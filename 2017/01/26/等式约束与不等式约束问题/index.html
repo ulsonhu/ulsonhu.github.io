@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&fm=27&gp=0.jpg">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg">
-<meta property="og:updated_time" content="2018-02-23T08:25:43.570Z">
+<meta property="og:updated_time" content="2018-02-23T11:54:39.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="等式约束与不等式约束问题">
 <meta name="twitter:description" content="针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。">
@@ -189,47 +189,91 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
             
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            分类
+            关于
           </a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
-            关于
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -261,7 +305,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/26/等式约束与不等式约束问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ulson">
+      <meta itemprop="name" content="Pic by John Lennon">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -290,6 +334,8 @@
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-26T00:00:00+08:00">
                 2017-01-26
               </time>
+            
+
             
 
             
@@ -329,47 +375,51 @@
 <a id="more"></a>
 <h2>等式约束问题</h2>
 <p>设目标函数为f(x)，约束条件为$h_k(x)$，形如
-<font color="red" size="5">$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$</font>
+$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$
 则解决方法是消元法或者拉格朗日法。消元法不再多说，拉格朗日法这里在提一下，因为后面提到的KKT条件是对拉格朗日乘子法的一种泛化。</p>
 <p>$$L(x,\lambda)=f(x)+\sum_{k=1}^{l}\lambda_kh_k(x)$$
 其中$λ_k$是各个约束条件的待定系数。
 然后解偏导方程组：
-<font color="red" size="5">$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</font></p>
+$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</p>
 <p>至于为什么这么做可以求解最优化？维基百科上给出了一个比较好的直观解释。</p>
 <p>举个二维最优化的例子：</p>
-<p><font size="5">$$min f(x,y)   \s.t. g(x,y) = c$$</font></p>
+<p>$$min f(x,y)   \s.t. g(x,y) = c$$</p>
 <p>这里画出$z=f(x,y)$的等高线：
-<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="这里写图片描述"></p>
+<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="log01"></p>
 <p>绿线标出的是约束$g(x,y)=c$的点的轨迹。蓝线是$f(x,y)$的等高线。箭头表示斜率，和等高线的法线平行。从梯度的方向上来看，显然有$d1&gt;d2$。
 绿色的线是约束，也就是说，只要正好落在这条绿线上的点才可能是满足要求的点。如果没有这条约束，$f(x,y)$的最小值应该会落在最小那圈等高线内部的某一点上。
 <font color="red">而现在加上了约束，最小值点应该在哪里呢？</font>显然应该是在f(x,y)的等高线正好和约束线相切的位置，因为如果只是相交意味着肯定还存在其它的等高线在该条等高线的内部或者外部，使得新的等高线与目标函数的交点的值更大或者更小，<font color="red">只有到等高线与目标函数的曲线相切的时候，可能取得最优值。</font></p>
 <p>如果我们对约束也求梯度$∇g(x,y)$，则其梯度如图中绿色箭头所示。很容易看出来，要想让目标函数$f(x,y)$的等高线和约束相切，则他们切点的梯度一定在一条直线上。
-即：$∇f(x,y)=λ（∇g(x,y)-C) $
+即：$\partial f(x,y)=\lambda（\partial g(x,y)-C) $
 其中λ可以是任何非0实数。</p>
 <p>一旦求出$\lambda$的值，将其带入下式，易求在无约束极值和极值所对应的点。</p>
-<p><font size="5">$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</font></p>
+<p>$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</p>
 <p>这就是拉格朗日函数的由来。</p>
 <h2>不等式约束问题</h2>
 <p>考虑一般形式的优化问题：
-<font size="5">$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</font></p>
-<p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^<em>$处$g_j(x)= 0$，那么称该不等式约束是$x^</em>$处的起作用约束；如果在$x^*$处$g_j(x)\geq 0$，那么称该约束是处的不起作用约束。
+$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</p>
+<p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^{<em>}$处$g_j(x)= 0$，那么称该不等式约束是$x^{</em>}$处的起作用约束；如果在$x^{*}$ 处 $g_j(x)\geq 0$，那么称该约束是处的不起作用约束。
 按惯例，把等式约束$h_i(x)=0$当作总是起作用的约束。</p>
 <p>由此，定义不等式约束下的拉格朗日函数L，则L表达式为：
-<font size="5">$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</font></p>
-<p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$λ_j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p>
+$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</p>
+<p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$\lambda _j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p>
 <p>常用的方法是KKT条件，同样地，把所有的不等式约束、等式约束和目标函数全部写为一个式子，简化为$L(a, b, x)= f(x) + a<em>g(x)+b</em>h(x)$</p>
 <p>KKT条件是说最优值必须满足以下条件：</p>
-<p>1）$\frac{\partial L }{\partial x_i}=0$对x求导为零；</p>
-<p>2）h(x) =0;</p>
-<p>3）a*g(x) = 0;</p>
-<p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为g(x)&lt;=0，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p>
+<ol>
+<li>$\frac{\partial L }{\partial x_i}=0$对x求导为零；</li>
+<li>h(x) =0;</li>
+<li>a*g(x) = 0;</li>
+</ol>
+<p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为$g(x)&lt;=0$，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p>
 <h3>KKT的推导：</h3>
 <p>首先不加证明的给出对偶问题结论：
 $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\underset{\omega,b}{Min}L(\omega,b,\alpha)$$</p>
-<p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="这里写图片描述"></p>
-<p>参考资料：
-[1].Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）
-[2].<a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></p>
+<p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="log02"></p>
+<p>参考资料：</p>
+<ol>
+<li>Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）</li>
+<li><a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></li>
+</ol>
 
       
     </div>
@@ -390,7 +440,7 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="ulson 微信支付"/>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
         <p>微信支付</p>
       </div>
     
@@ -411,9 +461,9 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
       
         <div class="post-tags">
           
-            <a href="/tags/Mathematic/" rel="tag"># Mathematic</a>
+            <a href="/tags/Mathematic/" rel="tag"><i class="fa fa-tag"></i> Mathematic</a>
           
-            <a href="/tags/优化算法/" rel="tag"># 优化算法</a>
+            <a href="/tags/优化算法/" rel="tag"><i class="fa fa-tag"></i> 优化算法</a>
           
         </div>
       
@@ -426,8 +476,8 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/25/MCMC与Gibbs采样/" rel="next" title="MCMC与Gibbs采样">
-                <i class="fa fa-chevron-left"></i> MCMC与Gibbs采样
+              <a href="/2017/01/26/广义线性模型(Generalized Linear Model)/" rel="next" title="广义线性模型(Generalized Linear Model)">
+                <i class="fa fa-chevron-left"></i> 广义线性模型(Generalized Linear Model)
               </a>
             
           </div>
@@ -436,8 +486,8 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/23/唐璜节选/" rel="prev" title="唐璜节选">
-                唐璜节选 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/03/全局优化算法之遗传算法/" rel="prev" title="全局优化算法之遗传算法">
+                全局优化算法之遗传算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -506,9 +556,9 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="ulson" />
+                alt="Pic by John Lennon" />
             
-              <p class="site-author-name" itemprop="name">ulson</p>
+              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
               <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
           </div>
 
@@ -517,9 +567,9 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -532,7 +582,7 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -553,7 +603,7 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="ulsonhu@gmail.com" target="_blank" title="Gmail">
+                    <a href="mailto:ulsonhu@gmail.com" target="_blank" title="Gmail">
                       
                         <i class="fa fa-fw fa-envelope"></i>Gmail</a>
                   </span>
@@ -624,7 +674,7 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ulson</span>
+  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
 
   
 </div>
@@ -812,6 +862,323 @@ $$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 

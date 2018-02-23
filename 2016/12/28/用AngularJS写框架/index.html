@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="1. 模块的定义和加载 1.1 模块的定义 一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
+<meta name="description" content="一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
 <meta name="keywords" content="前端,JavaScript,AngularJS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用AngularJS写框架">
 <meta property="og:url" content="http://yoursite.com/2016/12/28/用AngularJS写框架/index.html">
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
-<meta property="og:description" content="1. 模块的定义和加载 1.1 模块的定义 一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
+<meta property="og:description" content="一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-23T08:26:26.940Z">
+<meta property="og:updated_time" content="2018-02-23T13:12:08.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用AngularJS写框架">
-<meta name="twitter:description" content="1. 模块的定义和加载 1.1 模块的定义 一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
+<meta name="twitter:description" content="一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。">
 
 
 
@@ -186,47 +186,91 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
             
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            分类
+            关于
           </a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
             
-            关于
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -258,7 +302,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/28/用AngularJS写框架/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ulson">
+      <meta itemprop="name" content="Pic by John Lennon">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -292,6 +336,8 @@
             
 
             
+
+            
           </span>
 
           
@@ -307,6 +353,10 @@
 
           
 
+          
+              <div class="post-description">
+                  一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。
+              </div>
           
 
         </div>
@@ -324,16 +374,15 @@
       
         <h2>1. 模块的定义和加载</h2>
 <h3>1.1 模块的定义</h3>
-<p>一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。</p>
 <a id="more"></a>
-<p>先问个问题：我们做模块系统的目的是什么？如果觉得这个问题难以回答，可以从反面来考虑：假如不做模块系统，有什么样的坏处？</p>
-<p>我们经历过比较粗放、混乱的前端开发阶段，页面里充满了全局变量，全局函数。那时候要复用js文件，就是把某些js函数放到一个文件里，然后让多个页面都来引用。</p>
-<p>考虑到一个页面可以引用多个这样的js，这些js互相又不知道别人里面写了什么，很容易造成命名的冲突，而产生这种冲突的时候，又没有哪里能够提示出来。所以我们要有一种办法，把作用域比较好地隔开。</p>
-<p>JavaScript这种语言比较奇怪，奇怪在哪里呢，它的现有版本里没package跟class，要是有，我们也没必要来考虑什么自己做模块化了。那它是要用什么东西来隔绝作用域呢？</p>
-<p>在很多传统高级语言里，变量作用域的边界是大括号，在{}里面定义的变量，作用域不会传到外面去，但我们的JavaScript大人不是这样的，他的边界是function。所以我们这段代码，i仍然能打出值：</p>
+<p>  先问个问题：我们做模块系统的目的是什么？如果觉得这个问题难以回答，可以从反面来考虑：假如不做模块系统，有什么样的坏处？</p>
+<p>  我们经历过比较粗放、混乱的前端开发阶段，页面里充满了全局变量，全局函数。那时候要复用js文件，就是把某些js函数放到一个文件里，然后让多个页面都来引用。</p>
+<p>  考虑到一个页面可以引用多个这样的js，这些js互相又不知道别人里面写了什么，很容易造成命名的冲突，而产生这种冲突的时候，又没有哪里能够提示出来。所以我们要有一种办法，把作用域比较好地隔开。</p>
+<p>  JavaScript这种语言比较奇怪，奇怪在哪里呢，它的现有版本里没package跟class，要是有，我们也没必要来考虑什么自己做模块化了。那它是要用什么东西来隔绝作用域呢？</p>
+<p>  在很多传统高级语言里，变量作用域的边界是大括号，在{}里面定义的变量，作用域不会传到外面去，但我们的JavaScript大人不是这样的，他的边界是function。所以我们这段代码，i仍然能打出值：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line">alert(i);</span><br></pre></td></tr></table></figure>
-<p>那么，我们只能选用function做变量的容器，把每个模块封装到一个function里。现在问题又来了，这个function本身的作用域是全局的，怎么办？我们想不到办法，拔剑四顾心茫然。</p>
-<p>我们有没有什么可参照的东西呢？这时候，脑海中一群语言飘过： C语言飘过：“我不是面向对象语言哦~不需要像你这么组织哦~”，“死开！” Java飘过：“我是纯面向对象语言哦，连main都要在类中哦，编译的时候通过装箱清单指定入口哦~”，“死开！” C++飘过：“我也是纯面向对象语言哦”，等等，C++是纯面向对象的语言吗？你的main是什么？？？main是特例，不在任何类中！</p>
+<p>  那么，我们只能选用function做变量的容器，把每个模块封装到一个function里。现在问题又来了，这个function本身的作用域是全局的，怎么办？我们想不到办法，拔剑四顾心茫然。</p>
+<p>  我们有没有什么可参照的东西呢？这时候，脑海中一群语言飘过： C语言飘过：“我不是面向对象语言哦~不需要像你这么组织哦~”，“死开！” Java飘过：“我是纯面向对象语言哦，连main都要在类中哦，编译的时候通过装箱清单指定入口哦~”，“死开！” C++飘过：“我也是纯面向对象语言哦”，等等，C++是纯面向对象的语言吗？你的main是什么？？？main是特例，不在任何类中！</p>
 <p>啊，我们发现了什么，既然无法避免全局的作用域，那与其让100个function都全局，不如只让一个来全局，其他的都由它管理。</p>
 <p>本来我们打算自己当上帝的，现在只好改行先当个工商局长。你想开店吗？先来注册，不然封杀你！于是良民们纷纷来注册。店名叫什么，从哪进货，卖什么的，一一登记在案，为了方便下面的讨论，我们连进货的过程都让工商局管理起来。</p>
 <p>店名，指的就是这里的模块名，从哪里进货，代表它依赖什么其他模块，卖什么，表示它对外提供一些什么特性。</p>
@@ -344,16 +393,16 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> moduleMap = &#123;&#125;;</span><br><span class="line">    <span class="built_in">window</span>.thin = &#123;</span><br><span class="line">        define: <span class="function"><span class="keyword">function</span>(<span class="params">name, dependencies, factory</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!moduleMap[name]) &#123;</span><br><span class="line">                <span class="keyword">var</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">                    name: name,</span><br><span class="line">                    dependencies: dependencies,</span><br><span class="line">                    factory: factory</span><br><span class="line">                &#125;;</span><br><span class="line">                moduleMap[name] = <span class="built_in">module</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> moduleMap[name];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 <p>现在，模块的存储结构就搞好了。</p>
 <h3>1.2 模块的使用</h3>
-<p>存的部分搞好了，我们来看看怎么取。现在来了一个商家，卖木器的，他需要从一个卖钉子的那边进货，卖钉子的已经来注册过了，现在要让这个木器厂能买到钉子。现在的问题是，两个商家处于不同的作用域，也就是说，它们互相不可见，那通过什么方式，我们才能让他们产生调用关系呢？</p>
-<p>个人解决不了的问题还是得靠政府，有困难要坚决克服，没有困难就制造困难来克服。现在困难有了，该克服了。商家说，我能不能给你我的进货名单，你帮我查一下它们在哪家店，然后告诉我？这么简单的要求当然一口答应下来，但是采用什么方式传递给你呢？这可犯难了。</p>
+<p>  存的部分搞好了，我们来看看怎么取。现在来了一个商家，卖木器的，他需要从一个卖钉子的那边进货，卖钉子的已经来注册过了，现在要让这个木器厂能买到钉子。现在的问题是，两个商家处于不同的作用域，也就是说，它们互相不可见，那通过什么方式，我们才能让他们产生调用关系呢？</p>
+<p>  个人解决不了的问题还是得靠政府，有困难要坚决克服，没有困难就制造困难来克服。现在困难有了，该克服了。商家说，我能不能给你我的进货名单，你帮我查一下它们在哪家店，然后告诉我？这么简单的要求当然一口答应下来，但是采用什么方式传递给你呢？这可犯难了。</p>
 <p>我们参考AngularJS框架，写了一个类似的代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">thin.define(<span class="string">"A"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//module A</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">thin.define(<span class="string">"B"</span>, [<span class="string">"A"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">A</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//module B</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>看这段代码特别在哪里呢？模块A的定义，毫无特别之处，主要看模块B。它在依赖关系里写了一个字符串的A，然后在工厂方法的形参写了一个真真切切的A类型。嗯？这个有些奇怪啊，你的A类型要怎么传递过来呢？其实是很简单的，因为我们声明了依赖项的数组，所以可以从依赖项，挨个得到对应的工厂方法，然后创建实例，传进来。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">use: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = moduleMap[name];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">module</span>.entity) &#123;</span><br><span class="line">        <span class="keyword">var</span> args = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="built_in">module</span>.dependencies.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (moduleMap[<span class="built_in">module</span>.dependencies[i]].entity) &#123;</span><br><span class="line">                args.push(moduleMap[<span class="built_in">module</span>.dependencies[i]].entity);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                args.push(<span class="keyword">this</span>.use(<span class="built_in">module</span>.dependencies[i]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">module</span>.entity = <span class="built_in">module</span>.factory.apply(noop, args);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.entity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们可以看到，这里面递归获取了依赖项，然后当作参数，用这个模块的工厂方法来实例化了一下。这里我们多做了一个判断，如果模块工厂已经执行过，就缓存在entity属性上，不需要每次都创建。以此类推，假如一个模块有多个依赖项，也可以用类似的方式写，毫无压力：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thin.define(&quot;D&quot;, [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;], function(A, B, C) &#123;</span><br><span class="line">    //module D</span><br><span class="line">    var a = new A();</span><br><span class="line">    var b = new B();</span><br><span class="line">    var c = new C();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thin.define(<span class="string">"D"</span>, [<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">A, B, C</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//module D</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">    <span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">var</span> c = <span class="keyword">new</span> C();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>注意了，D模块的工厂，实参的名称未必就要是跟依赖项一致，比如，以后我们代码较多，可以给依赖项和模块名称加命名空间，可能变成这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thin.define(&quot;foo.D&quot;, [&quot;foo.A&quot;, &quot;foo.B&quot;, &quot;foo.C&quot;], function(A, B, C) &#123;</span><br><span class="line">    //module D</span><br><span class="line">    var a = new A();</span><br><span class="line">    var b = new B();</span><br><span class="line">    var c = new C();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thin.define(<span class="string">"foo.D"</span>, [<span class="string">"foo.A"</span>, <span class="string">"foo.B"</span>, <span class="string">"foo.C"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">A, B, C</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//module D</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">    <span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br><span class="line">    <span class="keyword">var</span> c = <span class="keyword">new</span> C();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这段代码仍然可以正常运行。我们来做另外一个测试，改变形参的顺序：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">thin.define(<span class="string">"A"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"a"</span>;</span><br><span class="line">&#125;);</span><br><span class="line">thin.define(<span class="string">"B"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"b"</span>;</span><br><span class="line">&#125;);</span><br><span class="line">thin.define(<span class="string">"C"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"c"</span>;</span><br><span class="line">&#125;);</span><br><span class="line">thin.define(<span class="string">"D"</span>, [<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">B, A, C</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> B + A + C;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> D = thin.use(<span class="string">"D"</span>);</span><br><span class="line">alert(D);</span><br></pre></td></tr></table></figure>
 <p>试试看，我们的D打出什么结果呢？结果是&quot;abc&quot;，所以说，模块工厂的实参只跟依赖项的定义有关，跟形参的顺序无关。我们看到，在AngularJS里面，并非如此，实参的顺序是跟形参一致的，这是怎么做到的呢？</p>
@@ -363,10 +412,10 @@
 <p>可以看到，这个代码也不长，重点是类型为function的那段，首先去除了注释，然后获取了形参列表字符串，这段正则能获取到两个结果，第一个是全函数的实现，第二个才是真正的形参列表，取第二个出来split，就得到了形参的字符串列表了，然后按照这个顺序再去加载依赖模块，就可以让形参列表不对应于依赖项数组了。</p>
 <p>AngularJS的这段代码很强大，但是要损耗一些性能，考虑到我们的框架首要原则是简单，甚至可以为此牺牲一些灵活性，我们不做这么复杂的事情了。</p>
 <h3>1.3 模块的加载</h3>
-<p>到目前为止，我们可以把多个模块都定义在一个文件中，然后手动引入这个js文件，但是如果一个页面要引用很多个模块，引入工作就变得比较麻烦，比如说，单页应用程序（SPA）一般比较复杂，往往包含数以万计行数的js代码，这些代码至少分布在几十个甚至成百上千的模块中，如果我们也在主界面就加载它们，载入时间会非常难以接受。但我们可以这样看：主界面加载的时候，并不是用到了所有这些功能，能否先加载那些必须的，而把剩下的放在需要用的时候再去加载？</p>
+<p>  到目前为止，我们可以把多个模块都定义在一个文件中，然后手动引入这个js文件，但是如果一个页面要引用很多个模块，引入工作就变得比较麻烦，比如说，单页应用程序（SPA）一般比较复杂，往往包含数以万计行数的js代码，这些代码至少分布在几十个甚至成百上千的模块中，如果我们也在主界面就加载它们，载入时间会非常难以接受。但我们可以这样看：主界面加载的时候，并不是用到了所有这些功能，能否先加载那些必须的，而把剩下的放在需要用的时候再去加载？</p>
 <p>所以我们可以考虑<strong>万能的AJAX</strong>，从服务端获取一个js的内容，然后……，怎么办，你当然说不能eval了，因为据说eval很evil啦，但是它evil在哪里呢？主要是破坏全局作用域啦，怎么怎么，但是如果这些文件里面都是按照我们规定的模块格式写，好像也没有什么在全局作用域的……，好吧。</p>
 <p>算了，我们还是用最简单的方式了，就是**动态创建script标签，然后设置src，添加到document.head里，然后监听它们的完成事件，做后续操作。**真的很简单，因为我们的框架不需要考虑那么多种情况，不需要AMD，不需要require那么麻烦，用这框架的人必须按照这里的原则写。</p>
-<p>所以，说真的我们这里没那么复杂啦，要是你们想看更详细原理的不如去看这个，解释得比我好哎：<a href="http://coolshell.cn/articles/9749.html#jtss-tsina" target="_blank" rel="noopener">JavaScript装载与执行</a></p>
+<p>  所以，说真的我们这里没那么复杂啦，要是你们想看更详细原理的不如去看这个，解释得比我好哎：<a href="http://coolshell.cn/articles/9749.html#jtss-tsina" target="_blank" rel="noopener">JavaScript装载与执行</a></p>
 <p>[补一段，@Franky 大神指出了这篇文章中一些不符合现状的地方，我把它也贴在这里，供读者参考]</p>
 <blockquote>
 <p>很多观点都是 史蒂夫那本老书上的观点. 和那时候同期产生的一些数据和资料…所以显得不少东西说的太想当然了… 譬如script标签的加载和执行会阻塞后面资源的加载和执行之类的.说的过于肯定了. 比如chrome7+就开始逐渐改进的 预加载机制 就分 head 里的资源, body里的资源 .两个资源是否跨界三种情形. 不提这些浏览器. 我们看看ie10也同样改进了 死循环10秒 这后面的图片能被提前加载. 就更不用说其他A级浏览器的丰富的优化策略了. 所以还是建议博主, 别拿几年前的老资料作为依据.尤其这些数据是用来说明更新速度像在赛跑一样的各个浏览器了.</p>
@@ -391,36 +440,36 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input vm-value=&quot;name&quot;/&gt;</span><br><span class="line">var person = &#123;</span><br><span class="line">    name: &quot;Tom&quot;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>如果我们给name重新赋值，<a href="http://person.name" target="_blank" rel="noopener">person.name</a> = “Jerry”，怎么才能让界面得到变更？</p>
 <p>从直觉来说，我们需要在name发生改变的时候，触发一个事件，或者调用某个指定的方法，然后才好着手做后面的事情，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name: &quot;Tom&quot;,</span><br><span class="line">    setName: function(newName) &#123;</span><br><span class="line">        this.name = newName;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">"Tom"</span>,</span><br><span class="line">    setName: <span class="function"><span class="keyword">function</span>(<span class="params">newName</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = newName;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>这样我们可以在setName里面去给input赋值。推而广之，为了使得实体包含的多个属性都可以运作，可以这么做：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">    name: &quot;Tom&quot;,</span><br><span class="line">    gender: 5</span><br><span class="line">    set: function(key, value) &#123;</span><br><span class="line">        this[key] = value;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">"Tom"</span>,</span><br><span class="line">    gender: <span class="number">5</span></span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>[key] = value;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>或者合并两个方法，只判断是否传了参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.name = function(value) &#123;</span><br><span class="line">    if (arguments.length == 0) &#123;</span><br><span class="line">        return this._name;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        this._name = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.name = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">arguments</span>.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._name = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种情况下，<a href="http://xn--person-op0jjj079gsvv8ray18m049c.name" target="_blank" rel="noopener">赋值的时候就是person.name</a>(“Tom”)，取值的时候就是var name = <a href="http://person.name" target="_blank" rel="noopener">person.name</a>()了。</p>
 <p>有一些框架是通过这种方式来变通实现数据绑定的，对数据的写入只能通过方法调用。但这种方式很不直接，我们来想点别的办法。</p>
 <p>在C#等一些语言里，有一种东西叫做存取器，比如说：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">    private string name;</span><br><span class="line"></span><br><span class="line">    public string Name</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line">        set</span><br><span class="line">        &#123;</span><br><span class="line">            name = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>用的时候，<a href="http://person.Name" target="_blank" rel="noopener">person.Name</a> = “Jerry”，就会调用到set里，相当于是个方法。</p>
 <p>这一点非常好，很符合我们的需要，那JavaScript里面有没有类似存取器的特性呢？老早以前是没有的，但现在有了，那就是Object.defineProperty，它的第三个参数就是可选的存取函数。比如说：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">// Add an accessor property to the object.</span><br><span class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</span><br><span class="line">    set: function (value) &#123;</span><br><span class="line">        this._name = value;</span><br><span class="line">        //do something</span><br><span class="line">    &#125;,</span><br><span class="line">    get: function () &#123;</span><br><span class="line">        return this._name;</span><br><span class="line">    &#125;,</span><br><span class="line">    enumerable: true,</span><br><span class="line">    configurable: true</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add an accessor property to the object.</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">"name"</span>, &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._name = value;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;,</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">    &#125;,</span><br><span class="line">    enumerable: <span class="literal">true</span>,</span><br><span class="line">    configurable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>赋值的时候，<a href="http://person.name" target="_blank" rel="noopener">person.name</a> = “Tom”，取值的时候，var name = <a href="http://person.name" target="_blank" rel="noopener">person.name</a>，简直太美妙了。注意这里define的时候，是定义在实例上的，如果想要定义到类型里面，可以在构造器里面定义。</p>
 <p>现在我们从数据到DOM的绑定可以解决掉了，至少我们能够在变量被更改的时候去做一些自己的事情，比如查找这个属性被绑定到哪些控件了，然后挨个对其赋值。框架怎么知道属性被绑定到哪些控件了呢？这个直接在第二部分的实现过程中讨论。</p>
 <p>再看控件到数据的绑定，这个其实很好理解。无非就是给控件添加change之类的事件监听，在这里面把关联到的数据更新掉。到这里，我们在原理方面已经没有什么问题了，现在开始准备把它写出来。</p>
 <h3>2.2 数据绑定的实现</h3>
 <p>我们的框架启动之后，要先把前面所说的这种绑定关系收集起来，这种属性会分布于DOM的各个角落，一个很现实的做法是，递归遍历界面的每个DOM节点，检测该属性，于是我们代码的结构大致如下所示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function parseElement(element) &#123;</span><br><span class="line">    for (var i=0; i&lt;element.attributes.length; i++) &#123;</span><br><span class="line">        parseAttribute(element.attributes[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (var i=0; i&lt;element.children.length; i++) &#123;</span><br><span class="line">        parseElement(element.children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseElement</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.attributes.length; i++) &#123;</span><br><span class="line">        parseAttribute(element.attributes[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.children.length; i++) &#123;</span><br><span class="line">        parseElement(element.children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是我们这时候面临一个问题，比如你的输入框绑定在name变量上，这个name应该从属于什么？它是全局变量吗？</p>
 <p>我们在开始做这个框架的时候强调了一个原则：业务模块不允许定义全局变量，框架内部也尽量少有全局作用域，到目前为止，我们只暴露了thin一个全局入口，所以在这里不能破坏这个原则。</p>
 <p>因此，我们要求业务开发人员去定义一个视图模型，把变量包装起来，所包装的不限于变量，也可以有方法。比如下面，我们定义了一个实体叫Person，带两个变量，两个方法，后面我们来演示一下怎么把它们绑定到HTML界面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">this.define(&quot;Person&quot;, [], function() &#123;</span><br><span class="line">    function Person() &#123;</span><br><span class="line">        this.name = &quot;Tom&quot;;</span><br><span class="line">        this.age = 5;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Person.prototype = &#123;</span><br><span class="line">        growUp: function() &#123;</span><br><span class="line">            this.age++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Person;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.define(<span class="string">"Person"</span>, [], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">"Tom"</span>;</span><br><span class="line">        <span class="keyword">this</span>.age = <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Person.prototype = &#123;</span><br><span class="line">        growUp: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Person;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>模型方面都准备好了，现在来看界面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div vm-model=&quot;Person&quot;&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; vm-value=&quot;name&quot;/&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; vm-value=&quot;age&quot;/&gt;</span><br><span class="line">    &lt;input type=&quot;button&quot; vm-click=&quot;growUp&quot; value=&quot;Grow Up&quot;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">vm-model</span>=<span class="string">"Person"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">vm-value</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">vm-value</span>=<span class="string">"age"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">vm-click</span>=<span class="string">"growUp"</span> <span class="attr">value</span>=<span class="string">"Grow Up"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>为了使得结构更加容易看，我们把界面的无关属性比如样式之类都去掉了，只留下不能再减少的这么一段。现在我们可以看到，在界面的顶层定义一个vm-model属性，值为实体的名称。两个输入框通过vm-value来绑定到实例属性，vm-init绑定界面的初始化方法，vm-click绑定按钮的点击事件。</p>
 <p>好了，现在我们可以来扫描这个简单的DOM结构了。想要做这么一个绑定，首先要考虑数据从哪里来？在绑定name和code属性之前，毫无疑问，应当先实例化一个Person，我们怎么才能知道需要把Person模块实例化呢？</p>
 <p>当扫描到一个DOM元素的时候，我们要先检测它的vm-model属性，如果有值，就取这个值来实例化，然后，把这个值一直传递下去，在扫描其他属性或者下属DOM元素的时候都带进去。这么一来，parseElement就变成一个递归了，于是它只好有两个参数，变成了这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function parseElement(element, vm) &#123;</span><br><span class="line">    var model = vm;</span><br><span class="line"></span><br><span class="line">    if (element.getAttribute(&quot;vm-model&quot;)) &#123;</span><br><span class="line">        model = bindModel(element.getAttribute(&quot;vm-model&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (var i=0; i&lt;element.attributes.length; i++) &#123;</span><br><span class="line">        parseAttribute(element, element.attributes[i], model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (var i=0; i&lt;element.children.length; i++) &#123;</span><br><span class="line">        parseElement(element.children[i], model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseElement</span>(<span class="params">element, vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = vm;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (element.getAttribute(<span class="string">"vm-model"</span>)) &#123;</span><br><span class="line">        model = bindModel(element.getAttribute(<span class="string">"vm-model"</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.attributes.length; i++) &#123;</span><br><span class="line">        parseAttribute(element, element.attributes[i], model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;element.children.length; i++) &#123;</span><br><span class="line">        parseElement(element.children[i], model);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>看看我们打算怎么来实例化这个模型，这个bindModel方法的参数是模块名，于是我们先去use一下，从工厂里生成出来，然后new一下，先这么return出去吧。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function bindModel(modelName) &#123;</span><br><span class="line">    thin.log(&quot;model&quot; + modelName);</span><br><span class="line"></span><br><span class="line">    var model = thin.use(modelName, true);</span><br><span class="line">    var instance = new model();</span><br><span class="line"></span><br><span class="line">    return instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindModel</span>(<span class="params">modelName</span>) </span>&#123;</span><br><span class="line">    thin.log(<span class="string">"model"</span> + modelName);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> model = thin.use(modelName, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">var</span> instance = <span class="keyword">new</span> model();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>现在我们开始关注parseAttribute函数，可能的attribute有哪些种类呢？我列举了一些很常用的：</p>
 <ul>
 <li>init，用于绑定初始化方法</li>
@@ -430,17 +479,17 @@
 <li>visible和invisible，绑定可见状态</li>
 </ul>
 <p>然后就可以实现我们parseAttribute函数了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">function parseAttribute(element, attr, model) &#123;</span><br><span class="line">    if (attr.name.indexOf(&quot;vm-&quot;) == 0) &#123;</span><br><span class="line">        var type = attr.name.slice(3);</span><br><span class="line"></span><br><span class="line">        switch (type) &#123;</span><br><span class="line">            case &quot;init&quot;:</span><br><span class="line">                bindInit(element, attr.value, model);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;value&quot;:</span><br><span class="line">                bindValue(element, attr.value, model);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;click&quot;:</span><br><span class="line">                bindClick(element, attr.value, model);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;enable&quot;:</span><br><span class="line">                bindEnable(element, attr.value, model, true);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;disable&quot;:</span><br><span class="line">                bindEnable(element, attr.value, model, false);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;visible&quot;:</span><br><span class="line">                bindVisible(element, attr.value, model, true);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;invisible&quot;:</span><br><span class="line">                bindVisible(element, attr.value, model, false);</span><br><span class="line">                break;</span><br><span class="line">            case &quot;element&quot;:</span><br><span class="line">                model[attr.value] = element;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseAttribute</span>(<span class="params">element, attr, model</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (attr.name.indexOf(<span class="string">"vm-"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> type = attr.name.slice(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"init"</span>:</span><br><span class="line">                bindInit(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"value"</span>:</span><br><span class="line">                bindValue(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"click"</span>:</span><br><span class="line">                bindClick(element, attr.value, model);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"enable"</span>:</span><br><span class="line">                bindEnable(element, attr.value, model, <span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"disable"</span>:</span><br><span class="line">                bindEnable(element, attr.value, model, <span class="literal">false</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"visible"</span>:</span><br><span class="line">                bindVisible(element, attr.value, model, <span class="literal">true</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"invisible"</span>:</span><br><span class="line">                bindVisible(element, attr.value, model, <span class="literal">false</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"element"</span>:</span><br><span class="line">                model[attr.value] = element;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意到最后还有个element类型，本来可以不要这个，但我们考虑到将来，一切都是组件化的时候，界面上打算不写id，也不依靠选择器，而是用某个标志来定位元素，所以加上了这个，文章最后的示例中使用了它。</p>
 <p>这么多绑定，不打算都讲，用bindValue函数来说明一下吧：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function bindValue(element, key, vm) &#123;</span><br><span class="line">    thin.log(&quot;binding value: &quot; + key);</span><br><span class="line"></span><br><span class="line">    vm.$watch(key, function (value, oldValue) &#123;</span><br><span class="line">        element.value = value || &quot;&quot;;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    element.onkeyup = function () &#123;</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    element.onpaste = function () &#123;</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindValue</span>(<span class="params">element, key, vm</span>) </span>&#123;</span><br><span class="line">    thin.log(<span class="string">"binding value: "</span> + key);</span><br><span class="line"></span><br><span class="line">    vm.$watch(key, <span class="function"><span class="keyword">function</span> (<span class="params">value, oldValue</span>) </span>&#123;</span><br><span class="line">        element.value = value || <span class="string">""</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    element.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    element.onpaste = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        vm[key] = element.value;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们假定每个模型实例上带有一个$watch方法，用于监控某变量的变化，可以传入一个监听函数，当变量变化的时候，自动调用这个函数，并且把新旧两个值传回来。</p>
 <p>在这个代码里，我们使用$watch方法给传入的key添加一个监听，监听器里面给监听元素赋值。我们这里偷懒了一下，假定所有的绑定元素都是输入框，所以直接给element.value设置值，为了防止值为空导致显示undefined，把值跟空字符串用短路表达式做了个转换。</p>
 <p>接下来，也对element的几个可能导致值变化的事件进行了监听，在里面把模型上对应的值更新掉。这样双向绑定就做好了。</p>
 <p>然后回头来看$watch的实现。很显然这里也要一个map，我们给它取名为$watchers，存放属性的绑定关系，对于每个属性，它的值需要保存一份，供getter获取，同时还有一个数组，存放了该属性绑定的处理函数。当属性发生变更的时候，去挨个把它们调用一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var Binder = &#123;</span><br><span class="line">    $watch: function (key, watcher) &#123;</span><br><span class="line">        if (!this.$watchers[key]) &#123;</span><br><span class="line">            this.$watchers[key] = &#123;</span><br><span class="line">                value: this[key],</span><br><span class="line">                list: []</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            Object.defineProperty(this, key, &#123;</span><br><span class="line">                set: function (val) &#123;</span><br><span class="line">                    var oldValue = this.$watchers[key].value;</span><br><span class="line">                    this.$watchers[key].value = val;</span><br><span class="line"></span><br><span class="line">                    for (var i = 0; i &lt; this.$watchers[key].list.length; i++) &#123;</span><br><span class="line">                        this.$watchers[key].list[i](val, oldValue);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line"></span><br><span class="line">                get: function () &#123;</span><br><span class="line">                    return this.$watchers[key].value;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.$watchers[key].list.push(watcher);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Binder = &#123;</span><br><span class="line">    $watch: <span class="function"><span class="keyword">function</span> (<span class="params">key, watcher</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.$watchers[key]) &#123;</span><br><span class="line">            <span class="keyword">this</span>.$watchers[key] = &#123;</span><br><span class="line">                value: <span class="keyword">this</span>[key],</span><br><span class="line">                list: []</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, key, &#123;</span><br><span class="line">                set: <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> oldValue = <span class="keyword">this</span>.$watchers[key].value;</span><br><span class="line">                    <span class="keyword">this</span>.$watchers[key].value = val;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.$watchers[key].list.length; i++) &#123;</span><br><span class="line">                        <span class="keyword">this</span>.$watchers[key].list[i](val, oldValue);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line"></span><br><span class="line">                get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.$watchers[key].value;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.$watchers[key].list.push(watcher);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>但是vm怎么就有$watch呢，每个地方都去判断一下非空然后再去创建其实挺麻烦的，所以，这个属性我们可以直接在实例化模型的时候创建出来。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function bindModel(name) &#123;</span><br><span class="line">    thin.log(&quot;binding model: &quot; + name);</span><br><span class="line"></span><br><span class="line">    var model = thin.use(name, true);</span><br><span class="line">    var instance = new model().extend(Binder);</span><br><span class="line">    instance.$watchers = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    return instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindModel</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    thin.log(<span class="string">"binding model: "</span> + name);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> model = thin.use(name, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">var</span> instance = <span class="keyword">new</span> model().extend(Binder);</span><br><span class="line">    instance.$watchers = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>看看这里的写法，为什么$watchers要额外设置，而$watch就可以放在Binder里面来extend呢？</p>
 <p>先解释extend干了什么，它做的是一个对象的浅拷贝，也就是说，把Binder的属性和方法都复制给了创建出来的model实例，注意，这个所谓的复制，如果是简单类型，那确实复制了，如果是引用类型，那复制的其实只是一个引用，所以如果$watchers也放在Binder里，不同的instance就共享一个$watchers，逻辑就是错误的。那为什么$watch又可以放在这里复制呢？因为它是函数，它的this始终指向当前的执行主体，也就是说，如果放在instance1上执行，指向的就是instance1，放在instance2上执行，指向的就是instance2，我们利用这一点，就可以不用让每个实例都创建一份$watch方法，而是共用同一个。</p>
 <p>同理，我们可以把enable，visible，init，click这些都做起来，init的执行时间放在扫描完vm-model那个element之下的所有DOM节点之后。</p>
@@ -472,7 +521,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="ulson 微信支付"/>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
         <p>微信支付</p>
       </div>
     
@@ -493,11 +542,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"># 前端</a>
+            <a href="/tags/前端/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+            <a href="/tags/AngularJS/" rel="tag"><i class="fa fa-tag"></i> AngularJS</a>
           
         </div>
       
@@ -590,9 +639,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="ulson" />
+                alt="Pic by John Lennon" />
             
-              <p class="site-author-name" itemprop="name">ulson</p>
+              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
               <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
           </div>
 
@@ -601,9 +650,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -616,7 +665,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -637,7 +686,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="ulsonhu@gmail.com" target="_blank" title="Gmail">
+                    <a href="mailto:ulsonhu@gmail.com" target="_blank" title="Gmail">
                       
                         <i class="fa fa-fw fa-envelope"></i>Gmail</a>
                   </span>
@@ -708,7 +757,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ulson</span>
+  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
 
   
 </div>
@@ -896,6 +945,323 @@
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 

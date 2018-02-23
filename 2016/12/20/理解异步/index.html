@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="JavaScript编程几乎总是伴随着异步操作，传统的异步操作会在操作完成之后，使用回调函数传回结果，而回调函数中则包含了后续的工作。这也是造成异步编程困难的主要原因：">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解异步">
+<meta property="og:url" content="http://yoursite.com/2016/12/20/理解异步/index.html">
+<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:description" content="JavaScript编程几乎总是伴随着异步操作，传统的异步操作会在操作完成之后，使用回调函数传回结果，而回调函数中则包含了后续的工作。这也是造成异步编程困难的主要原因：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-23T07:33:58.317Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解异步">
+<meta name="twitter:description" content="JavaScript编程几乎总是伴随着异步操作，传统的异步操作会在操作完成之后，使用回调函数传回结果，而回调函数中则包含了后续的工作。这也是造成异步编程困难的主要原因：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/20/理解异步/"/>
+
+
+
+
+
+  <title>理解异步 | Sonnet's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sonnet's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/20/理解异步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ulson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sonnet's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解异步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-20T00:00:00+08:00">
+                2016-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JavaScript编程几乎总是伴随着异步操作，传统的异步操作会在操作完成之后，使用回调函数传回结果，而回调函数中则包含了后续的工作。这也是造成异步编程困难的主要原因：</p>
+<a id="more"></a>
+<h2>前述</h2>
+<p><strong>我们一直习惯于“线性”地编写代码逻辑，但是大量异步操作所带来的回调函数，会把我们的算法分解地支离破碎。</strong></p>
+<p>此时我们不能用if来实现逻辑分支，也不能用while/for/do来实现循环，更不用说异步操作之间的组合、错误处理以及取消操作了。因此也就诞生了如jQuery Deferred这样的辅助类库。</p>
+<p>我们常见的异步操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">定时器setTimeout</span><br><span class="line">postmessage</span><br><span class="line">WebWorkor</span><br><span class="line">CSS3 动画</span><br><span class="line">XMLHttpRequest</span><br><span class="line">HTML5的本地数据</span><br><span class="line">等等…</span><br></pre></td></tr></table></figure>
+<p>JavaScript要求在与服务器进行交互时要用异步通信，如同AJAX一样。因为是异步模型，所以在调用Transaction游览器提供的本地数据接口时候类似AJAX（这里我是假设），浏览器自己有内部的XHR方法异步处理，但是此时的JS代码还是会同步往下执行，其实就是无阻塞的代码。</p>
+<p>**问题：**因为无阻塞，代码在发送AJAX这个请求后会继续执行，那么后续的操作如果依赖这个数据的就会出错了，所以这里就需要等待AJAX返回，才能执行后续操作。</p>
+<p>因为异步而导致流程不正确，或者说我们的应用在某个程度上依赖第三方API的数据，那么就会面临一个共同的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们无法获悉一个API响应的延迟时间，应用程序的其他部分可能会被阻塞，直到它返回结果。Deferreds 的引入对这个问题提供了一个更好的解决方案，它是非阻塞的，并且与代码完全解耦。</span><br></pre></td></tr></table></figure>
+<p>当然异步操作也可以提供一个类似于成功回调，失败回调的通知接口。</p>
+<p>JS是单线程语言，就简单性而言，把每一件事情（包括GUI事件和渲染）都放在一个线程里来处理是一个很好的程序模型，因为这样就无需再考虑线程同步这些复杂问题。</p>
+<p>另一方面，他也暴露了应用开发中的一个严重问题，单线程环境看起来对用户请求响应迅速，但是当线程忙于处理其它事情时，就不能对用户的鼠标点击和键盘操作做出响应。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定时器改变流程</span></span><br><span class="line">show(<span class="number">1</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    show(<span class="number">2</span>)&#125;, <span class="number">0</span>)</span><br><span class="line">show(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行异步动画</span></span><br><span class="line"><span class="comment">//因为代码的执行是按照从上至下</span></span><br><span class="line"><span class="comment">//但是由于加入了动画，动画形成了异步，所以实际的改变值必须等动画完成才能得到</span></span><br><span class="line"><span class="comment">//但是同步逻辑3其实已经运行，所以3要等待2结束才可以</span></span><br><span class="line">$(<span class="string">"#go"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> block = $(<span class="string">"#block"</span>);</span><br><span class="line">	show(<span class="string">'1.动画流程代码开始,对象长度'</span>+ block.css(<span class="string">'width'</span>))</span><br><span class="line">	block.animate(&#123;</span><br><span class="line">		width       : <span class="string">"70%"</span>,</span><br><span class="line">		opacity     : <span class="number">0.4</span>,</span><br><span class="line">		marginLeft  : <span class="string">"0.6in"</span>,</span><br><span class="line">		fontSize    : <span class="string">"3em"</span>,</span><br><span class="line">		borderWidth : <span class="string">"10px"</span>,</span><br><span class="line">	&#125;, <span class="number">1000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		show(<span class="string">'2.动画执行结束束,对象长度'</span>+ block.css(<span class="string">'width'</span>))</span><br><span class="line">	&#125;);</span><br><span class="line">	show(<span class="string">'3.动画流程代码结束,对象长度'</span>+ block.css(<span class="string">'width'</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">	$(<span class="string">"body"</span>).append(<span class="string">'&lt;li&gt;'</span> + data + <span class="string">'&lt;/li&gt;'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2>Deferred</h2>
+<h3>Deferred是什么</h3>
+<p>前端项目的开发，不仅仅涉及到同步的概念，而且还会经常穿插各种异步的处理。一些大的操作，比如远程获取数据，操作一个大数据处理，这时候是不能马上获取到数据的。假设我们发送一个AJAX请求到接受到数据需要10秒钟，那么从发送到接受数据这个时间段中，前端的处理时间其实是空闲，但是对于开发者来说这种时间是不能浪费了，所以我们可以在10秒钟做很多同步的处理，同时等待异步的数据返回。所以我们需要监听这个回调的数据在成功的时候能够获取到，或者设计一个返回后触发处理的机制，当然原生的JavaScript对这个机制几乎是没有的。为了优化这个形成统一的异步处理方案，jQuery就开始设计了一个Deferred异步模型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deferred 提供了一个抽象的非阻塞的解决方案（如异步请求的响应），它创建一个promise对象，其目的是在未来某个时间点返回一个响应。简单来说就是一个异步/同步回调函数的处理方案。</span><br></pre></td></tr></table></figure>
+<p>$.Deferred在jQuery代码内部有四个模块被使用，分别是“<strong>promise方法”、“DOM ready”、“Ajax模块”及“动画模块</strong>”。</p>
+<p>看看jQuery中的最常用的AJAX处理：</p>
+<p><strong>一：Ajax的改造</strong></p>
+<p>传统的jQuery的AJAX操作的传统写法(1.5版之前)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  url: &quot;aaron.html&quot;,</span><br><span class="line">  success: function()&#123;</span><br><span class="line">     alert(&quot;成功！&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  error:function()&#123;</span><br><span class="line">    alert(&quot;失败！&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>$.ajax()接受一个对象参数，这个对象包含两个方法：success方法指定操作成功后的回调函数，error方法指定操作失败后的回调函数。</p>
+<p>在1.5版本后通过新的Deferred引入就改成了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&quot;aaron.html&quot;)</span><br><span class="line">.done(function()&#123; alert(&quot;成功&quot;); &#125;)</span><br><span class="line">.fail(function()&#123; alert(&quot;出错&quot;); &#125;);</span><br></pre></td></tr></table></figure>
+<p>把传参的回调，换成了链式的写法，这样可读性更高了。在jquery 1.5版后，通过$.ajax返回的不是XHR对象了，而是经过包装的Deferred对象，所以就具有promise的一些规范。当然这种写法到底是怎么做的，我们在后续的教程中会详细的讲解到。</p>
+<p><strong>二：提供一种方法来执行一个或多个对象的回调函数</strong></p>
+<p>在实际开发中，我们可能要发送多个异步的请求操作，我们需要等所有的异步都处理完毕后，才能继续下一个动作。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://code.jquery.com/jquery-latest.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"aaron1"</span>&gt;</span>运行案例一<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"aaron2"</span>&gt;</span>运行案例二<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">//提供一种方法来执行一个或多个对象的回调函数</span></span></span><br><span class="line"><span class="javascript"><span class="comment">//在实际开发中，我们可能要发送多个异步的请求操作，我们需要等所有的异步都处理完毕后，才能继续下一个动作</span></span></span><br><span class="line"><span class="javascript"><span class="comment">//案例一</span></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">task1</span>(<span class="params">name, fn</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">    fn(name)</span></span><br><span class="line"><span class="undefined">  &#125;, 500)</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">task2</span>(<span class="params">name, fn</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">    fn(name)</span></span><br><span class="line"><span class="undefined">  &#125;, 1000)</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">//任务数</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> taskNuns = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> num = <span class="number">2</span>; <span class="comment">//2个任务</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (num === <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="javascript">      show(<span class="string">'任务都完成了'</span>,$(<span class="string">"#aaron1"</span>))</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    num--;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">&#125;()</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">$(<span class="string">"#aaron1"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="comment">//常规处理</span></span></span><br><span class="line"><span class="javascript">  task1(<span class="string">'任务一'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    show(<span class="string">'task1'</span>, $(<span class="string">"#aaron1"</span>))</span></span><br><span class="line"><span class="undefined">    taskNuns()</span></span><br><span class="line"><span class="undefined">  &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  task2(<span class="string">'任务二'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    show(<span class="string">'task2'</span>, $(<span class="string">"#aaron1"</span>))</span></span><br><span class="line"><span class="undefined">    taskNuns();</span></span><br><span class="line"><span class="undefined">  &#125;)</span></span><br><span class="line"><span class="undefined">&#125;)</span></span><br><span class="line"><span class="javascript"><span class="comment">//========================分割线============================================</span></span></span><br><span class="line"><span class="javascript"><span class="comment">//案例二</span></span></span><br><span class="line"><span class="javascript"><span class="comment">//通过Deferred改进</span></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">task3</span>(<span class="params">name</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> dtd = $.Deferred();</span></span><br><span class="line"><span class="javascript">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    show(<span class="string">'task3执行完毕'</span>,$(<span class="string">"#aaron2"</span>))</span></span><br><span class="line"><span class="undefined">    dtd.resolve(name)</span></span><br><span class="line"><span class="undefined">  &#125;, 500)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">return</span> dtd;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">task4</span>(<span class="params">name</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> dtd = $.Deferred();</span></span><br><span class="line"><span class="javascript">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    show(<span class="string">'task4执行完毕'</span>,$(<span class="string">"#aaron2"</span>))</span></span><br><span class="line"><span class="undefined">    dtd.resolve(name)</span></span><br><span class="line"><span class="undefined">  &#125;, 1000)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">return</span> dtd;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">$(<span class="string">"#aaron2"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  $.when(task3(<span class="string">'task1'</span>), task4(<span class="string">'task2'</span>)).done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    show(<span class="string">'when处理成功'</span>, $(<span class="string">"#aaron2"</span>))</span></span><br><span class="line"><span class="undefined">  &#125;)</span></span><br><span class="line"><span class="undefined">&#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params">data, ele</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  (ele || $(<span class="string">"body"</span>)).append(<span class="string">'&lt;li&gt;'</span> + data + <span class="string">'&lt;/li&gt;'</span>)</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以我们这里要涉及一个等待的处理。我们自己要做一个计时器，每一个任务执行完毕后，都要触发一次任务的检测。当最后一个调用完毕了，我们就可以执行后面的动作，当前这里的写法也会有些问题，比如错误的时候没有处理。同样的功能，我们换成Deferred就会很简单了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.when($.ajax(&quot;a1.html&quot;), $.ajax(&quot;a2.html&quot;))</span><br><span class="line">　　.done(function()&#123; alert(&apos;2次回调都正确返回了&apos;) &#125;)</span><br><span class="line">　　.fail(function()&#123; alert(&apos;出错了&apos;); &#125;);</span><br></pre></td></tr></table></figure>
+<p>这段代码的意思是：先执行两个操作$.ajax(“a1.html”)和$.ajax(“a2.html”)，如果都成功了，就运行done()指定的回调函数；如果有一个失败或都失败了，就执行fail()指定的回调函数。</p>
+<p><strong>三：可以混入任意的对象接口中</strong></p>
+<p>jQuery的Deferred最好用的地方，就是模块化程度非常高，可以任意配合使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function task(name) &#123;</span><br><span class="line">  var dtd = $.Deferred();</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    dtd.resolve(name)</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">  return dtd;</span><br><span class="line">&#125;</span><br><span class="line">$.when(task(&apos;任务一&apos;), task(&apos;任务二&apos;)).done(function() &#123;</span><br><span class="line">  alert(&apos;成功&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>把需要处理的异步操作，用Deferred对象给包装一下，然后通过when方法收集异步的操作，最后再返回出done的成功，这样的处理太赞了！</p>
+<p>所以说，Deferred的引入，为处理事件回调提供了更加强大并且更灵活的编程模型。</p>
+<h3>认识$.Deferred的接口</h3>
+<p>大多情况下，promise作为一个模型，提供了一个在软件工程中描述延时（或将来）概念的解决方案。它背后的思想我们已经介绍过：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不是执行一个方法，然后阻塞应用程序等待结果返回，而是返回一个promise对象来满足未来值。</span><br></pre></td></tr></table></figure>
+<p>这样看来，Promise/A只是一种规范，Deferred可以看作这种规范的具体实现，旨在提供通用的接口，用来简化异步编程难度，说白了就是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个可链式操作的对象，提供多个回调函数的注册，以及回调列队的回调，并转达任何异步操作成功或失败的消息。</span><br></pre></td></tr></table></figure>
+<p>jQuery.Deferred()背后的设计理念来自 <a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank" rel="noopener">CommonJS Promises/A</a> , jQuery.Deferred()基于这个理念实现，但并没有完全遵循其设计， 它代表了一种可能会长时间运行而且不一定必须完整的操作的结果，简单的描述下规范中定义的“Promise”。</p>
+<p>promise模式在任何时刻都处于以下三种状态之一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">未完成（unfulfilled）</span><br><span class="line">已完成（resolved）</span><br><span class="line">拒绝（rejected）</span><br></pre></td></tr></table></figure>
+<p>CommonJS Promise/A 标准这样定义的，promise对象上的then方法负责添加针对已完成和拒绝状态下的处理函数。then方法会返回另一个promise对象，这样可以形成“管道”风格。</p>
+<p>看看jQuery的Deferred源码中对动作接口的定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ &quot;resolve&quot;, &quot;done&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;resolved&quot; ],</span><br><span class="line">[ &quot;reject&quot;, &quot;fail&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;rejected&quot; ],</span><br><span class="line">[ &quot;notify&quot;, &quot;progress&quot;, jQuery.Callbacks(&quot;memory&quot;) ]</span><br></pre></td></tr></table></figure>
+<p>Deferred中定义的动作是非常多的，抽象的看其实可以类似一种观察者模式的实现。</p>
+<p>观察者模式中的订阅方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Done (操作完成)</span><br><span class="line">Fail (操作失败)</span><br><span class="line">Progress (操作进行中</span><br></pre></td></tr></table></figure>
+<p>观察中模式中的发布方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resolve（解决）</span><br><span class="line">reject（拒绝）</span><br><span class="line">notify（通知）</span><br></pre></td></tr></table></figure>
+<p>而且还提供了可以定义运行时的this对象的fire，fireWith，所以扩展了3个可以定义上下文的的接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resolveWith</span><br><span class="line">rejectWith</span><br><span class="line">notifyWith</span><br></pre></td></tr></table></figure>
+<p>所以按照这样的规范，我们的使用就应该是这样：见代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;button id=&quot;aaron1&quot;&gt;例一:基本用法&lt;/button&gt;</span><br><span class="line">&lt;button id=&quot;aaron2&quot;&gt;例二:过滤器&lt;/button&gt;</span><br><span class="line">&lt;button id=&quot;aaron3&quot;&gt;例三:promise方法&lt;/button&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">//例一</span><br><span class="line">$(&quot;#aaron1&quot;).on(&quot;click&quot;, function() &#123;</span><br><span class="line">  // 构建一个deferred对象</span><br><span class="line">  var dtd = $.Deferred();</span><br><span class="line">  // 给deferred注册一个成功后的回调通知</span><br><span class="line">  dtd.done(function() &#123;</span><br><span class="line">    show(&apos;成功&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line">  // 开始执行一段代码</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    dtd.resolve(); // 改变deferred对象的执行状态</span><br><span class="line">  &#125;, 2000);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//例二：过滤器</span><br><span class="line">var filterResolve = function() &#123;</span><br><span class="line">  var defer = $.Deferred(),</span><br><span class="line">    filtered = defer.then(function(value) &#123;</span><br><span class="line">      return value * 2;</span><br><span class="line">    &#125;);</span><br><span class="line">  defer.resolve(5);</span><br><span class="line">  filtered.done(function(value) &#123;</span><br><span class="line">    show(&quot;Value is ( 2*5 = ) 10: &quot; + value);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">$(&quot;#aaron2&quot;).on(&quot;click&quot;, filterResolve)</span><br><span class="line"></span><br><span class="line">//例三：实现promise方法</span><br><span class="line">$(&quot;#aaron3&quot;).on(&quot;click&quot;, function() &#123;</span><br><span class="line">  var obj = &#123;</span><br><span class="line">    hello: function(name) &#123;</span><br><span class="line">      show(&quot;你好 &quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">    defer = $.Deferred();</span><br><span class="line">  // 设置一个promise</span><br><span class="line">  defer.promise(obj);</span><br><span class="line">  //解决一个deferred</span><br><span class="line">  defer.resolve(&quot;慕课网&quot;);</span><br><span class="line">  obj.done(function(name) &#123;</span><br><span class="line">    obj.hello(name);</span><br><span class="line">  &#125;).hello(&quot;Aaron&quot;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">function show(data) &#123;</span><br><span class="line">  $(&quot;body&quot;).append(&apos;&lt;li&gt;&apos; + data + &apos;&lt;/li&gt;&apos;)</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3>$.Deferred的设计</h3>
+<p>由于1.7版本后$.Callbacks从Deferred中抽离出去了，目前版本的Deferred.js代码不过150行，而真正$.Deferred的实现只有100行左右，实现的逻辑是相当犀利的。</p>
+<p>因为Callback被剥离出去后，整个Deferred就显得非常的精简，代码直接通过extend扩展到静态接口上，对于extend的继承这个东东，在之前就提及过jQuery如何处理内部jQuery与init相互引用this的问题，所以当jQuery.extend只有一个参数的时候，其实就是对jQuery静态方法的一个扩展。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jQuery.extend(&#123;</span><br><span class="line">   Deferred:function(func)&#123;</span><br><span class="line">        ...省略代码....</span><br><span class="line">        return deferred</span><br><span class="line">   &#125;,</span><br><span class="line">   when:function(func)&#123;</span><br><span class="line">      ...省略代码....</span><br><span class="line">      return deferred.promise();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>我们来具体看看2个静态方法内部都干了些什么?</p>
+<p>Deferred整体结构：右边代码所示。</p>
+<p>Deferred就是一个简单的工厂方法，有两种方式使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = $.Deferred（）</span><br><span class="line">$.Deferred(function()&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>内部其实是严重依赖$.Callbacks对象，Callbacks就是用来储存deferred依赖的数据的。</p>
+<p>因为done、fail、progress就是jQuery.Callbacks(“once memory”)所有对应的处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var list = jQuery.Callbacks(&quot;once memory&quot;)</span><br><span class="line">promise[&apos;done&apos;] = list.add;</span><br></pre></td></tr></table></figure>
+<p>deferred定义了一系列的接口，堪称一绝，100多行的代码，精练的有些过分。</p>
+<p>Deferred方法内部建议了2个对象，一个是deferred外部接口对象，一个是内部promise对象。</p>
+<p>promise对象解释是一个受限的对象, 这就是所谓的受限制的deferred对象，因为相比之前， 返回的deferred不再拥有resolve(With), reject(With), notify(With)这些能改变deferred对象状态并且执行callbacklist的方法了,只能是then、done、fali等方法。</p>
+<p>其内部通过tuples数组，存储了所有的接口API，通过遍历把所有的接口一次都挂到内部promise与deferred对象上。</p>
+<p>其中定义了done、fail以及progress这几个方法，其实就是Callbacks回调函数中的add方法，用与push外部的的数据，保存在队列上。</p>
+<p>我们通过resolve、reject以及notify其实也就是处理Callbacks中的队列列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">// jQuery. Deferred主要处理：</span><br><span class="line">//     显而易见Deferred是个工厂类，返回的是内部构建的deferred对象</span><br><span class="line">//     tuples 创建三个$.Callbacks对象，分别表示成功，失败，处理中三种状态</span><br><span class="line">//     创建了一个promise对象，具有state、always、then、primise方法</span><br><span class="line">//     扩展primise对象生成最终的Deferred对象，返回该对象</span><br><span class="line">//     primise对象就是一个受限对象，只读</span><br><span class="line">var Deferred = function(func) &#123;</span><br><span class="line">  var tuples = [</span><br><span class="line">    //1 动作</span><br><span class="line">    //2 侦听器</span><br><span class="line">    //3 最终状态</span><br><span class="line">    //后面的操作将是围绕这些接口处理</span><br><span class="line">    [&quot;resolve&quot;, &quot;done&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;resolved&quot;],</span><br><span class="line">    [&quot;reject&quot;, &quot;fail&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;rejected&quot;],</span><br><span class="line">    [&quot;notify&quot;, &quot;progress&quot;, jQuery.Callbacks(&quot;memory&quot;)]</span><br><span class="line">  ],</span><br><span class="line">  state = &quot;pending&quot;,</span><br><span class="line">  //扩展的primise对象</span><br><span class="line">  promise = &#123;</span><br><span class="line">    state: function() &#123;&#125;,</span><br><span class="line">    always: function() &#123;&#125;,</span><br><span class="line">    then: function( /* fnDone, fnFail, fnProgress */ ) &#123;&#125;,</span><br><span class="line">    promise: function(obj) &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  deferred = &#123;&#125;;</span><br><span class="line">  //定义管道风格的接口pipe</span><br><span class="line">  promise.pipe = promise.then;</span><br><span class="line">  //逐个添加所有的接口到deferred对象上</span><br><span class="line">  jQuery.each(tuples, function(i, tuple) &#123;</span><br><span class="line">    deferred[tuple[0]] = function() &#123;</span><br><span class="line">      deferred[tuple[0] + &quot;With&quot;](this === deferred ? promise : this, arguments);</span><br><span class="line">      return this;</span><br><span class="line">    &#125;;</span><br><span class="line">    deferred[tuple[0] + &quot;With&quot;] = list.fireWith;</span><br><span class="line">  &#125;);</span><br><span class="line">  //转成成promise对象</span><br><span class="line">  promise.promise(deferred);</span><br><span class="line">  //如果传递的参数是函数，直接运行</span><br><span class="line">  if (func) &#123;</span><br><span class="line">    func.call(deferred, deferred);</span><br><span class="line">  &#125;</span><br><span class="line">  return deferred;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//when就是一个合集的处理</span><br><span class="line">//可以收集多个异步操作，合并成功后处理</span><br><span class="line">//同时也可以绑定Promise 对象的其它方法，如 defered.then</span><br><span class="line">//所以when内部必须要创建一个deferred对象</span><br><span class="line">var when = function(subordinate /* , ..., subordinateN */ ) &#123;</span><br><span class="line">  var i = 0,</span><br><span class="line">    resolveValues = slice.call(arguments),</span><br><span class="line">    length = resolveValues.length,</span><br><span class="line">    deferred = remaining === 1 ? subordinate : jQuery.Deferred(),</span><br><span class="line">    updateFunc = function(i, contexts, values) &#123;</span><br><span class="line">      return function(value) &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    progressValues, progressContexts, resolveContexts;</span><br><span class="line">  if (length &gt; 1) &#123;</span><br><span class="line">    progressValues = new Array(length);</span><br><span class="line">    progressContexts = new Array(length);</span><br><span class="line">    resolveContexts = new Array(length);</span><br><span class="line">    for (; i &lt; length; i++) &#123;</span><br><span class="line">      if (resolveValues[i] &amp;&amp; jQuery.isFunction(resolveValues[i].promise)) &#123;</span><br><span class="line">        resolveValues[i].promise()</span><br><span class="line">          .done(updateFunc(i, resolveContexts, resolveValues))</span><br><span class="line">          .fail(deferred.reject)</span><br><span class="line">          .progress(updateFunc(i, progressContexts, progressValues));</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        --remaining;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return deferred.promise();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2>Deferred的执行流程</h2>
+<p>用下面的例子分析（见右侧代码编辑器）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var defer = $.Deferred();</span><br><span class="line">defer.resolve(5);</span><br><span class="line">defer.done(function(value) &#123;&#125;)</span><br><span class="line">var filtered = defer.then(function(value) &#123;</span><br><span class="line">  return value * 2;</span><br><span class="line">&#125;);</span><br><span class="line">filtered.done(function(value) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里有几个关键的问题：</p>
+<p>1、defer延时对象通过resolved触发done成功回调，调用在添加done之前，那么靠什么延时处理？</p>
+<p>2、为什么defer.then对象返回的给filtered.done的数据可以类似管道风格的顺序叠加给后面的done处理？</p>
+<p>一般来说，javascript要实现异步的收集，就需要“等待”，比如defer.resolve(5)虽然触发了，但是done的处理还没添加，我们必须要等待done、then等方法先添加了后才能执行了resolve，那么常规的的用法就是在resolve内部用setTimeout 0，image.onerror行成一个异步的等待操作处理。</p>
+<p>但是jQuery很巧妙的绕过了这个收集方式，</p>
+<p>defer.resolve(5)方法实际就是触发了callback回到函数的fireWith方法，这样可以接受一个上下文deferred与参数5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deferred[tuple[0] + &quot;With&quot;](this === deferred ? promise : this, arguments);</span><br></pre></td></tr></table></figure>
+<p>之前 done | fail | progress方法都是通过jQuery.Callbacks(“once memory”) 或 jQuery.Callbacks(“memory”)生成的。</p>
+<p>实际上在Callback源码fire方法有一句 memory = options.memory &amp;&amp; data;这样就很巧妙的缓存当前参数5的值，提供给下一个使用，这个就是then，pipe链式数据的一个基础了，此刻的操作，我们把memory保存了这个数据的值。</p>
+<p>重点来了，下一个defer.done的操作也是走的add的处理，把done的回调函数加入到list队列中的之后，接着就会触发。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> // With memory, if we&apos;re not firing then</span><br><span class="line"> // we should call right away</span><br><span class="line">&#125; else if (memory) &#123;</span><br><span class="line">  firingStart = start;</span><br><span class="line">  fire(memory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为memory在上一个resolve操作的时候，缓存了5了，所以memory的判断显示是为真的，所以立刻就触发了fire(memory)的代码了，所以就算触发的循序与添加的循序不一致，也不会导致错误。 而且jquery很巧妙的避免了异步收集的问题，这样处理更可靠了。可见回调函数模块就是为Deferred模块量身定做的了。</p>
+<p>第二个问题，是关于then，pipe管道风格的处理，这样也是一个很复杂的设计，在后面一章就提到了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var filterResolve = function() &#123;</span><br><span class="line">  var defer = $.Deferred();</span><br><span class="line">  //先执行成功</span><br><span class="line">  defer.resolve(5);</span><br><span class="line">  //后添加</span><br><span class="line">  defer.done(function(value) &#123;</span><br><span class="line">    $(&apos;body&apos;).append(&quot;&lt;li&gt;defer.done的值是：&quot; + value + &quot;&lt;/li&gt;&quot;);</span><br><span class="line">  &#125;)</span><br><span class="line">  //实现一个管道方法</span><br><span class="line">  var filtered = defer.then(function(value) &#123;</span><br><span class="line">    return value * 2;</span><br><span class="line">  &#125;);</span><br><span class="line">  //接受上一个值，叠加处理</span><br><span class="line">  filtered.done(function(value) &#123;</span><br><span class="line">    $(&apos;body&apos;).append(&quot;&lt;li&gt;filtered.done ( 2*5 = ) 10: &quot; + &quot;&lt;/li&gt;&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">$(&quot;button&quot;).on(&quot;click&quot;, filterResolve);</span><br></pre></td></tr></table></figure>
+<h2>Deferred源码剖析(上)</h2>
+<p>Deferred对接口的设计别出心裁，不是常规的直接定义的，我们可以看tuples这个数组的定义。</p>
+<p><strong>Deferred</strong><strong>自身则围绕这三组数据进行更高层次的抽象</strong></p>
+<p>☑ 触发回调函数列表执行(函数名)</p>
+<p>☑ 添加回调函数（函数名）</p>
+<p>☑ 回调函数列表（jQuery.Callbacks对象）</p>
+<p>☑ Deferred最终状态（第三组数据除外）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var tuples = [</span><br><span class="line">  // action, add listener, listener list, final state</span><br><span class="line">  [&quot;resolve&quot;, &quot;done&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;resolved&quot;],</span><br><span class="line">  [&quot;reject&quot;, &quot;fail&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;rejected&quot;],</span><br><span class="line">  [&quot;notify&quot;, &quot;progress&quot;, jQuery.Callbacks(&quot;memory&quot;)]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>这里抽象出2组阵营：</p>
+<p><strong>1</strong>**组：回调方法/事件订阅 **</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">done、fail、progress</span><br></pre></td></tr></table></figure>
+<p><strong>2</strong>**组：通知方法/事件发布    **</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resolve、reject、notify、resolveWith、rejectWith、notifyWith</span><br></pre></td></tr></table></figure>
+<p>Tuples元素集，其实是把相同有共同特性的代码的给合并成一种结构，然后来一次处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery.each(tuples, function(i, tuple) &#123;</span><br><span class="line">  //代码请看右边代码区域</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>对于Tuples的3条数据集是分2部分处理的：</p>
+<p><strong>第一部分将回调函数存入</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise[ tuple[1] ] = list.add;</span><br></pre></td></tr></table></figure>
+<p>其实就是给promise赋予3个回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">promise.done = $.Callbacks(&quot;once memory&quot;).add</span><br><span class="line">promise.fail = $.Callbacks(&quot;once memory&quot;).add</span><br><span class="line">promise.progressl = $.Callbacks(&quot;memory&quot;).add</span><br></pre></td></tr></table></figure>
+<p>如果存在Deferred最终状态，默认会预先向doneList，failList中的list添加三个回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (stateString) &#123;</span><br><span class="line">  list.add(function() &#123;</span><br><span class="line">    state = stateString;</span><br><span class="line">  &#125;, tuples[i ^ 1][2].disable, tuples[2][2].lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有个小技巧：</p>
+<p>i ^ 1 <a href="https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">按位异或运算符</a></p>
+<p>所以实际上第二个传参数是1、0索引对调了，所以取值是failList.disable与doneList.disable。</p>
+<p><strong>通过stateString有值这个条件，预先向doneList,failList中的list添加三个回调函数，分别是:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">doneList : [changeState, failList.disable, processList.lock]</span><br><span class="line">failList : [changeState, doneList.disable, processList.lock]</span><br></pre></td></tr></table></figure>
+<p>☑ changeState 改变状态的匿名函数，deferred的状态，分为三种：pending(初始状态), resolved(解决状态), rejected(拒绝状态)；</p>
+<p>☑ 不论deferred对象最终是resolve（还是reject），在首先改变对象状态之后，都会disable另一个函数列表failList(或者doneList)；</p>
+<p>☑ 然后lock processList保持其状态，最后执行剩下的之前done（或者fail）进来的回调函数。</p>
+<p>所以第一步最终都是围绕这add方法：</p>
+<p>☑ done/fail/是list.add也就是<a href="http://www.cnblogs.com/snandy/archive/2012/11/15/2770237.html#add" target="_blank" rel="noopener">callbacks.add</a>，将回调函数存入回调对象中。</p>
+<p><strong>第二部分很简单，给Deferred对象扩充6个方法：</strong></p>
+<p>☑ resolve/reject/notify 是 <a href="http://www.cnblogs.com/snandy/archive/2012/11/15/2770237.html#fireWith" target="_blank" rel="noopener">callbacks.fireWith</a>，执行回调函数；</p>
+<p>☑ resolveWith/rejectWith/notifyWith 是 <a href="http://www.cnblogs.com/snandy/archive/2012/11/15/2770237.html#fireWith" target="_blank" rel="noopener">callbacks.fireWith</a> 队列方法引用。</p>
+<p>最后合并promise到Deferred。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">promise.promise( deferred );</span><br><span class="line">jQuery.extend( obj, promise );</span><br></pre></td></tr></table></figure>
+<p>所以最终通过工厂方法Deferred构建的异步对象带的所有的方法了，return内部的deferred对象了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;button&gt;测试Deferred&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">      </span><br><span class="line">    function Deferred()&#123;</span><br><span class="line">      //内部deferred对象</span><br><span class="line">      var deferred = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">      //定义的基本接口</span><br><span class="line">      //Callbacks(once memory)的用法，就是只执行一次，并且保持以前的值</span><br><span class="line">      // 每个元组分别包含一些与当前deferred相关的信息: </span><br><span class="line">      // 分别是：触发回调函数列表执行(函数名)，添加回调函数（函数名），回调函数列表（jQuery.Callbacks对象），deferred最终状态（第三组数据除外）</span><br><span class="line">      // 总体而言，三个元组会有对应的三个callbacklist对应于doneList, failList, processList</span><br><span class="line">      var tuples = [</span><br><span class="line">        [&quot;resolve&quot;, &quot;done&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;resolved&quot;],</span><br><span class="line">        [&quot;reject&quot;, &quot;fail&quot;, jQuery.Callbacks(&quot;once memory&quot;), &quot;rejected&quot;],</span><br><span class="line">        [&quot;notify&quot;, &quot;progress&quot;, jQuery.Callbacks(&quot;memory&quot;)]</span><br><span class="line">      ];</span><br><span class="line"></span><br><span class="line">      //deferred的状态，三种：pending(初始状态), resolved(解决状态), rejected(拒绝状态)</span><br><span class="line">      //其实就是tuples最后定义的</span><br><span class="line">      var state = &quot;pending&quot;;</span><br><span class="line"></span><br><span class="line">      //内部promise对象,作用：</span><br><span class="line">      //1：通过promise.promise( deferred );混入到deferred中使用</span><br><span class="line">      //2：可以生成一个受限的deferred对象，</span><br><span class="line">      //   不在拥有resolve(With), reject(With), notify(With)这些能改变deferred对象状态并且执行callbacklist的方法了</span><br><span class="line">      //   换句话只能读，不能改变了</span><br><span class="line">      //扩展</span><br><span class="line">      //  done fail pipe process </span><br><span class="line">      var promise = &#123;</span><br><span class="line">        state: function() &#123;&#125;,</span><br><span class="line">        always: function() &#123;&#125;,</span><br><span class="line">        then: function() &#123;&#125;,</span><br><span class="line">        promise: function(obj) &#123;</span><br><span class="line">          return obj != null ? jQuery.extend(obj, promise) : promise;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      //管道接口,API别名</span><br><span class="line">      promise.pipe = promise.then;</span><br><span class="line"></span><br><span class="line">      //遍历tuples</span><br><span class="line">      //把定义的接口混入到deferred中</span><br><span class="line">      jQuery.each(tuples, function(i, tuple) &#123;</span><br><span class="line">        var list = tuple[2],</span><br><span class="line">          stateString = tuple[3];</span><br><span class="line"></span><br><span class="line">          // 给上面的promise对象添加done，fail，process方法</span><br><span class="line">          // 分别引用三个不同 jQuery.Callbacks(&quot;once memory&quot;)对象的add方法，在初始化就构建成了对象</span><br><span class="line">          // 向各自的回调函数列表list（各自闭包中）中添加回调函数，互不干扰</span><br><span class="line">          // promise = &#123;</span><br><span class="line">          //    done:</span><br><span class="line">          //    fail:</span><br><span class="line">          //    process</span><br><span class="line">          // &#125;</span><br><span class="line">          promise[tuple[1]] = list.add;</span><br><span class="line"></span><br><span class="line">        if (stateString) &#123;</span><br><span class="line">          list.add(function() &#123;</span><br><span class="line">            state = stateString;</span><br><span class="line">          &#125;, tuples[i ^ 1][2].disable, tuples[2][2].lock);</span><br><span class="line">        &#125;</span><br><span class="line">        deferred[tuple[0]] = function() &#123;</span><br><span class="line">          deferred[tuple[0] + &quot;With&quot;](this === deferred ? promise : this, arguments);</span><br><span class="line">          return this;</span><br><span class="line">        &#125;;</span><br><span class="line">        deferred[tuple[0] + &quot;With&quot;] = list.fireWith;</span><br><span class="line">      &#125;);</span><br><span class="line">      //混入方法</span><br><span class="line">      promise.promise(deferred);</span><br><span class="line"></span><br><span class="line">      return deferred;</span><br><span class="line">    &#125;</span><br><span class="line">  $(&quot;button&quot;).on(&quot;click&quot;, function() &#123;</span><br><span class="line">    var dtd = Deferred();</span><br><span class="line">    // 给deferred注册一个成功后的回调通知</span><br><span class="line">    dtd.done(function() &#123;</span><br><span class="line">       $(&apos;body&apos;).append(&apos;&lt;li&gt;Deferred成功&lt;/li&gt;&apos;)</span><br><span class="line">    &#125;)</span><br><span class="line">    // 开始执行一段代码</span><br><span class="line">    setTimeout(function() &#123;</span><br><span class="line">      dtd.resolve(); // 改变deferred对象的执行状态</span><br><span class="line">    &#125;, 500);</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2>Deferred源码剖析(下)</h2>
+<p>在上一节中构建了deferred对象，实现了done/fail/process和resolve/reject/notify等方法，但是最重要的then,pipe管道接口我们还没有实现，我们考虑下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var dfd = $.Deferred()</span><br><span class="line">dfd.then(function(preVale) &#123;</span><br><span class="line">  return 2 * preVale   //4</span><br><span class="line">&#125;).then(function(preVale) &#123;</span><br><span class="line">  return 3 * preVale   //12</span><br><span class="line">&#125;)</span><br><span class="line">dfd.resolve(2)</span><br></pre></td></tr></table></figure>
+<p>then就是pipe，我们可以想象是一个管道，可以对回调模式使用瀑布模型。如案例所示，下一个回调都能取到上一个回调的值，这样一直可以叠加往后传递。</p>
+<p>不难看出管道的风格就是链式的操作，每一个链上的结果都会反馈后下一个链，那么这个链式是不是传统的返回自身这个对象this呢？</p>
+<p>常规的办法通过数组处理：右侧代码所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function aDeferred(）&#123;</span><br><span class="line">   //代码右侧代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的结构当然是很简陋的，这里我们最终有一个本质的问题没有解决，jQuery中的then的返回还有可能是另一个新的异步模型对象,如ajax，因此还能实现done，fail,always,then等方法。所以采用简陋的数组的方式保存状态是很肤浅的了。</p>
+<p>这时候jQuery采取了对象保存处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们可以把每一次的then操作，当做是创建一个新的deferred对象，那么每一个对象都够保存自己的状态与各自的处理方法。通过一个办法把所有的对象操作都串联起来，这就是then或者pipe管道设计的核心思路了。</span><br></pre></td></tr></table></figure>
+<p>看jQuery的<strong>then</strong>结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">then: function( /* fnDone, fnFail, fnProgress */ ) &#123;</span><br><span class="line">         var fns = arguments;</span><br><span class="line">         return jQuery.Deferred(function(newDefer) &#123;</span><br><span class="line">                   jQuery.each(tuples, function(i, tuple) &#123;</span><br><span class="line">                            deferred[tuple[1]](function() &#123;</span><br><span class="line">                         // deferred[ done | fail | progress ]                   </span><br><span class="line">                    &#125;);</span><br><span class="line">               &#125;);</span><br><span class="line">         &#125;).promise()</span><br></pre></td></tr></table></figure>
+<p>其实在内部创建了一个新的Deferred对象，不过这里的不同是通过传递一个回调函数，参数是newDefer，其实Deferred内部就是为了改变下上下文this为deferred，然后传递deferred给这个回调函数了，所以newDefer就指向内部的deferred对象了。</p>
+<p>那么对象之间如何关联？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">jQuery.each(tuples, function(i, tuple) &#123;</span><br><span class="line">  //取出参数</span><br><span class="line">  var fn = jQuery.isFunction(fns[i]) &amp;&amp; fns[i];</span><br><span class="line">  // deferred[ done | fail | progress ] for forwarding actions to newDefer</span><br><span class="line">  // 添加done fail progress的处理方法</span><br><span class="line">  // 针对延时对象直接做了处理</span><br><span class="line">  deferred[tuple[1]](function() &#123;</span><br><span class="line">    var returned = fn &amp;&amp; fn.apply(this, arguments);</span><br><span class="line">    if (returned &amp;&amp; jQuery.isFunction(returned.promise)) &#123;</span><br><span class="line">      returned.promise()</span><br><span class="line">        .done(newDefer.resolve)</span><br><span class="line">        .fail(newDefer.reject)</span><br><span class="line">        .progress(newDefer.notify);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      newDefer[tuple[0] + &quot;With&quot;](this === promise ? newDefer.promise() : this, fn ? [returned] : arguments);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>把then的方法通过：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deferred.done</span><br><span class="line">deferred.fail</span><br><span class="line">deferred.progress</span><br></pre></td></tr></table></figure>
+<p>加入到上一个对象的各自的执行队列中保存了。这样就实现了不同对象之间的关联调用。</p>
+<p>同样如果then返回的是一个promise对象（ajax）的时候：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (returned &amp;&amp; jQuery.isFunction(returned.promise)) &#123;</span><br><span class="line">  returned.promise()</span><br><span class="line">    .done(newDefer.resolve)</span><br><span class="line">    .fail(newDefer.reject)</span><br><span class="line">    .progress(newDefer.notify);</span><br></pre></td></tr></table></figure>
+<p>也可以直接处理了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;button&gt;模拟的代码测试&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  </span><br><span class="line">  //使用$.Deferred</span><br><span class="line">  var dfd = $.Deferred()</span><br><span class="line">  dfd.then(function(preVale) &#123;</span><br><span class="line">    return 2 * preVale; </span><br><span class="line">  &#125;).then(function(preVale) &#123;</span><br><span class="line">    return 3 * preVale </span><br><span class="line">  &#125;).then(function(preVale) &#123;</span><br><span class="line">    $(&apos;body&apos;).append(&apos;&lt;li&gt;使用$.Deferred代码结果:&apos;+ preVale +&apos;&lt;/li&gt;&apos;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  dfd.resolve(2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  //简单模拟</span><br><span class="line">  function aDeferred() &#123;</span><br><span class="line">    var arr = [];</span><br><span class="line">    return &#123;</span><br><span class="line">      then: function(fn) &#123;</span><br><span class="line">        arr.push(fn)</span><br><span class="line">        return this;</span><br><span class="line">      &#125;,</span><br><span class="line">      resolve: function(args) &#123;</span><br><span class="line">        var returned;</span><br><span class="line">        arr.forEach(function(fn, i) &#123;</span><br><span class="line">          var o = returned || args;</span><br><span class="line">          returned = fn(o)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">$(&quot;button&quot;).on(&quot;click&quot;, function() &#123;</span><br><span class="line">  var d = aDeferred();</span><br><span class="line">  d.then(function(preVale) &#123;</span><br><span class="line">    return 2 * preVale //4</span><br><span class="line">  &#125;).then(function(preVale) &#123;</span><br><span class="line">    return 3 * preVale //4</span><br><span class="line">  &#125;).then(function(preVale) &#123;</span><br><span class="line">    $(&apos;body&apos;).append(&apos;&lt;li&gt;模拟代码结果:&apos;+ preVale +&apos;&lt;/li&gt;&apos;)</span><br><span class="line">  &#125;);</span><br><span class="line">  d.resolve(2)</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3>when方法的设计</h3>
+<p>when也是一个非常有用的方法，常用于合并多个异步操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.when(d1,d2,d3,d4......).done(function(v1, v2,v3...) &#123;</span><br><span class="line">    //等待所有异步加载完毕后执行</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>用法很简单，把所有的异步丢到when中，when会处理所有的结果。当然d1,d2,d3都是有规范的，都是通过Deferred产生的。</p>
+<p>具体的用法见右侧代码编辑器中的代码。</p>
+<p>如果向 <code>jQuery.when()</code> 传入延迟对象，那么会返回它的 Promise 对象(延迟方法的一个子集)。可以继续绑定 Promise 对象的其它方法，例如， <code>defered.then</code> 。当延迟对象已经被解决（resolved）或被拒绝(rejected）（通常是由创建延迟对象的最初代码执行的），那么就会调用适当的回调函数。例如，由 <code>jQuery.ajax()</code> 返回的 jqXHR 对象是一个延迟对象，可以向下面这样使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.when($.ajax(&quot;test.aspx&quot;)).then(function(data, textStatus, jqXHR) &#123;</span><br><span class="line">  alert(jqXHR.status); // alerts 200</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们通过模拟的代码，可以很简单的分析整个流程：</p>
+<p>1. 传递了多个异步对象，然后遍历每个异步对象给每一个对象绑定done、fail、progess方法，无非就是监听每一个异步的状态（成功，失败），如果是完成了自然会激活done方法。</p>
+<p>2. updateFunc是监听方法，通过判断异步对象执行的次数来决定是不是已经完成了所有的处理或者是失败处理</p>
+<p>3. 因为<code>when也要形成异步操作，</code>比如when().done()，<code>所以内部必须新建一个</code>jQuery.Deferred()对象，用来给后面链式调用。</p>
+<p>4. 此刻监听所有异步对象(d1,d2…)的updateFunc的处理都完毕了，会给一个正确的通知给when后面的done方法，因为done是通过第三步jQuery.Deferred()创建的，所以此时就需要发送消息到这个上面，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deferred.resolveWith(contexts, values);</span><br></pre></td></tr></table></figure>
+<p>5. 内部的jQuery.Deferred()因为外部绑定了when().done(),所以done自然就收到了updateFunc给的消息了，可以继续之后的操作了。</p>
+<p>所以整个执行流程就是这样简单，我们通过右边最简单的模拟出这个效果。</p>
+<p>整个when的设计其实最终还是依赖了jQuery.Deferred内部处理的机制，一层套一层。当然jQuery的异步设计逻辑也确实很复杂，需要思维跳转很活跃，某一个时间在这里，下一个片段又要另一个地方去了，不是按照同步代码这样执行的。需要大家有一定的空间跳跃力了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;</span><br><span class="line">&lt;script src=&quot;http://code.jquery.com/jquery-latest.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;http://img.mukewang.com/down/541f6ff70001a0a500000000.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;button&gt;$.when代码测试&lt;/button&gt;</span><br><span class="line">&lt;button&gt;when模拟的代码测试&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">$(&apos;button&apos;).eq(0).click(function() &#123;</span><br><span class="line">  var d1 = new $.Deferred();</span><br><span class="line">  var d2 = new $.Deferred();</span><br><span class="line"></span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">    d1.resolve(&quot;$.when代码测试Fish&quot;);</span><br><span class="line">  &#125;,500)</span><br><span class="line"></span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">    d2.resolve(&quot;$.when代码测试Pizza&quot;);</span><br><span class="line">  &#125;,1000)</span><br><span class="line"></span><br><span class="line">$.when(d1, d2).done(function(v1, v2) &#123;</span><br><span class="line">  show(v1); // &quot;Fish&quot;</span><br><span class="line">  show(v2); // &quot;Pizza&quot;</span><br><span class="line">&#125;);  </span><br><span class="line">&#125;)</span><br><span class="line">ul</span><br><span class="line">$(&apos;button&apos;).eq(1).click(function() &#123;</span><br><span class="line"></span><br><span class="line">  var d1 = new $.Deferred();</span><br><span class="line">  var d2 = new $.Deferred();</span><br><span class="line"></span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    d1.resolve(&quot;when模拟:Fish&quot;);</span><br><span class="line">  &#125;, 500)</span><br><span class="line"></span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    d2.resolve(&quot;when模拟:Pizza&quot;);</span><br><span class="line">  &#125;, 1000)</span><br><span class="line"></span><br><span class="line">  function when(d1, d2) &#123;</span><br><span class="line">    var i = 0,</span><br><span class="line">      resolveValues = [].slice.call(arguments),</span><br><span class="line">      length = resolveValues.length;</span><br><span class="line">    var len = length;</span><br><span class="line">    //收集resolve值</span><br><span class="line">    var values = [];</span><br><span class="line">    var deferred = jQuery.Deferred();</span><br><span class="line"></span><br><span class="line">    function updateFunc(value) &#123;</span><br><span class="line">      values.push(value);</span><br><span class="line">      if (len === 1) &#123;</span><br><span class="line">        deferred.resolveWith(&apos;contexts&apos;, values);</span><br><span class="line">      &#125;</span><br><span class="line">      len--</span><br><span class="line">    &#125;</span><br><span class="line">    for (; i &lt; length; i++) &#123;</span><br><span class="line">      resolveValues[i].done(updateFunc)</span><br><span class="line">    &#125;</span><br><span class="line">    return deferred;</span><br><span class="line">  &#125;</span><br><span class="line">  when(d1, d2).done(function(v1, v2) &#123;</span><br><span class="line">    show(v1); // &quot;Fish&quot;</span><br><span class="line">    show(v2); // &quot;Pizza&quot;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt; </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="ulson 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/28/JQuery源码解读 02-对象构建/" rel="next" title="JQuery源码解读 02-对象构建">
+                <i class="fa fa-chevron-left"></i> JQuery源码解读 02-对象构建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/15/优化算法篇之梯度法/" rel="prev" title="优化算法篇之梯度法">
+                优化算法篇之梯度法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="ulson" />
+            
+              <p class="site-author-name" itemprop="name">ulson</p>
+              <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="ulsonhu@gmail.com" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/ulson_hu/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/tour_hyc/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/ulsonhu" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">前述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Deferred</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Deferred是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">认识$.Deferred的接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">$.Deferred的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Deferred的执行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Deferred源码剖析(上)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Deferred源码剖析(下)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">when方法的设计</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ulson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

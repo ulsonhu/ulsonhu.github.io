@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
 <meta property="og:description" content="全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-23T17:21:08.022Z">
+<meta property="og:updated_time" content="2018-02-24T06:03:43.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全局优化算法之粒子群算法">
 <meta name="twitter:description" content="全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。">
@@ -372,29 +372,32 @@
       
 
       
-        <p>##序言</p>
-<p>前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，迭代序列只能收敛到局部极小点。因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p>
-<p>全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。
+        <h2>序言</h2>
+<p>  前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，迭代序列只能收敛到局部极小点。因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p>
+<p>  全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。
 这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。
 遗传算法属于智能优化算法之一。</p>
-<p>常用的全局优化算法有：
-遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p>
-<p>##PSO算法
-粒子群算法（Particle swarm optimization）是由James Kennedy &amp;<a href="http://www.engr.iupui.edu/~eberhart/" target="_blank" rel="noopener">Russell Eberhart</a>提出。
+<p>  常用的全局优化算法有： 遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p>
+<h2>PSO算法</h2>
+<p>  粒子群算法（Particle swarm optimization）是由James Kennedy &amp;<a href="http://www.engr.iupui.edu/~eberhart/" target="_blank" rel="noopener">Russell Eberhart</a>提出。
 区别于上节讨论的模拟退火算法，粒子群算法并不是只更新单个迭代点，而是更新一组迭代点，称为群。群中每个点称为粒子。可将群视为一个无序的群体，其中的每个成员都在移动，意在形成聚集，但移动方向是随机的。</p>
-<p>具体来说，求取目标函数在$\mathbb{R}^n$上极小点的过程。
-1）在$\mathbb{R}^n$随机产生一组数据点，为每个点赋予一个速度，构成一个速度向量。这些点视为粒子所在的位置，以指定速度在运动。
-2）针对每个数据点计算对应的目标函数值，基于计算结果，产生一组新的数据点，赋予新的运动速度。</p>
-<p>其每个粒子都持续追踪到目前为止最好的位置，称到目前为止最好的位置为Pbest，全局最好为止Gbest。
+<p>  具体来说，求取目标函数在$\mathbb{R}^n$上极小点的过程。</p>
+<ol>
+<li>在$\mathbb{R}^n$随机产生一组数据点，为每个点赋予一个速度，构成一个速度向量。这些点视为粒子所在的位置，以指定速度在运动。</li>
+<li>针对每个数据点计算对应的目标函数值，基于计算结果，产生一组新的数据点，赋予新的运动速度。</li>
+</ol>
+<p>  其每个粒子都持续追踪到目前为止最好的位置，称到目前为止最好的位置为Pbest，全局最好为止Gbest。
 基于粒子的个体最好位置和群的群的全局最优位置，调整各粒子的运动速度，实现粒子的“交互“。即在每次迭代中，产生两个随机数，分别作为pbest和gbest的权重，以此构成pbest和gbest的一个组合值，分别称为速度项和随机项，再加上加权后的原有速度，可以实现对原有速度的更新。</p>
-<p>目标函数在$\mathbb{R}^n$中，由种群数m组成粒子群，其中第i个粒子在d维的位置为$x_{id}$，其飞行速度为$v_{id}$，该粒子当前搜索的最优位置为，整个粒子群当前位置为，更新公式如下：
-<font size="6">$$v_{id}^{t+1}=v_{id}^{t}+c_1r_1(P_{id}-x_{id}+c_2r_2(P_{gd}-x_{id}))\quad (1) \ x_{id}^{t+1}=x_{id}{t}+v_{id}^{t+1} \quad \quad(2)$$</font></p>
+<p>  目标函数在$\mathbb{R}^n$中，由种群数m组成粒子群，其中第i个粒子在d维的位置为$x_{id}$，其飞行速度为$v_{id}$，该粒子当前搜索的最优位置为，整个粒子群当前位置为，更新公式如下：
+$$v_{id}^{t+1}=v_{id}^{t}+c_1r_1(P_{id}-x_{id}+c_2r_2(P_{gd}-x_{id}))\quad (1) \ x_{id}^{t+1}=x_{id}{t}+v_{id}^{t+1} \quad \quad(2)$$</p>
 <p>$r_1、r_2$是服从U(0,1)分布的随机数，学习因子$c_1、c_2$为非负常数，通常取$c_1=c_2=2$，$v_id \in [v_{min},v_{max}],v_{max}$是自设定的常数，迭代终止条件为预设的最大迭代数或预定的最小适应度阈值。</p>
 <p>Matlab代码示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">%% 该代码为基于PSO的函数极值寻优</span><br><span class="line">%</span><br><span class="line">%% 清空环境</span><br><span class="line">clc</span><br><span class="line">clear</span><br><span class="line"></span><br><span class="line">%% 参数初始化</span><br><span class="line">%粒子群算法中的两个参数</span><br><span class="line">c1 = 1.49445;</span><br><span class="line">c2 = 1.49445;</span><br><span class="line"></span><br><span class="line">maxgen=500;   % 进化次数  </span><br><span class="line">sizepop=100;   %种群规模</span><br><span class="line"></span><br><span class="line">Vmax=1;</span><br><span class="line">Vmin=-1;</span><br><span class="line">popmax=5;</span><br><span class="line">popmin=-5;</span><br><span class="line"></span><br><span class="line">%% 产生初始粒子和速度</span><br><span class="line">for i=1:sizepop</span><br><span class="line">    %随机产生一个种群</span><br><span class="line">    pop(i,:)=5*rands(1,2);    %初始种群</span><br><span class="line">    V(i,:)=rands(1,2);  %初始化速度</span><br><span class="line">    %计算适应度</span><br><span class="line">    fitness(i)=fun(pop(i,:));   %染色体的适应度</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">%% 个体极值和群体极值</span><br><span class="line">[bestfitness bestindex]=min(fitness);</span><br><span class="line">zbest=pop(bestindex,:);   %全局最佳</span><br><span class="line">gbest=pop;    %个体最佳</span><br><span class="line">fitnessgbest=fitness;   %个体最佳适应度值</span><br><span class="line">fitnesszbest=bestfitness;   %全局最佳适应度值</span><br><span class="line"></span><br><span class="line">%% 迭代寻优</span><br><span class="line">for i=1:maxgen</span><br><span class="line">    </span><br><span class="line">    for j=1:sizepop</span><br><span class="line">        </span><br><span class="line">        %速度更新</span><br><span class="line">        V(j,:) = V(j,:) + c1*rand*(gbest(j,:) - pop(j,:)) + c2*rand*(zbest - pop(j,:));</span><br><span class="line">        V(j,find(V(j,:)&gt;Vmax))=Vmax;</span><br><span class="line">        V(j,find(V(j,:)&lt;Vmin))=Vmin;</span><br><span class="line">        </span><br><span class="line">        %种群更新</span><br><span class="line">        pop(j,:)=pop(j,:)+0.5*V(j,:);</span><br><span class="line">        pop(j,find(pop(j,:)&gt;popmax))=popmax;</span><br><span class="line">        pop(j,find(pop(j,:)&lt;popmin))=popmin;</span><br><span class="line">        </span><br><span class="line">        %适应度值</span><br><span class="line">        fitness(j)=fun(pop(j,:)); </span><br><span class="line">   </span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    for j=1:sizepop</span><br><span class="line">        </span><br><span class="line">        %个体最优更新</span><br><span class="line">        if fitness(j) &lt; fitnessgbest(j)</span><br><span class="line">            gbest(j,:) = pop(j,:);</span><br><span class="line">            fitnessgbest(j) = fitness(j);</span><br><span class="line">        end</span><br><span class="line">        </span><br><span class="line">        %群体最优更新</span><br><span class="line">        if fitness(j) &lt; fitnesszbest</span><br><span class="line">            zbest = pop(j,:);</span><br><span class="line">            fitnesszbest = fitness(j);</span><br><span class="line">        end</span><br><span class="line">    end </span><br><span class="line">    yy(i)=fitnesszbest;    </span><br><span class="line">        </span><br><span class="line">end</span><br><span class="line">%% 结果分析</span><br><span class="line">plot(yy)</span><br><span class="line">title(&apos;最优个体适应度&apos;,&apos;fontsize&apos;,12);</span><br><span class="line">xlabel(&apos;进化代数&apos;,&apos;fontsize&apos;,12);ylabel(&apos;适应度&apos;,&apos;fontsize&apos;,12);</span><br></pre></td></tr></table></figure>
-<p>参考论文：
-[1].An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.
-[2].<a href="http://www.jos.org.cn/1000-9825/18/861.pdf" target="_blank" rel="noopener">一种更简化更高效的粒子群算法</a></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 该代码为基于PSO的函数极值寻优</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%% 清空环境</span></span><br><span class="line">clc</span><br><span class="line">clear</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 参数初始化</span></span><br><span class="line"><span class="comment">%粒子群算法中的两个参数</span></span><br><span class="line">c1 = <span class="number">1.49445</span>;</span><br><span class="line">c2 = <span class="number">1.49445</span>;</span><br><span class="line"></span><br><span class="line">maxgen=<span class="number">500</span>;   <span class="comment">% 进化次数  </span></span><br><span class="line">sizepop=<span class="number">100</span>;   <span class="comment">%种群规模</span></span><br><span class="line"></span><br><span class="line">Vmax=<span class="number">1</span>;</span><br><span class="line">Vmin=<span class="number">-1</span>;</span><br><span class="line">popmax=<span class="number">5</span>;</span><br><span class="line">popmin=<span class="number">-5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 产生初始粒子和速度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:sizepop</span><br><span class="line">    <span class="comment">%随机产生一个种群</span></span><br><span class="line">    pop(<span class="built_in">i</span>,:)=<span class="number">5</span>*rands(<span class="number">1</span>,<span class="number">2</span>);    <span class="comment">%初始种群</span></span><br><span class="line">    V(<span class="built_in">i</span>,:)=rands(<span class="number">1</span>,<span class="number">2</span>);  <span class="comment">%初始化速度</span></span><br><span class="line">    <span class="comment">%计算适应度</span></span><br><span class="line">    fitness(<span class="built_in">i</span>)=fun(pop(<span class="built_in">i</span>,:));   <span class="comment">%染色体的适应度</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 个体极值和群体极值</span></span><br><span class="line">[bestfitness bestindex]=min(fitness);</span><br><span class="line">zbest=pop(bestindex,:);   <span class="comment">%全局最佳</span></span><br><span class="line">gbest=pop;    <span class="comment">%个体最佳</span></span><br><span class="line">fitnessgbest=fitness;   <span class="comment">%个体最佳适应度值</span></span><br><span class="line">fitnesszbest=bestfitness;   <span class="comment">%全局最佳适应度值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 迭代寻优</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:maxgen</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:sizepop</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%速度更新</span></span><br><span class="line">        V(<span class="built_in">j</span>,:) = V(<span class="built_in">j</span>,:) + c1*<span class="built_in">rand</span>*(gbest(<span class="built_in">j</span>,:) - pop(<span class="built_in">j</span>,:)) + c2*<span class="built_in">rand</span>*(zbest - pop(<span class="built_in">j</span>,:));</span><br><span class="line">        V(<span class="built_in">j</span>,<span class="built_in">find</span>(V(<span class="built_in">j</span>,:)&gt;Vmax))=Vmax;</span><br><span class="line">        V(<span class="built_in">j</span>,<span class="built_in">find</span>(V(<span class="built_in">j</span>,:)&lt;Vmin))=Vmin;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%种群更新</span></span><br><span class="line">        pop(<span class="built_in">j</span>,:)=pop(<span class="built_in">j</span>,:)+<span class="number">0.5</span>*V(<span class="built_in">j</span>,:);</span><br><span class="line">        pop(<span class="built_in">j</span>,<span class="built_in">find</span>(pop(<span class="built_in">j</span>,:)&gt;popmax))=popmax;</span><br><span class="line">        pop(<span class="built_in">j</span>,<span class="built_in">find</span>(pop(<span class="built_in">j</span>,:)&lt;popmin))=popmin;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%适应度值</span></span><br><span class="line">        fitness(<span class="built_in">j</span>)=fun(pop(<span class="built_in">j</span>,:)); </span><br><span class="line">   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:sizepop</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%个体最优更新</span></span><br><span class="line">        <span class="keyword">if</span> fitness(<span class="built_in">j</span>) &lt; fitnessgbest(<span class="built_in">j</span>)</span><br><span class="line">            gbest(<span class="built_in">j</span>,:) = pop(<span class="built_in">j</span>,:);</span><br><span class="line">            fitnessgbest(<span class="built_in">j</span>) = fitness(<span class="built_in">j</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">%群体最优更新</span></span><br><span class="line">        <span class="keyword">if</span> fitness(<span class="built_in">j</span>) &lt; fitnesszbest</span><br><span class="line">            zbest = pop(<span class="built_in">j</span>,:);</span><br><span class="line">            fitnesszbest = fitness(<span class="built_in">j</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    yy(<span class="built_in">i</span>)=fitnesszbest;    </span><br><span class="line">        </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% 结果分析</span></span><br><span class="line">plot(yy)</span><br><span class="line">title(<span class="string">'最优个体适应度'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);</span><br><span class="line">xlabel(<span class="string">'进化代数'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);ylabel(<span class="string">'适应度'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+<p>参考论文：</p>
+<ol>
+<li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li>
+<li><a href="http://www.jos.org.cn/1000-9825/18/861.pdf" target="_blank" rel="noopener">一种更简化更高效的粒子群算法</a></li>
+</ol>
 
       
     </div>
@@ -449,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/03/全局优化算法之模拟退火算法/" rel="next" title="全局优化算法之模拟退火算法">
-                <i class="fa fa-chevron-left"></i> 全局优化算法之模拟退火算法
+              <a href="/2017/02/03/全局优化算法之遗传算法/" rel="next" title="全局优化算法之遗传算法">
+                <i class="fa fa-chevron-left"></i> 全局优化算法之遗传算法
               </a>
             
           </div>
@@ -513,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -604,6 +616,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">PSO算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

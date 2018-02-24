@@ -1514,6 +1514,9 @@ pre .javascript .function {
   font-size: 14px;
   margin-top: 2px;
 }
+.post-wordcount {
+  display: inline-block;
+}
 .post-meta-divider {
   margin: 0 0.5em;
 }
@@ -1943,7 +1946,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3d327a;
+  background: #ff50ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3240,4 +3243,14 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+.post {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding: 15px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.site-meta {
+  background: #0684bd;
 }

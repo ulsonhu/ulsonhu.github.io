@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://hi.csdn.net/attachment/201101/12/8394323_129482633872s3.jpg">
 <meta property="og:image" content="http://img.blog.csdn.net/20170227193922105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170227193901589?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-02-23T17:59:21.683Z">
+<meta property="og:updated_time" content="2018-02-24T06:23:39.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全局优化算法之遗传算法">
 <meta name="twitter:description" content="全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。">
@@ -394,10 +394,10 @@
 适应度函数是遗传算法进化过程的驱动力，也是进行自然选择的唯一标准，它的设计应结合求解问题本身的要求而定。</p>
 <h3>3、选择和进化步骤</h3>
 <p>在选择步骤中，利用选择操作构造一个新的种群$M(k)$，使其个体数量与种群相等，种群中个体数量称为个体容量，用N表示，M是在P的基础上进行随机处理后得到的，即M中的每个个体以概率
-<font size="5">$$\frac{f(x^{(k)})}{F(k)}$$</font>
+<font size="3">$$\frac{f(x^{(k)})}{F(k)}$$</font>
 等于$P(k)$中的$x^{(k)}$，其中，<font size="3">$F(k)=\sum f(x_{i}^{(k)})$</font>，指的是对整个P进行求和，也就是说，染色体被选中的概率与其适应度函数值大小成正比。</p>
 <h4>轮盘赌选择方法：</h4>
-<p><img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826341f6bF.jpg" alt="log00"></p>
+<img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826341f6bF.jpg" width="50%" height="50%">
 <p>轮盘赌选择法可用如下过程模拟来实现：</p>
 <ol>
 <li>在［0, 1］内产生一个均匀分布的随机数r。</li>
@@ -407,7 +407,7 @@
 </ol>
 <p>$$q_i=\sum_{j=1}^{i}P_j$$</p>
 <p>得到积累概率为：</p>
-<p><img src="http://hi.csdn.net/attachment/201101/12/8394323_129482634014NA.jpg" alt="log01"></p>
+<img src="http://hi.csdn.net/attachment/201101/12/8394323_129482634014NA.jpg" width="50%" height="50%">
 <p>轮盘赌选择方法的实现步骤:</p>
 <ol>
 <li>计算群体中所有个体的适应度值；</li>
@@ -437,9 +437,9 @@
 <p>选择适应度函数为：$f(x) = x + 10sin(5x) + 7cos(4x)$函数图像为</p>
 <p><img src="http://img.blog.csdn.net/20170227193922105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log04"></p>
 <p>运行结果为：</p>
-<p><img src="http://img.blog.csdn.net/20170227193901589?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log05">
-最优个体为： 10101111011111011
-最优值为：24.8554</p>
+<p><img src="http://img.blog.csdn.net/20170227193901589?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log05"></p>
+<p>最优个体为： 10101111011111011</p>
+<p>最优值为：24.8554</p>
 <p>相关Matlab代码参考：<a href="https://github.com/yanshengjia/artificial-intelligence/tree/master/genetic-algorithm-for-functional-maximum-problem/src" target="_blank" rel="noopener">Github地址</a></p>
 <ol>
 <li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li>
@@ -499,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/26/等式约束与不等式约束问题/" rel="next" title="等式约束与不等式约束问题">
-                <i class="fa fa-chevron-left"></i> 等式约束与不等式约束问题
+              <a href="/2017/02/03/全局优化算法之模拟退火算法/" rel="next" title="全局优化算法之模拟退火算法">
+                <i class="fa fa-chevron-left"></i> 全局优化算法之模拟退火算法
               </a>
             
           </div>
@@ -509,8 +509,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/03/全局优化算法之模拟退火算法/" rel="prev" title="全局优化算法之模拟退火算法">
-                全局优化算法之模拟退火算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/05/全局搜索算法之粒子群算法/" rel="prev" title="全局优化算法之粒子群算法">
+                全局优化算法之粒子群算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

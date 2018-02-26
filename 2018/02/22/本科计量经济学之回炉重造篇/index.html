@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="经济学," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这篇博文是很久之前总结的，最近正好需要复习计量经济学相关知识，所以把原来的这篇文章回炉重造一番，做一点补充完善工作。">
+<meta name="keywords" content="经济学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本科计量经济学之回炉重造篇">
+<meta property="og:url" content="http://yoursite.com/2018/02/22/本科计量经济学之回炉重造篇/index.html">
+<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:description" content="这篇博文是很久之前总结的，最近正好需要复习计量经济学相关知识，所以把原来的这篇文章回炉重造一番，做一点补充完善工作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-26T14:37:37.190Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本科计量经济学之回炉重造篇">
+<meta name="twitter:description" content="这篇博文是很久之前总结的，最近正好需要复习计量经济学相关知识，所以把原来的这篇文章回炉重造一番，做一点补充完善工作。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/22/本科计量经济学之回炉重造篇/"/>
+
+
+
+
+
+  <title>本科计量经济学之回炉重造篇 | Sonnet's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sonnet's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/本科计量经济学之回炉重造篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sonnet's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">本科计量经济学之回炉重造篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T00:00:00+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  这篇博文是很久之前总结的，最近正好需要复习计量经济学相关知识，所以把原来的这篇文章回炉重造一番，做一点补充完善工作。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文基于本科的计量经济学课程，主要涉及宏微观、高等数学、线性代数、统计学相关知识。<br>
+学完我们需要掌握的主要内容包括计量经济学中基本假设及违背基本假设的处理；横截面、面板数据的分析与处理；基础时间序列分析与预测</p>
+<p>参考书籍为</p>
+<ul>
+<li><a href="https://book.douban.com/subject/4717098/" target="_blank" rel="noopener">李子奈.计量经济学</a></li>
+<li><a href="https://book.douban.com/subject/5068097/" target="_blank" rel="noopener">伍德里奇.计量经济学导论</a></li>
+</ul>
+<h2>1 基本假设篇</h2>
+<p>通常在实际研究的计量经济学问题中，完全满足回归的基本假设的情况并不多见。不满足基本假定的情况。称为<strong>违背基本假定</strong>，其情况主要包括:</p>
+<ol>
+<li>随机干扰项存在异方差</li>
+<li>随机干扰项的序列相关（或称自相关）</li>
+<li>解释变量之间的多重共线</li>
+<li>解释变量为随机变量，存在内生性</li>
+</ol>
+<h3>1.1 异方差性</h3>
+<p>线性模型的基本假设中有$Var(\mu|x_1,x_2,\cdots,x_k)=d$，即<strong>随机干扰项的方差不因自变量的不同而不同</strong>。表现在现实的经济生活中，以消费水平受到收入水平的影响为例。$C = b_0 + b_1 * Y + \mu$,对于收入水平Y较低的群众而言，消费情况的变化是比较小的，但是对于收入水平较大的群体而言，其消费水平的变化差异可能就非常大了。用公式表示，即为$var(\mu|x_1,x_2,\cdots,x_k) = f(x_i,d)$</p>
+<h3>1.2 数据异方差性的后果</h3>
+<ol>
+<li>导致参数估计无效，在估计的有效性中，利用了$Ε（\mu '\mu）= d^2I$这条同方差的假设,但是现在d与X是相关的，不能直接拿出来</li>
+<li>参数显著性检验失去意义（显著性检验中，是要用到随机干扰项的误差的，由于异方差性，使用最小二乘法得出来的参数的方差并不是其真实方差了）</li>
+<li>模型预测失效。（模型预测也是要用到随机干扰项的方差的）</li>
+</ol>
+<h3>1.3 检验异方差</h3>
+<ol>
+<li>
+<p><strong>图示检验</strong>（使用Y-X散点图，或者$e^2~X$散点图进行判断，如果呈现一条水平线则是不存在异方差，否则，可能存在），这种方法的问题是：判断并不准确，是否算是水平线还是复杂性的异方差无法判断</p>
+</li>
+<li>
+<p><strong>帕克（Park）检验与戈里瑟检验</strong>。 对样本残差平方$e_i^2$与X之间进行检验。设定模型$e_i^2\sim f(X)+\mu $,如果$e_i^2$与X之间存在显著的相关性，则原模型存在异方差性。<strong>该检验存在的问题</strong>：模型$e_i^2\sim f(X)+\mu $的函数形式和变量选择存在不确定性，而且，该模型本身自己也可能存在异方差性</p>
+</li>
+<li>
+<p><strong>G-Q（Goldfeld-Quandt）检验</strong>:</p>
+</li>
+</ol>
+<ul>
+<li>a.按照某一个被认为可能存在异方差性的变量将样本进行从小到大的排序；</li>
+<li>b.将样本分成两个部分，一个部分自变量大，一个部分自变量小；</li>
+<li>c.对这两个样本分别进行回归，得到各自的残差平方和，在同方差的假设下，这两个残差平方和的大小应当是差异不大的；</li>
+<li>使用上面得出的残差平方和构建F统计量。</li>
+</ul>
+<p><strong>方法的问题</strong>:只能检验单调递增还是单调递减型方差，并且可能需要对各个解释变量进行轮流实验。</p>
+<ol start="4">
+<li><strong>怀特检验进行辅助回归</strong>：$e_i^2 \sim b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2 + b_4x_1^2 + b_5x_2^2 + \mu $，可以证明，在同方差的假设下，从该辅助回归得到的$R^2$与样本容量的积，渐近服从自由度为辅助回归方程中解释变量个数的卡方分布 $nR^2 \sim \chi^2(k)$ 。WLS加权最小二乘法思想就是将不稳定的方差转换为稳定的方差乘以一个不稳定的函数。通过变换，使得模型变为同方差的情况。</li>
+</ol>
+<p>  假设我们已经知道了随机误差项的方差和自变量之间的关系:
+$var(\mu_i)=E(\mu_i^2)=d_i^2=f(X_{i,j}) \cdot q^2$
+(而不是在无异方差的情况下的 $var(\mu |X)=q^2$ )。那么，我们可以使用$\sqrt{f(X_{ij})}$去除以原模型，使得变化后的模型称为无异方差的情况。注：公式中$j$为变量的标号, $i$为样本的标号。 变化后的模型如下：</p>
+<p>$$ Y_i / \sqrt{f(X_{ij})} = b_0 / \sqrt{f(X_{ij})} + b_1x_1 / \sqrt{f(X_{ij})} + \cdots + b_k  x_k / \sqrt{f(X_{ij})} + u_i/\sqrt(f(X_{ij}))$$</p>
+<p>注意到这里，每个变量$X_{ij}$除以的都是其相对应的$f(X_{ij})$. 上面模型，异方差就是不存在的了，便可以用加权后的模型对参数进行估计。现在的问题是，如何对权重$f(x_{ij})$进行估计呢？</p>
+<p>观察可以发现，等式左边可以用样本残差$e_i^2$来代替，等式左边$f(X_{ij})$中有$j$个参数，$q^2$为另一个参数。两边取对数，能够将等式转换为线性模型进行估计。接着就是使用帕克检验的方法，进行各种形式的尝试。从而估计出$f(X_{ij})$的形式 。</p>
+<h3>1.4 异方差稳健标准误法</h3>
+<p><strong>加权最小二乘法</strong>的关键是要寻找模型中随机扰动项$\mu $的方差与解释变量间的适当的函数形式，而这并非一件容易的事。</p>
+<p>如果很难找到的话，可以用异方差的稳健标准误方法，进行替代。 <font color="red">在有异方差的情况下，参数估计仍然是无偏的，但是参数估计的方差和标准差会与传统的有所区别，从而无法保证估计的有效性，但并不影响估计的无偏性和一致性。</font>那么我们仍然采用普通的最小二乘估计量，但是在进行参数检验的时候使用修正后的相应方差。（至于参数的有效性无法满足的问题，并不关注）</p>
+<ol>
+<li>在无异方差下，参数估计的方差为$var(b|X) = d^2 (x’x)^{-1}$，在有异方差下，则为 $var(b) =　(x’x)^{-1}x’D(x’x)^{-1}x’$,这里$D$为$n*1$的向量。使用普通最小二乘法估计的残差平方$e_i^2$形成的向量$e’e$作为向量D的代表。怀特证明了这种做法是对$var(b) =　(x’x)^{-1} * x’ * D * (x’x)^{-1} * x’$的一致估计。</li>
+<li>当存在异方差时，异方差稳健标准误法虽然不能得到有效的参数估计，但是由于得到了普通最小二乘估计量的正确的方差估计，使得以估计量方差为基础的各项检验不再失效，是消除异方差性不良后果的主要手段。</li>
+</ol>
+<h2>2 序列相关性</h2>
+<h3>2.1 序列相关的含义</h3>
+<p>  在经典的线性模型假设中，有<font color="red">随机干扰项独立，即互不相关的假设。</font>这个假设的意思是说，对于造成结果而言，不能由自变量解释到的那部分随机干扰项是独立的。<font color="blue">例如</font>，有两块相邻的水田，其各自产量与施肥量，日照量等有关。但两块水田产量的随机因素之间是不存在关系的，不会因为这块水田随机因素大，那块也大。</p>
+<p>用公式描述，就是：$Cov(\mu _i, \mu _j)=0$， i和j是观测样本。序列相关则意味着样本之间随机因素是具有相关性的，上面例子中，有些无法观测到的对水田产量的因素，例如土壤肥力如果是随机干扰项的话，那么毫无疑问相邻两块土地之间的随机干扰项是具有相关性的。</p>
+<p>通常，由于样本中有$n$个随机干扰项，如果仅存在$E（\mu _i,\mu _{i+1}）\neq 0$，那么称之为一阶自相关，一阶自相关是比较常见的序列相关问题。<font color="blue">例如</font>：一个人的素质可能与他的朋友的素质是相关的，但是与其朋友的朋友的素质之间，相关性就可以忽略了；或者我们可以理解为，一个人素质与其朋友的朋友之间的关系，事实上是通过其朋友来传导的。那么，这样我们就可以将多阶自相关的问题，通过一阶自相关来理解了。</p>
+<p>因此，为了能够便于理解和进行计算，我们通常都进行一阶自相关的研究。我们将一阶自相关用公式表述为：$\mu _i = p*\mu <em>{i+1} + e</em>{i -1}  &lt; p$</p>
+<p>一般经验而言，对于采用时间序列数据作样本的计量经济学问题，由于在不同样本点上解释变量以外的其它因素（随机干扰项）在时间上的连续性，或者说惯性，往往会导致序列相关性。</p>
+<h3>2.2 序列相关性的后果</h3>
+<ol>
+<li>
+<p><strong>参数估计非有效</strong>：在有效性的证明中利用了 $E(uu’) = d^2I$, 但是现在这个条件是无法满足了。所以有效性便不再满足。</p>
+</li>
+<li>
+<p><strong>变量的显著性检验失去意义：</strong>随机干扰项向量的协方差矩阵不再是 $d^2I$，因此原本的参数分布和显著性t检验也不再满足。</p>
+</li>
+<li>
+<p><strong>模型的预测失效：</strong>原因同变量显著性检验失去意义。</p>
+</li>
+</ol>
+<h3>2.3 检验序列相关</h3>
+<ol>
+<li>
+<p><strong>图示法</strong>： 使用OLS的样本残差作为随机干扰项的估计，画出$e_t$和$e_{t-1}$之间的散点图，看二者之间是否存在明显的相关性。该方法存在主观性和不确定性。</p>
+</li>
+<li>
+<p><strong>回归检验法</strong>： 对$e_t$和$e_{t-1}$进行回归检验，看二者之间是否存在显著的关系。</p>
+</li>
+<li>
+<p><strong>DW检验</strong>：构造一个统计量，服从DW分布，然后再使用DW准则进行检验。（用的较少，局限性很大）</p>
+</li>
+<li>
+<p><strong>拉格朗日乘数（LM）检验</strong>：将模型转换为受约束的回归方程即
+$Y_i=b_0+b_1*x_{i1}+b_2*x_{i2}+\cdots+b_k*x_{ik}+p_1*u_{i-1}+p_2*u_{i-2}+\cdots+p_k*u_{i-k}+e_k$。检验约束条件$H_0：p_1=p_2=\cdots =p_k=0$(k可以自行决定)，再使用检验模型约束条件的LM统计量检验该约束条件即可。</p>
+</li>
+</ol>
+<h3>2.4 如何补救序列相关</h3>
+<p>补救序列相关与补救异方差一样,存在两种思路:</p>
+<ul>
+<li>一就是变换原模型为不存在序列相关的模型,再用OLS来进行估计,即为广义最小二乘法(GLS)和广义差分法（GDM）;</li>
+<li>另一条途径是仍然采用OLS的估计参数，但是对参数估计量的方差或者标准差进行修正。</li>
+</ul>
+<h4>2.4.1 广义最小二乘法</h4>
+<p>  广义最小二乘，是具有普遍意义的最小二乘，普通最小二乘和加权最小二乘是它的特例。<font color="red">广义最小二乘是不需要同方差性和无序列相关的假设的。</font>它将随机变量的协方差矩阵不再表示为 $d^2I$这样的形式， 而是用$cov(u,u’) = p^2 * W$来表示。其中 $W = DD’$.进一步的，变换模型为 $D^{-1}*Y = D^{-1} * X_b + D^{-1}*u$, 该模型便不再有异方差和序列相关，可以对其使用OLS进行估计。（李子奈《计量经济学》pp.127）</p>
+<p>  广义最小二乘法真正的难题是如何去估计协方差矩阵$W$，在序列自相关的情况下，若只有$n$个样本点，要对$\frac{n*(n-1)}{2} + k +2$ 个参数进行估计是几乎不可能的。因此，只能是说对随机干扰项自相关的结构事先给出必要的假设。一般而言，我们假设随机干扰项是一阶自相关的：即$\mu _t = p\mu _{t-1} + e$，对该模型进行估计，便可以得到协方差矩阵W以及权重矩阵D 。</p>
+<h4>2.4.2 广义差分法</h4>
+<p>  广义差分法实质上就是广义最小二乘法，不过是损失了部分样本观测值，具体可见《计量经济学》（李子奈）pp.129。</p>
+<p>随机干扰项相关系数的估计：无论是使用广义最小二乘法还是广义差分法，都需要知道不同样本点之间随机干扰项的相关系数$r_1,r_2\cdots r_p$等，必须对其进行估计，即对$u_t = r_1 * u_{t-1} + r_2 * u_{t-2} + …+ r_p * u_{t-p} + e_t$进行估计。但是事实上$\mu <em>{t}$是无法观测到的，我们只能使用$e</em>{t}$来对其进行近似的估计。</p>
+<p>具体方法为，先使用OLS对原始模型进行估计，对$e_{t},e_{t-1}\cdots e_{t-p}$之间进行线性估计得出随机干扰项的相关系数。再将其带入到广义差分法或者广义最小二乘法中，得到新的$e_{t},e_{t-1}\cdots e_{t-p}$,再次进行估计，得出他们的相关系数，重复上述步骤，直到$e_{t},e_{t-1}\cdots e_{t-p}$的值趋于稳定。我们称该方法为<strong>科克伦-奥科特（Cochrane-Orcutt）迭代法</strong>。</p>
+<p><strong>序列相关稳健标准误法</strong>存在序列相关时，OLS估计的无偏性和一致性仍然是有的，但是有效性无法保证，因此，我们可以对随机干扰项的协方差进行修正，在进行显著性检验时使用改修正的稳健标准误。具体公式过于冗长，可参考《计量经济学》（李子奈）pp.130</p>
+<h3>2.5 虚假序列相关问题</h3>
+<p>  若模型设定中遗漏了重要的解释变量，从而导致了序列相关的出现，我们称之为<strong>虚假序列相关</strong>。我们在处理序列相关问题时，应当要将虚假序列相关的可能性先排除掉，即排除掉遗漏变量的可能。如何避免出现模型设定的偏误问题呢？那就是在开始时建立一个“一般”的模型，然后逐渐剔除缺失不显著的变量。</p>
+<h2>3 多重共线性</h2>
+<p>共线性是指自变量之间存在较大的相关性，导致$|X’X| \neq 0$，从而$(X’X)^{-1}$对角线上的元素较大，随机干扰项的协方差矩阵$d^2(X’X)^{-1}$对角线上的元素也较大，导致一系列的不良后果。主要包括：</p>
+<ol>
+<li>完全共线性下，估计量不存在，完全共线性下$|X’X|=0$，$X’X$没有逆，OLS没法得出参数估计量。</li>
+<li>普通最小二乘法方差变大，导致通过样本计算出来的t值比较小$(X’X）^{-1}$在t统计量的分母中，导致t统计量较小），由于样本本身的共线性问题，导致了t检验的不可靠。同时，也会使得因变量区间预测的“区间”变大，使得预测失去意义，模型不能进行外推。</li>
+<li>参数估计量的经济含义不合理。若$X_1，X_2$之间存在共线性，那么二者其中一个可以由另一个表征出来。他们各自的参数估计量不再代表本身的经济意义，而是代表二者对被解释变量的共同影响。<strong>经验告诉我们，在多元线性回归模型的估计中，如果出现了参数估计值的经济意义明显不合理的情况，应该首先怀疑是否存在多重共线性</strong>。</li>
+</ol>
+<h3>3.1 造成多重共线性的原因</h3>
+<ol>
+<li>经济变量相关的共同趋势。这在时间序列样本中情况比较多。</li>
+<li>滞后变量的引入。例如,居民消费$C$受到总收入以及前期的消费$C_{t-1}$的影响，但是毫无疑问的，前期的消费$C_{t-1}$会影响到当期的收入$Y_{t}$。所以模型中毫无疑问会出现共线性的问题。在这样一种情况下，$Y_{t}$的参数$b_{1}$就不再代表收入对消费的影响了，而是$Y_{t}$与$C_{t-1}$对$C_{t}$的共同影响，二者的参数经济意义不明了。所以可能会出现不合常理的参数估计值。</li>
+<li>样本资料的限制。由于社会科学采用的数据是“社会实验”得出，而并非是控制实验得出，所以自变量样本是不受控制的，某些变量之间可能总是会存在一些共线性。例如时间序列样本就算是这种情况。</li>
+</ol>
+<h3>3.2 多重共线性的检验</h3>
+<p><strong>对两个解释变量</strong>：可以通过解释变量的样本协方差矩阵，发现解释变量之间的两两相关性，对于相关性非常高的两个解释变量，可能存在共线性的问题。</p>
+<p><strong>对多个解释变量之间的相关性</strong>：所谓多个解释变量相关就是如$x_1 = x_2 + x_3 + x_4$这种。使用综合统计检验，如果在OLS下，模型的$R^2$与$F$值较大，但是各参数检验的$t$值较小，说明各解释变量对$Y$的联合线性作用显著。但从较小的$t$值，我们可以估计到，可能存在共线性，从而使得解释变量对$Y$的独立作用不能分辨，故$t$检验不显著。</p>
+<h3>3.3 判别多重共线性的范围</h3>
+<p>知道模型有多重共线性，进一步的，我们希望能够将引起多重共线性的变量找出来，以进一步地对模型进行调整。</p>
+<p>具体的方法有判定系数检验法和逐步回归法。</p>
+<ol>
+<li>
+<p>判定系数检验法：使模型中每个解释变量分别以其余解释变量为解释变量进行回归计算,即 $X_{i} \sim x_{1} + x_{2}+\cdots +x_{i-1} + x_{i+1}+\cdots +x_{k}$。如果发现该模型的判定系数$R^2$较大，则说明该解释变量$x_{i}$能够用其它解释变量表征出来。至于如何判定$R^2$是否足够大，我们可以做$F$检验。</p>
+</li>
+<li>
+<p>逐步回归法：</p>
+</li>
+</ol>
+<ul>
+<li>先做$Y$与各$X_i$分别一元线性回归，找出$R^2$最大的那个$X_i$，以该一元线性回归为基础；</li>
+<li>逐个引入解释变量，观察拟合优度（修正后的拟合优度）的变化（也可以使用AIC准侧），如果拟合优度变化显著，则说明该变量是一个独立解释变量，如果拟合优度变化不显著，说明该解释变量可以用其它变量的线性组合替代，也就是说它与其它变量之间存在共线性关系。</li>
+</ul>
+<h3>3.4 克服多重共线性的办法</h3>
+<ol>
+<li>
+<p><strong>排除引起共线性的变量</strong>：这种方法可能存在的问题是，某变量本来是应当存在于模型当中的，只是由于样本的问题，使得该变量显示出共线性。剔除掉该变量将会导致回归模型在进行预测时的准确性下降。如果换一组样本，可能共线性的情况就不再存在了。因此，是否真的应当剔除掉变量应当还要进行实际经济模型或者实际意义进行考虑。如果某个变量是具有非常明显的经济意义的，那么即使该变量存在共线性，也不能轻易剔除掉。</p>
+</li>
+<li>
+<p><strong>差分法</strong>：常用于时间序列数据中，使用自变量和因变量的增量作为回归的变量。这是由于变量增量的相关性毫无疑问肯定是要比变量本身的相关性弱的。</p>
+</li>
+<li>
+<p><strong>岭回归与LASSO</strong>：可参见<a href="http://www.cnblogs.com/pingzeng/p/5040911.html" target="_blank" rel="noopener">多重共线性的解决方法之——岭回归与LASSO</a></p>
+</li>
+</ol>
+<h2>4 随机解释变量问题 （内生性问题）</h2>
+<p>  计量经济假设中，我们是假设自变量是确定变量，是非随机的。<s>所谓是确定变量，我们可以用科学实验中的对照实验来进行说明，<font color="blue">例如</font>：判断不同的水分条件对粮食产量的影响时，我们将控制其它对产量有影响的变量，如光照，土壤，种子等，仅仅使得水分条件不一样，进而判断水分条件对产量的影响。在这种实验中，水分是可以进行人为控制的确定变量，我们称这种实验为“对照实验”。</s></p>
+<p><s>然而，由于伦理和实际操作上的种种不可行，经济学家是不可能拿整个社会来做实验的。例如不能故意控制某个地方的公共投资高，另一个地方的公共投资低，从而判断政府公共投资对收入的影响。经济学家只能使用既有的现实社会运行数据，通过判断不同公共投资地区的GDP的不同来判断公共投资的影响，经济学家称这种为“自然实验”。 但是，事实上，公共投资却并不是完全的确定性的，它并不是政府主动控制想投入多少就投入多少，其大小毫无疑问是受到地方财政收入的约束的。从这个角度上来说，也就是GDP越高的地方，毫无疑问也就能够投入越多的公共投资。</s></p>
+<p><s><font color="red">那么公共投资与GDP的因果关系就变得非常复杂了，到底公共投资是因？还是GDP是因呢？我们称这种情况为随机解释变量问题：即解释变量无法控制，是具有随机性的。</font></s></p>
+<p>  随机解释变量问题可以分为3种不同的情况：</p>
+<ol>
+<li>随机解释变量$X_i$与随机干扰项$\mu $独立： $cov(X_{i},\mu ) = E(X_{i}\mu )= E(X_{i})*E(\mu )=0$，这种情况，随机解释变量问题对模型的估计不会产生影响。</li>
+<li>随机解释变量$X_i$与随机干扰项$\mu $同期无关但是异期相关： $cov(X_{i}, \mu _{i-s}) \neq 0$，这种情况，得到的参数估计量是有偏的，但是却是一致的（可以从OLS估计量的形式中推出来）。</li>
+<li>随机解释变量$X_i$与随机干扰项$\mu $同期先关：这种情况得到的参数估计量有偏且非一致。</li>
+</ol>
+<h3>4.1 引起内生性问题的通常理由</h3>
+<ol>
+<li>经济模型中因变量滞后项的引用，通常会造成随机解释变量异期相关。</li>
+<li>存在互为因果的模型，例如上文所述公共投资与GDP。</li>
+</ol>
+<h3>4.2 随机解释变量的解决方法</h3>
+<h4>4.2.1 工具变量</h4>
+<p>工具变量是指该变量与随机解释变量之间存在较高的相关性，而且对随机解释变量的解释能力也非常高（$R^2$比较大），但是该解释变量与模型的随机干扰项不相关，与被解释变量也不相关。即满足：</p>
+<ul>
+<li>工具变量必须外生，即$Cov(z,\mu )=0$。</li>
+<li>工具变量必须与内生变量$x$相关，即$Cov(z,x) \neq 0$。</li>
+</ul>
+<h4>4.2.2 工具变量的估计</h4>
+<p>应该根据常识及经济理论判断$Cov(z,\mu )$是否合理。</p>
+<p>我们可以检验$Cov(z,x )\neq 0$是否成立,即检验在$H_0:\pi_1 = 0$在$x=\pi_0+\pi_1 z+v$,这称作第一阶段回归</p>
+<p>假设简单回归情形$y=\beta_0+\beta_1 x+\mu$，并给定我们假设$Cov(z,y)=\beta_1 Cov(z,x)+Cov(z,\mu )$</p>
+<p>于是解出$\beta_1=\frac{Cov(z,x)}{Cov(z,x)}$，得到$\beta_1$估计量
+$$\hat{\beta_1}=\frac{\sum_{i=1}^n(z_i-z)(y_i - \bar{y})}{\sum_{i=1}^n(z_i-\bar{z})(x_i - x)}$$</p>
+<p>为了进行推断，我们需要计算统计量和置信区间的标准误。通常的方法是增加一个同方差假设</p>
+<p>$E(\frac{\mu^2}{z})=\sigma2=Var(\mu )$
+得出，
+$$Var(\hat{\beta_1})=\frac{\sigma^2}{n\sigma_x^2 \rho_{x,z}^2} \\ se(\hat{\beta_1})=\frac{\hat{\sigma}^2}{ SST_{x}R_{x,z}^2}$$</p>
+<blockquote>
+<p>未完待续 loading…</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/经济学/" rel="tag"><i class="fa fa-tag"></i> 经济学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/网站迁移-hexo/" rel="next" title="网站迁移(hexo)">
+                <i class="fa fa-chevron-left"></i> 网站迁移(hexo)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Pic by John Lennon" />
+            
+              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ulsonhu@gmail.com" target="_blank" title="Gmail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>Gmail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/ulson_hu/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/tour_hyc/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/ulsonhu" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1 基本假设篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 异方差性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 数据异方差性的后果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 检验异方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 异方差稳健标准误法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2 序列相关性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 序列相关的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 序列相关性的后果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 检验序列相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 如何补救序列相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 广义最小二乘法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2 广义差分法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 虚假序列相关问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3 多重共线性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 造成多重共线性的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 多重共线性的检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 判别多重共线性的范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 克服多重共线性的办法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4 随机解释变量问题 （内生性问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 引起内生性问题的通常理由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 随机解释变量的解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 工具变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 工具变量的估计</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -340,28 +340,6 @@
   </entry>
   
   <entry>
-    <title>等式约束与不等式约束问题</title>
-    <link href="http://yoursite.com/2017/01/26/%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2017/01/26/等式约束与不等式约束问题/</id>
-    <published>2017-01-25T16:00:00.000Z</published>
-    <updated>2018-02-23T11:54:39.291Z</updated>
-    
-    <content type="html"><![CDATA[<p>针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。</p><a id="more"></a><h2>等式约束问题</h2><p>设目标函数为f(x)，约束条件为$h_k(x)$，形如$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$则解决方法是消元法或者拉格朗日法。消元法不再多说，拉格朗日法这里在提一下，因为后面提到的KKT条件是对拉格朗日乘子法的一种泛化。</p><p>$$L(x,\lambda)=f(x)+\sum_{k=1}^{l}\lambda_kh_k(x)$$其中$λ_k$是各个约束条件的待定系数。然后解偏导方程组：$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</p><p>至于为什么这么做可以求解最优化？维基百科上给出了一个比较好的直观解释。</p><p>举个二维最优化的例子：</p><p>$$min f(x,y)   \s.t. g(x,y) = c$$</p><p>这里画出$z=f(x,y)$的等高线：<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="log01"></p><p>绿线标出的是约束$g(x,y)=c$的点的轨迹。蓝线是$f(x,y)$的等高线。箭头表示斜率，和等高线的法线平行。从梯度的方向上来看，显然有$d1&gt;d2$。绿色的线是约束，也就是说，只要正好落在这条绿线上的点才可能是满足要求的点。如果没有这条约束，$f(x,y)$的最小值应该会落在最小那圈等高线内部的某一点上。<font color="red">而现在加上了约束，最小值点应该在哪里呢？</font>显然应该是在f(x,y)的等高线正好和约束线相切的位置，因为如果只是相交意味着肯定还存在其它的等高线在该条等高线的内部或者外部，使得新的等高线与目标函数的交点的值更大或者更小，<font color="red">只有到等高线与目标函数的曲线相切的时候，可能取得最优值。</font></p><p>如果我们对约束也求梯度$∇g(x,y)$，则其梯度如图中绿色箭头所示。很容易看出来，要想让目标函数$f(x,y)$的等高线和约束相切，则他们切点的梯度一定在一条直线上。即：$\partial f(x,y)=\lambda（\partial g(x,y)-C) $其中λ可以是任何非0实数。</p><p>一旦求出$\lambda$的值，将其带入下式，易求在无约束极值和极值所对应的点。</p><p>$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</p><p>这就是拉格朗日函数的由来。</p><h2>不等式约束问题</h2><p>考虑一般形式的优化问题：$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</p><p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^{<em>}$处$g_j(x)= 0$，那么称该不等式约束是$x^{</em>}$处的起作用约束；如果在$x^{*}$ 处 $g_j(x)\geq 0$，那么称该约束是处的不起作用约束。按惯例，把等式约束$h_i(x)=0$当作总是起作用的约束。</p><p>由此，定义不等式约束下的拉格朗日函数L，则L表达式为：$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</p><p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$\lambda _j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p><p>常用的方法是KKT条件，同样地，把所有的不等式约束、等式约束和目标函数全部写为一个式子，简化为$L(a, b, x)= f(x) + a<em>g(x)+b</em>h(x)$</p><p>KKT条件是说最优值必须满足以下条件：</p><ol><li>$\frac{\partial L }{\partial x_i}=0$对x求导为零；</li><li>h(x) =0;</li><li>a*g(x) = 0;</li></ol><p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为$g(x)&lt;=0$，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p><h3>KKT的推导：</h3><p>首先不加证明的给出对偶问题结论：$$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\underset{\omega,b}{Min}L(\omega,b,\alpha)$$</p><p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="log02"></p><p>参考资料：</p><ol><li>Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）</li><li><a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Mathematic" scheme="http://yoursite.com/tags/Mathematic/"/>
-    
-      <category term="优化算法" scheme="http://yoursite.com/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title>广义线性模型(Generalized Linear Model)</title>
     <link href="http://yoursite.com/2017/01/26/%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B(Generalized%20Linear%20Model)/"/>
     <id>http://yoursite.com/2017/01/26/广义线性模型(Generalized Linear Model)/</id>
@@ -380,6 +358,28 @@
       <category term="Mathematic" scheme="http://yoursite.com/tags/Mathematic/"/>
     
       <category term="统计学" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>等式约束与不等式约束问题</title>
+    <link href="http://yoursite.com/2017/01/26/%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/01/26/等式约束与不等式约束问题/</id>
+    <published>2017-01-25T16:00:00.000Z</published>
+    <updated>2018-02-23T11:54:39.291Z</updated>
+    
+    <content type="html"><![CDATA[<p>针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。</p><a id="more"></a><h2>等式约束问题</h2><p>设目标函数为f(x)，约束条件为$h_k(x)$，形如$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$则解决方法是消元法或者拉格朗日法。消元法不再多说，拉格朗日法这里在提一下，因为后面提到的KKT条件是对拉格朗日乘子法的一种泛化。</p><p>$$L(x,\lambda)=f(x)+\sum_{k=1}^{l}\lambda_kh_k(x)$$其中$λ_k$是各个约束条件的待定系数。然后解偏导方程组：$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</p><p>至于为什么这么做可以求解最优化？维基百科上给出了一个比较好的直观解释。</p><p>举个二维最优化的例子：</p><p>$$min f(x,y)   \s.t. g(x,y) = c$$</p><p>这里画出$z=f(x,y)$的等高线：<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="log01"></p><p>绿线标出的是约束$g(x,y)=c$的点的轨迹。蓝线是$f(x,y)$的等高线。箭头表示斜率，和等高线的法线平行。从梯度的方向上来看，显然有$d1&gt;d2$。绿色的线是约束，也就是说，只要正好落在这条绿线上的点才可能是满足要求的点。如果没有这条约束，$f(x,y)$的最小值应该会落在最小那圈等高线内部的某一点上。<font color="red">而现在加上了约束，最小值点应该在哪里呢？</font>显然应该是在f(x,y)的等高线正好和约束线相切的位置，因为如果只是相交意味着肯定还存在其它的等高线在该条等高线的内部或者外部，使得新的等高线与目标函数的交点的值更大或者更小，<font color="red">只有到等高线与目标函数的曲线相切的时候，可能取得最优值。</font></p><p>如果我们对约束也求梯度$∇g(x,y)$，则其梯度如图中绿色箭头所示。很容易看出来，要想让目标函数$f(x,y)$的等高线和约束相切，则他们切点的梯度一定在一条直线上。即：$\partial f(x,y)=\lambda（\partial g(x,y)-C) $其中λ可以是任何非0实数。</p><p>一旦求出$\lambda$的值，将其带入下式，易求在无约束极值和极值所对应的点。</p><p>$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</p><p>这就是拉格朗日函数的由来。</p><h2>不等式约束问题</h2><p>考虑一般形式的优化问题：$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</p><p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^{<em>}$处$g_j(x)= 0$，那么称该不等式约束是$x^{</em>}$处的起作用约束；如果在$x^{*}$ 处 $g_j(x)\geq 0$，那么称该约束是处的不起作用约束。按惯例，把等式约束$h_i(x)=0$当作总是起作用的约束。</p><p>由此，定义不等式约束下的拉格朗日函数L，则L表达式为：$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</p><p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$\lambda _j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p><p>常用的方法是KKT条件，同样地，把所有的不等式约束、等式约束和目标函数全部写为一个式子，简化为$L(a, b, x)= f(x) + a<em>g(x)+b</em>h(x)$</p><p>KKT条件是说最优值必须满足以下条件：</p><ol><li>$\frac{\partial L }{\partial x_i}=0$对x求导为零；</li><li>h(x) =0;</li><li>a*g(x) = 0;</li></ol><p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为$g(x)&lt;=0$，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p><h3>KKT的推导：</h3><p>首先不加证明的给出对偶问题结论：$$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\underset{\omega,b}{Min}L(\omega,b,\alpha)$$</p><p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="log02"></p><p>参考资料：</p><ol><li>Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）</li><li><a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Mathematic" scheme="http://yoursite.com/tags/Mathematic/"/>
+    
+      <category term="优化算法" scheme="http://yoursite.com/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

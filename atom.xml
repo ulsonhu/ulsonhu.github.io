@@ -119,9 +119,9 @@
     </summary>
     
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
-    
       <category term="Mac" scheme="https://ulsonhu.github.io/tags/Mac/"/>
+    
+      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
     
   </entry>
   
@@ -205,9 +205,9 @@
     </summary>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
-    
       <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+    
+      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
   </entry>
   
@@ -273,9 +273,9 @@
     </summary>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
   </entry>
   
@@ -287,26 +287,6 @@
     <updated>2018-02-24T06:03:43.497Z</updated>
     
     <content type="html"><![CDATA[<h2>序言</h2><p>  前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，迭代序列只能收敛到局部极小点。因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p><p>  全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。遗传算法属于智能优化算法之一。</p><p>  常用的全局优化算法有： 遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p><h2>PSO算法</h2><p>  粒子群算法（Particle swarm optimization）是由James Kennedy &amp;<a href="http://www.engr.iupui.edu/~eberhart/" target="_blank" rel="noopener">Russell Eberhart</a>提出。区别于上节讨论的模拟退火算法，粒子群算法并不是只更新单个迭代点，而是更新一组迭代点，称为群。群中每个点称为粒子。可将群视为一个无序的群体，其中的每个成员都在移动，意在形成聚集，但移动方向是随机的。</p><p>  具体来说，求取目标函数在$\mathbb{R}^n$上极小点的过程。</p><ol><li>在$\mathbb{R}^n$随机产生一组数据点，为每个点赋予一个速度，构成一个速度向量。这些点视为粒子所在的位置，以指定速度在运动。</li><li>针对每个数据点计算对应的目标函数值，基于计算结果，产生一组新的数据点，赋予新的运动速度。</li></ol><p>  其每个粒子都持续追踪到目前为止最好的位置，称到目前为止最好的位置为Pbest，全局最好为止Gbest。基于粒子的个体最好位置和群的群的全局最优位置，调整各粒子的运动速度，实现粒子的“交互“。即在每次迭代中，产生两个随机数，分别作为pbest和gbest的权重，以此构成pbest和gbest的一个组合值，分别称为速度项和随机项，再加上加权后的原有速度，可以实现对原有速度的更新。</p><p>  目标函数在$\mathbb{R}^n$中，由种群数m组成粒子群，其中第i个粒子在d维的位置为$x_{id}$，其飞行速度为$v_{id}$，该粒子当前搜索的最优位置为，整个粒子群当前位置为，更新公式如下：$$v_{id}^{t+1}=v_{id}^{t}+c_1r_1(P_{id}-x_{id}+c_2r_2(P_{gd}-x_{id}))\quad (1) \ x_{id}^{t+1}=x_{id}{t}+v_{id}^{t+1} \quad \quad(2)$$</p><p>$r_1、r_2$是服从U(0,1)分布的随机数，学习因子$c_1、c_2$为非负常数，通常取$c_1=c_2=2$，$v_id \in [v_{min},v_{max}],v_{max}$是自设定的常数，迭代终止条件为预设的最大迭代数或预定的最小适应度阈值。</p><p>Matlab代码示例：</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%% 该代码为基于PSO的函数极值寻优</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%% 清空环境</span></span><br><span class="line">clc</span><br><span class="line">clear</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 参数初始化</span></span><br><span class="line"><span class="comment">%粒子群算法中的两个参数</span></span><br><span class="line">c1 = <span class="number">1.49445</span>;</span><br><span class="line">c2 = <span class="number">1.49445</span>;</span><br><span class="line"></span><br><span class="line">maxgen=<span class="number">500</span>;   <span class="comment">% 进化次数  </span></span><br><span class="line">sizepop=<span class="number">100</span>;   <span class="comment">%种群规模</span></span><br><span class="line"></span><br><span class="line">Vmax=<span class="number">1</span>;</span><br><span class="line">Vmin=<span class="number">-1</span>;</span><br><span class="line">popmax=<span class="number">5</span>;</span><br><span class="line">popmin=<span class="number">-5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% 产生初始粒子和速度</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:sizepop</span><br><span class="line">    <span class="comment">%随机产生一个种群</span></span><br><span class="line">    pop(<span class="built_in">i</span>,:)=<span class="number">5</span>*rands(<span class="number">1</span>,<span class="number">2</span>);    <span class="comment">%初始种群</span></span><br><span class="line">    V(<span class="built_in">i</span>,:)=rands(<span class="number">1</span>,<span class="number">2</span>);  <span class="comment">%初始化速度</span></span><br><span class="line">    <span class="comment">%计算适应度</span></span><br><span class="line">    fitness(<span class="built_in">i</span>)=fun(pop(<span class="built_in">i</span>,:));   <span class="comment">%染色体的适应度</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 个体极值和群体极值</span></span><br><span class="line">[bestfitness bestindex]=min(fitness);</span><br><span class="line">zbest=pop(bestindex,:);   <span class="comment">%全局最佳</span></span><br><span class="line">gbest=pop;    <span class="comment">%个体最佳</span></span><br><span class="line">fitnessgbest=fitness;   <span class="comment">%个体最佳适应度值</span></span><br><span class="line">fitnesszbest=bestfitness;   <span class="comment">%全局最佳适应度值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 迭代寻优</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:maxgen</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:sizepop</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%速度更新</span></span><br><span class="line">        V(<span class="built_in">j</span>,:) = V(<span class="built_in">j</span>,:) + c1*<span class="built_in">rand</span>*(gbest(<span class="built_in">j</span>,:) - pop(<span class="built_in">j</span>,:)) + c2*<span class="built_in">rand</span>*(zbest - pop(<span class="built_in">j</span>,:));</span><br><span class="line">        V(<span class="built_in">j</span>,<span class="built_in">find</span>(V(<span class="built_in">j</span>,:)&gt;Vmax))=Vmax;</span><br><span class="line">        V(<span class="built_in">j</span>,<span class="built_in">find</span>(V(<span class="built_in">j</span>,:)&lt;Vmin))=Vmin;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%种群更新</span></span><br><span class="line">        pop(<span class="built_in">j</span>,:)=pop(<span class="built_in">j</span>,:)+<span class="number">0.5</span>*V(<span class="built_in">j</span>,:);</span><br><span class="line">        pop(<span class="built_in">j</span>,<span class="built_in">find</span>(pop(<span class="built_in">j</span>,:)&gt;popmax))=popmax;</span><br><span class="line">        pop(<span class="built_in">j</span>,<span class="built_in">find</span>(pop(<span class="built_in">j</span>,:)&lt;popmin))=popmin;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%适应度值</span></span><br><span class="line">        fitness(<span class="built_in">j</span>)=fun(pop(<span class="built_in">j</span>,:)); </span><br><span class="line">   </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:sizepop</span><br><span class="line">        </span><br><span class="line">        <span class="comment">%个体最优更新</span></span><br><span class="line">        <span class="keyword">if</span> fitness(<span class="built_in">j</span>) &lt; fitnessgbest(<span class="built_in">j</span>)</span><br><span class="line">            gbest(<span class="built_in">j</span>,:) = pop(<span class="built_in">j</span>,:);</span><br><span class="line">            fitnessgbest(<span class="built_in">j</span>) = fitness(<span class="built_in">j</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">%群体最优更新</span></span><br><span class="line">        <span class="keyword">if</span> fitness(<span class="built_in">j</span>) &lt; fitnesszbest</span><br><span class="line">            zbest = pop(<span class="built_in">j</span>,:);</span><br><span class="line">            fitnesszbest = fitness(<span class="built_in">j</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    yy(<span class="built_in">i</span>)=fitnesszbest;    </span><br><span class="line">        </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%% 结果分析</span></span><br><span class="line">plot(yy)</span><br><span class="line">title(<span class="string">'最优个体适应度'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);</span><br><span class="line">xlabel(<span class="string">'进化代数'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);ylabel(<span class="string">'适应度'</span>,<span class="string">'fontsize'</span>,<span class="number">12</span>);</span><br></pre></td></tr></table></figure><p>参考论文：</p><ol><li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li><li><a href="http://www.jos.org.cn/1000-9825/18/861.pdf" target="_blank" rel="noopener">一种更简化更高效的粒子群算法</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。
-    
-    </summary>
-    
-    
-      <category term="优化算法" scheme="https://ulsonhu.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>全局优化算法之模拟退火算法</title>
-    <link href="https://ulsonhu.github.io/%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.html"/>
-    <id>https://ulsonhu.github.io/全局优化算法之模拟退火算法.html</id>
-    <published>2017-02-02T16:00:00.000Z</published>
-    <updated>2018-02-23T17:59:28.415Z</updated>
-    
-    <content type="html"><![CDATA[<h2>序言</h2><p>前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，迭代序列只能收敛到局部极小点。因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p><a id="more"></a><p>全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。遗传算法属于智能优化算法之一。</p><p>常用的全局优化算法有：遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p><h2>1、随机搜索算法</h2><p>模拟退火算法是一种随机搜索算法，随机搜索方法也称作概率搜索算法，这很好理解，是一种能够在优化问题的可行集中随机采样，逐步完成搜索的算法。German首次将模拟退火算法应用在凸显处理领域。<a href="http://www.stat.cmu.edu/~acthomas/724/Geman.pdf" target="_blank" rel="noopener">论文地址</a>后续有时间我可以是这翻译一下。</p><h3>朴素随机搜索算法步骤：</h3><ol><li>令$K=0$，选定初始点$x^{(0)}\in \Omega$</li><li>从$N(x^{(k)})$中随机选定一个备选点$z^{(k)}$</li><li>如果$f(z^{(k)}) &lt; f(x^{(k)})$,则令$x^{(k+1)}=z_{(k)}$，否则$x^{(k+1)}=x_{(k)}$</li><li>如果满足停止条件，则停止迭代</li><li>令$k=k+1$，回到第2步</li></ol><p>算法分析：朴素随机搜索算法面临的问题在于领域$N(x^{(k)})$的设计，一方面要保证领域足够大，否则算法可能会在局部点&quot;卡住&quot;；但如果使领域太大的话，会使得搜索过程变得很慢。另一种，对领域问题的解决方案是对朴素随机搜索算法进行修改，使其能够&quot;爬出&quot;局部极小点的&quot;领域&quot;。<font color="red"><strong>这意味着两次迭代中，算法产生的新点可能会比当前点要差。模拟退火算法就设计了这样的机制。</strong></font></p><h2>2、模拟退火算法</h2><h3>算法步骤</h3><ol><li>令$K=0$，选定初始点$x^{(0)}\in \Omega$</li><li>从$N(x^{(k)})$中随机选定一个备选点$z^{(k)}$</li><li><font color="red"><strong>设计一枚特殊的硬币，使其在一次抛投过程中出现正面的概率为$P(k,f(z^{(k)}),f(x^{(k)}))$。抛一次硬币，如果出现正面，则令$x^{(k+1)}=z^{(k)}$，否则$x^{(k+1)}=x_{(k)}。$</strong></font></li><li>如果满足停止条件，则停止迭代</li><li>令$k=k+1$，回到第2步</li></ol><p>注：其中所说的&quot;抛硬币&quot;实际可理解成一种随机决策。</p><p>算法进行中，第k次迭代，可以追踪到目前最好的点$x_{best}^{(k)}$，即能够对所有的$i \in {0,\cdots ,k },$都有$f(x^{(j)})\leqslant  f(x^{(i)})$成立的$x^{(j)}$。</p><p>$x_{best}^{(k)}$按照以下方式进行更新</p><p><img src="http://img.blog.csdn.net/20170228102458217?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p><font color="red"><strong>通过持续追踪并更新当前为止最好的点，可以将模拟退火算法简单视为一个搜索过程，搜索过程的最终目的是出处当前为止最好的点。这种说法适合绝大部分启发式算法。</strong></font></p><h2>3、模拟退火算法与朴素随机搜索算法的区别</h2><p>模拟退火算法与朴素随机搜索算法区别在于步骤3，该步骤中，<font color="red"><strong>模拟退火算法以一定的概率选择备选点作为下一次迭代点，即使这个备选点比当前的迭代点要差。这一概率被称作接受概率，接受概率要合理设定，才能保证迭代过程正确进行</strong>。</font>$$P(k,f(z^{(k)}),f(x^{(k)}))=min(1,exp(\frac{-f(x^{(k)})+f(z^{(k)})}{T_k}))$$$T_k$称为冷却温度</p><p>从上式我们至少可以推出，如果$f(z^{(k)})\leqslant f(x^{(k)})$，则p=1，即$x^{(k+1)}=z^{(k)}$。如果$f(z^{(k)}) &gt;f(x^{(k)})$，则仍有一定概率使得$x^{(k+1)}=z^{(k)}$，这一概率为,$exp(\frac{-f(x^{(k)})+f(z^{(k)})}{T_k})$。</p><p><font color="red"><strong>$f(z^{(k)}) 与f(x^{(k)})$之间差异越大，采用$z^{(k)}$作为下一迭代点的概率就越小。类似的，$T_k$越小，采用$z^{(k)}$作为下一迭代点的概率就越小。</strong></font>通常的做法是令温度$T_k$递减到0（表示冷却过程）。也就是说，随着迭代次数的增加，算法趋于更差点的概率越来越小。</p><p>对于温度参数的研究，可以<a href="https://stuff.mit.edu/afs/athena/course/6/6.435/www/Hajek88.pdf" target="_blank" rel="noopener">参考论文</a></p><h2>4、 模拟退火算法伪代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* J(y)：在状态y时的评价函数值</span></span><br><span class="line"><span class="comment">* Y(i)：表示当前状态</span></span><br><span class="line"><span class="comment">* Y(i+1)：表示新的状态</span></span><br><span class="line"><span class="comment">* r： 用于控制降温的快慢</span></span><br><span class="line"><span class="comment">* T： 系统的温度，系统初始应该要处于一个高温的状态</span></span><br><span class="line"><span class="comment">* T_min ：温度的下限，若温度T达到T_min，则停止搜索</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">while</span>( T &gt; T_min )</span><br><span class="line">&#123;</span><br><span class="line">　　dE = J( Y(i+<span class="number">1</span>) ) - J( Y(i) ) ; </span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> ( dE &gt;=<span class="number">0</span> ) <span class="comment">//表达移动后得到更优解，则总是接受移动</span></span><br><span class="line">Y(i+<span class="number">1</span>) = Y(i) ; <span class="comment">//接受从Y(i)到Y(i+1)的移动</span></span><br><span class="line">　　<span class="keyword">else</span></span><br><span class="line">　　&#123;</span><br><span class="line"><span class="comment">// 函数exp( dE/T )的取值范围是(0,1) ，dE/T越大，则exp( dE/T )也</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="built_in">exp</span>( dE/T ) &gt; random( <span class="number">0</span> , <span class="number">1</span> ) )</span><br><span class="line">Y(i+<span class="number">1</span>) = Y(i) ; <span class="comment">//接受从Y(i)到Y(i+1)的移动</span></span><br><span class="line">　　&#125;</span><br><span class="line">　　T = r * T ; <span class="comment">//降温退火 ，0&lt;r&lt;1 。r越大，降温越慢；r越小，降温越快</span></span><br><span class="line">　　<span class="comment">/*</span></span><br><span class="line"><span class="comment">　　* 若r过大，则搜索到全局最优解的可能会较高，但搜索的过程也就较长。若r过小，则搜索的过程会很快，但最终可能会达到一个局部最优值</span></span><br><span class="line"><span class="comment">　　*/</span></span><br><span class="line">　　i ++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>参考链接：</p><ol><li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li><li><a href="http://www.cnblogs.com/heaad/archive/2010/12/20/1911614.html" target="_blank" rel="noopener">http://www.cnblogs.com/heaad/archive/2010/12/20/1911614.html</a></li></ol>]]></content>
     
     <summary type="html">
     
@@ -340,6 +320,26 @@
   </entry>
   
   <entry>
+    <title>全局优化算法之模拟退火算法</title>
+    <link href="https://ulsonhu.github.io/%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.html"/>
+    <id>https://ulsonhu.github.io/全局优化算法之模拟退火算法.html</id>
+    <published>2017-02-02T16:00:00.000Z</published>
+    <updated>2018-02-23T17:59:28.415Z</updated>
+    
+    <content type="html"><![CDATA[<h2>序言</h2><p>前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，迭代序列只能收敛到局部极小点。因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p><a id="more"></a><p>全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。遗传算法属于智能优化算法之一。</p><p>常用的全局优化算法有：遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p><h2>1、随机搜索算法</h2><p>模拟退火算法是一种随机搜索算法，随机搜索方法也称作概率搜索算法，这很好理解，是一种能够在优化问题的可行集中随机采样，逐步完成搜索的算法。German首次将模拟退火算法应用在凸显处理领域。<a href="http://www.stat.cmu.edu/~acthomas/724/Geman.pdf" target="_blank" rel="noopener">论文地址</a>后续有时间我可以是这翻译一下。</p><h3>朴素随机搜索算法步骤：</h3><ol><li>令$K=0$，选定初始点$x^{(0)}\in \Omega$</li><li>从$N(x^{(k)})$中随机选定一个备选点$z^{(k)}$</li><li>如果$f(z^{(k)}) &lt; f(x^{(k)})$,则令$x^{(k+1)}=z_{(k)}$，否则$x^{(k+1)}=x_{(k)}$</li><li>如果满足停止条件，则停止迭代</li><li>令$k=k+1$，回到第2步</li></ol><p>算法分析：朴素随机搜索算法面临的问题在于领域$N(x^{(k)})$的设计，一方面要保证领域足够大，否则算法可能会在局部点&quot;卡住&quot;；但如果使领域太大的话，会使得搜索过程变得很慢。另一种，对领域问题的解决方案是对朴素随机搜索算法进行修改，使其能够&quot;爬出&quot;局部极小点的&quot;领域&quot;。<font color="red"><strong>这意味着两次迭代中，算法产生的新点可能会比当前点要差。模拟退火算法就设计了这样的机制。</strong></font></p><h2>2、模拟退火算法</h2><h3>算法步骤</h3><ol><li>令$K=0$，选定初始点$x^{(0)}\in \Omega$</li><li>从$N(x^{(k)})$中随机选定一个备选点$z^{(k)}$</li><li><font color="red"><strong>设计一枚特殊的硬币，使其在一次抛投过程中出现正面的概率为$P(k,f(z^{(k)}),f(x^{(k)}))$。抛一次硬币，如果出现正面，则令$x^{(k+1)}=z^{(k)}$，否则$x^{(k+1)}=x_{(k)}。$</strong></font></li><li>如果满足停止条件，则停止迭代</li><li>令$k=k+1$，回到第2步</li></ol><p>注：其中所说的&quot;抛硬币&quot;实际可理解成一种随机决策。</p><p>算法进行中，第k次迭代，可以追踪到目前最好的点$x_{best}^{(k)}$，即能够对所有的$i \in {0,\cdots ,k },$都有$f(x^{(j)})\leqslant  f(x^{(i)})$成立的$x^{(j)}$。</p><p>$x_{best}^{(k)}$按照以下方式进行更新</p><p><img src="http://img.blog.csdn.net/20170228102458217?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p><font color="red"><strong>通过持续追踪并更新当前为止最好的点，可以将模拟退火算法简单视为一个搜索过程，搜索过程的最终目的是出处当前为止最好的点。这种说法适合绝大部分启发式算法。</strong></font></p><h2>3、模拟退火算法与朴素随机搜索算法的区别</h2><p>模拟退火算法与朴素随机搜索算法区别在于步骤3，该步骤中，<font color="red"><strong>模拟退火算法以一定的概率选择备选点作为下一次迭代点，即使这个备选点比当前的迭代点要差。这一概率被称作接受概率，接受概率要合理设定，才能保证迭代过程正确进行</strong>。</font>$$P(k,f(z^{(k)}),f(x^{(k)}))=min(1,exp(\frac{-f(x^{(k)})+f(z^{(k)})}{T_k}))$$$T_k$称为冷却温度</p><p>从上式我们至少可以推出，如果$f(z^{(k)})\leqslant f(x^{(k)})$，则p=1，即$x^{(k+1)}=z^{(k)}$。如果$f(z^{(k)}) &gt;f(x^{(k)})$，则仍有一定概率使得$x^{(k+1)}=z^{(k)}$，这一概率为,$exp(\frac{-f(x^{(k)})+f(z^{(k)})}{T_k})$。</p><p><font color="red"><strong>$f(z^{(k)}) 与f(x^{(k)})$之间差异越大，采用$z^{(k)}$作为下一迭代点的概率就越小。类似的，$T_k$越小，采用$z^{(k)}$作为下一迭代点的概率就越小。</strong></font>通常的做法是令温度$T_k$递减到0（表示冷却过程）。也就是说，随着迭代次数的增加，算法趋于更差点的概率越来越小。</p><p>对于温度参数的研究，可以<a href="https://stuff.mit.edu/afs/athena/course/6/6.435/www/Hajek88.pdf" target="_blank" rel="noopener">参考论文</a></p><h2>4、 模拟退火算法伪代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* J(y)：在状态y时的评价函数值</span></span><br><span class="line"><span class="comment">* Y(i)：表示当前状态</span></span><br><span class="line"><span class="comment">* Y(i+1)：表示新的状态</span></span><br><span class="line"><span class="comment">* r： 用于控制降温的快慢</span></span><br><span class="line"><span class="comment">* T： 系统的温度，系统初始应该要处于一个高温的状态</span></span><br><span class="line"><span class="comment">* T_min ：温度的下限，若温度T达到T_min，则停止搜索</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">while</span>( T &gt; T_min )</span><br><span class="line">&#123;</span><br><span class="line">　　dE = J( Y(i+<span class="number">1</span>) ) - J( Y(i) ) ; </span><br><span class="line"></span><br><span class="line">　　<span class="keyword">if</span> ( dE &gt;=<span class="number">0</span> ) <span class="comment">//表达移动后得到更优解，则总是接受移动</span></span><br><span class="line">Y(i+<span class="number">1</span>) = Y(i) ; <span class="comment">//接受从Y(i)到Y(i+1)的移动</span></span><br><span class="line">　　<span class="keyword">else</span></span><br><span class="line">　　&#123;</span><br><span class="line"><span class="comment">// 函数exp( dE/T )的取值范围是(0,1) ，dE/T越大，则exp( dE/T )也</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="built_in">exp</span>( dE/T ) &gt; random( <span class="number">0</span> , <span class="number">1</span> ) )</span><br><span class="line">Y(i+<span class="number">1</span>) = Y(i) ; <span class="comment">//接受从Y(i)到Y(i+1)的移动</span></span><br><span class="line">　　&#125;</span><br><span class="line">　　T = r * T ; <span class="comment">//降温退火 ，0&lt;r&lt;1 。r越大，降温越慢；r越小，降温越快</span></span><br><span class="line">　　<span class="comment">/*</span></span><br><span class="line"><span class="comment">　　* 若r过大，则搜索到全局最优解的可能会较高，但搜索的过程也就较长。若r过小，则搜索的过程会很快，但最终可能会达到一个局部最优值</span></span><br><span class="line"><span class="comment">　　*/</span></span><br><span class="line">　　i ++ ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>参考链接：</p><ol><li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li><li><a href="http://www.cnblogs.com/heaad/archive/2010/12/20/1911614.html" target="_blank" rel="noopener">http://www.cnblogs.com/heaad/archive/2010/12/20/1911614.html</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。
+    
+    </summary>
+    
+    
+      <category term="优化算法" scheme="https://ulsonhu.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>广义线性模型(Generalized Linear Model)</title>
     <link href="https://ulsonhu.github.io/%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B(Generalized%20Linear%20Model).html"/>
     <id>https://ulsonhu.github.io/广义线性模型(Generalized Linear Model).html</id>
@@ -355,9 +355,9 @@
     </summary>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
   </entry>
   
@@ -400,9 +400,9 @@
     </summary>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
   </entry>
   
@@ -424,9 +424,9 @@ $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$
     </summary>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
   </entry>
   
@@ -446,9 +446,9 @@ $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$
     </summary>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
   </entry>
   

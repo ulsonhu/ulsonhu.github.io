@@ -119,9 +119,9 @@
     </summary>
     
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
-    
       <category term="Mac" scheme="https://ulsonhu.github.io/tags/Mac/"/>
+    
+      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
     
   </entry>
   
@@ -227,9 +227,9 @@
     </summary>
     
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
-    
       <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+    
+      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
     
       <category term="TensorFlow" scheme="https://ulsonhu.github.io/tags/TensorFlow/"/>
     
@@ -300,6 +300,26 @@
   </entry>
   
   <entry>
+    <title>全局优化算法之遗传算法</title>
+    <link href="https://ulsonhu.github.io/%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95.html"/>
+    <id>https://ulsonhu.github.io/全局优化算法之遗传算法.html</id>
+    <published>2017-02-02T16:00:00.000Z</published>
+    <updated>2018-02-24T06:23:39.363Z</updated>
+    
+    <content type="html"><![CDATA[<h2>全局优化算法概述</h2><p>前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，<font color="blue">迭代序列只能收敛到局部极小点。</font>因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p><a id="more"></a><p>全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。遗传算法属于智能优化算法之一。</p><p>常用的全局优化算法有：遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p><h3>1、染色体编码</h3><p>实际上遗传算法并不是直接针对约束集中的点进行操作，而是针对这些点的编码后再进行相关变异交叉等操作。具体说来，如约束集$\omega$中的点24映射为一个字符串集合-- 11000，这些字符串全部都是等长的，称为染色体。基本遗传算法（SGA）使用二进制串进行编码。</p><h3>2、适应度函数</h3><p>遗传算法对一个个体（解）的好坏用适应度函数值来评价，适应度函数值越大，解的质量越好。适应度函数是遗传算法进化过程的驱动力，也是进行自然选择的唯一标准，它的设计应结合求解问题本身的要求而定。</p><h3>3、选择和进化步骤</h3><p>在选择步骤中，利用选择操作构造一个新的种群$M(k)$，使其个体数量与种群相等，种群中个体数量称为个体容量，用N表示，M是在P的基础上进行随机处理后得到的，即M中的每个个体以概率<font size="3">$$\frac{f(x^{(k)})}{F(k)}$$</font>等于$P(k)$中的$x^{(k)}$，其中，<font size="3">$F(k)=\sum f(x_{i}^{(k)})$</font>，指的是对整个P进行求和，也就是说，染色体被选中的概率与其适应度函数值大小成正比。</p><h4>轮盘赌选择方法：</h4><img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826341f6bF.jpg" width="50%" height="50%"><p>轮盘赌选择法可用如下过程模拟来实现：</p><ol><li>在［0, 1］内产生一个均匀分布的随机数r。</li><li>若r≤q(1),则染色体x(1)被选中。</li><li>若$q(k-1)&lt; r ≤ q(k)$,其中(2≤k≤N), 则染色体x(k)被选中。其中的qi称为染色体$x_i (i=1, 2, \cdots, n)$的积累概率, 其计算公式为</li></ol><p>$$q_i=\sum_{j=1}^{i}P_j$$</p><p>得到积累概率为：</p><img src="http://hi.csdn.net/attachment/201101/12/8394323_129482634014NA.jpg" width="50%" height="50%"><p>轮盘赌选择方法的实现步骤:</p><ol><li>计算群体中所有个体的适应度值；</li><li>计算每个个体的选择概率；</li><li>计算积累概率；</li><li>采用模拟赌盘操作（即生成0到1之间的随机数与每个个体遗传到下一代群体的概率进行匹配）来确定各个个体是否遗传到下一代群体中。</li></ol><h3>4、交叉算子</h3><p>交叉运算，是指对两个相互配对的染色体依据交叉概率，按某种方式相互交换其部分基因，从而形成两个新的个体。</p><p>交叉运算是遗传算法区别于其他进化算法的重要特征，它在遗传算法中起关键作用，是产生新个体的主要方法。基本遗传算法（SGA）中交叉算子采用单点交叉算子。</p><p>单点交叉运算</p><p><img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826338NWUh.jpg" alt="log02"></p><h3>5、变异算子</h3><ul><li>变异运算，是指改变个体编码串中的某些基因值，从而形成新的个体。</li><li>变异运算是产生新个体的<strong>辅助方法</strong>，决定遗传算法的局部搜索能力，保持种群多样性。</li><li>交叉运算和变异运算的相互配合，共同完成对搜索空间的全局搜索和局部搜索。</li><li>基本遗传算法（SGA）中变异算子采用基本位变异算子。</li></ul><p>基本位变异算子是指对个体编码串随机指定的某一位或某几位基因作变异运算。对于二进制编码符号串所表示的个体，若需要进行变异操作的某一基因座上的原有基因值为0，则将其变为1；反之，若原有基因值为1，则将其变为0 。</p><p><img src="http://hi.csdn.net/attachment/201101/12/8394323_129482633872s3.jpg" alt="log03"></p><div align="center">基本位变异算子的执行过程</div><p><font color="red"><strong>交叉和变异操作目的在于创建一个新的种群，使得新种群目标函数的平均值能够大于上一代种群。总的说来，遗传算法就是针对种群迭代开展交叉和变异操作，产生新种群，直到满足预定的停止条件。</strong></font></p><p>Matlab示例：</p><p>选择适应度函数为：$f(x) = x + 10sin(5x) + 7cos(4x)$函数图像为</p><p><img src="http://img.blog.csdn.net/20170227193922105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log04"></p><p>运行结果为：</p><p><img src="http://img.blog.csdn.net/20170227193901589?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log05"></p><p>最优个体为： 10101111011111011</p><p>最优值为：24.8554</p><p>相关Matlab代码参考：<a href="https://github.com/yanshengjia/artificial-intelligence/tree/master/genetic-algorithm-for-functional-maximum-problem/src" target="_blank" rel="noopener">Github地址</a></p><ol><li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li><li><a href="http://blog.csdn.net/v_JULY_v/article/details/6132775" target="_blank" rel="noopener">http://blog.csdn.net/v_JULY_v/article/details/6132775</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。
+    
+    </summary>
+    
+    
+      <category term="优化算法" scheme="https://ulsonhu.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>全局优化算法之模拟退火算法</title>
     <link href="https://ulsonhu.github.io/%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95.html"/>
     <id>https://ulsonhu.github.io/全局优化算法之模拟退火算法.html</id>
@@ -320,20 +340,22 @@
   </entry>
   
   <entry>
-    <title>全局优化算法之遗传算法</title>
-    <link href="https://ulsonhu.github.io/%E5%85%A8%E5%B1%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B9%8B%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95.html"/>
-    <id>https://ulsonhu.github.io/全局优化算法之遗传算法.html</id>
-    <published>2017-02-02T16:00:00.000Z</published>
-    <updated>2018-02-24T06:23:39.363Z</updated>
+    <title>等式约束与不等式约束问题</title>
+    <link href="https://ulsonhu.github.io/%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98.html"/>
+    <id>https://ulsonhu.github.io/等式约束与不等式约束问题.html</id>
+    <published>2017-01-25T16:00:00.000Z</published>
+    <updated>2018-02-23T11:54:39.291Z</updated>
     
-    <content type="html"><![CDATA[<h2>全局优化算法概述</h2><p>前面讨论过一些迭代算法，包括牛顿法、梯度方法、共轭梯度方法和拟牛顿法，能够从初始点出发，产生一个迭代序列。很多时候，<font color="blue">迭代序列只能收敛到局部极小点。</font>因此，为了保证算法收敛到全局最小点，有时需要在全局极小点附近选择初始点。此外，这些方法需要计算目标函数。</p><a id="more"></a><p>全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。遗传算法属于智能优化算法之一。</p><p>常用的全局优化算法有：遗传算法 、模拟退火算法、禁忌搜索算法、粒子群算法、蚁群算法。</p><h3>1、染色体编码</h3><p>实际上遗传算法并不是直接针对约束集中的点进行操作，而是针对这些点的编码后再进行相关变异交叉等操作。具体说来，如约束集$\omega$中的点24映射为一个字符串集合-- 11000，这些字符串全部都是等长的，称为染色体。基本遗传算法（SGA）使用二进制串进行编码。</p><h3>2、适应度函数</h3><p>遗传算法对一个个体（解）的好坏用适应度函数值来评价，适应度函数值越大，解的质量越好。适应度函数是遗传算法进化过程的驱动力，也是进行自然选择的唯一标准，它的设计应结合求解问题本身的要求而定。</p><h3>3、选择和进化步骤</h3><p>在选择步骤中，利用选择操作构造一个新的种群$M(k)$，使其个体数量与种群相等，种群中个体数量称为个体容量，用N表示，M是在P的基础上进行随机处理后得到的，即M中的每个个体以概率<font size="3">$$\frac{f(x^{(k)})}{F(k)}$$</font>等于$P(k)$中的$x^{(k)}$，其中，<font size="3">$F(k)=\sum f(x_{i}^{(k)})$</font>，指的是对整个P进行求和，也就是说，染色体被选中的概率与其适应度函数值大小成正比。</p><h4>轮盘赌选择方法：</h4><img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826341f6bF.jpg" width="50%" height="50%"><p>轮盘赌选择法可用如下过程模拟来实现：</p><ol><li>在［0, 1］内产生一个均匀分布的随机数r。</li><li>若r≤q(1),则染色体x(1)被选中。</li><li>若$q(k-1)&lt; r ≤ q(k)$,其中(2≤k≤N), 则染色体x(k)被选中。其中的qi称为染色体$x_i (i=1, 2, \cdots, n)$的积累概率, 其计算公式为</li></ol><p>$$q_i=\sum_{j=1}^{i}P_j$$</p><p>得到积累概率为：</p><img src="http://hi.csdn.net/attachment/201101/12/8394323_129482634014NA.jpg" width="50%" height="50%"><p>轮盘赌选择方法的实现步骤:</p><ol><li>计算群体中所有个体的适应度值；</li><li>计算每个个体的选择概率；</li><li>计算积累概率；</li><li>采用模拟赌盘操作（即生成0到1之间的随机数与每个个体遗传到下一代群体的概率进行匹配）来确定各个个体是否遗传到下一代群体中。</li></ol><h3>4、交叉算子</h3><p>交叉运算，是指对两个相互配对的染色体依据交叉概率，按某种方式相互交换其部分基因，从而形成两个新的个体。</p><p>交叉运算是遗传算法区别于其他进化算法的重要特征，它在遗传算法中起关键作用，是产生新个体的主要方法。基本遗传算法（SGA）中交叉算子采用单点交叉算子。</p><p>单点交叉运算</p><p><img src="http://hi.csdn.net/attachment/201101/12/8394323_1294826338NWUh.jpg" alt="log02"></p><h3>5、变异算子</h3><ul><li>变异运算，是指改变个体编码串中的某些基因值，从而形成新的个体。</li><li>变异运算是产生新个体的<strong>辅助方法</strong>，决定遗传算法的局部搜索能力，保持种群多样性。</li><li>交叉运算和变异运算的相互配合，共同完成对搜索空间的全局搜索和局部搜索。</li><li>基本遗传算法（SGA）中变异算子采用基本位变异算子。</li></ul><p>基本位变异算子是指对个体编码串随机指定的某一位或某几位基因作变异运算。对于二进制编码符号串所表示的个体，若需要进行变异操作的某一基因座上的原有基因值为0，则将其变为1；反之，若原有基因值为1，则将其变为0 。</p><p><img src="http://hi.csdn.net/attachment/201101/12/8394323_129482633872s3.jpg" alt="log03"></p><div align="center">基本位变异算子的执行过程</div><p><font color="red"><strong>交叉和变异操作目的在于创建一个新的种群，使得新种群目标函数的平均值能够大于上一代种群。总的说来，遗传算法就是针对种群迭代开展交叉和变异操作，产生新种群，直到满足预定的停止条件。</strong></font></p><p>Matlab示例：</p><p>选择适应度函数为：$f(x) = x + 10sin(5x) + 7cos(4x)$函数图像为</p><p><img src="http://img.blog.csdn.net/20170227193922105?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log04"></p><p>运行结果为：</p><p><img src="http://img.blog.csdn.net/20170227193901589?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log05"></p><p>最优个体为： 10101111011111011</p><p>最优值为：24.8554</p><p>相关Matlab代码参考：<a href="https://github.com/yanshengjia/artificial-intelligence/tree/master/genetic-algorithm-for-functional-maximum-problem/src" target="_blank" rel="noopener">Github地址</a></p><ol><li>An introduction to optimization-最优化导论[J]. Edwin K.P.Chong.</li><li><a href="http://blog.csdn.net/v_JULY_v/article/details/6132775" target="_blank" rel="noopener">http://blog.csdn.net/v_JULY_v/article/details/6132775</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。</p><a id="more"></a><h2>等式约束问题</h2><p>设目标函数为f(x)，约束条件为$h_k(x)$，形如$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$则解决方法是消元法或者拉格朗日法。消元法不再多说，拉格朗日法这里在提一下，因为后面提到的KKT条件是对拉格朗日乘子法的一种泛化。</p><p>$$L(x,\lambda)=f(x)+\sum_{k=1}^{l}\lambda_kh_k(x)$$其中$λ_k$是各个约束条件的待定系数。然后解偏导方程组：$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</p><p>至于为什么这么做可以求解最优化？维基百科上给出了一个比较好的直观解释。</p><p>举个二维最优化的例子：</p><p>$$min f(x,y)   \s.t. g(x,y) = c$$</p><p>这里画出$z=f(x,y)$的等高线：<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="log01"></p><p>绿线标出的是约束$g(x,y)=c$的点的轨迹。蓝线是$f(x,y)$的等高线。箭头表示斜率，和等高线的法线平行。从梯度的方向上来看，显然有$d1&gt;d2$。绿色的线是约束，也就是说，只要正好落在这条绿线上的点才可能是满足要求的点。如果没有这条约束，$f(x,y)$的最小值应该会落在最小那圈等高线内部的某一点上。<font color="red">而现在加上了约束，最小值点应该在哪里呢？</font>显然应该是在f(x,y)的等高线正好和约束线相切的位置，因为如果只是相交意味着肯定还存在其它的等高线在该条等高线的内部或者外部，使得新的等高线与目标函数的交点的值更大或者更小，<font color="red">只有到等高线与目标函数的曲线相切的时候，可能取得最优值。</font></p><p>如果我们对约束也求梯度$∇g(x,y)$，则其梯度如图中绿色箭头所示。很容易看出来，要想让目标函数$f(x,y)$的等高线和约束相切，则他们切点的梯度一定在一条直线上。即：$\partial f(x,y)=\lambda（\partial g(x,y)-C) $其中λ可以是任何非0实数。</p><p>一旦求出$\lambda$的值，将其带入下式，易求在无约束极值和极值所对应的点。</p><p>$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</p><p>这就是拉格朗日函数的由来。</p><h2>不等式约束问题</h2><p>考虑一般形式的优化问题：$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</p><p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^{<em>}$处$g_j(x)= 0$，那么称该不等式约束是$x^{</em>}$处的起作用约束；如果在$x^{*}$ 处 $g_j(x)\geq 0$，那么称该约束是处的不起作用约束。按惯例，把等式约束$h_i(x)=0$当作总是起作用的约束。</p><p>由此，定义不等式约束下的拉格朗日函数L，则L表达式为：$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</p><p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$\lambda _j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p><p>常用的方法是KKT条件，同样地，把所有的不等式约束、等式约束和目标函数全部写为一个式子，简化为$L(a, b, x)= f(x) + a<em>g(x)+b</em>h(x)$</p><p>KKT条件是说最优值必须满足以下条件：</p><ol><li>$\frac{\partial L }{\partial x_i}=0$对x求导为零；</li><li>h(x) =0;</li><li>a*g(x) = 0;</li></ol><p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为$g(x)&lt;=0$，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p><h3>KKT的推导：</h3><p>首先不加证明的给出对偶问题结论：$$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\underset{\omega,b}{Min}L(\omega,b,\alpha)$$</p><p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="log02"></p><p>参考资料：</p><ol><li>Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）</li><li><a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></li></ol>]]></content>
     
     <summary type="html">
     
-      全局优化算法又称现代启发式算法，是一种具有全局优化性能、通用性强且适合于并行处理的算法。这种算法一般具有严密的理论依据，而不是单纯凭借专家经验，理论上可以在一定的时间内找到最优解或近似最优解。
+      &lt;p&gt;针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。&lt;/p&gt;
     
     </summary>
     
+    
+      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
     
       <category term="优化算法" scheme="https://ulsonhu.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
     
@@ -358,28 +380,6 @@
       <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
       <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>等式约束与不等式约束问题</title>
-    <link href="https://ulsonhu.github.io/%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E4%B8%8E%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98.html"/>
-    <id>https://ulsonhu.github.io/等式约束与不等式约束问题.html</id>
-    <published>2017-01-25T16:00:00.000Z</published>
-    <updated>2018-02-23T11:54:39.291Z</updated>
-    
-    <content type="html"><![CDATA[<p>针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。</p><a id="more"></a><h2>等式约束问题</h2><p>设目标函数为f(x)，约束条件为$h_k(x)$，形如$$min \quad f(x) \  s.t. \quad h_k(x)=0 \quad k=1,2,\cdots k$$则解决方法是消元法或者拉格朗日法。消元法不再多说，拉格朗日法这里在提一下，因为后面提到的KKT条件是对拉格朗日乘子法的一种泛化。</p><p>$$L(x,\lambda)=f(x)+\sum_{k=1}^{l}\lambda_kh_k(x)$$其中$λ_k$是各个约束条件的待定系数。然后解偏导方程组：$$\frac{\partial F }{\partial x_i}=0 \quad  \frac{\partial F }{\partial \lambda_k}=0 \ \cdots$$</p><p>至于为什么这么做可以求解最优化？维基百科上给出了一个比较好的直观解释。</p><p>举个二维最优化的例子：</p><p>$$min f(x,y)   \s.t. g(x,y) = c$$</p><p>这里画出$z=f(x,y)$的等高线：<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1364139753,865873880&amp;fm=27&amp;gp=0.jpg" alt="log01"></p><p>绿线标出的是约束$g(x,y)=c$的点的轨迹。蓝线是$f(x,y)$的等高线。箭头表示斜率，和等高线的法线平行。从梯度的方向上来看，显然有$d1&gt;d2$。绿色的线是约束，也就是说，只要正好落在这条绿线上的点才可能是满足要求的点。如果没有这条约束，$f(x,y)$的最小值应该会落在最小那圈等高线内部的某一点上。<font color="red">而现在加上了约束，最小值点应该在哪里呢？</font>显然应该是在f(x,y)的等高线正好和约束线相切的位置，因为如果只是相交意味着肯定还存在其它的等高线在该条等高线的内部或者外部，使得新的等高线与目标函数的交点的值更大或者更小，<font color="red">只有到等高线与目标函数的曲线相切的时候，可能取得最优值。</font></p><p>如果我们对约束也求梯度$∇g(x,y)$，则其梯度如图中绿色箭头所示。很容易看出来，要想让目标函数$f(x,y)$的等高线和约束相切，则他们切点的梯度一定在一条直线上。即：$\partial f(x,y)=\lambda（\partial g(x,y)-C) $其中λ可以是任何非0实数。</p><p>一旦求出$\lambda$的值，将其带入下式，易求在无约束极值和极值所对应的点。</p><p>$$F(x,y)=f(x,y)+\lambda(g(x,y)-c)$$</p><p>这就是拉格朗日函数的由来。</p><h2>不等式约束问题</h2><p>考虑一般形式的优化问题：$$Min\quad f(x) \ s.t. \quad h(x)=0 \ \quad g(x) \geq 0$$</p><p>由上式，对于一个不等式约束$g_j(x)\leqslant 0$，如果在$x^{<em>}$处$g_j(x)= 0$，那么称该不等式约束是$x^{</em>}$处的起作用约束；如果在$x^{*}$ 处 $g_j(x)\geq 0$，那么称该约束是处的不起作用约束。按惯例，把等式约束$h_i(x)=0$当作总是起作用的约束。</p><p>由此，定义不等式约束下的拉格朗日函数L，则L表达式为：$$L(X,\lambda,\mu)=f(X)+\sum_{j==1}^{p}\lambda_jh_j(X)+\sum_{k=1}^{q}\mu_kg_k(X)$$</p><p>其中f(x)是原目标函数，$h_j(x)$是第j个等式约束条件，$\lambda _j$是对应的约束系数，$g_k$是不等式约束，$\mu_k$是对应的约束系数。</p><p>常用的方法是KKT条件，同样地，把所有的不等式约束、等式约束和目标函数全部写为一个式子，简化为$L(a, b, x)= f(x) + a<em>g(x)+b</em>h(x)$</p><p>KKT条件是说最优值必须满足以下条件：</p><ol><li>$\frac{\partial L }{\partial x_i}=0$对x求导为零；</li><li>h(x) =0;</li><li>a*g(x) = 0;</li></ol><p>求取这些等式之后就能得到候选最优值。其中第三个式子非常有趣，因为$g(x)&lt;=0$，如果要满足这个等式，必须a=0或者$g(x)=0$. 这是SVM的很多重要性质的来源，如支持向量的概念。</p><h3>KKT的推导：</h3><p>首先不加证明的给出对偶问题结论：$$\underset{\omega,b}{Min}\underset{b}{Max}L(\omega,b,\alpha)=\underset{b}{Max}\underset{\omega,b}{Min}L(\omega,b,\alpha)$$</p><p><img src="http://images2015.cnblogs.com/blog/520787/201509/520787-20150901140604513-1723209246.jpg" alt="log02"></p><p>参考资料：</p><ol><li>Edwin K.P.Chong  and Stanisslaw H.Zak 最优化导论（第四版）</li><li><a href="http://blog.csdn.net/xianlingmao/article/details/7919597" target="_blank" rel="noopener">http://blog.csdn.net/xianlingmao/article/details/7919597</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;针对特殊约束条件下的优化问题，有着不同类别适应不同条件的求解算法。包括梯度法、求解线性等式约束问题的投影梯度法、适用于含有等式约束规划和含有不等式规划的拉格朗日乘子法、针对不等式约束的KKT条件法、罚函数法等。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
-    
-      <category term="优化算法" scheme="https://ulsonhu.github.io/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

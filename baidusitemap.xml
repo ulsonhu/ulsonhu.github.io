@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://ulsonhu.github.io/VC%E7%BB%B4%E7%90%86%E8%AE%BA-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
+    <lastmod>2018-03-11T17:00:50.588Z</lastmod>
+    <data>
+        <display>
+        <title>VC维理论-统计学习理论基础</title>
+        <pubTime>2018-03-02T16:00:00.000Z</pubTime>
+        
+        <tag>统计学</tag>
+         
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习相关" url="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ulsonhu.github.io/LASSO%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.html</loc>
     <lastmod>2018-03-11T10:55:28.492Z</lastmod>
     <data>
@@ -97,9 +119,9 @@
         <title>MacOS下使用python的多版本方案</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Mac</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -161,9 +183,9 @@
         <title>SVM支持向量机</title>
         <pubTime>2017-02-26T16:00:00.000Z</pubTime>
         
-        <tag>Machine Learning</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Machine Learning</tag>
          
          
            
@@ -501,9 +523,9 @@
         <title>用Tensflow写简单的神经网络</title>
         <pubTime>2017-02-24T17:40:33.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Machine Learning</tag>
+         
+        <tag>Python</tag>
          
         <tag>TensorFlow</tag>
          

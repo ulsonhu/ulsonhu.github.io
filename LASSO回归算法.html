@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="文字," />
+  <meta name="keywords" content="统计学,数量经济学," />
 
 
 
@@ -81,18 +81,23 @@
 
 
 
-<meta name="description" content="大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:">
-<meta name="keywords" content="文字">
+<meta name="description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
+<meta name="keywords" content="统计学,数量经济学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写在大三下学期">
-<meta property="og:url" content="https://ulsonhu.github.io/写在大三下学期.html">
+<meta property="og:title" content="Lasso回归算法">
+<meta property="og:url" content="https://ulsonhu.github.io/LASSO回归算法.html">
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
-<meta property="og:description" content="大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:">
+<meta property="og:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-11T04:38:52.339Z">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018.03_04lasso01.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04lasso02.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04_lasso03.png">
+<meta property="og:updated_time" content="2018-03-11T10:55:28.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写在大三下学期">
-<meta name="twitter:description" content="大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:">
+<meta name="twitter:title" content="Lasso回归算法">
+<meta name="twitter:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
+<meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png">
 
 
 
@@ -122,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://ulsonhu.github.io/写在大三下学期.html"/>
+  <link rel="canonical" href="https://ulsonhu.github.io/LASSO回归算法.html"/>
 
 
 
 
 
-  <title>写在大三下学期 | Sonnet's Blog</title>
+  <title>Lasso回归算法 | Sonnet's Blog</title>
   
 
 
@@ -300,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ulsonhu.github.io/写在大三下学期.html">
+    <link itemprop="mainEntityOfPage" href="https://ulsonhu.github.io/LASSO回归算法.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Pic by John Lennon">
@@ -317,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">写在大三下学期</h1>
+          <h1 class="post-title" itemprop="name headline">Lasso回归算法</h1>
         
 
         <div class="post-meta">
@@ -329,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-22T13:20:09+08:00">
-                2017-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T00:00:00+08:00">
+                2018-03-01
               </time>
             
 
@@ -354,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书思考/" itemprop="url" rel="index">
-                    <span itemprop="name">读书思考</span>
+                  <a href="/categories/数理统计/" itemprop="url" rel="index">
+                    <span itemprop="name">数理统计</span>
                   </a>
                 </span>
 
@@ -377,6 +382,10 @@
           
 
           
+              <div class="post-description">
+                  很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？
+              </div>
+          
 
         </div>
       </header>
@@ -391,49 +400,67 @@
       
 
       
-        <p>  大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:</p>
-<a id="more"></a>
-<h2>时代的浪潮已经拍到了我们这代人的脚下</h2>
-<p>  每每看到知乎上“大三了，考研还来得及吗？”，“大三了，学计算机还来得及吗？”诸如此类的问题，总也庆幸自己两年多的时间做了一些事读了一些书，但我知道自己做的还远远远远不够看。
-大三的生活，伴着毕业的步伐，来的匆匆。自己的学年论文加上向老师申请的论文，学的懵懂的专业课，还得挤出时间来为考研蓄力，冷不丁还夹带点感情的纠结。Flag ～</p>
-<p>时光总是匆匆的催人老，情爱总是让人烦恼。</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=394467&auto=0&height=66"></iframe>
-<h2>写博客的初衷</h2>
-<p>  大脑的存储空间是有限的，为了让新知识进来，你就得把暂时用不上旧知识遗忘掉。但是，自己当时花了那么多宝贵时间，一步一步摸索着过来所接触到的总结过的知识点，就这样被遗忘，或者被藏在某本笔记本的角落是在太可惜。当你怀着一颗热忱的心去进入一个领域，你只有从宏观上清楚了行业整体，从微观上把握住各个知识点原理，才算得上入门选手。</p>
-<p>  为此，记录下来并且可查可复习非常重要，这也就是Blog能为我提供的。</p>
-<p><em>性格决定你做怎样的选择，你的选择决定你怎样的人生。
-生命只有一次，而且它正在以不可逆转的姿态向前推进。
-你可以去旅行，可以朝九晚五地上班，还可以不顾一切地去创业。
-只是，千万不要选择平庸的人生。</em></p>
-<blockquote>
-<p>黄色的树林里分出两条路，
-可惜我不能同时去涉足，
-我在那路口久久伫立，
-我向着一条路极目望去，
-直到它消失在丛林深处。</p>
-</blockquote>
-<blockquote>
-<p>但我选了另外一条路，
-它荒草萋萋，十分幽寂，
-显得更诱人，更美丽；
-虽然在这条小路上，
-很少留下旅人的足迹。</p>
-</blockquote>
-<blockquote>
-<p>那天清晨落叶满地，
-两条路都未经脚印污染。
-啊，留下一条路等改日再见！
-但我知道路径延绵无尽头，
-恐怕我难以再回返。</p>
-</blockquote>
-<blockquote>
-<p>也许多少年后在某个地方，
-我将轻声叹息将往事回顾：
-一片树林里分出两条路——
-而我选择了人迹更少的一条，
-从此决定了我一生的道路。
-——罗伯特·弗罗斯特《未选择的路》</p>
-</blockquote>
+        <p><a href="http://rokia.org/?tag=p_value" target="_blank" rel="noopener">关于P值滥用的简要介绍</a></p>
+<p>计量模型中关于变量选择，很多同学可能第一个想到的是：前进法，后退法，向前向后逐步回归。但是，这些方法存在一些固有的缺陷,它们会导致某些可能为最优的变量组合无法共同进入模型。</p>
+<p>我们抛开传统的统计学教材，把眼光瞄向统计学习理论，就会发现，其实有大量的模型可供我们选择。
+今天，先介绍最基础的方法：lasso。</p>
+<h2>一、The lasso的提出</h2>
+<p>Lasso,即Lesat absolute shrinkage and seletion operator.改方法由统计学习领域的执牛耳者<a href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf" target="_blank" rel="noopener">Robert Tibshirani于1996年开创</a>。至今为止，这篇文章被引用次数已达14000多次。据说，在学术领域，被引用次数能达到几十次已经可以引以为傲。经过将近20年的发展，这个方法养活了一大群人，同时也发展出了很多更为成熟的理论，如Adaptive lasso，The Grouped lasso,SCAD。</p>
+<h2>二、The lasso的原理</h2>
+<p>lasso的思想其实很简单，就是在传统的最小二乘估计上对模型的系数施加一个$L_1$惩罚。
+模型形式如下。
+$$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2 \\ \qquad s. t\sum_{j = 1}^{p}|\beta_j|\leq t.$$</p>
+<p>上式等价于</p>
+<p>$$\widehat{\beta}^{lasso} = argmin_{\beta}{\sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2 + \lambda\sum_{j = 1}^{p}|\beta_j|}$$</p>
+<p>看到这个表达式，有没有一种熟悉的感觉？看！</p>
+<p>$$\widehat{\beta}^{ridge} = argmin_{\beta} {\sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2 + \lambda\sum_{j = 1}^{p}\beta_{j}^2}$$</p>
+<p>没错！它其实跟我们在回归分析教材中介绍的岭回归(ridge regression)非常相似，只是将$L_2$惩罚换成了$L_1$惩罚。Zou and Hastie在2005年，提出了一种在ridge regression和the lasso之间折衷的方法：the <strong>elastic net</strong> penalty,思想也非常简单，但是却很有影响力。</p>
+<p>回头看下，lasso为何如此流行。
+这么做的好处是一举多得的：</p>
+<ul>
+<li>可以解决岭回归能够解决的问题：多重共线性问题,过拟合问题等；</li>
+<li>还可以解决岭回归不能解决的问题：将一部分变量的系数压缩至0，即实现变量选择。</li>
+</ul>
+<p>我们可以从一张图看出来。<br>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png" width="70%" height="70%"></p>
+<p>这幅图可以这样理解
+蓝色的区域是$\beta$的可行域。由于the lasso的约束是$L_1$约束，必然是方形区域，区域的大小取决于$t$的大小；而ridge regression是$L_2$约束，所以可行域呈圆形。</p>
+<p>$$Z = \sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2$$</p>
+<p>从上面的式子可以看出，（如果我的空间解析几何没记错的话，）函数$Z(\beta_1,\beta_2)$描述的是一个椭圆抛物面的形状。而椭圆抛物面在$(\beta_1,\beta_2)$平面上的投影就是类似上图红色圆圈所表述的形状，每一圈代表着不同的$Z$值。而中间的黑点，自然就是最小的$Z$，即没有约束下，普通最小二乘得到的解。我们可以想象，当蓝色的圆圈足够大，以至于涵盖了中间的小黑点时，约束没有起到作用，取到的解就是中间的小黑点，此时等价于普通最小二乘；当约束比较紧，取到的解靠近0，为两个区域相切的点。</p>
+<p>我们可以直观地看到，the lasso更容易取到角点解，即：使得某些变量的系数压缩至零。如果你还是不相信自己的眼睛，我们待会还可以从一个示例中看出这一特点。</p>
+<p>一些爱思考的同学可能会继续追问：“它能够保证留下来的变量都是对因变量有着更大影响的吗？”这一点稍微思考一下，应该是可以保证的。但是，如果存在一组高度相关的变量时，Lasso倾向于选择其中的一个变量，而忽视其他所有的变量。这样可能会导致结果的不稳定性。要解决这个问题，可以去探究一下 <strong>elastic net</strong> penalty。</p>
+<h2>三、lasso的R实现</h2>
+<p>lasso的实现可以采用glmnet包。glmnet包作者是Friedman, Hastie, and Tibshirani这三位统计学习领域的大牛，可信度无可置疑。
+这个包采用的算法是循环坐标下降法（cyclical coordinate descent），能够处理的模型包括 linear regression,logistic and multinomial regression models, poisson regression 和 the Cox model，用到的正则化方法就是$l1$范数（lasso）、$l2$范数（岭回归）和它们的混合 （elastic net）。</p>
+<p>这里，给出一个实现lasso的示例。</p>
+<p>数据来源于ISLR包中的Hitters数据集，该数据集描述了美国1986年和1987年的棒球运动员相关数据。我们来探究一下对运动员薪水起主要作用的因素有哪些。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ISLR)</span><br><span class="line">str(Hitters)&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 'data.frame':    322 obs. of  20 variables:</span></span><br><span class="line"><span class="comment">##  $ AtBat    : int  293 315 479 496 321 594 185 298 323 401 ...</span></span><br><span class="line"><span class="comment">##  $ Hits     : int  66 81 130 141 87 169 37 73 81 92 ...</span></span><br><span class="line"><span class="comment">##  $ HmRun    : int  1 7 18 20 10 4 1 0 6 17 ...</span></span><br><span class="line"><span class="comment">##  $ Runs     : int  30 24 66 65 39 74 23 24 26 49 ...</span></span><br><span class="line"><span class="comment">##  $ RBI      : int  29 38 72 78 42 51 8 24 32 66 ...</span></span><br><span class="line"><span class="comment">##  $ Walks    : int  14 39 76 37 30 35 21 7 8 65 ...</span></span><br><span class="line"><span class="comment">##  $ Years    : int  1 14 3 11 2 11 2 3 2 13 ...</span></span><br><span class="line"><span class="comment">##  $ CAtBat   : int  293 3449 1624 5628 396 4408 214 509 341 5206 ...</span></span><br><span class="line"><span class="comment">##  $ CHits    : int  66 835 457 1575 101 1133 42 108 86 1332 ...</span></span><br><span class="line"><span class="comment">##  $ CHmRun   : int  1 69 63 225 12 19 1 0 6 253 ...</span></span><br><span class="line"><span class="comment">##  $ CRuns    : int  30 321 224 828 48 501 30 41 32 784 ...</span></span><br><span class="line"><span class="comment">##  $ CRBI     : int  29 414 266 838 46 336 9 37 34 890 ...</span></span><br><span class="line"><span class="comment">##  $ CWalks   : int  14 375 263 354 33 194 24 12 8 866 ...</span></span><br><span class="line"><span class="comment">##  $ League   : Factor w/ 2 levels &amp;quot;A&amp;quot;,&amp;quot;N&amp;quot;: 1 2 1 2 2 1 2 1 2 1 ...</span></span><br><span class="line"><span class="comment">##  $ Division : Factor w/ 2 levels &amp;quot;E&amp;quot;,&amp;quot;W&amp;quot;: 1 2 2 1 1 2 1 2 2 1 ...</span></span><br><span class="line"><span class="comment">##  $ PutOuts  : int  446 632 880 200 805 282 76 121 143 0 ...</span></span><br><span class="line"><span class="comment">##  $ Assists  : int  33 43 82 11 40 421 127 283 290 0 ...</span></span><br><span class="line"><span class="comment">##  $ Errors   : int  20 10 14 3 4 25 7 9 19 0 ...</span></span><br><span class="line"><span class="comment">##  $ Salary   : num  NA 475 480 500 91.5 750 70 100 75 1100 ...</span></span><br><span class="line"><span class="comment">##  $ NewLeague: Factor w/ 2 levels &amp;quot;A&amp;quot;,&amp;quot;N&amp;quot;: 1 2 1 2 2 1 1 1 2 1 ...&lt;/code&gt;&lt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hitters&lt;-na.omit(Hitters)</span><br><span class="line"><span class="comment">## sampling</span></span><br><span class="line">x&amp;lt;-model.matrix(Salary~.,Hitters)[,-<span class="number">1</span>]</span><br><span class="line">y&amp;lt;-Hitters$Salary</span><br><span class="line"></span><br><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">train&amp;lt;-sample(<span class="number">1</span>:nrow(x),nrow(x)/<span class="number">2</span>)</span><br><span class="line">test&amp;lt;-(-train)</span><br><span class="line">y.test&amp;lt;-y[test]</span><br><span class="line"></span><br><span class="line"><span class="comment">## ridge regression</span></span><br><span class="line"><span class="keyword">library</span>(glmnet)</span><br><span class="line">grid&amp;lt;-<span class="number">10</span>^seq(<span class="number">10</span>,-<span class="number">2</span>,length = <span class="number">100</span>)</span><br><span class="line">ridge.mod&amp;lt;-glmnet(x,y,alpha = <span class="number">0</span>,lambda = grid)</span><br><span class="line">plot(ridge.mod, main = &amp;quot;The ridge&amp;quot;)</span><br></pre></td></tr></table></figure>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018.03_04lasso01.png" width="70%" height="70%">
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## the lasso</span></span><br><span class="line">lasso.mod&amp;lt;-glmnet(x[train,],y[train],alpha = <span class="number">1</span>,lambda = grid)</span><br><span class="line">plot(lasso.mod, main = &amp;quot;The lasso&amp;quot;)</span><br></pre></td></tr></table></figure>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04lasso02.png" width="70%" height="70%">
+<p>从上面两幅图对比可知，the lasso相比起ridge regression，在压缩变量方便表现更出色。
+当然，你还可以使用这个包内部的交叉验证函数对<span class="math inline">(\lambda)</span>进行参数优化，使得模型更具有稳健性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## cross-validation</span><br><span class="line">set.seed(1)</span><br><span class="line">cv.out&amp;lt;-cv.glmnet(x[train,],y[train],alpha = 1)</span><br><span class="line">plot(cv.out)</span><br></pre></td></tr></table></figure>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04_lasso03.png" width="70%" height="70%">
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bestlam&amp;lt;-cv.out$lambda.min</span><br><span class="line">lasso.pred&amp;lt;-predict(lasso.mod,s = bestlam,newx = x[test,])</span><br><span class="line">mean((lasso.pred - y.test)^<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## [1] 100743.4</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">out&amp;lt;-glmnet(x,y,alpha = <span class="number">1</span>,lambda = grid)</span><br><span class="line">lasso.coef&amp;lt;-predict(out,type = &amp;quot;coefficients&amp;quot;,s = bestlam)[<span class="number">1</span>:<span class="number">20</span>,]</span><br><span class="line">lasso.coef</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##  (Intercept)        AtBat         Hits        HmRun         Runs </span></span><br><span class="line"><span class="comment">##   18.5394844    0.0000000    1.8735390    0.0000000    0.0000000 </span></span><br><span class="line"><span class="comment">##          RBI        Walks        Years       CAtBat        CHits </span></span><br><span class="line"><span class="comment">##    0.0000000    2.2178444    0.0000000    0.0000000    0.0000000 </span></span><br><span class="line"><span class="comment">##       CHmRun        CRuns         CRBI       CWalks      LeagueN </span></span><br><span class="line"><span class="comment">##    0.0000000    0.2071252    0.4130132    0.0000000    3.2666677 </span></span><br><span class="line"><span class="comment">##    DivisionW      PutOuts      Assists       Errors   NewLeagueN </span></span><br><span class="line"><span class="comment">## -103.4845458    0.2204284    0.0000000    0.0000000    0.0000000</span></span><br></pre></td></tr></table></figure>
+<p>可见，很多变量的系数确实被压缩至零。</p>
+<h2>四、lasso的优缺点分析</h2>
+<ul>
+<li>相比较于其他变量选择方法，如：best subset，Partial Least Squares(偏最小二乘)，Principal components regression(主成分回归)，the lasso和ridge regression对参数的调整是连续的，并不是一刀切的。</li>
+<li>the lasso相比于ridge regression的优势在于压缩变量表现更出色。</li>
+<li>但是，正如前面所说，lasso还是会有一些潜在的问题，有时候，elastic net等其他的一些lasso的变形会是更好的选择。</li>
+</ul>
+<h2>五、参考文献</h2>
+<ol>
+<li>The Elements of Statistical Learning: Data Mining, Inference and Prediction. Second edition</li>
+<li>An Introduction to Statistical Learning with R</li>
+<li><a href="http://site.douban.com/182577/widget/notes/10567212/note/288551448/" target="_blank" rel="noopener">线性回归建模–变量选择和正则化（1）：R包glmnet</a></li>
+</ol>
 
       
     </div>
@@ -480,7 +507,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/文字/" rel="tag"><i class="fa fa-tag"></i> 文字</a>
+            <a href="/tags/统计学/" rel="tag"><i class="fa fa-tag"></i> 统计学</a>
+          
+            <a href="/tags/数量经济学/" rel="tag"><i class="fa fa-tag"></i> 数量经济学</a>
           
         </div>
       
@@ -493,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/如何高效学习.html" rel="next" title="「如何高效的学习」读书笔记">
-                <i class="fa fa-chevron-left"></i> 「如何高效的学习」读书笔记
+              <a href="/因果推断：工具变量（Instrumental Variable）.html" rel="next" title="因果推断：工具变量（Instrumental Variable）">
+                <i class="fa fa-chevron-left"></i> 因果推断：工具变量（Instrumental Variable）
               </a>
             
           </div>
@@ -502,10 +531,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Python字符串处理拾掇.html" rel="prev" title="Python字符串处理拾掇">
-                Python字符串处理拾掇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -676,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">时代的浪潮已经拍到了我们这代人的脚下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">写博客的初衷</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一、The lasso的提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">二、The lasso的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">三、lasso的R实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">四、lasso的优缺点分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">五、参考文献</span></a></li></ol></div>
             
 
           </div>

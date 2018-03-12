@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520785729/2018_03_05_20.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520785731/2018_03_05_21.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520785730/2018_03_05_22.png">
-<meta property="og:updated_time" content="2018-03-11T17:00:50.588Z">
+<meta property="og:updated_time" content="2018-03-12T16:25:46.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VC维理论-统计学习理论基础">
 <meta name="twitter:description" content="VC维在机器学习领域是一个很基础的概念，它给诸多机器学习方法的可学习性提供了坚实的理论基础，但有时候，对我们而言，SVM，LR，深度学习等可能都已经用到线上了，但却不理解VC维。">
@@ -502,8 +502,8 @@ $$W_g\rightarrow argmin\sum_{n=1}^{N}\left [y_n \neq sign(W^Tx_n)  \right ]$$</p
 上面这两个核心条件，也正好对应着test和train这两个过程。train过程希望损失期望(即$E_{in}(g)$)尽可能小；test过程希望在真实环境中的损失期望也尽可能小，即$E_{in}(g)$接近于$E_{out}(g)$。
 <p>但往往我们更多在关心，如何基于模型的假设空间，利用最优化算法，找到$E_{in}$最小的解$g$。但容易忽视test这个过程，如果让学习可行，不仅仅是要在训练集表现好，在真实环境里也要表现好。
 从上述推导出来的不等式，我们看到假设数$M$在这两个核心条件中有着重要作用。
-<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520781760/2018_03_05.png" width="80%" height="80%">
-$M$太小，当$N$足够大时，$E_{in}和$E_{out}$比较接近，但如果候选假设集太小，不容易在其中找到一个$g$，使得$E_{in}(g)$约等于0，第二项不能满足。而如果$M$太大，这时候选集多了，相对容易在其中找到一个$g$，使得$E_{in}(g)$约等于0，但第一项就不能满足了。所以假设空间$H$的大小$M$很关键。</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520781760/2018_03_05.png" width="80%" height="80%"></p>
+<p>$M$太小，当$N$足够大时，$E_{in}和$E_{out}$比较接近，但如果候选假设集太小，不容易在其中找到一个$g$，使得$E_{in}(g)$约等于0，第二项不能满足。而如果$M$太大，这时候选集多了，相对容易在其中找到一个$g$，使得$E_{in}(g)$约等于0，但第一项就不能满足了。所以假设空间$H$的大小$M$很关键。</p>
 <p>对于一个假设空间，$M$可能是无穷大的。要能够继续推导下去，那么有一个直观的思路，能否找到一个有限的因子$m_H$来替代不等式bound中的$M$。</p>
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520782700/2018_03_05_06.png" width="80%" height="80%">
 <p>虽说假设空间很大，上述推导里，我们用到了$P(h_1,h_2,\cdots ,h_m) \leq P(h_1) + P(h_2) + \cdots + P(h_m)$。但事实上，多个$h$之间并不是完全独立的，他们是有很大的重叠的，也就是在$M$个假设中，可能有一些假设可以归为同一类。</p>
@@ -698,6 +698,10 @@ $d_{VC} = O(V\cdot D)$，其中$V$表示神经网络中神经元的个数，$D$�
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/SQL语句学习及总结.html" rel="prev" title="SQL语句学习及总结">
+                SQL语句学习及总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -777,7 +781,7 @@ $d_{VC} = O(V\cdot D)$，其中$V$表示神经网络中神经元的个数，$D$�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -788,7 +792,7 @@ $d_{VC} = O(V\cdot D)$，其中$V$表示神经网络中神经元的个数，$D$�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -799,7 +803,7 @@ $d_{VC} = O(V\cdot D)$，其中$V$表示神经网络中神经元的个数，$D$�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -952,149 +956,6 @@ $d_{VC} = O(V\cdot D)$，其中$V$表示神经网络中神经元的个数，$D$�
     
 
   </div>
-
-<!-- ===layout begin== -->
-  <div class="bg_content">
-       <canvas id="canvas"></canvas>
-  </div>
- 'use strict';
-
-    var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-    function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-    function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-    var Circle = function () {
-       function Circle(x, y) {
-            _classCallCheck(this, Circle);
-
-            this.x = x;
-            this.y = y;
-            this.r = Math.random() * 10;
-            this._mx = Math.random();
-            this._my = Math.random();
-        }
-
-       _createClass(Circle, [{
-            key: 'drawCircle',
-            value: function drawCircle(ctx) {
-                ctx.beginPath();
-                //arc() 方法使用一个中心点和半径，为一个画布的当前子路径添加一条弧。
-                ctx.arc(this.x, this.y, this.r, 0, 360);
-                ctx.closePath();
-                ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
-                ctx.fill();
-            }
-        }, {
-            key: 'drawLine',
-            value: function drawLine(ctx, _circle) {
-                var dx = this.x - _circle.x;
-                var dy = this.y - _circle.y;
-                var d = Math.sqrt(dx * dx + dy * dy);
-                if (d < 150) {
-                    ctx.beginPath();
-
-                    ctx.moveTo(this.x, this.y); //起始点
-                    ctx.lineTo(_circle.x, _circle.y); //终点
-                    ctx.closePath();
-                    ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
-                    ctx.stroke();
-                }
-            }
-
-
-        }, {
-            key: 'move',
-            value: function move(w, h) {
-                this._mx = this.x < w && this.x > 0 ? this._mx : -this._mx;
-                this._my = this.y < h && this.y > 0 ? this._my : -this._my;
-                this.x += this._mx / 2;
-                this.y += this._my / 2;
-            }
-        }]);
-
-        return Circle;
-    }();
-
-
-
-    var currentCirle = function (_Circle) {
-        _inherits(currentCirle, _Circle);
-
-        function currentCirle(x, y) {
-            _classCallCheck(this, currentCirle);
-
-            return _possibleConstructorReturn(this, (currentCirle.__proto__ || Object.getPrototypeOf(currentCirle)).call(this, x, y));
-        }
-
-        _createClass(currentCirle, [{
-            key: 'drawCircle',
-            value: function drawCircle(ctx) {
-                ctx.beginPath();
-
-                //this.r = (this.r < 14 && this.r > 1) ? this.r + (Math.random() * 2 - 1) : 2;
-                this.r = 8;
-                ctx.arc(this.x, this.y, this.r, 0, 360);
-                ctx.closePath();
-                //ctx.fillStyle = 'rgba(0,0,0,' + (parseInt(Math.random() * 100) / 100) + ')'
-                ctx.fillStyle = 'rgba(255, 77, 54, 0.6)';
-                ctx.fill();
-            }
-        }]);
-
-        return currentCirle;
-    }(Circle);
-
-
-    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    var w = canvas.width = canvas.offsetWidth;
-    var h = canvas.height = canvas.offsetHeight;
-    var circles = [];
-    var current_circle = new currentCirle(0, 0);
-
-    var draw = function draw() {
-        ctx.clearRect(0, 0, w, h);
-        for (var i = 0; i < circles.length; i++) {
-            circles[i].move(w, h);
-            circles[i].drawCircle(ctx);
-            for (j = i + 1; j < circles.length; j++) {
-                circles[i].drawLine(ctx, circles[j]);
-            }
-        }
-        if (current_circle.x) {
-            current_circle.drawCircle(ctx);
-            for (var k = 1; k < circles.length; k++) {
-                current_circle.drawLine(ctx, circles[k]);
-            }
-        }
-        requestAnimationFrame(draw);
-    };
-
-    var init = function init(num) {
-        for (var i = 0; i < num; i++) {
-            circles.push(new Circle(Math.random() * w, Math.random() * h));
-        }
-        draw();
-    };
-    window.addEventListener('load', init(60));
-    window.onmousemove = function (e) {
-        e = e || window.event;
-        current_circle.x = e.clientX;
-        current_circle.y = e.clientY;
-    };
-    window.onmouseout = function () {
-        current_circle.x = null;
-        current_circle.y = null;
-    };
-
-
-    <!-- ==layout end=== -->
 
   
 

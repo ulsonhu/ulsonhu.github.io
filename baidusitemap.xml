@@ -3,9 +3,10 @@
 
 
     
+    
   <url>
     <loc>https://ulsonhu.github.io/SQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html</loc>
-    <lastmod>2018-03-12T16:32:42.962Z</lastmod>
+    <lastmod>2018-03-13T04:04:19.345Z</lastmod>
     <data>
         <display>
         <title>SQL语句学习及总结</title>
@@ -143,9 +144,9 @@
         <title>MacOS下使用python的多版本方案</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Mac</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -165,9 +166,9 @@
         <title>MCMC与Gibbs采样</title>
         <pubTime>2017-01-24T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -229,9 +230,9 @@
         <title>广义线性模型(Generalized Linear Model)</title>
         <pubTime>2017-01-25T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -251,9 +252,9 @@
         <title>指数分布族</title>
         <pubTime>2017-01-22T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -419,9 +420,9 @@
         <title>共轭先验</title>
         <pubTime>2017-02-17T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -571,9 +572,9 @@
         <title>矩阵分解相关知识回顾</title>
         <pubTime>2017-01-20T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -674,7 +675,6 @@
     </data>
     </url>
 
-    
     
     
     

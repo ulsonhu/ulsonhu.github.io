@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>https://ulsonhu.github.io/MySQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html</loc>
+    <lastmod>2018-03-17T15:12:56.964Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL语句学习及总结</title>
+        <pubTime>2018-03-05T16:00:00.000Z</pubTime>
+        
+        <tag>数据分析</tag>
+         
+        <tag>数据库</tag>
+         
+        <tag>SQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ulsonhu.github.io/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html</loc>
-    <lastmod>2018-03-13T08:30:19.736Z</lastmod>
+    <lastmod>2018-03-13T16:18:21.070Z</lastmod>
     <data>
         <display>
         <title>广义矩估计(GMM)方法</title>
@@ -25,30 +49,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>https://ulsonhu.github.io/SQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html</loc>
-    <lastmod>2018-03-13T04:04:19.345Z</lastmod>
-    <data>
-        <display>
-        <title>SQL语句学习及总结</title>
-        <pubTime>2018-03-05T16:00:00.000Z</pubTime>
-        
-        <tag>SQl</tag>
-         
-        <tag>数据分析</tag>
-         
-        <tag>数据库</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据分析" url="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://ulsonhu.github.io/VC%E7%BB%B4%E7%90%86%E8%AE%BA-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
@@ -166,9 +166,9 @@
         <title>MacOS下使用python的多版本方案</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>Mac</tag>
-         
         <tag>Python</tag>
+         
+        <tag>Mac</tag>
          
          
            

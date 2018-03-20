@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据分析,SAS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下">
+<meta name="keywords" content="数据分析,SAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAS基础学习">
+<meta property="og:url" content="https://ulsonhu.github.io/SAS基础学习.html">
+<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:description" content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_01.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_02.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_03.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_04.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_05.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_06.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_07.png">
+<meta property="og:updated_time" content="2018-03-20T15:28:20.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SAS基础学习">
+<meta name="twitter:description" content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下">
+<meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ulsonhu.github.io/SAS基础学习.html"/>
+
+
+
+
+
+  <title>SAS基础学习 | Sonnet's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="v6x7HqA95s" />
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sonnet's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ulsonhu.github.io/SAS基础学习.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sonnet's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SAS基础学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T00:00:00+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考书籍</p>
+<ol>
+<li>《SAS编程与数据挖掘商业案例》（预热）</li>
+<li>「the Little SAS Book」(推荐)</li>
+<li>「Applied Econometrics Using The SAS System」</li>
+</ol>
+<p>SAS编程主要包括<code>DATA</code>和<code>PROC</code>两部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* create sas data set named toads;</span><br><span class="line">* read the data file ToadJump.dta using list input;</span><br><span class="line">DATA toads;</span><br><span class="line">INFILE &apos;~/desktop/ToadJump.dta&apos;;</span><br><span class="line">INPUT ToadJump $ Weight Jump1 Jump2 Jump3;</span><br><span class="line">RUN;</span><br><span class="line">* print the data to make sure the file was read correctly;</span><br><span class="line">* PROC PRINT DATA = toads;</span><br><span class="line">TITLE &apos;SAS Data Set Toads&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>这样就建立了一个名为<code>toads</code>的临时数据集，然后读入外部文件<code>ToadJump.dat</code>，然后告诉SAS有四个变量，其中第一个是文本型,缺失值用一个点<code>.</code>标记</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">* Create a SAS data set named sales;</span><br><span class="line">* Read the data file OnionRing.dat using column input;</span><br><span class="line">DATA sales;</span><br><span class="line">INFILE ’~/desktop/OnionRing.dat’;</span><br><span class="line">INPUT VisitingTeam $ 1-20 ConcessionSales 21-24 BleacherSales 25-28</span><br><span class="line">OurHits 29-31 TheirHits 32-34 OurRuns 35-37 TheirRuns 38-40;</span><br><span class="line">RUN;</span><br><span class="line">* Print the data to make sure the file was read correctly;</span><br><span class="line">PROC PRINT DATA = sales;</span><br><span class="line">TITLE ’SAS Data Set Sales’;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<h2>基本函数</h2>
+<table>
+<thead>
+<tr>
+<th>SAS文本类函数</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ANYALNUM(arg,start)</td>
+<td>返回第一次出现任意数字或字母的位置，可选开始位置start</td>
+</tr>
+<tr>
+<td>ANYALPHA(arg,start)</td>
+<td>返回第一次出现任意字母的位置，可选开始位置start</td>
+</tr>
+<tr>
+<td>ANYDIGIT(arg,start)</td>
+<td>返回第一次出现任意数字的位置，可选开始位置start</td>
+</tr>
+<tr>
+<td>ANYSPACE(arg,start)</td>
+<td>返回第一次出现任意空白的位置，可选开始位置start</td>
+</tr>
+<tr>
+<td>CAT(arg1,arg2,…argn)</td>
+<td>连接字符串，留下头尾空白</td>
+</tr>
+<tr>
+<td>CATS(arg1,arg2,…argn)</td>
+<td>连接字符串，删除头尾空白</td>
+</tr>
+<tr>
+<td>CATX(‘separator-string’, arg-1,…,arg-n)</td>
+<td>连接字符串，删除头尾空白并用指定标点连接</td>
+</tr>
+<tr>
+<td>COMPRESS(arg, ‘char’)</td>
+<td>移除字符串中的空格和可选字符</td>
+</tr>
+<tr>
+<td>INDEX(arg, ‘string’)</td>
+<td>返回指定字符在变量中的位置</td>
+</tr>
+<tr>
+<td>LEFT(arg)</td>
+<td>字符串左对齐</td>
+</tr>
+<tr>
+<td>LENGTH(arg)</td>
+<td>返回字符串长度，不考虑尾部空格</td>
+</tr>
+<tr>
+<td>PROPCASE(arg)</td>
+<td>首字母大写</td>
+</tr>
+<tr>
+<td>SUBSTR(arg,position,n)</td>
+<td>从字符串中提取指定开始位置指定长度字符</td>
+</tr>
+<tr>
+<td>TRANSLATE(source,to1,from1,…ton,fromn)</td>
+<td>替换字符</td>
+</tr>
+<tr>
+<td>TRANWRD(source,from,to)</td>
+<td>替换字符串</td>
+</tr>
+<tr>
+<td>TRIM(arg)</td>
+<td>删除尾部空白</td>
+</tr>
+<tr>
+<td>UPCASE(arg)</td>
+<td>替换成大写</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>SAS数值函数</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INT(arg)</td>
+<td>返回整数</td>
+</tr>
+<tr>
+<td>LOG(arg)</td>
+<td>自然对数</td>
+</tr>
+<tr>
+<td>LOG10(arg)</td>
+<td>$10$为底对数</td>
+</tr>
+<tr>
+<td>MAX(arg1,arg2,…argn)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>MEAN(arg1,arg2,…argn)</td>
+<td>均值</td>
+</tr>
+<tr>
+<td>MIN(arg1,arg2,…argn)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>N(arg1,arg2,…argn)</td>
+<td>非缺失值个数</td>
+</tr>
+<tr>
+<td>NMISS(arg1,arg2,…argn)</td>
+<td>缺失值个数</td>
+</tr>
+<tr>
+<td>ROUND(arg, roundoffunit)</td>
+<td>保留几位小数</td>
+</tr>
+<tr>
+<td>SUM(arg1,arg2,…argn)</td>
+<td>求和</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>SAS日期函数</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATEJUL(julian-date)</td>
+<td>标准julian日期到SAS日期</td>
+</tr>
+<tr>
+<td>DAY(date)</td>
+<td>返回「日」</td>
+</tr>
+<tr>
+<td>MDY(month,day,year)</td>
+<td>年月日到SAS日期</td>
+</tr>
+<tr>
+<td>MONTH(date)</td>
+<td>返回「月」</td>
+</tr>
+<tr>
+<td>QTR(date)</td>
+<td>返回季度</td>
+</tr>
+<tr>
+<td>TODAY()</td>
+<td>今日</td>
+</tr>
+<tr>
+<td>WEEKDAY(date)</td>
+<td>返回周几（周日为1）</td>
+</tr>
+<tr>
+<td>YEAR(date)</td>
+<td>返回「年」</td>
+</tr>
+<tr>
+<td>YRDIF(start-date,end- date,’ACTUAL’)</td>
+<td>返回相差年份</td>
+</tr>
+</tbody>
+</table>
+<h2>判断结构</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">* if then structure</span><br><span class="line">if model = &apos;Pink&apos; then make = &apos;Floyd&apos;;</span><br><span class="line"></span><br><span class="line">* 执行多项命令，需要嵌套do；可以用and和or</span><br><span class="line">if Year then Model = &apos;Mac&apos; or Model = &apos;pro&apos; then Make = &apos;Jobs&apos;;</span><br><span class="line">if Model = &apos;iphone5&apos; then do;</span><br><span class="line">Make = &apos;Tim&apos;;</span><br><span class="line">Seats = 2;</span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line">* if else</span><br><span class="line">if Cost = . then CostGroup = &apos;Missing&apos;;</span><br><span class="line">else if Cost else if Cost else CostGroup = high;</span><br><span class="line"></span><br><span class="line">* use if to select sub-set</span><br><span class="line">if sex = &apos;m&apos;;if sex = &apos;m&apos; then detele;</span><br></pre></td></tr></table></figure>
+<h2>数组操作</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* Change all 9 to missing values;</span><br><span class="line">DATA songs;</span><br><span class="line">INFILE &apos;~/desktop/WBRK.dat&apos;;</span><br><span class="line">INPUT City $ 1-15 Age domk wj hwow simbh kt aomm libm tr filp ttr;</span><br><span class="line">ARRAY song (10) domk wj hwow simbh kt aomm libm tr filp ttr;</span><br><span class="line">DO i = 1 TO 10;</span><br><span class="line">IF song(i) = 9 THEN song(i) = .;</span><br><span class="line">END;</span><br><span class="line">RUN;</span><br><span class="line">PROC PRINT DATA = songs;</span><br><span class="line">TITLE &apos;WBRK Song Survey&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<h2>基本模块调用</h2>
+<p>搞定基本的函数之后，开始鼓捣$SAS$里面的模型。也就是说，要开始写<code>PROC</code>了。其实，$SAS$比较像$Stata$（计量经济学主流软件），无论是从输出的样式，还是语法。不习惯没有()的模型调用呀。若是说$SAS$和$Stata$的区别，怕只是$Stata$更侧重于<strong>计量模型</strong>而$SAS$则是服务于大多数<strong>统计模型</strong>吧。</p>
+<h3>PROC的基本内容：CONTENT</h3>
+<p><code>PROC:content</code>，可以显示数据集的主要特性。比如，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LIBNAME tropical &apos;~/MySASLib&apos;;</span><br><span class="line">PROC CONTENTS DATA = tropical.banana;</span><br></pre></td></tr></table></figure>
+<p>这里主要是两个声明:<code>TITLE</code>和<code>FOOTNOTE</code>。前者输出时候会产生一个标题，后者会产生尾注。用法也是比较直接的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TITLE ”Here’s another title”;</span><br><span class="line">TITLE ’Here’’s another title’;</span><br><span class="line">FOOTNOTE3 ’This is the third footnote’;</span><br></pre></td></tr></table></figure>
+<h3>SAS PROC求子集:WHERE</h3>
+<p>如果要在<code>PROC</code>里面先求子集的话，可以直接调用<code>WHERE</code>。感觉这里和$SQL$的思路比较像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PROC PRINT DATA = &apos;～/desktop/MySASLib/style&apos;;</span><br><span class="line">WHERE Genre = &apos;Impressionism&apos;;</span><br><span class="line">TITLE &apos;Major Impressionist Painters&apos;;</span><br><span class="line">FOOTNOTE &apos;F = France N = Netherlands U = US&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<h3>SAS PROC 数据进行排序:SORT</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATA marine;</span><br><span class="line">INFILE &apos;~/desktop/Lengths.dat&apos;;</span><br><span class="line">INPUT Name $ Family $ Length @@;</span><br><span class="line">RUN;</span><br><span class="line">* Sort the data;</span><br><span class="line">PROC SORT DATA = marine OUT = seasort NODUPKEY;</span><br><span class="line">BY Family DESCENDING Length;</span><br><span class="line">PROC PRINT DATA = seasort;</span><br><span class="line">TITLE &apos;Whales and Sharks&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>这样数据就按照<code>Family</code>、<code>Length</code>（递减）排序了。</p>
+<h3>SAS PROC 输出数据:PRINT</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA sales;</span><br><span class="line">INFILE &apos;~/desktop/Candy.dat&apos;;</span><br><span class="line">INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $</span><br><span class="line">Quantity;</span><br><span class="line">Profit = Quantity * 1.25;</span><br><span class="line">PROC SORT DATA = sales;</span><br><span class="line">BY Class;</span><br><span class="line">PROC PRINT DATA = sales;</span><br><span class="line">BY Class;</span><br><span class="line">SUM Profit;</span><br><span class="line">VAR Name DateReturned CandyType Profit;</span><br><span class="line">TITLE &apos;Candy Sales for Field Trip by Class&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<h3>SAS PROC里面改变输出格式：FORMAT</h3>
+<p>基本就是<code>FORMAT</code>一下就可以了，再就是<code>PUT</code>的时候也可以调整。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATA sales;</span><br><span class="line">INFILE &apos;~/desktop/Candy.dat&apos;;</span><br><span class="line">INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $</span><br><span class="line">Quantity;</span><br><span class="line">Profit = Quantity * 1.25;</span><br><span class="line">PROC PRINT DATA = sales;</span><br><span class="line">VAR Name DateReturned CandyType Profit;</span><br><span class="line">FORMAT DateReturned DATE9. Profit DOLLAR6.2;</span><br><span class="line">TITLE &apos;Candy Sale Data Using Formats&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>常用的格式有：</p>
+<ul>
+<li>文本型：<code>$HEXw.</code>和<code>$w.</code></li>
+<li>日期型：<code>DATEw.</code>（输出为ddmmyy或者ddmmyyyy）、<code>DATETIMEw.d</code>（输出为ddmmyy:hh:mm:ss）、<code>DAYw.</code>（输出为dd）、<code>EURDFDDw.</code> 、<code>JULIANw.</code>、<code>MMDDYYw.</code>（输出为mmddyy或mmddyyyy）、<code>TIMEw.d</code>（输出为hh:mm:ss）、<code>WEEKDATEw.</code>（输出为工作日）、<code>WORDDATEw.</code>(输出为单词)。</li>
+<li>数字型：<code>BESTw.</code>（自动选择）、<code>COMMAw.d</code>（逗号分隔）、<code>DOLLARw.d</code>（货币）、<code>Ew.</code>（科学计数法）、<code>PDw.d</code>、<code>w.d</code>（标准小数）</li>
+</ul>
+<p>输出的样本见下：</p>
+<p>当然<code>FORMAT</code>还可以自定义<code>factor</code>型变量的输出格式，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DATA carsurvey;</span><br><span class="line">INFILE &apos;~/deskktop/Cars.dat&apos;;</span><br><span class="line">INPUT Age Sex Income Color $;</span><br><span class="line">PROC FORMAT;</span><br><span class="line">VALUE gender 1 = &apos;Male&apos; </span><br><span class="line">2 = &apos;Female&apos;;</span><br><span class="line">VALUE agegroup 13 -&lt; 20 = &apos;Teen&apos;</span><br><span class="line">20 -&lt; 65 = &apos;Adult&apos;</span><br><span class="line">65 - HIGH = &apos;Senior&apos;;</span><br><span class="line">VALUE $col &apos;W&apos; = &apos;Moon White&apos;</span><br><span class="line">&apos;B&apos; = &apos;Sky Blue&apos;</span><br><span class="line">&apos;Y&apos; = &apos;Sunburst Yellow&apos;</span><br><span class="line">&apos;G&apos; = &apos;Rain Cloud Gray&apos;;</span><br><span class="line">* Print data using user-defined and standard (DOLLAR8.) formats;</span><br><span class="line">PROC PRINT DATA = carsurvey;</span><br><span class="line">FORMAT Sex gender. Age agegroup. Color $col. Income DOLLAR8.;</span><br><span class="line">TITLE &apos;Survey Results Printed with User-Defined Formats&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>就可以把数字型的1，2转换为对应的文本<code>male</code>和<code>female</code>等，还可以把变量离散化。</p>
+<h3>SAS总结数据:MEANS</h3>
+<p>$SAS$当然还有类似于$Excel$的数据透视表和$R$的<code>data.table</code>的模块，就是<code>MEANS</code>。
+可以输出的描述性统计值，包括最大值、最小值、平均值、中位数、余非缺失值个数、缺失值个数、范围、标准差、和等等。此外，还可以使用<code>BY</code>或者<code>CLASS</code>进行分组统计，<code>VAR</code>选择变量等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA sales;</span><br><span class="line">INFILE &apos;~/desktop/Flowers.dat&apos;;</span><br><span class="line">INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon</span><br><span class="line">Marigold;</span><br><span class="line">Month = MONTH(SaleDate);</span><br><span class="line">PROC SORT DATA = sales;</span><br><span class="line">BY Month;</span><br><span class="line">* Calculate means by Month for flower sales;</span><br><span class="line">PROC MEANS DATA = sales;</span><br><span class="line">BY Month;</span><br><span class="line">VAR Petunia SnapDragon Marigold;</span><br><span class="line">TITLE &apos;Summary of Flower Sales by Month&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>可以实现</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> Summary of  Flower Sales by Month 1</span><br><span class="line">---------------- Month=5 --------------</span><br><span class="line">The MEANS Procedure</span><br><span class="line">Variable N Mean Std Dev Minimum Maximum</span><br><span class="line">----------------------------------------</span><br><span class="line">Petunia 3 86.6666667 35.1188458 50.0000000 120.0000000</span><br><span class="line">SnapDragon 3 113.3333333 41.6333200 80.0000000 160.0000000</span><br><span class="line">Marigold 3 81.6666667 25.6580072 60.0000000 110.0000000</span><br><span class="line">---------------- Month=6 ---------------</span><br><span class="line">Variable N Mean Std Dev Minimum Maximum</span><br><span class="line">-----------------------------------------</span><br><span class="line">Petunia 4 81.2500000 16.5201897 60.0000000 100.0000000</span><br><span class="line">SnapDragon 4 97.5000000 47.8713554 60.0000000 160.0000000</span><br><span class="line">Marigold 4 83.7500000 19.7378655 60.0000000 100.0000000</span><br><span class="line">-------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>当然这些统计量也可以直接的写入一个SAS数据表，只需要加上一个<code>OUTPUT</code>就可以了。原数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">756-01 05/04/2008 120 80 110</span><br><span class="line">834-01 05/12/2008 90 160 60</span><br><span class="line">901-02 05/18/2008 50 100 75</span><br><span class="line">834-01 06/01/2008 80 60 100</span><br><span class="line">756-01 06/11/2008 100 160 75</span><br><span class="line">901-02 06/19/2008 60 60 60</span><br><span class="line">756-01 06/25/2008 85 110 100</span><br></pre></td></tr></table></figure>
+<p>SAS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">DATA sales;</span><br><span class="line">INFILE &apos;~/desktop/Flowers.dat&apos;;</span><br><span class="line">INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon Marigold;</span><br><span class="line">PROC SORT DATA = sales;</span><br><span class="line">BY CustomerID;</span><br><span class="line">* Calculate means by CustomerID, output sum and mean to new data set;</span><br><span class="line">PROC MEANS NOPRINT DATA = sales;</span><br><span class="line">BY CustomerID;</span><br><span class="line">VAR Petunia SnapDragon Marigold;</span><br><span class="line">OUTPUT OUT = totals MEAN(Petunia SnapDragon Marigold) =</span><br><span class="line">MeanPetunia MeanSnapDragon MeanMarigold</span><br><span class="line">SUM(Petunia SnapDragon Marigold) = Petunia SnapDragon Marigold;</span><br><span class="line">PROC PRINT DATA = totals;</span><br><span class="line">TITLE &apos;Sum of Flower Data over Customer ID&apos;;</span><br><span class="line">FORMAT MeanPetunia MeanSnapDragon MeanMarigold 3.;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>最终结果为：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_01.png" width="90%" height="90%"></p>
+<h3>SAS PROC统计频率：FREQ</h3>
+<p>计数的话，就要靠SAS里面的<code>FREQ</code>模块了。比如我们有一个数据集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">esp w cap d cap w kon w ice w kon d esp d kon w ice d esp d</span><br><span class="line">cap w esp d cap d Kon d . d kon w esp d cap w ice w kon w</span><br><span class="line">kon w kon w ice d esp d kon w esp d esp w kon w cap w kon w</span><br></pre></td></tr></table></figure>
+<p>然后可以用<code>FREQ</code>来统计一些基本量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DATA orders;</span><br><span class="line">INFILE &apos;~/desktop/Coffee.dat&apos;;</span><br><span class="line">INPUT Coffee $ Window $ @@;</span><br><span class="line">* Print tables for Window and Window by Coffee;</span><br><span class="line">PROC FREQ DATA = orders;</span><br><span class="line">TABLES Window Window * Coffee;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>最终会得到一个$2*5$的表格：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_02.png" width="90%" height="90%"></p>
+<h3>SAS PROC汇报表格：TABULATE</h3>
+<p>基本看到TABULATE就可以想到那个著名的软件Tabular了…不过貌似SAS也自带了一个类似的表格模块。这个东西可以变得非常复杂，不过鉴于一时半会儿还用不到，没有细细看。抄个例子吧。</p>
+<p>原数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Silent Lady Maalea sail sch 75.00</span><br><span class="line">America II Maalea sail yac 32.95</span><br><span class="line">Aloha Anai Lahaina sail cat 62.00</span><br><span class="line">Ocean Spirit Maalea power cat 22.00</span><br><span class="line">Anuenue Maalea sail sch 47.50</span><br><span class="line">Hana Lei Maalea power cat 28.99</span><br><span class="line">Leilani Maalea power yac 19.99</span><br><span class="line">Kalakaua Maalea power cat 29.50</span><br><span class="line">Reef Runner Lahaina power yac 29.95</span><br><span class="line">Blue Dolphin Maalea sail cat 42.95</span><br></pre></td></tr></table></figure>
+<p>SAS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">DATA boats;</span><br><span class="line">INFILE &apos;~/desktop/Boats.dat&apos;;</span><br><span class="line">INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30</span><br><span class="line">Price 32-36;</span><br><span class="line">RUN;</span><br><span class="line">* Tabulations with three dimensions;</span><br><span class="line">PROC TABULATE DATA = boats;</span><br><span class="line">CLASS Port Locomotion Type;</span><br><span class="line">TABLE Port, Locomotion, Type;</span><br><span class="line">TITLE &apos;Number of Boats by Port, Locomotion, and Type&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>最终结果：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_03.png" width="90%" height="90%"></p>
+<p>类似的，还可以增加统计量（类似于<code>MEANS</code>那里）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA boats;</span><br><span class="line">INFILE &apos;~/desktop/Boats.dat&apos;;</span><br><span class="line">INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30</span><br><span class="line">Price 32-36;</span><br><span class="line">RUN;</span><br><span class="line">* PROC TABULATE report with options;</span><br><span class="line">PROC TABULATE DATA = boats FORMAT=DOLLAR9.2;</span><br><span class="line">CLASS Locomotion Type;</span><br><span class="line">VAR Price;</span><br><span class="line">TABLE Locomotion ALL, MEAN*Price*(Type ALL)</span><br><span class="line">/BOX=&apos;Full Day Excursions&apos; MISSTEXT=&apos;none&apos;;</span><br><span class="line">TITLE;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>可以得到：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_04.png" width="90%" height="90%"></p>
+<p>最后还可以混合<code>FORMAT</code>等等，可以变得相当的复杂。貌似这东西是美国劳工部鼓捣出来的格式…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA boats;</span><br><span class="line">INFILE &apos;~/desktop/Boats.dat&apos;;</span><br><span class="line">INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30</span><br><span class="line">Price 32-36 Length 38-40;</span><br><span class="line">RUN;</span><br><span class="line">* Using the FORMAT= option in the TABLE statement;</span><br><span class="line">PROC TABULATE DATA = boats;</span><br><span class="line">CLASS Locomotion Type;</span><br><span class="line">VAR Price Length;</span><br><span class="line">TABLE Locomotion ALL,</span><br><span class="line">MEAN * (Price*FORMAT=DOLLAR6.2 Length*FORMAT=6.0) * (Type ALL);</span><br><span class="line">TITLE &apos;Price and Length by Type of Boat&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>BOSS级汇报表格呈现了…</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_05.png" width="90%" height="90%">
+<p>我只能感慨，不愧是商业软件啊，用户需求考虑的真的是特别的周到…这种费时费力做汇报表格的事情也被搞定了，强悍。</p>
+<p>SAS里面的报告：REPORT
+还有一个REPORT，看到有TABULATE的时候我已经不奇怪并略略的有些期待一个做报告的模块出现了。这东西基本就是前面几个的超级混合体，反正你想搞到的汇报模式总是能够搞出来的。</p>
+<p>又是一堆数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">17 sci 9 bio 28 fic 50 mys 13 fic 32 fic 67 fic 81 non 38 non</span><br><span class="line">53 non 16 sci 15 bio 61 fic 52 ref 22 mys 76 bio 37 fic 86 fic</span><br><span class="line">49 mys 78 non 45 sci 64 bio 8 fic 11 non 41 fic 46 ref 69 fic</span><br><span class="line">34 fic 26 mys 23 sci 74 ref 15 sci 27 fic 23 mys 63 fic 78 non</span><br><span class="line">40 bio 12 fic 29 fic 54 mys 67 fic 60 fic 38 sci 42 fic 80 fic</span><br></pre></td></tr></table></figure>
+<p>然后一堆SAS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">DATA books;</span><br><span class="line">INFILE &apos;c:\MyRawData\LibraryBooks.dat&apos;;</span><br><span class="line">INPUT Age BookType $ @@;</span><br><span class="line">RUN;</span><br><span class="line">* Define formats to group the data;</span><br><span class="line">PROC FORMAT;</span><br><span class="line">VALUE agegpa</span><br><span class="line">0-18 = &apos;0 to 18&apos;</span><br><span class="line">19-25 = &apos;19 to 25&apos;</span><br><span class="line">26-49 = &apos;26 to 49&apos;</span><br><span class="line">50-HIGH = &apos; 50+ &apos;;</span><br><span class="line">VALUE agegpb</span><br><span class="line">0-25 = &apos;0 to 25&apos;</span><br><span class="line">26-HIGH = &apos; 26+ &apos;;</span><br><span class="line">VALUE $typ</span><br><span class="line">&apos;bio&apos;,&apos;non&apos;,&apos;ref&apos; = &apos;Non-Fiction&apos;</span><br><span class="line">&apos;fic&apos;,&apos;mys&apos;,&apos;sci&apos; = &apos;Fiction&apos;;</span><br><span class="line">RUN;</span><br><span class="line">*Create two way table with Age grouped into four categories;</span><br><span class="line">PROC FREQ DATA = books;</span><br><span class="line">TITLE &apos;Patron Age by Book Type: Four Age Groups&apos;;</span><br><span class="line">TABLES BookType * Age / NOPERCENT NOROW NOCOL;</span><br><span class="line">FORMAT Age agegpa. BookType $typ.;</span><br><span class="line">RUN;</span><br><span class="line">* Create two way table with Age grouped into two categories;</span><br><span class="line">PROC FREQ DATA = books;</span><br><span class="line">TITLE &apos;Patron Age by Book Type: Two Age Groups&apos;;</span><br><span class="line">TABLES BookType * Age / NOPERCENT NOROW NOCOL;</span><br><span class="line">FORMAT Age agegpb. BookType $typ.;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>然后一堆交叉计数的结果就出来了：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_06.png" width="90%" height="90%"></p>
+<p>当然，简单的计算和分类统计也不在话下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DATA natparks;</span><br><span class="line">INFILE &apos;c:\MyRawData\Parks.dat&apos;;</span><br><span class="line">INPUT Name $ 1-21 Type $ Region $ Museums Camping;</span><br><span class="line">RUN;</span><br><span class="line">*Statistics in COLUMN statement with two group variables;</span><br><span class="line">PROC REPORT DATA = natparks NOWINDOWS HEADLINE;</span><br><span class="line">COLUMN Region Type N (Museums Camping),MEAN;</span><br><span class="line">DEFINE Region / GROUP;</span><br><span class="line">DEFINE Type / GROUP;</span><br><span class="line">TITLE &apos;Statistics with Two Group Variables&apos;;</span><br><span class="line">RUN;</span><br><span class="line">*Statistics in COLUMN statement with group and across variables;</span><br><span class="line">PROC REPORT DATA = natparks NOWINDOWS HEADLINE;</span><br><span class="line">COLUMN Region N Type,(Museums Camping),MEAN;</span><br><span class="line">DEFINE Region / GROUP;</span><br><span class="line">DEFINE Type / ACROSS;</span><br><span class="line">TITLE &apos;Statistics with a Group and Across Variable&apos;;</span><br><span class="line">RUN;</span><br></pre></td></tr></table></figure>
+<p>可以得到一个看起来很fancy的表格：
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_07.png" width="90%" height="90%"></p>
+<h3>SAS数据总结综述</h3>
+<p>我的感觉是，<code>MEANS</code>, <code>TABULATE</code>和<code>REPORT</code>这三个模块各有千秋，基本就是可以替代EXCEL的数据透视表，虽然效率上说不好谁比谁高。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/dadaladi.jpg" alt="Pic by John Lennon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="Pic by John Lennon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据分析/" rel="tag"><i class="fa fa-tag"></i> 数据分析</a>
+          
+            <a href="/tags/SAS/" rel="tag"><i class="fa fa-tag"></i> SAS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Excel知识点备忘.html" rel="next" title="Excel知识点备忘">
+                <i class="fa fa-chevron-left"></i> Excel知识点备忘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Pic by John Lennon" />
+            
+              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/ulson-hu-73441ab6/" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-linkedin-square"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/by_nichome/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/tour_hyc/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/ulsonhu" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">基本函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">判断结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">数组操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">基本模块调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">PROC的基本内容：CONTENT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">SAS PROC求子集:WHERE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">SAS PROC 数据进行排序:SORT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">SAS PROC 输出数据:PRINT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.</span> <span class="nav-text">SAS PROC里面改变输出格式：FORMAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.</span> <span class="nav-text">SAS总结数据:MEANS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.7.</span> <span class="nav-text">SAS PROC统计频率：FREQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.8.</span> <span class="nav-text">SAS PROC汇报表格：TABULATE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.9.</span> <span class="nav-text">SAS数据总结综述</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

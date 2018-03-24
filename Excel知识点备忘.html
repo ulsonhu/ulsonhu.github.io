@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
 <meta property="og:description" content="数据分析需要掌握的一些基本Excel姿势拾遗，后续不断更新">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T15:28:17.044Z">
+<meta property="og:updated_time" content="2018-03-23T15:52:50.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Excel知识点备忘">
 <meta name="twitter:description" content="数据分析需要掌握的一些基本Excel姿势拾遗，后续不断更新">
@@ -476,22 +476,36 @@
 <li>模糊匹配时第一列一定要升序排列</li>
 </ul>
 <ol start="2">
-<li><code>index(array,row_number)</code>与<code>match(lookup_value,lookup_array,[match_type])</code>，两者连用，基本可以替代’Vlookup()'的查找，其中’Vlookup()'只是针对文本内容的查找</li>
+<li><code>index(查找的区域，区域内第几行，区域内第几列)</code>与<code>match(查找指定的值，查找所在区域，查找方式的参数)</code>，两者连用，基本可以替代’Vlookup()'的查找，其中’Vlookup()'只是针对文本内容的查找</li>
 </ol>
 <p>如<code>index(A:A,match(C1,B:B,0))</code></p>
 <ol start="3">
 <li>
+<blockquote>
+<p>=Lookup（查找的值，值所在的位置，返回相应位置的值）</p>
+</blockquote>
+</li>
+</ol>
 <p><code>lookup()</code>函数弥补了<code>vlookup()</code>函数第三参数的劣势，但其本身也存在缺点，即不能精确匹配
 使用<code>lookup()</code>函数需要熟悉Excel数组的运算.
 详见<a href="http://study.163.com/course/courseLearn.htm?courseId=670032#/learn/video?lessonId=823422&amp;courseId=670032" target="_blank" rel="noopener">视频18课时62:00</a></p>
+<ol start="4">
+<li>
+<p><code>choose(index_num, value1, [value2], ...)</code></p>
 </li>
 <li>
-<p>choose(index_num, value1, [value2], …)</p>
+<p><code>Offset(指定点，偏移多少行，偏移多少列，返回多少行，返回多少列)</code>
+建立坐标系，以坐标系为原点，返回距离原点的值或者区域。正数代表向下或向右，负数则相反。通过’Offset()'函数可以实现动态图标、动态数据透视表</p>
 </li>
 <li>
-<p><code>offset()</code></p>
+<p><code>Row()</code></p>
 </li>
 </ol>
+<p>返回单元格所在的行</p>
+<ol start="7">
+<li><code>Column()</code></li>
+</ol>
+<p>返回单元格所在的列</p>
 <h2>四、文本函数</h2>
 <ul>
 <li><code>text(text)</code>设置数字格式并将其转换为文本</li>
@@ -504,7 +518,7 @@
 <li><code>trim(text)</code>设置数字格式并将其转换为文本</li>
 </ul>
 <h2>五、数据透视表</h2>
-<p>Excel中十分重要的一项功能，应用范围</p>
+<p>Excel中十分重要的一项功能，主要功能是将数据聚合，按照各子段进行<code>sum()</code>，<code>count()</code>的运算。应用范围</p>
 <ul>
 <li>包括大量复杂数据的表格，希望快速整理出一份具有实际意义的报表</li>
 <li>希望找出同类数据在不同时期的某种特定关系</li>
@@ -522,6 +536,9 @@
 <ol>
 <li>选择性粘贴 $\rightarrow $ 转置</li>
 <li><code>column()``row()</code>返回当前列(行)数</li>
+<li><code>Ctrl+Enter</code>，以当前单元格为始，往下填充数据和函数。</li>
+<li><code>Ctrl+Space</code>，选定整列。<code>Shift+Space</code>，选定整行。</li>
+<li><code>Alt+Enter</code>，换行。</li>
 </ol>
 
       
@@ -672,7 +689,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -683,7 +700,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

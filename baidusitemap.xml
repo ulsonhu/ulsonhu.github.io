@@ -4,6 +4,74 @@
 
     
   <url>
+    <loc>https://ulsonhu.github.io/%E7%94%A8python%E5%81%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97(%E7%AF%87%E4%B8%80).html</loc>
+    <lastmod>2018-03-24T15:55:57.498Z</lastmod>
+    <data>
+        <display>
+        <title>用python做数据分析与科学计算(篇一)</title>
+        <pubTime>2018-03-17T16:00:00.000Z</pubTime>
+        
+        <tag>数据分析</tag>
+         
+        <tag>Python</tag>
+         
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://ulsonhu.github.io/LASSO%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.html</loc>
+    <lastmod>2018-03-24T14:49:32.426Z</lastmod>
+    <data>
+        <display>
+        <title>Lasso回归算法</title>
+        <pubTime>2018-02-28T16:00:00.000Z</pubTime>
+        
+        <tag>统计学</tag>
+         
+        <tag>数量经济学</tag>
+         
+         
+           
+             
+              <breadCrumb title="数理统计" url="https://ulsonhu.github.io/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://ulsonhu.github.io/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html</loc>
+    <lastmod>2018-03-23T15:52:50.368Z</lastmod>
+    <data>
+        <display>
+        <title>Excel知识点备忘</title>
+        <pubTime>2018-03-11T16:00:00.000Z</pubTime>
+        
+        <tag>Excel</tag>
+         
+        <tag>数据分析</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://ulsonhu.github.io/JUMP%E5%B0%91%E5%B9%B4%E5%91%A8%E5%88%8A-%E6%9C%80%E5%85%A8%E6%BC%AB%E7%94%BB%E6%8E%92%E8%A1%8C%E6%A6%9C.html</loc>
     <lastmod>2018-03-23T04:14:21.695Z</lastmod>
     <data>
@@ -36,28 +104,6 @@
         <tag>数据分析</tag>
          
         <tag>SAS</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据分析" url="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://ulsonhu.github.io/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html</loc>
-    <lastmod>2018-03-20T15:28:17.044Z</lastmod>
-    <data>
-        <display>
-        <title>Excel知识点备忘</title>
-        <pubTime>2018-03-11T16:00:00.000Z</pubTime>
-        
-        <tag>Excel</tag>
-         
-        <tag>数据分析</tag>
          
          
            
@@ -156,28 +202,6 @@
            
              
               <breadCrumb title="机器学习相关" url="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://ulsonhu.github.io/LASSO%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.html</loc>
-    <lastmod>2018-03-11T10:55:28.492Z</lastmod>
-    <data>
-        <display>
-        <title>Lasso回归算法</title>
-        <pubTime>2018-02-28T16:00:00.000Z</pubTime>
-        
-        <tag>统计学</tag>
-         
-        <tag>数量经济学</tag>
-         
-         
-           
-             
-              <breadCrumb title="数理统计" url="https://ulsonhu.github.io/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
           
         </display>
     </data>

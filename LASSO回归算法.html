@@ -81,22 +81,22 @@
 
 
 
-<meta name="description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
+<meta name="description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
 <meta name="keywords" content="统计学,数量经济学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lasso回归算法">
 <meta property="og:url" content="https://ulsonhu.github.io/LASSO回归算法.html">
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
-<meta property="og:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
+<meta property="og:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018.03_04lasso01.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04lasso02.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04_lasso03.png">
-<meta property="og:updated_time" content="2018-03-11T10:55:28.492Z">
+<meta property="og:updated_time" content="2018-03-24T14:49:32.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lasso回归算法">
-<meta name="twitter:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
+<meta name="twitter:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
 <meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png">
 
 
@@ -383,7 +383,7 @@
 
           
               <div class="post-description">
-                  很多人在做变量选择时，眼光依然局限于$R^2$或者$Ajusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用AIC和BIC等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？
+                  很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？
               </div>
           
 
@@ -610,7 +610,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +621,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

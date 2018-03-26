@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://ulsonhu.github.io/"/>
+  <link href="http://ulsonhu.cn/"/>
   <updated>2018-03-25T03:50:50.260Z</updated>
-  <id>https://ulsonhu.github.io/</id>
+  <id>http://ulsonhu.cn/</id>
   
   <author>
     <name>Pic by John Lennon</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>概率论（离散空间）杂谈</title>
-    <link href="https://ulsonhu.github.io/%E6%A6%82%E7%8E%87%E8%AE%BA%E6%9D%82%E8%B0%88%E7%AF%87%E4%B8%80.html"/>
-    <id>https://ulsonhu.github.io/概率论杂谈篇一.html</id>
+    <link href="http://ulsonhu.cn/%E6%A6%82%E7%8E%87%E8%AE%BA%E6%9D%82%E8%B0%88%E7%AF%87%E4%B8%80.html"/>
+    <id>http://ulsonhu.cn/概率论杂谈篇一.html</id>
     <published>2018-03-19T16:00:00.000Z</published>
     <updated>2018-03-25T03:50:50.260Z</updated>
     
@@ -31,19 +31,19 @@
     
     </summary>
     
-      <category term="概率论" scheme="https://ulsonhu.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+      <category term="概率论" scheme="http://ulsonhu.cn/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
     
     
-      <category term="Mathematic" scheme="https://ulsonhu.github.io/tags/Mathematic/"/>
+      <category term="Mathematic" scheme="http://ulsonhu.cn/tags/Mathematic/"/>
     
-      <category term="概率论" scheme="https://ulsonhu.github.io/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+      <category term="概率论" scheme="http://ulsonhu.cn/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>用python做数据分析与科学计算(篇一)</title>
-    <link href="https://ulsonhu.github.io/%E7%94%A8python%E5%81%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97(%E7%AF%87%E4%B8%80).html"/>
-    <id>https://ulsonhu.github.io/用python做数据分析与科学计算(篇一).html</id>
+    <link href="http://ulsonhu.cn/%E7%94%A8python%E5%81%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97(%E7%AF%87%E4%B8%80).html"/>
+    <id>http://ulsonhu.cn/用python做数据分析与科学计算(篇一).html</id>
     <published>2018-03-17T16:00:00.000Z</published>
     <updated>2018-03-24T15:55:57.498Z</updated>
     
@@ -55,21 +55,21 @@
     
     </summary>
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://ulsonhu.cn/tags/Python/"/>
     
-      <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://ulsonhu.cn/tags/Machine-Learning/"/>
     
   </entry>
   
   <entry>
     <title>SAS基础学习篇(一)</title>
-    <link href="https://ulsonhu.github.io/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87(%E4%B8%80).html"/>
-    <id>https://ulsonhu.github.io/SAS基础学习篇(一).html</id>
+    <link href="http://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87(%E4%B8%80).html"/>
+    <id>http://ulsonhu.cn/SAS基础学习篇(一).html</id>
     <published>2018-03-13T16:00:00.000Z</published>
     <updated>2018-03-21T02:59:56.496Z</updated>
     
@@ -81,19 +81,19 @@
     
     </summary>
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
-      <category term="SAS" scheme="https://ulsonhu.github.io/tags/SAS/"/>
+      <category term="SAS" scheme="http://ulsonhu.cn/tags/SAS/"/>
     
   </entry>
   
   <entry>
     <title>Excel知识点备忘</title>
-    <link href="https://ulsonhu.github.io/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html"/>
-    <id>https://ulsonhu.github.io/Excel知识点备忘.html</id>
+    <link href="http://ulsonhu.cn/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html"/>
+    <id>http://ulsonhu.cn/Excel知识点备忘.html</id>
     <published>2018-03-11T16:00:00.000Z</published>
     <updated>2018-03-23T15:52:50.368Z</updated>
     
@@ -105,19 +105,19 @@
     
     </summary>
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="Excel" scheme="https://ulsonhu.github.io/tags/Excel/"/>
+      <category term="Excel" scheme="http://ulsonhu.cn/tags/Excel/"/>
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title>MySQL语句学习及总结</title>
-    <link href="https://ulsonhu.github.io/MySQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html"/>
-    <id>https://ulsonhu.github.io/MySQL语句学习及总结.html</id>
+    <link href="http://ulsonhu.cn/MySQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html"/>
+    <id>http://ulsonhu.cn/MySQL语句学习及总结.html</id>
     <published>2018-03-05T16:00:00.000Z</published>
     <updated>2018-03-20T12:33:18.001Z</updated>
     
@@ -129,21 +129,21 @@
     
     </summary>
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="数据分析" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
-      <category term="SQL" scheme="https://ulsonhu.github.io/tags/SQL/"/>
+      <category term="SQL" scheme="http://ulsonhu.cn/tags/SQL/"/>
     
-      <category term="数据库" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>VC维理论-统计学习理论基础</title>
-    <link href="https://ulsonhu.github.io/VC%E7%BB%B4%E7%90%86%E8%AE%BA-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html"/>
-    <id>https://ulsonhu.github.io/VC维理论-统计学习理论基础.html</id>
+    <link href="http://ulsonhu.cn/VC%E7%BB%B4%E7%90%86%E8%AE%BA-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html"/>
+    <id>http://ulsonhu.cn/VC维理论-统计学习理论基础.html</id>
     <published>2018-03-02T16:00:00.000Z</published>
     <updated>2018-03-12T16:25:46.823Z</updated>
     
@@ -155,19 +155,19 @@
     
     </summary>
     
-      <category term="机器学习相关" scheme="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+      <category term="机器学习相关" scheme="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
-      <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://ulsonhu.cn/tags/Machine-Learning/"/>
     
   </entry>
   
   <entry>
     <title>Lasso回归算法</title>
-    <link href="https://ulsonhu.github.io/LASSO%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.html"/>
-    <id>https://ulsonhu.github.io/LASSO回归算法.html</id>
+    <link href="http://ulsonhu.cn/LASSO%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95.html"/>
+    <id>http://ulsonhu.cn/LASSO回归算法.html</id>
     <published>2018-02-28T16:00:00.000Z</published>
     <updated>2018-03-24T14:49:32.426Z</updated>
     
@@ -179,19 +179,19 @@
     
     </summary>
     
-      <category term="数理统计" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+      <category term="数理统计" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
-      <category term="数量经济学" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>因果推断：工具变量（Instrumental Variable）</title>
-    <link href="https://ulsonhu.github.io/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD%EF%BC%9A%E5%B7%A5%E5%85%B7%E5%8F%98%E9%87%8F%EF%BC%88Instrumental%20Variable%EF%BC%89.html"/>
-    <id>https://ulsonhu.github.io/因果推断：工具变量（Instrumental Variable）.html</id>
+    <link href="http://ulsonhu.cn/%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%AD%EF%BC%9A%E5%B7%A5%E5%85%B7%E5%8F%98%E9%87%8F%EF%BC%88Instrumental%20Variable%EF%BC%89.html"/>
+    <id>http://ulsonhu.cn/因果推断：工具变量（Instrumental Variable）.html</id>
     <published>2018-02-27T16:00:00.000Z</published>
     <updated>2018-03-11T10:55:23.905Z</updated>
     
@@ -203,43 +203,19 @@
     
     </summary>
     
-      <category term="数理统计" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+      <category term="数理统计" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
-      <category term="数量经济学" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JUMP少年周刊-最全漫画排行榜</title>
-    <link href="https://ulsonhu.github.io/JUMP%E5%B0%91%E5%B9%B4%E5%91%A8%E5%88%8A-%E6%9C%80%E5%85%A8%E6%BC%AB%E7%94%BB%E6%8E%92%E8%A1%8C%E6%A6%9C.html"/>
-    <id>https://ulsonhu.github.io/JUMP少年周刊-最全漫画排行榜.html</id>
-    <published>2018-02-23T16:00:00.000Z</published>
-    <updated>2018-03-23T04:14:21.695Z</updated>
-    
-    <content type="html"><![CDATA[<p>其中，一些台词我们仍记忆犹新诸如</p><p>龟–派--汽–功  $\quad \Rightarrow $ 七龙珠<br>你已经死了      $\quad \Rightarrow $北斗神拳<br>教练我想打篮球！ $\quad \Rightarrow $灌篮高手<br>燃烧吧，小宇宙   $\quad \Rightarrow $圣斗士星矢<br>我可是要当海贼王的男人 $\quad \Rightarrow $One Peice<br></p><p>JUMP的连载原则：把在十话内没有得到读者青睐的漫画统统砍掉，并要求高人气作品不准完结，要不顾剧情发展的连载下去。虽然，这样的的条款压抑了创作者空间，但是作为一个企业来说，JUMP以这样的原则给我们呈现了数不清的优秀作品，也获得了巨大的商业成功，稳居日本漫画龙头地位。</p><table><thead><tr><th style="text-align:center">排行</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th></tr></thead><tbody><tr><td style="text-align:center"></td><td style="text-align:center"><em>香蕉时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"><em>奇异果时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"><em>芒果时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">No.1</td><td style="text-align:center"><strong>破廉耻学园</strong></td><td style="text-align:center">永井 豪</td><td style="text-align:center">1968-1972</td><td style="text-align:center"><strong>七龙珠</strong></td><td style="text-align:center">鸟山 明</td><td style="text-align:center">1984-1995</td><td style="text-align:center"><strong>海贼王</strong></td><td style="text-align:center">尾田荣一郎</td><td style="text-align:center">2000-2013</td></tr><tr><td style="text-align:center">No.2</td><td style="text-align:center">根性青蛙</td><td style="text-align:center">吉泽保美</td><td style="text-align:center">1970-1976</td><td style="text-align:center">筋肉人</td><td style="text-align:center">蚵仔煎</td><td style="text-align:center">1979-1987</td><td style="text-align:center"><strong>全职猎人</strong></td><td style="text-align:center">富坚 义博</td><td style="text-align:center">1998-</td></tr><tr><td style="text-align:center">No.3</td><td style="text-align:center"><strong>乌龙派出所</strong></td><td style="text-align:center">秋本 治</td><td style="text-align:center">1976-2016</td><td style="text-align:center"><strong>灌篮高手</strong></td><td style="text-align:center">井上 雄彦</td><td style="text-align:center">1990-1996</td><td style="text-align:center"><strong>火影忍者</strong></td><td style="text-align:center">岸本 齐史</td><td style="text-align:center">1999-2013</td></tr><tr><td style="text-align:center">No.4</td><td style="text-align:center">魔投手</td><td style="text-align:center">梶原一骑</td><td style="text-align:center">1971-1974</td><td style="text-align:center"><strong>北斗神拳</strong></td><td style="text-align:center">武论尊</td><td style="text-align:center">1983-1988</td><td style="text-align:center"><strong>美食的俘虏</strong></td><td style="text-align:center">岛袋 光年</td><td style="text-align:center">2008-2016</td></tr><tr><td style="text-align:center">No.5</td><td style="text-align:center"><strong>男儿当大将</strong></td><td style="text-align:center">本宫</td><td style="text-align:center">1968-1973</td><td style="text-align:center">城市猎人</td><td style="text-align:center">北条司</td><td style="text-align:center">1985-1991</td><td style="text-align:center">死神</td><td style="text-align:center">久保 带人</td><td style="text-align:center">2001-2016</td></tr><tr><td style="text-align:center">No.6</td><td style="text-align:center">阿拉蕾</td><td style="text-align:center">鸟山 明</td><td style="text-align:center">1980-1984</td><td style="text-align:center"><strong>足球小将</strong></td><td style="text-align:center">高桥 阳一</td><td style="text-align:center">1981-1988</td><td style="text-align:center"><strong>棋魂</strong></td><td style="text-align:center">堀田由美</td><td style="text-align:center">1999-2003</td></tr><tr><td style="text-align:center">No.7</td><td style="text-align:center">魔神z</td><td style="text-align:center">永井 豪</td><td style="text-align:center">1972-1973</td><td style="text-align:center">High School！奇面组</td><td style="text-align:center">新泽基荣</td><td style="text-align:center">1982-1987</td><td style="text-align:center">游戏王</td><td style="text-align:center">高桥和希</td><td style="text-align:center">1996-2004</td></tr><tr><td style="text-align:center">No.8</td><td style="text-align:center">Play Ball</td><td style="text-align:center">千叶昭雄</td><td style="text-align:center">1973-1978</td><td style="text-align:center"><strong>Jo-Jo奇妙冒险</strong></td><td style="text-align:center">荒木飞吕彦</td><td style="text-align:center">1987-2004</td><td style="text-align:center">银魂</td><td style="text-align:center">空知 英秋</td><td style="text-align:center">2004-至今</td></tr><tr><td style="text-align:center">No.9</td><td style="text-align:center"><strong>猫眼三姐妹</strong></td><td style="text-align:center">北条司</td><td style="text-align:center">1981-1984</td><td style="text-align:center">橙路</td><td style="text-align:center">松本泉</td><td style="text-align:center">1984-1987</td><td style="text-align:center">黑子的篮球</td><td style="text-align:center">藤卷忠俊</td><td style="text-align:center">2009-2014</td></tr><tr><td style="text-align:center">No.10</td><td style="text-align:center">赛道之狼</td><td style="text-align:center"></td><td style="text-align:center">1975-1979</td><td style="text-align:center"><strong>幽游白书</strong></td><td style="text-align:center">富坚义博</td><td style="text-align:center">1990-1993</td><td style="text-align:center"><strong>网球王子</strong></td><td style="text-align:center">许斐刚</td><td style="text-align:center">1999-2008</td></tr><tr><td style="text-align:center">No.11</td><td style="text-align:center"><strong>料理人味平</strong></td><td style="text-align:center">牛次郎</td><td style="text-align:center">1973-1977</td><td style="text-align:center"><strong>浪客剑心</strong></td><td style="text-align:center">和月 伸宏</td><td style="text-align:center">1994-1999</td><td style="text-align:center">死亡笔记</td><td style="text-align:center">大场</td><td style="text-align:center">2004-2006</td></tr><tr><td style="text-align:center">No.12</td><td style="text-align:center">东大一直线</td><td style="text-align:center">小林</td><td style="text-align:center">1976-1979</td><td style="text-align:center"><strong>圣斗士星矢</strong></td><td style="text-align:center">车田 正美</td><td style="text-align:center">1986-1990</td><td style="text-align:center">暗杀教室</td><td style="text-align:center">松井 优征</td><td style="text-align:center">2012</td></tr><tr><td style="text-align:center">No.13</td><td style="text-align:center">天际球团</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">铁拳对钢拳</td><td style="text-align:center">森田真法</td><td style="text-align:center">1988-1997</td><td style="text-align:center">家庭教师HITMAN REBORN</td><td style="text-align:center">天野明</td><td style="text-align:center">2004-1012</td></tr><tr><td style="text-align:center">No.14</td><td style="text-align:center">厕所博士</td><td style="text-align:center"></td><td style="text-align:center">1970-1977</td><td style="text-align:center">魁！！男塾</td><td style="text-align:center">宫下亚喜罗</td><td style="text-align:center">1985-1991</td><td style="text-align:center"><strong>通灵王</strong></td><td style="text-align:center">武井 宏之</td><td style="text-align:center">1998-2004</td></tr><tr><td style="text-align:center">No.15</td><td style="text-align:center">眼睛蛇</td><td style="text-align:center">寺泽 武一</td><td style="text-align:center">1978-1984</td><td style="text-align:center">电影少女</td><td style="text-align:center">桂 正和</td><td style="text-align:center">1989-1992</td><td style="text-align:center">Bobobo-bo Bo-bobo</td><td style="text-align:center">泽井 磐夫</td><td style="text-align:center">2001-2007</td></tr><tr><td style="text-align:center">No.16</td><td style="text-align:center">杜宾刑警</td><td style="text-align:center">武论尊</td><td style="text-align:center">1975-1979</td><td style="text-align:center">幻法小魔星</td><td style="text-align:center">江川 达也</td><td style="text-align:center">1988-1992</td><td style="text-align:center"><strong>草莓100%</strong></td><td style="text-align:center">河下 水希</td><td style="text-align:center">2002-2005</td></tr><tr><td style="text-align:center">No.17</td><td style="text-align:center">停止！！云雀</td><td style="text-align:center">江口 寿史</td><td style="text-align:center">1981-1983</td><td style="text-align:center">秀逗泰山</td><td style="text-align:center">德弘正也</td><td style="text-align:center">1988-1995</td><td style="text-align:center">出包王女</td><td style="text-align:center">矢吹 健太郎</td><td style="text-align:center">2006-2009</td></tr><tr><td style="text-align:center">No.18</td><td style="text-align:center">热拳本色</td><td style="text-align:center">车田 正美</td><td style="text-align:center">1977-1981</td><td style="text-align:center">灵异教师神眉</td><td style="text-align:center"></td><td style="text-align:center">1993-1999</td><td style="text-align:center">ROOKIES</td><td style="text-align:center">森田</td><td style="text-align:center">1998-2003</td></tr><tr><td style="text-align:center">No.19</td><td style="text-align:center">赤脚的元</td><td style="text-align:center">中泽 磐治</td><td style="text-align:center">1973-1974</td><td style="text-align:center">银牙</td><td style="text-align:center">高桥义广</td><td style="text-align:center">1983-1987</td><td style="text-align:center">光速蒙面侠21</td><td style="text-align:center">村田雄介</td><td style="text-align:center">2002-2009</td></tr><tr><td style="text-align:center">No.20</td><td style="text-align:center">前进！！海盗</td><td style="text-align:center">江口 寿史</td><td style="text-align:center">1997-1980</td><td style="text-align:center">顺带着稀里糊涂</td><td style="text-align:center"></td><td style="text-align:center">1985-1989</td><td style="text-align:center">搞怪吹笛手</td><td style="text-align:center">臼田京介</td><td style="text-align:center">2000-2010</td></tr></tbody></table><blockquote><p>表格注：JUMP于2012年连载的人气漫画诸如：<strong>排球少年、食戟之灵</strong>等优秀作品暂未列入排行榜。</p></blockquote><p>2000年代以来，JUMP三台柱就分别是“死神、火影、海贼王”，但是死神和火影的正式完结，人气却弄的相当低迷，海贼王目前也可以看到，尾田休刊次数也增加不少。目前JUMP少年周刊可以说迎来了一个低迷时期。</p><p>于2008年连载的《美食俘虏》，JUMP虽有意提拔其为台柱，甚至把主角请到《海贼王》中客串，但目前看来依然扶不起。目前连载中算是老油条的《银魂》，也是准备暖身进入最终章了。</p><p>2014年人气漫画，《黑子的篮球》完结。2016年，三台柱中《死神》、《火影忍者》完结，超人气作品《暗杀教室》完结，《食戟之灵》进入新篇章后人气也随之下滑。</p><p>目前，发展看好的有优秀运动向排球漫画《排球少年》，于2014年连载的《我的英雄学院》也一直维持着相当高的人气。</p><p>说了这么多还是希望，海贼王不要烂尾 $$Thanks \\ ShonenJump.$$</p><img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521696877/jum.jpg" width="90%" height="90%">]]></content>
-    
-    <summary type="html">
-    
-      关于JUMP少年周刊的一份漫画排行榜。1968年8月6日JUMP少年周刊正式创刊，不是作为日本少年的我们，可能无法对周刊少年JUMP的历史感同身受，但是其中很多作品，一定有自童年或直到现在依然被你喜爱的作品。
-    
-    </summary>
-    
-      <category term="漫画兴趣" scheme="https://ulsonhu.github.io/categories/%E6%BC%AB%E7%94%BB%E5%85%B4%E8%B6%A3/"/>
-    
-    
-      <category term="JUMP周刊" scheme="https://ulsonhu.github.io/tags/JUMP%E5%91%A8%E5%88%8A/"/>
-    
-      <category term="漫画" scheme="https://ulsonhu.github.io/tags/%E6%BC%AB%E7%94%BB/"/>
+      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>广义矩估计(GMM)方法</title>
-    <link href="https://ulsonhu.github.io/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html"/>
-    <id>https://ulsonhu.github.io/广义矩估计(GMM)方法.html</id>
+    <link href="http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html"/>
+    <id>http://ulsonhu.cn/广义矩估计(GMM)方法.html</id>
     <published>2018-02-23T16:00:00.000Z</published>
     <updated>2018-03-13T16:18:21.070Z</updated>
     
@@ -251,19 +227,43 @@
     
     </summary>
     
-      <category term="数理统计" scheme="https://ulsonhu.github.io/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+      <category term="数理统计" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
-      <category term="数量经济学" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JUMP少年周刊-最全漫画排行榜</title>
+    <link href="http://ulsonhu.cn/JUMP%E5%B0%91%E5%B9%B4%E5%91%A8%E5%88%8A-%E6%9C%80%E5%85%A8%E6%BC%AB%E7%94%BB%E6%8E%92%E8%A1%8C%E6%A6%9C.html"/>
+    <id>http://ulsonhu.cn/JUMP少年周刊-最全漫画排行榜.html</id>
+    <published>2018-02-23T16:00:00.000Z</published>
+    <updated>2018-03-23T04:14:21.695Z</updated>
+    
+    <content type="html"><![CDATA[<p>其中，一些台词我们仍记忆犹新诸如</p><p>龟–派--汽–功  $\quad \Rightarrow $ 七龙珠<br>你已经死了      $\quad \Rightarrow $北斗神拳<br>教练我想打篮球！ $\quad \Rightarrow $灌篮高手<br>燃烧吧，小宇宙   $\quad \Rightarrow $圣斗士星矢<br>我可是要当海贼王的男人 $\quad \Rightarrow $One Peice<br></p><p>JUMP的连载原则：把在十话内没有得到读者青睐的漫画统统砍掉，并要求高人气作品不准完结，要不顾剧情发展的连载下去。虽然，这样的的条款压抑了创作者空间，但是作为一个企业来说，JUMP以这样的原则给我们呈现了数不清的优秀作品，也获得了巨大的商业成功，稳居日本漫画龙头地位。</p><table><thead><tr><th style="text-align:center">排行</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th><th style="text-align:center">漫画</th><th style="text-align:center">作者</th><th style="text-align:center">连载年度</th></tr></thead><tbody><tr><td style="text-align:center"></td><td style="text-align:center"><em>香蕉时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"><em>奇异果时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"><em>芒果时代</em></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">No.1</td><td style="text-align:center"><strong>破廉耻学园</strong></td><td style="text-align:center">永井 豪</td><td style="text-align:center">1968-1972</td><td style="text-align:center"><strong>七龙珠</strong></td><td style="text-align:center">鸟山 明</td><td style="text-align:center">1984-1995</td><td style="text-align:center"><strong>海贼王</strong></td><td style="text-align:center">尾田荣一郎</td><td style="text-align:center">2000-2013</td></tr><tr><td style="text-align:center">No.2</td><td style="text-align:center">根性青蛙</td><td style="text-align:center">吉泽保美</td><td style="text-align:center">1970-1976</td><td style="text-align:center">筋肉人</td><td style="text-align:center">蚵仔煎</td><td style="text-align:center">1979-1987</td><td style="text-align:center"><strong>全职猎人</strong></td><td style="text-align:center">富坚 义博</td><td style="text-align:center">1998-</td></tr><tr><td style="text-align:center">No.3</td><td style="text-align:center"><strong>乌龙派出所</strong></td><td style="text-align:center">秋本 治</td><td style="text-align:center">1976-2016</td><td style="text-align:center"><strong>灌篮高手</strong></td><td style="text-align:center">井上 雄彦</td><td style="text-align:center">1990-1996</td><td style="text-align:center"><strong>火影忍者</strong></td><td style="text-align:center">岸本 齐史</td><td style="text-align:center">1999-2013</td></tr><tr><td style="text-align:center">No.4</td><td style="text-align:center">魔投手</td><td style="text-align:center">梶原一骑</td><td style="text-align:center">1971-1974</td><td style="text-align:center"><strong>北斗神拳</strong></td><td style="text-align:center">武论尊</td><td style="text-align:center">1983-1988</td><td style="text-align:center"><strong>美食的俘虏</strong></td><td style="text-align:center">岛袋 光年</td><td style="text-align:center">2008-2016</td></tr><tr><td style="text-align:center">No.5</td><td style="text-align:center"><strong>男儿当大将</strong></td><td style="text-align:center">本宫</td><td style="text-align:center">1968-1973</td><td style="text-align:center">城市猎人</td><td style="text-align:center">北条司</td><td style="text-align:center">1985-1991</td><td style="text-align:center">死神</td><td style="text-align:center">久保 带人</td><td style="text-align:center">2001-2016</td></tr><tr><td style="text-align:center">No.6</td><td style="text-align:center">阿拉蕾</td><td style="text-align:center">鸟山 明</td><td style="text-align:center">1980-1984</td><td style="text-align:center"><strong>足球小将</strong></td><td style="text-align:center">高桥 阳一</td><td style="text-align:center">1981-1988</td><td style="text-align:center"><strong>棋魂</strong></td><td style="text-align:center">堀田由美</td><td style="text-align:center">1999-2003</td></tr><tr><td style="text-align:center">No.7</td><td style="text-align:center">魔神z</td><td style="text-align:center">永井 豪</td><td style="text-align:center">1972-1973</td><td style="text-align:center">High School！奇面组</td><td style="text-align:center">新泽基荣</td><td style="text-align:center">1982-1987</td><td style="text-align:center">游戏王</td><td style="text-align:center">高桥和希</td><td style="text-align:center">1996-2004</td></tr><tr><td style="text-align:center">No.8</td><td style="text-align:center">Play Ball</td><td style="text-align:center">千叶昭雄</td><td style="text-align:center">1973-1978</td><td style="text-align:center"><strong>Jo-Jo奇妙冒险</strong></td><td style="text-align:center">荒木飞吕彦</td><td style="text-align:center">1987-2004</td><td style="text-align:center">银魂</td><td style="text-align:center">空知 英秋</td><td style="text-align:center">2004-至今</td></tr><tr><td style="text-align:center">No.9</td><td style="text-align:center"><strong>猫眼三姐妹</strong></td><td style="text-align:center">北条司</td><td style="text-align:center">1981-1984</td><td style="text-align:center">橙路</td><td style="text-align:center">松本泉</td><td style="text-align:center">1984-1987</td><td style="text-align:center">黑子的篮球</td><td style="text-align:center">藤卷忠俊</td><td style="text-align:center">2009-2014</td></tr><tr><td style="text-align:center">No.10</td><td style="text-align:center">赛道之狼</td><td style="text-align:center"></td><td style="text-align:center">1975-1979</td><td style="text-align:center"><strong>幽游白书</strong></td><td style="text-align:center">富坚义博</td><td style="text-align:center">1990-1993</td><td style="text-align:center"><strong>网球王子</strong></td><td style="text-align:center">许斐刚</td><td style="text-align:center">1999-2008</td></tr><tr><td style="text-align:center">No.11</td><td style="text-align:center"><strong>料理人味平</strong></td><td style="text-align:center">牛次郎</td><td style="text-align:center">1973-1977</td><td style="text-align:center"><strong>浪客剑心</strong></td><td style="text-align:center">和月 伸宏</td><td style="text-align:center">1994-1999</td><td style="text-align:center">死亡笔记</td><td style="text-align:center">大场</td><td style="text-align:center">2004-2006</td></tr><tr><td style="text-align:center">No.12</td><td style="text-align:center">东大一直线</td><td style="text-align:center">小林</td><td style="text-align:center">1976-1979</td><td style="text-align:center"><strong>圣斗士星矢</strong></td><td style="text-align:center">车田 正美</td><td style="text-align:center">1986-1990</td><td style="text-align:center">暗杀教室</td><td style="text-align:center">松井 优征</td><td style="text-align:center">2012</td></tr><tr><td style="text-align:center">No.13</td><td style="text-align:center">天际球团</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">铁拳对钢拳</td><td style="text-align:center">森田真法</td><td style="text-align:center">1988-1997</td><td style="text-align:center">家庭教师HITMAN REBORN</td><td style="text-align:center">天野明</td><td style="text-align:center">2004-1012</td></tr><tr><td style="text-align:center">No.14</td><td style="text-align:center">厕所博士</td><td style="text-align:center"></td><td style="text-align:center">1970-1977</td><td style="text-align:center">魁！！男塾</td><td style="text-align:center">宫下亚喜罗</td><td style="text-align:center">1985-1991</td><td style="text-align:center"><strong>通灵王</strong></td><td style="text-align:center">武井 宏之</td><td style="text-align:center">1998-2004</td></tr><tr><td style="text-align:center">No.15</td><td style="text-align:center">眼睛蛇</td><td style="text-align:center">寺泽 武一</td><td style="text-align:center">1978-1984</td><td style="text-align:center">电影少女</td><td style="text-align:center">桂 正和</td><td style="text-align:center">1989-1992</td><td style="text-align:center">Bobobo-bo Bo-bobo</td><td style="text-align:center">泽井 磐夫</td><td style="text-align:center">2001-2007</td></tr><tr><td style="text-align:center">No.16</td><td style="text-align:center">杜宾刑警</td><td style="text-align:center">武论尊</td><td style="text-align:center">1975-1979</td><td style="text-align:center">幻法小魔星</td><td style="text-align:center">江川 达也</td><td style="text-align:center">1988-1992</td><td style="text-align:center"><strong>草莓100%</strong></td><td style="text-align:center">河下 水希</td><td style="text-align:center">2002-2005</td></tr><tr><td style="text-align:center">No.17</td><td style="text-align:center">停止！！云雀</td><td style="text-align:center">江口 寿史</td><td style="text-align:center">1981-1983</td><td style="text-align:center">秀逗泰山</td><td style="text-align:center">德弘正也</td><td style="text-align:center">1988-1995</td><td style="text-align:center">出包王女</td><td style="text-align:center">矢吹 健太郎</td><td style="text-align:center">2006-2009</td></tr><tr><td style="text-align:center">No.18</td><td style="text-align:center">热拳本色</td><td style="text-align:center">车田 正美</td><td style="text-align:center">1977-1981</td><td style="text-align:center">灵异教师神眉</td><td style="text-align:center"></td><td style="text-align:center">1993-1999</td><td style="text-align:center">ROOKIES</td><td style="text-align:center">森田</td><td style="text-align:center">1998-2003</td></tr><tr><td style="text-align:center">No.19</td><td style="text-align:center">赤脚的元</td><td style="text-align:center">中泽 磐治</td><td style="text-align:center">1973-1974</td><td style="text-align:center">银牙</td><td style="text-align:center">高桥义广</td><td style="text-align:center">1983-1987</td><td style="text-align:center">光速蒙面侠21</td><td style="text-align:center">村田雄介</td><td style="text-align:center">2002-2009</td></tr><tr><td style="text-align:center">No.20</td><td style="text-align:center">前进！！海盗</td><td style="text-align:center">江口 寿史</td><td style="text-align:center">1997-1980</td><td style="text-align:center">顺带着稀里糊涂</td><td style="text-align:center"></td><td style="text-align:center">1985-1989</td><td style="text-align:center">搞怪吹笛手</td><td style="text-align:center">臼田京介</td><td style="text-align:center">2000-2010</td></tr></tbody></table><blockquote><p>表格注：JUMP于2012年连载的人气漫画诸如：<strong>排球少年、食戟之灵</strong>等优秀作品暂未列入排行榜。</p></blockquote><p>2000年代以来，JUMP三台柱就分别是“死神、火影、海贼王”，但是死神和火影的正式完结，人气却弄的相当低迷，海贼王目前也可以看到，尾田休刊次数也增加不少。目前JUMP少年周刊可以说迎来了一个低迷时期。</p><p>于2008年连载的《美食俘虏》，JUMP虽有意提拔其为台柱，甚至把主角请到《海贼王》中客串，但目前看来依然扶不起。目前连载中算是老油条的《银魂》，也是准备暖身进入最终章了。</p><p>2014年人气漫画，《黑子的篮球》完结。2016年，三台柱中《死神》、《火影忍者》完结，超人气作品《暗杀教室》完结，《食戟之灵》进入新篇章后人气也随之下滑。</p><p>目前，发展看好的有优秀运动向排球漫画《排球少年》，于2014年连载的《我的英雄学院》也一直维持着相当高的人气。</p><p>说了这么多还是希望，海贼王不要烂尾 $$Thanks \\ ShonenJump.$$</p><img src="https://res.cloudinary.com/ulsonhu/image/upload/v1521696877/jum.jpg" width="90%" height="90%">]]></content>
+    
+    <summary type="html">
+    
+      关于JUMP少年周刊的一份漫画排行榜。1968年8月6日JUMP少年周刊正式创刊，不是作为日本少年的我们，可能无法对周刊少年JUMP的历史感同身受，但是其中很多作品，一定有自童年或直到现在依然被你喜爱的作品。
+    
+    </summary>
+    
+      <category term="漫画兴趣" scheme="http://ulsonhu.cn/categories/%E6%BC%AB%E7%94%BB%E5%85%B4%E8%B6%A3/"/>
+    
+    
+      <category term="JUMP周刊" scheme="http://ulsonhu.cn/tags/JUMP%E5%91%A8%E5%88%8A/"/>
+    
+      <category term="漫画" scheme="http://ulsonhu.cn/tags/%E6%BC%AB%E7%94%BB/"/>
     
   </entry>
   
   <entry>
     <title>本科计量经济学之回炉重造篇</title>
-    <link href="https://ulsonhu.github.io/%E6%9C%AC%E7%A7%91%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B9%8B%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E7%AF%87.html"/>
-    <id>https://ulsonhu.github.io/本科计量经济学之回炉重造篇.html</id>
+    <link href="http://ulsonhu.cn/%E6%9C%AC%E7%A7%91%E8%AE%A1%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6%E4%B9%8B%E5%9B%9E%E7%82%89%E9%87%8D%E9%80%A0%E7%AF%87.html"/>
+    <id>http://ulsonhu.cn/本科计量经济学之回炉重造篇.html</id>
     <published>2018-02-21T16:00:00.000Z</published>
     <updated>2018-03-11T04:38:51.612Z</updated>
     
@@ -275,19 +275,19 @@
     
     </summary>
     
-      <category term="经济学" scheme="https://ulsonhu.github.io/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="经济学" scheme="http://ulsonhu.cn/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
     
-      <category term="数量经济学" scheme="https://ulsonhu.github.io/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
-      <category term="经济学" scheme="https://ulsonhu.github.io/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="经济学" scheme="http://ulsonhu.cn/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>网站迁移(hexo)</title>
-    <link href="https://ulsonhu.github.io/%E7%BD%91%E7%AB%99%E8%BF%81%E7%A7%BB-hexo.html"/>
-    <id>https://ulsonhu.github.io/网站迁移-hexo.html</id>
+    <link href="http://ulsonhu.cn/%E7%BD%91%E7%AB%99%E8%BF%81%E7%A7%BB-hexo.html"/>
+    <id>http://ulsonhu.cn/网站迁移-hexo.html</id>
     <published>2018-02-19T16:00:00.000Z</published>
     <updated>2018-03-11T04:38:44.562Z</updated>
     
@@ -304,17 +304,17 @@
     
     </summary>
     
-      <category term="读书思考" scheme="https://ulsonhu.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
+      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
     
     
-      <category term="hexo" scheme="https://ulsonhu.github.io/tags/hexo/"/>
+      <category term="hexo" scheme="http://ulsonhu.cn/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>2017年(Lunar Year)读书与看剧</title>
-    <link href="https://ulsonhu.github.io/Lunar_Year.html"/>
-    <id>https://ulsonhu.github.io/Lunar_Year.html</id>
+    <link href="http://ulsonhu.cn/Lunar_Year.html"/>
+    <id>http://ulsonhu.cn/Lunar_Year.html</id>
     <published>2018-02-14T16:00:00.000Z</published>
     <updated>2018-03-11T04:40:03.247Z</updated>
     
@@ -326,17 +326,17 @@
     
     </summary>
     
-      <category term="读书思考" scheme="https://ulsonhu.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
+      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
     
     
-      <category term="文字" scheme="https://ulsonhu.github.io/tags/%E6%96%87%E5%AD%97/"/>
+      <category term="文字" scheme="http://ulsonhu.cn/tags/%E6%96%87%E5%AD%97/"/>
     
   </entry>
   
   <entry>
     <title>MacOS下使用python的多版本方案</title>
-    <link href="https://ulsonhu.github.io/MacOS%E4%B8%8B%E4%BD%BF%E7%94%A8python%E7%9A%84%E5%A4%9A%E7%89%88%E6%9C%AC%E6%96%B9%E6%A1%88.html"/>
-    <id>https://ulsonhu.github.io/MacOS下使用python的多版本方案.html</id>
+    <link href="http://ulsonhu.cn/MacOS%E4%B8%8B%E4%BD%BF%E7%94%A8python%E7%9A%84%E5%A4%9A%E7%89%88%E6%9C%AC%E6%96%B9%E6%A1%88.html"/>
+    <id>http://ulsonhu.cn/MacOS下使用python的多版本方案.html</id>
     <published>2017-12-31T16:00:00.000Z</published>
     <updated>2018-03-11T04:40:02.559Z</updated>
     
@@ -348,19 +348,19 @@
     
     </summary>
     
-      <category term="机器学习相关" scheme="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+      <category term="机器学习相关" scheme="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="Mac" scheme="https://ulsonhu.github.io/tags/Mac/"/>
+      <category term="Python" scheme="http://ulsonhu.cn/tags/Python/"/>
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
+      <category term="Mac" scheme="http://ulsonhu.cn/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>Python字符串处理拾掇</title>
-    <link href="https://ulsonhu.github.io/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E6%8B%BE%E6%8E%87.html"/>
-    <id>https://ulsonhu.github.io/Python字符串处理拾掇.html</id>
+    <link href="http://ulsonhu.cn/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E6%8B%BE%E6%8E%87.html"/>
+    <id>http://ulsonhu.cn/Python字符串处理拾掇.html</id>
     <published>2017-04-19T16:00:00.000Z</published>
     <updated>2018-03-11T04:40:01.145Z</updated>
     
@@ -372,17 +372,17 @@
     
     </summary>
     
-      <category term="机器学习相关" scheme="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+      <category term="机器学习相关" scheme="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://ulsonhu.cn/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>写在大三下学期</title>
-    <link href="https://ulsonhu.github.io/%E5%86%99%E5%9C%A8%E5%A4%A7%E4%B8%89%E4%B8%8B%E5%AD%A6%E6%9C%9F.html"/>
-    <id>https://ulsonhu.github.io/写在大三下学期.html</id>
+    <link href="http://ulsonhu.cn/%E5%86%99%E5%9C%A8%E5%A4%A7%E4%B8%89%E4%B8%8B%E5%AD%A6%E6%9C%9F.html"/>
+    <id>http://ulsonhu.cn/写在大三下学期.html</id>
     <published>2017-03-22T05:20:09.000Z</published>
     <updated>2018-03-11T04:38:52.339Z</updated>
     
@@ -394,17 +394,17 @@
     
     </summary>
     
-      <category term="读书思考" scheme="https://ulsonhu.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
+      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
     
     
-      <category term="文字" scheme="https://ulsonhu.github.io/tags/%E6%96%87%E5%AD%97/"/>
+      <category term="文字" scheme="http://ulsonhu.cn/tags/%E6%96%87%E5%AD%97/"/>
     
   </entry>
   
   <entry>
     <title>「如何高效的学习」读书笔记</title>
-    <link href="https://ulsonhu.github.io/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0.html"/>
-    <id>https://ulsonhu.github.io/如何高效学习.html</id>
+    <link href="http://ulsonhu.cn/%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0.html"/>
+    <id>http://ulsonhu.cn/如何高效学习.html</id>
     <published>2017-03-21T16:00:00.000Z</published>
     <updated>2018-03-11T04:38:58.626Z</updated>
     
@@ -416,19 +416,19 @@
     
     </summary>
     
-      <category term="读书思考" scheme="https://ulsonhu.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
+      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
     
     
-      <category term="文字" scheme="https://ulsonhu.github.io/tags/%E6%96%87%E5%AD%97/"/>
+      <category term="文字" scheme="http://ulsonhu.cn/tags/%E6%96%87%E5%AD%97/"/>
     
-      <category term="阅读" scheme="https://ulsonhu.github.io/tags/%E9%98%85%E8%AF%BB/"/>
+      <category term="阅读" scheme="http://ulsonhu.cn/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
   <entry>
     <title>SVM支持向量机</title>
-    <link href="https://ulsonhu.github.io/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA.html"/>
-    <id>https://ulsonhu.github.io/SVM支持向量机.html</id>
+    <link href="http://ulsonhu.cn/SVM%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA.html"/>
+    <id>http://ulsonhu.cn/SVM支持向量机.html</id>
     <published>2017-02-26T16:00:00.000Z</published>
     <updated>2018-03-11T04:39:59.811Z</updated>
     
@@ -442,19 +442,19 @@
     
     </summary>
     
-      <category term="机器学习相关" scheme="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+      <category term="机器学习相关" scheme="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="统计学" scheme="https://ulsonhu.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
     
-      <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://ulsonhu.cn/tags/Machine-Learning/"/>
     
   </entry>
   
   <entry>
     <title>用Tensorflow写简单的神经网络</title>
-    <link href="https://ulsonhu.github.io/%E7%94%A8Tensorflow%E5%86%99%E7%AE%80%E5%8D%95%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.html"/>
-    <id>https://ulsonhu.github.io/用Tensorflow写简单的神经网络.html</id>
+    <link href="http://ulsonhu.cn/%E7%94%A8Tensorflow%E5%86%99%E7%AE%80%E5%8D%95%E7%9A%84%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.html"/>
+    <id>http://ulsonhu.cn/用Tensorflow写简单的神经网络.html</id>
     <published>2017-02-24T17:40:33.000Z</published>
     <updated>2018-03-18T03:33:56.215Z</updated>
     
@@ -466,21 +466,21 @@
     
     </summary>
     
-      <category term="机器学习相关" scheme="https://ulsonhu.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
+      <category term="机器学习相关" scheme="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="Python" scheme="https://ulsonhu.github.io/tags/Python/"/>
+      <category term="Python" scheme="http://ulsonhu.cn/tags/Python/"/>
     
-      <category term="Machine Learning" scheme="https://ulsonhu.github.io/tags/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://ulsonhu.cn/tags/Machine-Learning/"/>
     
-      <category term="TensorFlow" scheme="https://ulsonhu.github.io/tags/TensorFlow/"/>
+      <category term="TensorFlow" scheme="http://ulsonhu.cn/tags/TensorFlow/"/>
     
   </entry>
   
   <entry>
     <title>唐璜节选</title>
-    <link href="https://ulsonhu.github.io/%E5%94%90%E7%92%9C%E8%8A%82%E9%80%89.html"/>
-    <id>https://ulsonhu.github.io/唐璜节选.html</id>
+    <link href="http://ulsonhu.cn/%E5%94%90%E7%92%9C%E8%8A%82%E9%80%89.html"/>
+    <id>http://ulsonhu.cn/唐璜节选.html</id>
     <published>2017-02-22T16:00:00.000Z</published>
     <updated>2018-03-11T04:38:57.869Z</updated>
     
@@ -492,10 +492,10 @@
     
     </summary>
     
-      <category term="读书思考" scheme="https://ulsonhu.github.io/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
+      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
     
     
-      <category term="文字" scheme="https://ulsonhu.github.io/tags/%E6%96%87%E5%AD%97/"/>
+      <category term="文字" scheme="http://ulsonhu.cn/tags/%E6%96%87%E5%AD%97/"/>
     
   </entry>
   

@@ -90,7 +90,7 @@
 <meta property="og:description" content="什么是一个事件（event）的概率？这是概率论最基本也是争议最多的问题。我们是试着从常识出发，来考虑数学表达。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1521877258/2018_03_09_01.jpg">
-<meta property="og:updated_time" content="2018-03-25T03:50:50.260Z">
+<meta property="og:updated_time" content="2018-03-28T11:22:20.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论（离散空间）杂谈">
 <meta name="twitter:description" content="什么是一个事件（event）的概率？这是概率论最基本也是争议最多的问题。我们是试着从常识出发，来考虑数学表达。">
@@ -406,7 +406,7 @@
 <p>概率论：根据桶中信息，猜猜手里有啥？</p>
 </blockquote>
 <h2>概率空间</h2>
-<p>所有基本事件组成的集合，其中的每一个基本事件又称做样本点，样本空间用$\boldsymbol {\Omega }$表示，样本点用$\omega$表示,$\Omega={\omega }$</p>
+<p>所有基本事件组成的集合，其中的每一个基本事件又称做样本点，样本空间用$\boldsymbol {\Omega }$表示，样本点用$\omega$表示,$\Omega=\{\omega \}$</p>
 <ol>
 <li>$\mathcal{\Omega}$－Sample space 样本空间，试验中所有可能结果的集合。（注：每个结果需要互斥，所有可能结果必须被穷举）</li>
 <li>$\mathcal{F}$－Set of events 事件集合，是$\Omega$的一些子集构成的集合，并且它需要满足以下三点特性（也就是必须是$\sigma$－field）：</li>
@@ -422,7 +422,7 @@
 <ul>
 <li>$0\leq P(E_i)\leq 1$（实际限制了总测度为1）</li>
 <li>$P(\Omega)=1$（包含样本空间并且概率为1）</li>
-<li>如果$E_1,E_2,\cdots ,E_i$是互斥事件,那么$P{U_{i=1}^{\infty} E_i }=\sum_{i=1}^{\infty} E_i$</li>
+<li>如果$E_1,E_2,\cdots ,E_i$是互斥事件,那么$P\{U_{i=1}^{\infty} E_i \}=\sum_{i=1}^{\infty} E_i$</li>
 </ul>
 <h2>谈斯特林公式</h2>
 <p>$$n! \sim \sqrt{2\pi }n^{n+\frac{1}{2} }e^{-n} $$</p>
@@ -432,8 +432,8 @@
 【例】：抛一枚硬币，出现正面的概率？</p>
 <p>这是什么意思，通常认为，将这枚硬币独立的抛「很多次」，那么正面出现的次数「大约」占一半。这是在随机事件中很确定的事。所谓的「平均律」(The law of average)或「大数定律」(The law of large numbers)隐约也是在解释这个说法。现在我们从常识出发，来考虑数学表达。</p>
 <p>【问题1】
-抛$2n$次硬币，正面恰好出现$n$次的概率又多大？
-根据组合学，抛$2n$次硬币，共有$2^{2n}$种可能，假设每一种发生的结果机会均等，那么$2n$次中有$n$次正面的结果共有
+抛 $2n$ 次硬币，正面恰好出现 $n$ 次的概率又多大？
+根据组合学，抛 $2n$ 次硬币，共有 $2^{2n}$ 种可能，假设每一种发生的结果机会均等，那么 $2n$ 次中有 $n$ 次正面的结果共有
 $C_{n}^{2n}$种，故得概率为</p>
 <p>$p_{2n} = \frac{C_n^{2n}}{2^{2n}} = \frac{(2n)!}{2^{2n}\cdot n!\cdot n!} \qquad (1)$</p>
 <p>更有趣的是，当$n$趋向$\infty$时，$p_{2n}$会趋近多少？上述常识性的解释似乎是说， $\lim_{n \to \infty } p_{2n} = 1$，这成立吗？这需要对$(1)$式作精确的估计，于是引出下面的问题</p>
@@ -447,7 +447,7 @@ $C_{n}^{2n}$种，故得概率为</p>
 <p>现在我们要利用Stirling 公式来探讨概率之谜(the enigma of probability)。</p>
 <p>首先观察到一个显然的</p>
 <p>【补题】
-设${a_n},{b_n},{c_n}$及${d_n}$皆为正项数列且  $\lim_{n \to \infty} \frac{a_n}{b_n} = l$。若 $a_n \sim c_n$且$b_n \sim d_n$，则  $\lim_{n \to \infty} \frac{c_n}{d_n} = l$。
+设$\{a_n\},\{b_n\},\{c_n\}$及$\{d_n\}$皆为正项数列且  $\lim_{n \to \infty} \frac{a_n}{b_n} = l$。若 $a_n \sim c_n$且$b_n \sim d_n$，则  $\lim_{n \to \infty} \frac{c_n}{d_n} = l$。
 接着计算「丢$2n$次硬币，恰好出现$n$次正面的机率$p_{2 n}$在  $n \to \infty$的极限」</p>
 <p>$$
 \lim_{n \to \infty}p_{2n} = \lim_{n \to \infty} \frac{(2n)!}{2^{2n}n!n!} \\
@@ -672,7 +672,7 @@ $$n! \sim e^C \cdot n^{n+\frac{1}{2} } \cdot e^{-n}$$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@ $$n! \sim e^C \cdot n^{n+\frac{1}{2} } \cdot e^{-n}$$</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

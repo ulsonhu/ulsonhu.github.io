@@ -4,8 +4,50 @@
 
     
   <url>
+    <loc>http://ulsonhu.cn/%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E6%97%8F.html</loc>
+    <lastmod>2018-03-30T07:40:03.596Z</lastmod>
+    <data>
+        <display>
+        <title>指数分布族</title>
+        <pubTime>2017-01-22T16:00:00.000Z</pubTime>
+        
+        <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
+         
+         
+           
+             
+              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E5%AD%A6%EF%BC%9A%E4%B8%96%E7%BA%AA%E6%9C%AB%E7%9A%84%E5%9B%9E%E9%A1%BE%E4%B8%8E%E5%B1%95%E6%9C%9B.html</loc>
+    <lastmod>2018-03-30T07:20:59.208Z</lastmod>
+    <data>
+        <display>
+        <title>数理统计学：世纪末的回顾与展望</title>
+        <pubTime>2017-01-19T16:00:00.000Z</pubTime>
+        
+        <tag>数理统计</tag>
+         
+         
+           
+             
+              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://ulsonhu.cn/%E6%A6%82%E7%8E%87%E8%AE%BA%E6%9D%82%E8%B0%88%E7%AF%87%E4%B8%80.html</loc>
-    <lastmod>2018-03-25T03:50:50.260Z</lastmod>
+    <lastmod>2018-03-28T11:22:20.487Z</lastmod>
     <data>
         <display>
         <title>概率论（离散空间）杂谈</title>
@@ -19,6 +61,28 @@
            
              
               <breadCrumb title="概率论" url="http://ulsonhu.cn/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/MCMC%E4%B8%8EGibbs%E9%87%87%E6%A0%B7.html</loc>
+    <lastmod>2018-03-28T11:19:17.340Z</lastmod>
+    <data>
+        <display>
+        <title>MCMC与Gibbs采样</title>
+        <pubTime>2017-01-24T16:00:00.000Z</pubTime>
+        
+        <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
+         
+         
+           
+             
+              <breadCrumb title="机器学习相关" url="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
           
         </display>
     </data>
@@ -295,28 +359,6 @@
 
     
   <url>
-    <loc>http://ulsonhu.cn/MCMC%E4%B8%8EGibbs%E9%87%87%E6%A0%B7.html</loc>
-    <lastmod>2018-03-11T04:40:01.875Z</lastmod>
-    <data>
-        <display>
-        <title>MCMC与Gibbs采样</title>
-        <pubTime>2017-01-24T16:00:00.000Z</pubTime>
-        
-        <tag>统计学</tag>
-         
-        <tag>Mathematic</tag>
-         
-         
-           
-             
-              <breadCrumb title="机器学习相关" url="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://ulsonhu.cn/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E6%8B%BE%E6%8E%87.html</loc>
     <lastmod>2018-03-11T04:40:01.145Z</lastmod>
     <data>
@@ -366,31 +408,9 @@
         <title>广义线性模型(Generalized Linear Model)</title>
         <pubTime>2017-01-25T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
          
-         
-           
-             
-              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://ulsonhu.cn/%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E6%97%8F.html</loc>
-    <lastmod>2018-03-11T04:38:59.366Z</lastmod>
-    <data>
-        <display>
-        <title>指数分布族</title>
-        <pubTime>2017-01-22T16:00:00.000Z</pubTime>
-        
         <tag>统计学</tag>
-         
-        <tag>Mathematic</tag>
          
          
            
@@ -556,9 +576,9 @@
         <title>共轭先验</title>
         <pubTime>2017-02-17T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            
@@ -684,9 +704,9 @@
         <title>矩阵分解相关知识回顾</title>
         <pubTime>2017-01-20T16:00:00.000Z</pubTime>
         
-        <tag>统计学</tag>
-         
         <tag>Mathematic</tag>
+         
+        <tag>统计学</tag>
          
          
            

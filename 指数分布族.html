@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="统计学,Mathematic," />
+  <meta name="keywords" content="Mathematic,统计学," />
 
 
 
@@ -81,22 +81,20 @@
 
 
 
-<meta name="description" content="指数分布族是指可以表示为指数分布的概率分布。指数分布形式如下： $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$ 其中，$\eta$成为分布的自然参数；T(y)是充分统计量，通常$T(y)=y$。当$a、b、T$参数都固定的时候，就定义了一个以$\eta$为参数的指数函数族。">
-<meta name="keywords" content="统计学,Mathematic">
+<meta name="description" content="贝叶斯推断中，要寻找最好的先验分布，其本身是得依据先验数据的。故一个便于运算的策略就是寻找共轭的先验。所谓共轭先验分布就是那些能够导致后验与先验属于同一分布族的先验。而指数族是天生的，具有共轭先验的唯一分布族。">
+<meta name="keywords" content="Mathematic,统计学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="指数分布族">
 <meta property="og:url" content="http://ulsonhu.cn/指数分布族.html">
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
-<meta property="og:description" content="指数分布族是指可以表示为指数分布的概率分布。指数分布形式如下： $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$ 其中，$\eta$成为分布的自然参数；T(y)是充分统计量，通常$T(y)=y$。当$a、b、T$参数都固定的时候，就定义了一个以$\eta$为参数的指数函数族。">
+<meta property="og:description" content="贝叶斯推断中，要寻找最好的先验分布，其本身是得依据先验数据的。故一个便于运算的策略就是寻找共轭的先验。所谓共轭先验分布就是那些能够导致后验与先验属于同一分布族的先验。而指数族是天生的，具有共轭先验的唯一分布族。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20170226102110215?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170226102145230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170226102549656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-03-11T04:38:59.366Z">
+<meta property="og:updated_time" content="2018-03-30T07:40:03.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指数分布族">
-<meta name="twitter:description" content="指数分布族是指可以表示为指数分布的概率分布。指数分布形式如下： $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$ 其中，$\eta$成为分布的自然参数；T(y)是充分统计量，通常$T(y)=y$。当$a、b、T$参数都固定的时候，就定义了一个以$\eta$为参数的指数函数族。">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170226102110215?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:description" content="贝叶斯推断中，要寻找最好的先验分布，其本身是得依据先验数据的。故一个便于运算的策略就是寻找共轭的先验。所谓共轭先验分布就是那些能够导致后验与先验属于同一分布族的先验。而指数族是天生的，具有共轭先验的唯一分布族。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170226102549656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -381,6 +379,10 @@
           
 
           
+              <div class="post-description">
+                  贝叶斯推断中，要寻找最好的先验分布，其本身是得依据先验数据的。故一个便于运算的策略就是寻找共轭的先验。所谓共轭先验分布就是那些能够导致后验与先验属于同一分布族的先验。而指数族是天生的，具有共轭先验的唯一分布族。
+              </div>
+          
 
         </div>
       </header>
@@ -395,10 +397,9 @@
       
 
       
-        <p>  指数分布族是指可以表示为指数分布的概率分布。指数分布形式如下：
+        <p>指数分布族是指可以表示为指数分布的概率分布。指数分布形式如下：
 $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$
-其中，$\eta$成为分布的自然参数；T(y)是充分统计量，通常$T(y)=y$。当$a、b、T$参数都固定的时候，就定义了一个以$\eta$为参数的指数函数族。</p>
-<a id="more"></a>
+其中，$\eta$成为分布的自然参数；$T(y)$是充分统计量，通常$T(y)=y$。当$a、b、T$参数都固定的时候，就定义了一个以 $\eta$ 为参数的指数函数族。</p>
 <p>实际上，大多数概率分布都可以表示成上面公式给出的形式：</p>
 <ol>
 <li>伯努利分布：对0、1问题进行建模</li>
@@ -413,12 +414,18 @@ $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$
 <h2>示例</h2>
 <p>我们将高斯分布与伯努利分布表示成指数分布族的形式。</p>
 <h3>伯努利分布</h3>
-<p>  伯努利分布是对0、1问题进行建模，特可以表示成如下形式：</p>
+<p>伯努利分布是对$0、1$问题进行建模，特可以表示成如下形式：</p>
 <p>$$P(y;\varphi)=\varphi^y(1-\varphi)^{1-y} \quad y\in{0,1}$$</p>
-<p><img src="http://img.blog.csdn.net/20170226102110215?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log01"></p>
+<p>$$P(y;\varphi) = \varphi^y(1-\varphi)^{1-y} \\
+=exp(\log \varphi^y(1-\varphi)^{1-y}) \\
+=exp(y\log \varphi+(1-y)\log(1-\varphi)) \\
+=exp(y\log \frac{\varphi}{1-\varphi}+\log(1-\varphi))$$</p>
 <p>将伯努利分布表示成如下形式，对比指数族分布公示</p>
-<p><img src="http://img.blog.csdn.net/20170226102145230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log02"></p>
-<p>其中可以看到，$\eta$的形式为logisic函数，这是因为logistic模型对问题的先验概率估计是伯努利分布的缘故。</p>
+<p>$$b(y)=1 \\
+T(y)=1 \\
+\eta = \frac{\varphi}{1-\varphi} \Rightarrow \varphi=\frac{1}{1+e^{-\eta} } \\
+\alpha(\eta)=-\log(1-\varphi)=\log(1+e^{\eta})$$</p>
+<p>其中可以看到，$\eta$的形式为logistic函数，这是因为logistic模型对问题的先验概率估计是伯努利分布的缘故。</p>
 <h3>高斯分布</h3>
 <p>  高斯分布可以推导出线性模型，由线性模型的假设函数可知，高斯分布的方差与假设函数无关，因而为简便计算，我们将方差设为1，即使不这样做，最后的结果也是作为一个系数而已，高斯分布转换为指数分布形式的推导过程如下：</p>
 <p><img src="http://img.blog.csdn.net/20170226102549656?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdG91cmlzdG1hbjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="log03"></p>
@@ -430,7 +437,7 @@ $$P(y;\eta)=b(y)exp(\eta^{T}T(y)-\alpha(\eta))$$
 </ol>
 <h3>备注</h3>
 <p>指数分布族的<strong>无记忆性</strong>，教科书上所说的无记忆性（Memoryless Property，又称遗失记忆性）。这表示如果一个随机变量呈指数分布，它的条件概率遵循：
-$$P(T&gt;s+t;T&gt;t)=P(T&gt;s), \ for\quad all,\quad s.t&gt;0 $$
+$$P(T&gt;s+t;T&gt;t)=P(T&gt;s),\quad \text{for all} \quad s,t&gt;0 $$
 有兴趣的同学可以深入理解一下。</p>
 
       
@@ -473,9 +480,9 @@ $$P(T&gt;s+t;T&gt;t)=P(T&gt;s), \ for\quad all,\quad s.t&gt;0 $$
       
         <div class="post-tags">
           
-            <a href="/tags/统计学/" rel="tag"><i class="fa fa-tag"></i> 统计学</a>
-          
             <a href="/tags/Mathematic/" rel="tag"><i class="fa fa-tag"></i> Mathematic</a>
+          
+            <a href="/tags/统计学/" rel="tag"><i class="fa fa-tag"></i> 统计学</a>
           
         </div>
       
@@ -581,7 +588,7 @@ $$P(T&gt;s+t;T&gt;t)=P(T&gt;s), \ for\quad all,\quad s.t&gt;0 $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -603,7 +610,7 @@ $$P(T&gt;s+t;T&gt;t)=P(T&gt;s), \ for\quad all,\quad s.t&gt;0 $$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

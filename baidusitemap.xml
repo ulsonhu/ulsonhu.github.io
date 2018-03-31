@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html</loc>
+    <lastmod>2018-03-31T15:51:25.498Z</lastmod>
+    <data>
+        <display>
+        <title>广义矩估计(GMM)方法</title>
+        <pubTime>2018-02-23T16:00:00.000Z</pubTime>
+        
+        <tag>统计学</tag>
+         
+        <tag>数量经济学</tag>
+         
+         
+           
+             
+              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://ulsonhu.cn/%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83%E6%97%8F.html</loc>
     <lastmod>2018-03-30T07:40:03.596Z</lastmod>
     <data>
@@ -11,9 +33,9 @@
         <title>指数分布族</title>
         <pubTime>2017-01-22T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
          
          
            
@@ -75,9 +97,9 @@
         <title>MCMC与Gibbs采样</title>
         <pubTime>2017-01-24T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
          
          
            
@@ -249,28 +271,6 @@
     </url>
 
     
-  <url>
-    <loc>http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html</loc>
-    <lastmod>2018-03-13T16:18:21.070Z</lastmod>
-    <data>
-        <display>
-        <title>广义矩估计(GMM)方法</title>
-        <pubTime>2018-02-23T16:00:00.000Z</pubTime>
-        
-        <tag>统计学</tag>
-         
-        <tag>数量经济学</tag>
-         
-         
-           
-             
-              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://ulsonhu.cn/VC%E7%BB%B4%E7%90%86%E8%AE%BA-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html</loc>
@@ -344,9 +344,9 @@
         <title>MacOS下使用python的多版本方案</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Mac</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -408,9 +408,9 @@
         <title>广义线性模型(Generalized Linear Model)</title>
         <pubTime>2017-01-25T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
          
          
            
@@ -576,9 +576,9 @@
         <title>共轭先验</title>
         <pubTime>2017-02-17T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
          
          
            
@@ -704,9 +704,9 @@
         <title>矩阵分解相关知识回顾</title>
         <pubTime>2017-01-20T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
          
          
            

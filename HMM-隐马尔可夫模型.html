@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="统计学,数理统计," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="隐马尔可夫模型（Hidden Markov Model，$\text{HMM}$）是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来作进一步的分析，例如模式识别。">
+<meta name="keywords" content="统计学,数理统计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HMM-隐马尔可夫模型">
+<meta property="og:url" content="http://ulsonhu.cn/HMM-隐马尔可夫模型.html">
+<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:description" content="隐马尔可夫模型（Hidden Markov Model，$\text{HMM}$）是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来作进一步的分析，例如模式识别。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523585401/2018_04_10-4.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584361/2018_04_10-1.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-2.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-3.png">
+<meta property="og:updated_time" content="2018-04-13T02:11:45.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HMM-隐马尔可夫模型">
+<meta name="twitter:description" content="隐马尔可夫模型（Hidden Markov Model，$\text{HMM}$）是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来作进一步的分析，例如模式识别。">
+<meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523585401/2018_04_10-4.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ulsonhu.cn/HMM-隐马尔可夫模型.html"/>
+
+
+
+
+
+  <title>HMM-隐马尔可夫模型 | Sonnet's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="v6x7HqA95s" /><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sonnet's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/HMM-隐马尔可夫模型.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sonnet's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HMM-隐马尔可夫模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T00:00:00+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数理统计/" itemprop="url" rel="index">
+                    <span itemprop="name">数理统计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  隐马尔可夫模型（Hidden Markov Model，$\text{HMM}$）是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来作进一步的分析，例如模式识别。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2>马尔科夫链</h2>
+<p>在介绍$\text{HMM}$之前，我们先要了解什么是马尔科夫链。马尔科夫链是一个随机过程，简单来说就是当前时刻的状态与前 $p$ 个时刻的状态有关，即</p>
+<p>$$P(z(t) | z(t-1),z(t-2),\cdots,z(1),z(0)) = P(z(t)|z(t-1),z(t-2),\cdots,z(t-p))$$</p>
+<p>这种被称作 $p$ 阶马尔科夫链；
+为了简化这个过程以方便应用到模型中，我们有两个假设：</p>
+<ul>
+<li>在序列中，当前时刻状态只依赖于前一时刻的状态，也就是$P(z(t)|z(t-1), z(t-2),\cdots, z(1), z(0)) = P(z(t)|z(t-1))$。</li>
+<li>状态转移的分布不随时间的改变而改变，也就是说任意时刻下的状态产生与时间无关，仅仅与前一状态有关。</li>
+</ul>
+<p>但是实际生活中，这种状态本身是很难观测到的，我们只能根据其他的特征来观测这些状态，同时状态之间的 <strong>转移矩阵</strong>也是很难直接获得的，这就需要隐马尔科夫模型了.</p>
+<h2>HMM 形象的例子描述</h2>
+<p>在引入$\text{HMM}$的公式化描述之前，为了更好的理解 HMM 模型，我们先用一个掷骰子的例子来形象的描述 HMM模型.</p>
+<p>模型描述
+假设我手里有三个不同的骰子。</p>
+<ul>
+<li>
+<p>第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面$（1，2，3，4，5，6）$出现的概率是1/6。</p>
+</li>
+<li>
+<p>第二个骰子是个四面体（称这个骰子为D4），每个面$（1，2，3，4）$出现的概率是1/4。</p>
+</li>
+<li>
+<p>第三个骰子有八个面（称这个骰子为D8），每个面$（1，2，3，4，5，6，7，8）$出现的概率是1/8。</p>
+</li>
+</ul>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523585401/2018_04_10-4.png" width="95%" height="95%">
+<p>假设我们开始掷骰子，我们先从三个骰子里挑一个，挑到每一个骰子的概率都是1/3。
+然后我们掷骰子，得到一个数字，$1，2，3，4，5，6，7，8$中的一个。
+不停的重复上述过程，我们会得到一串数字，每个数字都是$1，2，3，4，5，6，7，8$中的一个。
+例如我们可能得到这么一串数字（掷骰子10次）：$1 6 3 5 2 7 3 5 2 4$</p>
+<p>这串数字叫做可见状态链。但是在隐马尔可夫模型中，我们不仅仅有这么一串可见状态链，还有一串隐含状态链。在这个例子里，这串隐含状态链就是你用的骰子的序列。比如，隐含状态链有可能是：D6 D8 D8 D6 D4 D8 D6 D6 D4 D8</p>
+<p>一般来说，$\text{HMM}$中说到的马尔可夫链其实是指隐含状态链，因为隐含状态（骰子）之间存在转换概率（transition probability）。在我们这个例子里，D6的下一个状态是D4，D6，D8的概率都是1/3。D4，D8的下一个状态是D4，D6，D8的转换概率也都一样是1/3。这样设定是为了最开始容易说清楚，但是我们其实是可以随意设定转换概率的。比如，我们可以这样定义，D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1。这样就是一个新的$\text{HMM}$。</p>
+<p>同样的，尽管可见状态之间没有转换概率，但是隐含状态和可见状态之间有一个概率叫做输出概率（emission probability）。就我们的例子来说，六面骰（D6）产生1的输出概率是1/6。产生2，3，4，5，6的概率也都是1/6。我们同样可以对输出概率进行其他定义。比如，我有一个被赌场动过手脚的六面骰子，掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584361/2018_04_10-1.png" width="95%" height="95%">
+隐马尔可夫示意图
+<p>其实对于 $\text{HMM}$ 来说，如果提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。</p>
+<p>但是应用$\text{HMM}$模型时候呢，往往是缺失了一部分信息的，有时候你知道骰子有几种，每种骰子是什么，但是不知道掷出来的骰子序列；有时候你只是看到了很多次掷骰子的结果，剩下的什么都不知道。如果应用算法去估计这些缺失的信息，就成了一个很重要的问题。</p>
+<h2>HMM模型解决的三个问题</h2>
+<ol>
+<li>知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道每次掷出来的都是哪种骰子（隐含状态链）</li>
+</ol>
+<blockquote>
+<p>这个问题呢，在语音识别领域呢，叫做解码问题。这个问题其实有两种解法，会给出两个不同的答案。每个答案都对，只不过这些答案的意义不一样。</p>
+<ul>
+<li>第一种解法求最大似然状态路径，说通俗点呢，就是我求一串骰子序列，这串骰子序列产生观测结果的概率最大。</li>
+<li>第二种解法呢，就不是求一组骰子序列了，而是求每次掷出的骰子分别是某种骰子的概率。比如说我看到结果后，我可以求得第一次掷骰子是D4的概率是0.5，D6的概率是0.3，D8的概率是0.2</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>还是知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道掷出这个结果的概率</li>
+</ol>
+<p>看似这个问题意义不大，因为你掷出来的结果很多时候都对应了一个比较大的概率。
+问这个问题的目的呢，其实是检测观察到的结果和已知的模型是否吻合。
+如果很多次结果都对应了比较小的概率，那么就说明我们已知的模型很有可能是错的，有人偷偷把我们的骰子給换了</p>
+<ol start="3">
+<li>知道骰子有几种（隐含状态数量），不知道每种骰子是什么（转换概率），观测到很多次掷骰子的结果（可见状态链），我想反推出每种骰子是什么（转换概率）</li>
+</ol>
+<blockquote>
+<p>这个问题很重要，因为这是最常见的情况。很多时候我们只有可见结果，不知道$\text{HMM}$模型里的参数，我们需要从可见结果估计出这些参数，这是建模的一个必要步骤</p>
+</blockquote>
+<p>在实际应用中，比如中文分词，我们更多的是利用第三个问题去建模( 当然，如果利用工具的话，你拿到手的时候这部分的参数都是已经训练好了的 )，然后用第一个问题的解码去求隐含状态序列（这也是我们的目标，比如分词、词性标注等）.</p>
+<h3>破解骰子序列</h3>
+<p>在这个形象的掷骰子的例子中，我们重点讲一下Viterbi algorithm解码过程.</p>
+<p>举例来说，我知道我有三个骰子，六面骰，四面骰，八面骰。我也知道我掷了十次的结果<code>（1 6 3 5 2 7 3 5 2 4）</code>，我不知道每次用了那种骰子，我想知道最有可能的骰子序列</p>
+<p>其实最简单而暴力的方法就是穷举所有可能的骰子序列，然后依照第零个问题的解法把每个序列对应的概率算出来。然后我们从里面把对应最大概率的序列挑出来就行了。如果马尔可夫链不长，当然可行。如果长的话，穷举的数量太大，就很难完成了。</p>
+<p>另外一种很有名的算法叫做 Viterbi algorithm.</p>
+<h2>HMM 的几个要素</h2>
+<p>经过上面形象化的例子描述，读者应该对隐马尔科夫模型有了大致的了解，下面通过引入数学化描述，来正式介绍 $\text{HMM}$.读者在阅读 $\text{HMM}$ 数学化描述时，可以对照前面掷骰子的问题来理解.</p>
+<ul>
+<li>StatusSet :
+状态值集合，常用 $S=\{S_1,S_2,\cdots ,S_Q\}$ 来表示系统的隐状态集合，其中 $Q$ 为隐状态数。用 $q_t=S_i$ 表示系统在时刻 $t$ 处于隐状态 $S_i$，隐状态序列为$Q=\{q_1,q_2,\cdots ,q_t\}$</li>
+</ul>
+<p>例如上面的三个不同的骰子，这些状态之间满足马尔科夫性质，是马尔科夫模型中实际所隐含的状态，这些状态通常无法直接观察得到.</p>
+<ul>
+<li>ObservedSet :
+观察值集合，观测序列记为 $O = (o_1,o_2,\cdots,o_T)$，其中 $T$ 为观测序列的长度； $O_t$为时刻$t$  的观测随机变量，可以是一个数值或向量.</li>
+</ul>
+<blockquote>
+<p>例如上面的 $1,2,3,4,5,\cdots $ 等值，在模型中与隐含状态相关联，可通过直接观测得到.</p>
+</blockquote>
+<ul>
+<li>TransProbMatrix :
+转移概率矩阵，状态转移的概率分布可表示为 $A=\{a_{ij}\}$，其中 $a_{ij} = P(q_{t+1} = S_j | q_t = S_i), 1 \leq i,j \leq Q$，且满足$a_{ij} \geq 0,\sum_{j=1}^Q a_{ij} = 1$ ，表示时刻 $t$ 从状态 $a_i$ 状态转移到时刻 $t+1$ 状态 $a_j$ 的概率.</li>
+</ul>
+<blockquote>
+<p>例如上面的取不同骰子的概率，描述了 $\text{HMM}$ 模型中各个状态之间的转移概率，</p>
+</blockquote>
+<ul>
+<li>EmitProbMatrix :
+发射概率矩阵，假设观测变量的样本空间为$V$ ，在状态 $S_i$ 时输出观测变量的概率分布可表示为:$B = \{ b_i(v),1 \leq i \leq Q,v \in V \}$ ，其中$b_i(v) = f\{ O_t = v | q_t = S_i \}$ 。</li>
+</ul>
+<blockquote>
+<p>例如上面的每个骰子取不同值的概率，令 $N$代表隐含状态数目， $M$代表可观测状态数目，则 $B_{ij} = P(O_i | S_j),1 \leq i \leq M,1 \leq j \leq N$ 表示在 $t$ 时刻、隐含状态是$S_j$  条件下，观察状态为$O_i$  的概率.</p>
+</blockquote>
+<ul>
+<li>InitStatus :
+初始状态分布，一般用 $\pi $ 来表示，即 $\pi = \{ \pi_i,1 \leq i \leq Q \}$，其中 $\pi_i = P\{ q_1 = S_i \}$
+例如上面我们假设投掷的是第一枚骰子，表示隐含状态在初始时刻 $t=1$ 的概率矩阵.</li>
+</ul>
+<p>从定义可知，隐马尔科夫模型作了<strong>两个基本假设:</strong></p>
+<ul>
+<li>
+<p><strong>齐次马尔科夫假设</strong>
+即假设隐藏的马尔科夫链在任意时刻  的状态只依赖于其前一时刻的状态，与其他时刻的状态及观测无关，也与时刻  无关.
+$$P(q_t | q_{t-1},o_{t-1},\cdots,q_1,o_1) = P(q_t | q_{t-1}),t = 1,2,\cdots,T$$</p>
+</li>
+<li>
+<p><strong>观测独立性假设</strong>
+即假设任意时刻的观测只依赖于该时刻的马尔科夫链的状态，与其他观测及状态无关.
+$$P(o_t | q_T,o_T,q_{T-1},o_{T-1},\cdots,q_{t+1},o_{t+1},q_t,q_{t-1},o_{t-1},\cdots,q_1,o_1) = P(o_t | q_t)$$</p>
+</li>
+</ul>
+<h2>观测序列的生成过程</h2>
+<p>上面的例子中我们也大致讲了序列如何生成的，这里我们用数学描述提炼一下：</p>
+<p><strong>输入</strong>: 隐马尔科夫模型 $\lambda=\{A,B,\pi \}$，观测序列长度 $T$;</p>
+<p><strong>输出</strong>: 观测序列 $O = (o_1,o_2,\cdots,o_T)$</p>
+<ul>
+<li>按照初始状态分布 $\pi$ 产生状态 $q_1$</li>
+<li>令 $t=1$</li>
+<li>按照状态 $q_t$ 的观察概率分布 $b_{q_t}(v)$ 生成 $o_t$</li>
+<li>按照状态 $q_t$ 的状态转移概率分布 $\{q_{ij}\}$ 产生状态 $q_{t+1},q_{t+1} \in \{ S_1,S_2,\cdots,S_Q \}$</li>
+<li>令 $t=t+1$ ；如果 $t&lt;T$，转步 3；否则，终止.</li>
+</ul>
+<h2>$\text{HMM}$ 的基本问题</h2>
+<p>隐马尔科夫模型在实际中运用，必须解决下面三个基本问题 :</p>
+<p>给定观察序列 $O = (o_1,o_2,\cdots,o_T)$ 和模型 $\lambda=\{A,B,\pi \}$，如何有效地计算观测值序列的输出概率?</p>
+<p><font color="blue">给定观察值序列和输出该观察值序列的隐马尔科夫模型 ，如何有效确定与之对应的最佳状态序列?</font>即估计出模型产出观察值序列最有可能经过的路径.</p>
+<p>对于初始模型和给定用于训练的观察值序列 $O = (o_1,o_2,\cdots,o_T)$，如何调整模型参数$\lambda=\{A,B,\pi \}$ ，使得输出概率最大 $P(O|\lambda)$ ？</p>
+<p>Note:对应到上面掷骰子的例子中所说的三个问题</p>
+<h2>基本算法</h2>
+<h3>直接计算</h3>
+<p>给定模型 $\lambda=\{A,B,\pi \}$ 和观测序列 $O = (o_1,o_2,\cdots,o_T)$,计算观测序列 $O$ 出现的概率 $P(O|\lambda)$ . 最直接的方法就是按概率公式直接算：通过列举所有可能的长度为 $T$ 的状态序列 $Q={Q_1,Q_2,\cdots Q_t}$，求各个状态序列 $Q$ 与观测序列 $O = (o_1,o_2,\cdots,o_T)$ 的联合概率$P(O,Q|\lambda)$ ，然后对所有可能的状态序列求和，得到 $P(O|\lambda)$.</p>
+<p>状态序列 $Q={Q_1,Q_2,\cdots Q_t}$ 的概率是
+$$P(Q|\lambda) = \pi_{q_1} a_{q_1 q_2} a_{q_2 q_3} \cdots a_{q_{T-1} q_{T}}$$</p>
+<p>对固定的状态序列 $Q={Q_1,Q_2,\cdots Q_t}$, 观测序列 $O = (o_1,o_2,\cdots,o_T)$ 的概率是
+$$P(O|Q,\lambda) = b_{q_1}(o_1) b_{q_2}(o_2) \cdots b_{q_T}(o_T)$$</p>
+<p>则 $O,Q$ 同时出现的联合概率为:
+$$P(O,Q|\lambda) = P(O|Q,\lambda) P(Q|\lambda) \\ = \pi_{q_1} b_{q_1}(o_1) a_{q_1 q_2} b_{q_2}(o_2) \cdots a_{q_{T-1} q_T} b_{q_T}(o_T) $$</p>
+<p>然后，对所有可能的状态序列 $Q$ 求和，得到观测序列 $O$ 的概率 $P(O|\lambda)$ ，即</p>
+<p>$$P(O|\lambda) = \sum_{Q} P(O|Q,\lambda) P(Q|\lambda) \\ = \sum_{q_1,q_2,\cdots,q_T} \pi_{q_1} b_{q_1}(o_1) a_{q_1 q_2} b_{q_2}(o_2) \cdots a_{q_{T-1} q_T} b_{q_T}(o_T) $$</p>
+<p>但是，该式计算量很大，是 $O(TN^T)$ 阶的，这种算法不可行.</p>
+<h3>前向-后向算法</h3>
+<p>解决问题 1 的最常用、最有效的方法就是 <em>Baum</em> 等人提出的前向-后向算法。</p>
+<p>该算法定义<strong>前向概率变量</strong>
+$$\alpha_t(i) : \alpha_t(i) = P(o_1,o_2,\cdots,o_t,q_t = S_i | \lambda)$$
+$\alpha(t_i)$ 可由下面递推公式计算得到 :</p>
+<p>初始化: $\alpha_1(i) = \pi_i b_i(o_1), 1 \leq i \leq Q$</p>
+<p>递推:$\alpha_{t+1}(j) =  \sum_{i=1}^Q \alpha_t(i) a_{ij} ] b_j(o_{t+1}) , 1 \leq j \leq Q,1 \leq t \leq T-1$</p>
+<p>结束: $P(O | \lambda) = \sum_{i=1}^Q \alpha_T(i)$</p>
+<p>其中$\sum_{i=1}^Q \alpha_T(i)$  是把最后 $T$ 时刻的所有可能的状态下观察到 $O$ 的概率求和；因为到最后 $T$ 时刻时，每一条状态路径都能观察到观测序列 $O$，且有一个生成概率，即$\alpha_T(i)$，于是将  $T$时刻所有可能的状态对应的前向概率变量累加，就是将所有可能观察到观测序列的状态序列的概率相加，即 $P(O|\lambda)$
+上述前向算法的递推关系如图所示:</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-2.png" width="95%" height="95%">
+<p>与前向算法相似，后向算法是从后向前递推计算输出概率的方法。定义后向概率变量
+$$\beta_t(i) : \beta_t(i) = P(o_{t+1},o_t,\cdots,o_T | q_t = S_i,\lambda)$$</p>
+<p>则 $\beta_t(i)$ 可由下面递推公式计算，后向算法的递推关系图如下所示:</p>
+<p>初始化 : $\beta_T(i) = 1, 1 \leq i \leq Q$</p>
+<p>递推公式 :
+$$\beta_t(i) = \sum_{j=1}^Q a_{ij} b_j(o_{t+1}) \beta_{t+1}(j), 1 \leq i \leq Q,t = T-1,\cdots,1$$</p>
+<p>结束 : $P(O | \lambda) = \sum_{i=1}^Q \beta_1(i) \pi_i = \beta_0(1)$</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-3.png" width="95%" height="95%">
+<p>根据前向变量和后向变量的定义，显然下式成立 ：</p>
+<p>$$P(O | \lambda) = \sum_{i=1}^Q \sum_{j=1}^Q \alpha_t(i) a_{ij} b_j(o_{t+1}) \beta_{t+1}(j),1 \leq t \leq T-1$$</p>
+<p><font color="blue">如何来理解该式子？</font></p>
+<p>$\alpha_t(i) a_{ij} b_j(o_{t+1}) \beta_{t+1}(j)$表示 $t$ 时刻为状态 $q_i$ 的前向概率（根据前向概率的定义，已经计算了 $t$ 时刻状态为 $q_i$ 时观测到 $o_t$ 的概率）， $t$时刻状态 $q_i$ 转移到 $t+1$ 时刻的状态 $q_j$，在 $t+1$ 时刻状态 $q_j$ 下观测到$o_{t+1}$ 的概率，最后乘以 $t+1$ 时刻状态为  $q_j$的后向概率（因为按后向概率的定义不包含当前状态的观察概率 $b_j(o_{t+1})$ 的计算）；分别求所有可能的状态 $q_i,q_j$ 的组合，就是$P(O|\lambda)$ .</p>
+<p>利用该算法减少计算量的原因在于每一次计算直接引用前一个时刻的计算结果，避免重复计算.这样，利用前向概率计算 $P(O|\lambda)$  的计算量是 $O(N^2T)$ 阶的，而不是直接计算的 $O(TN^T)$ 阶.</p>
+<h3>监督学习方法</h3>
+<p>对于 $\text{HMM}$ 参数估计问题，可按训练数据的特点来分是有监督学习还是无监督学习，如果是有监督学习的话，可直接通过对训练样本做一些统计即可得到 $\text{HMM}$ 的参数估计；在中文自然语言处理中，许多标注问题就是这么做的.</p>
+<p>假设已给训练数据包含 $K$ 个长度相同的观察序列和对应的状态序列 ${(O_1,Q_1),(O_2,Q_2),\cdots,(O_K,Q_K)}$，那么我们可以直接利用极大似然估计法来估计隐马尔科夫模型的参数，具体如下:</p>
+<p>转移概率 $a_{ij}$ 的估计
+设样本中时刻 $t$ 处于状态 $q_i$，时刻 $t+1$ 时刻由状态 $q_i$ 转移到了 $q_j$，此种情况出现的频数为 $A_{ij}$ ，那么转移概率$a_{ij}$ 的估计值为</p>
+<p>$$\hat{a}_{ij} = \frac{ A_{ij} }{\sum_{j=1}^Q A_{ij} },i = \{S_1,S_2,\cdots,S_Q\};j = \{S_1,S_2,\cdots,S_Q\}$$</p>
+<p>即统计由状态 $q_i$ 转移到状态 $q_j$ 占状态 $q_i$ 转移出去的比例.</p>
+<p>观测概率 $b_{q_j}(v)$ 的估计
+设样本中状态为$q_j$  并观测为 $o_v$ 的频数是 $B_{jv}$，那么状态为 $q_j$ 观测为 $o_v$ 的概率 $b_{q_j}(v)$ 的估计是:</p>
+<p>$$\hat{b}_{q_j}(v) = \frac{B_{jv} }{\sum_{v=1}^M B_{jv} }$$</p>
+<p>其中，$j = 1,2,\cdots,T;\quad v = 1,2,\cdots,M$.</p>
+<h3>Baum-Welch 算法</h3>
+<p><font color="blue">对于无监督学习的 HMM 参数估计问题，可以使用 Baum-Welch算法.</font></p>
+<p>首先定义两个变量$r_t(i)$  和$\xi_t(i,j)$ ，给定观察序列 $O(e_1,e_2,\cdots ,e_T)$ 和模型参数 $\lambda=\{A,B,\pi \}$;</p>
+<ul>
+<li>
+<p>$r_t(i)$为系统在时刻 $t$ 系统处在状态 $S_i$ 的概率，即
+$$r_t(i) = P(q_t = S_i | O,\lambda)$$</p>
+</li>
+<li>
+<p>$\xi_t(i,j)$为 $t$ 时刻状态为 $S_j$ ，到 $t+1$ 时刻系统状态转为 $S_j$ 的概率，即
+$$\xi_t(i,j) = P(q_t = S_i,q_{t+1} = S_j | O,\lambda)$$</p>
+</li>
+</ul>
+<p>根据前向-后向算法中 $\alpha_t(i)$ 和 $\beta_t(i)$ 定义有:</p>
+<p>$$
+r_t(i) = \frac{\alpha_t(i) \beta_t(i)}{\sum_{j=1}^Q \alpha_t(j) \beta_t(j)},1 \leq i \leq Q \\ \xi_t(i,j) = \frac{\alpha_t(i) a_{ij} b_j(e_{t+1}) \beta_{t+1}(j)}{P(O|\lambda)} \\ \qquad =\frac{\alpha_t(i) a_{ij} b_j(e_{t+1}) \beta_{t+1}(j)}{\sum_{m=1}^Q \sum_{n=1}^Q \alpha_t(m) a_{mn} b_n(e_{t+1}) \beta_{t+1}(n)} ,1 \leq i,j \leq Q
+$$</p>
+<p>则对于观察序列 $O(e_1,e_2,\cdots ,e_T)$ 而言，系统所处于状态 $S_j$ 的总次数（期望值）为 $\sum_{i=1}^Q r_t(i)$ ；同样，系统从状态 $S_i$ 转移到 $S_j$ 的总次数为 $\sum_{i=1}^Q \xi_t(i,j)$ .
+假设给定训练数据只包含 $K$ 个长度为 $T$ 的观测序列 $\{O_1,O_2,\cdots,O_K \}$ 而没有对应的状态序列，目标是学习隐马尔科夫模型 $\lambda=\{A,B,\pi \}$ 的参数.我们将观测序列数据看作观测数据 $O$，状态序列数据看作不可观测的隐数据 $I$，那么隐马尔科夫模型事实上是一个含有隐变量的概率模型</p>
+<p>$$P(O|\lambda) = \sum_{I} P(O|I,\lambda) P(I|\lambda)$$</p>
+<p>它的参数学习可以用<font color="blue">EM算法</font>来实现.</p>
+<ol>
+<li>
+<p>确定完全数据的对数似然函数
+所有观测数据写成$O = (o_1,o_2,\cdots,o_T)$ ，所有隐数据写成 $I = (i_1,i_2,\cdots,i_T)$，完全数据是 $(O,I) = (o_1,o_2,\cdots,o_T,i_1,i_2,\cdots,i_T)$，完全数据的对数似然函数是 $\log(P(O,I|\lambda))$</p>
+</li>
+<li>
+<p>EM 算法的 E 步: 求 $Q$ 函数 $Q(\lambda,\overline{\lambda})$
+$$Q(\lambda,\overline{\lambda}) = \sum_{I} \log \left( P(O,I|\lambda) P(O,I|\overline{\lambda}) \right)$$
+其中，$\overline{\lambda}$ 是隐马尔科夫模型参数的当前估计值，$\lambda$ 是要极大化的隐马尔科夫模型参数.
+$$P(O,I|\lambda) = \pi_{i_1} b_{i_1}(o_1) a_{i_1 i_2} b_{i_2}(o_2) \cdots a_{i_{T-1} i_T} b_{i_T}(o_T)$$
+于是函数 $Q(\lambda,\overline{\lambda})$ 可以写成:
+$$
+Q(\lambda,\overline{\lambda}) = \sum_{I} ( \log \pi_{i_1} ) P(O,I|\overline{\lambda}) \\ \sum_{I} ( \sum_{t=1}^{T-1} \log a_{i_t i_{t+1}} ) P(O,I|\overline{\lambda}) + \sum_{I} ( \sum_{t=1}^T \log b_{i_t}(o_t) ) P(O,I|\overline{\lambda})
+$$
+式中求和都是对所有训练数据的序列总长度 $T$ 进行的.</p>
+</li>
+</ol>
+<blockquote>
+<p>这其中的 $Q$ 函数，是直接用的《统计学习方法》中的概念，这本书中的 $Q$ 函数比较难懂.</p>
+</blockquote>
+<ol start="3">
+<li>EM 算法的 M 步: 极大化 $Q$ 函数 $Q(\lambda,\overline{\lambda})$ 求模型参数 $A,B,\pi$
+由于要极大化的参数在 $Q(\lambda,\overline{\lambda})$ 中单独地出现在 3 个项中，所以只需对各项分别极大化.</li>
+</ol>
+<p>(1). 第一项可以写成:
+$$\sum_{I} ( \log \pi_{i_1} ) P(O,I|\overline{\lambda}) = \sum_{i=1}^N (\log \pi_i) P(O,i_1 = i | \overline{\lambda})$$
+注意到 $\pi_i$ 满足约束条件$\sum_{}^N \pi_i = 1$ ，利用拉格朗日乘子法，写出拉格朗日函数:
+$$L(\pi_i,\gamma) = \sum_{i=1}^N (\log \pi_i) P(O,i_1 = i | \overline{\lambda}) + \gamma ( \sum_{i=1}^N \pi_i - 1 )$$
+对其求偏导数并令结果为零:
+$$\frac{\partial L}{\partial \pi_i} = \frac{1}{\pi_i} P(O,i_1 = i | \overline{\lambda}) + \gamma = 0 \\ P(O,i_1 = i | \overline{\lambda}) + \gamma \pi_i = 0 \\ \gamma = -P(O|\overline{\lambda}) \\ \pi_i = \frac{P(O,i_1 = i | \overline{\lambda})}{P(O|\overline{\lambda})}$$</p>
+<p>(2). 第 2 项可以写成:
+$$\sum_{I} ( \sum_{t=1}^{T-1} \log a_{i_t i_{t+1}} ) P(O,I|\overline{\lambda}) \\ = \sum_{i=1}^N \sum_{j=1}^N \sum_{t=1}^{T-1} (\log a_{ij}) P(O,i_t = i,i_{t+1} = j|\overline{\lambda})$$</p>
+<p>注意到约束条件 $\sum_{j=1}^N a_{ij} = 1$，应用拉格朗日乘子法得:
+$$L(a_{ij},\gamma) = \sum_{i=1}^N \sum_{j=1}^N \sum_{t=1}^{T-1} (\log a_{ij}) P(O,i_t = i,i_{t+1} = j|\overline{\lambda}) + \gamma ( \sum_{j=1}^N a_{ij} - 1 )$$
+求其对 $\alpha_{ij}$ 的偏导，并令其等于零:
+$$\frac{\partial L}{\partial a_{ij}} = \sum_{t=1}^{T-1} ( \frac{1}{a_{ij}} P(O,i_t = i,i_{t+1} = j|\overline{\lambda}) ) + \gamma = 0 \\ \sum_{t=1}^{T-1} P(O,i_t = i,i_{t+1} = j|\overline{\lambda}) + \sum_{t=1}^{T-1} a_{ij} \gamma = 0$$</p>
+<p>对 $j$ 求和:
+$$\sum_{j=1}^N \sum_{t=1}^{T-1} P(O,i_t = i,i_{t+1} = j|\overline{\lambda}) + \sum_{j=1}^N \sum_{t=1}^{T-1} a_{ij} \gamma = 0 \\ \sum_{t=1}^{T-1} P(O,i_t = i|\overline{\lambda}) + \sum_{t=1}^{T-1} \gamma = 0 \\ a_{ij} = \frac{\sum_{t=1}^{T-1} P(O,i_t = i,i_{t+1} = j | \overline{\lambda})}{\sum_{t=1}^{T-1} P(O,i_t = i|\overline{\lambda})}$$</p>
+<p>(3). 第 3 项与第 2 项的计算类似:
+$$\sum_{I} \left( \sum_{t=1}^T \log b_{i_t}(o_t) \right) P(O,I|\overline{\lambda}) = \sum_{j=1}^N \sum_{t=1}^T \log b_j(o_t) P(O,i_t = j | \overline{\lambda})$$
+同样用拉格朗日乘子法，约束条件是 $\sum_{k=1}^M b_j(k) = 1$ .注意，只有在 $o_t=v_k$ 时 $b_j(o_t)$ 对 $b_j(k)$ 的偏导数才不为 $0$，以 $I(o_t=v_k)$ 表示，求得
+$$b_j(k) = \frac{\sum_{t=1}^T P(O,i_t = j | \overline{\lambda}) I(o_t = v_k)}{\sum_{t=1}^T P(O,i_t = j | \overline{\lambda})}$$</p>
+<h4>Note</h4>
+<p>则上面的概率公式整理一下，并用 $\gamma_t(i),\xi_t(i,j)$ 表示为:
+$$ a_{ij} = \frac{\sum_{t=1}^{T-1} \xi_t(i,j)}{\sum_{t=1}^{T-1} \gamma_t(i)} \\ b_j(k) = \frac{\sum_{t=1,o_t = v_k}^T \gamma_t(j)}{\sum_{t=1}^T \gamma_t(j)} \\ \pi_i = \gamma_1(i)$$</p>
+<p>于是整理 Baum-Welech 完整算法描述如下:</p>
+<p>输入：观测数据  $O=(o_1,o_2,\cdots,o_T)$
+输出：隐马尔科夫模型参数.</p>
+<ul>
+<li>初始化
+对 $n=0$，选取 $a_{ij}^{(0)},b_j(k)^{(0)},\pi_i^{(0)}$，得到模型 $\lambda^{(0)} = (A^{(0)},B^{(0)},\pi^{(0)})$</li>
+<li>递推，对 $n = 1,2,\cdots$
+$$a_{ij}^{(n+1)} = \frac{\sum_{t=1}^{T-1} \xi_t(i,j)}{\sum_{t=1}^{T-1} \gamma_t(i)} \\ b_j(k)^{(n+1)} = \frac{\sum_{t=1,o_t = v_k}^T \gamma_t(j)}{\sum_{t=1}^T \gamma_t(j)} \\ \pi_i^{(n+1)} = \gamma_1(i) $$
+右端各值按观测 $O = (o_1,o_2,\cdots,o_T)$ 和模型 $\lambda^{(n)} = (A^{(n)},B^{(n)},\pi^{(n)})$ 计算.</li>
+<li>终止，得到模型参数 $\lambda^{(n+1)} = (A^{(n+1)},B^{(n+1)},\pi^{(n+1)})$</li>
+</ul>
+<h2>R中的HMM</h2>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">"HMM"</span>)</span><br><span class="line"><span class="keyword">library</span>(HMM)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#后向算法求观察值出现的概率</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>),c(<span class="string">"L"</span>,<span class="string">"R"</span>),transProbs = matrix(c(<span class="number">0.8</span>,<span class="number">0.2</span>,<span class="number">0.2</span>,<span class="number">0.8</span>),<span class="number">2</span>),emissionProbs = matrix(c(<span class="number">0.6</span>,<span class="number">0.4</span>,<span class="number">0.4</span>,<span class="number">0.6</span>),<span class="number">2</span>))</span><br><span class="line">print(hmm)</span><br><span class="line"><span class="comment"># 序列观察值</span></span><br><span class="line">observations = c(<span class="string">"L"</span>,<span class="string">"L"</span>,<span class="string">"R"</span>,<span class="string">"R"</span>)</span><br><span class="line">logBackwardProbabilities = backward(hmm,observations)</span><br><span class="line">print(exp(logBackwardProbabilities))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过前向算法求观察值出现的概率</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>), c(<span class="string">"L"</span>,<span class="string">"R"</span>), transProbs=matrix(c(<span class="number">.8</span>,<span class="number">.2</span>,<span class="number">.2</span>,<span class="number">.8</span>),<span class="number">2</span>),</span><br><span class="line">              emissionProbs=matrix(c(<span class="number">.6</span>,<span class="number">.4</span>,<span class="number">.4</span>,<span class="number">.6</span>),<span class="number">2</span>))</span><br><span class="line">print(hmm)</span><br><span class="line"><span class="comment"># Sequence of observations</span></span><br><span class="line">observations = c(<span class="string">"L"</span>,<span class="string">"L"</span>,<span class="string">"R"</span>,<span class="string">"R"</span>)</span><br><span class="line"><span class="comment"># Calculate forward probablities</span></span><br><span class="line">logForwardProbabilities = forward(hmm,observations)</span><br><span class="line">print(exp(logForwardProbabilities))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过Baum-Welch算法训练 hmm参数</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>),c(<span class="string">"L"</span>,<span class="string">"R"</span>))</span><br><span class="line">transProbs = matrix(c(<span class="number">0.9</span>,<span class="number">0.1</span>,<span class="number">0.1</span>,<span class="number">0.9</span>),<span class="number">2</span>)</span><br><span class="line">emissionProbs = matrix(c(<span class="number">0.5</span>,<span class="number">0.51</span>,<span class="number">0.5</span>,<span class="number">0.49</span>),<span class="number">2</span>)</span><br><span class="line">print(hmm)</span><br><span class="line">a = sample(c(rep(<span class="string">"L"</span>,<span class="number">100</span>),rep(<span class="string">"R"</span>,<span class="number">300</span>)))</span><br><span class="line">b = sample(c(rep(<span class="string">"L"</span>,<span class="number">300</span>),rep(<span class="string">"R"</span>,<span class="number">100</span>)))</span><br><span class="line">observation = c(a,b)</span><br><span class="line"><span class="comment"># Baum-Welch</span></span><br><span class="line">bw = baumWelch(hmm,observation,<span class="number">10</span>)</span><br><span class="line">print(bw$hmm)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 观察序列最可能出现的概率</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>), c(<span class="string">"L"</span>,<span class="string">"R"</span>), transProbs=matrix(c(<span class="number">.8</span>,<span class="number">.2</span>,<span class="number">.2</span>,<span class="number">.8</span>),<span class="number">2</span>),</span><br><span class="line">              emissionProbs=matrix(c(<span class="number">.6</span>,<span class="number">.4</span>,<span class="number">.4</span>,<span class="number">.6</span>),<span class="number">2</span>))</span><br><span class="line">print(hmm)</span><br><span class="line"><span class="comment"># Sequence of observations</span></span><br><span class="line">observations = c(<span class="string">"L"</span>,<span class="string">"L"</span>,<span class="string">"R"</span>,<span class="string">"R"</span>)</span><br><span class="line"><span class="comment"># Calculate posterior probablities of the states</span></span><br><span class="line">posterior = posterior(hmm,observations)</span><br><span class="line">print(posterior)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Viterbi算法解码，求最可能的隐状态序列</span></span><br><span class="line"><span class="comment"># Initialise HMM</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>), c(<span class="string">"L"</span>,<span class="string">"R"</span>), transProbs=matrix(c(<span class="number">.6</span>,<span class="number">.4</span>,<span class="number">.4</span>,<span class="number">.6</span>),<span class="number">2</span>),</span><br><span class="line">              emissionProbs=matrix(c(<span class="number">.6</span>,<span class="number">.4</span>,<span class="number">.4</span>,<span class="number">.6</span>),<span class="number">2</span>))</span><br><span class="line">print(hmm)</span><br><span class="line"><span class="comment"># Sequence of observations</span></span><br><span class="line">observations = c(<span class="string">"L"</span>,<span class="string">"L"</span>,<span class="string">"R"</span>,<span class="string">"R"</span>)</span><br><span class="line"><span class="comment"># Calculate Viterbi path</span></span><br><span class="line">viterbi = viterbi(hmm,observations)</span><br><span class="line">print(viterbi)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练hmm参数</span></span><br><span class="line"><span class="comment"># Initial HMM</span></span><br><span class="line">hmm = initHMM(c(<span class="string">"A"</span>,<span class="string">"B"</span>),c(<span class="string">"L"</span>,<span class="string">"R"</span>),</span><br><span class="line">              transProbs=matrix(c(<span class="number">.9</span>,<span class="number">.1</span>,<span class="number">.1</span>,<span class="number">.9</span>),<span class="number">2</span>),</span><br><span class="line">              emissionProbs=matrix(c(<span class="number">.5</span>,<span class="number">.51</span>,<span class="number">.5</span>,<span class="number">.49</span>),<span class="number">2</span>))</span><br><span class="line">print(hmm)</span><br><span class="line"><span class="comment"># Sequence of observation</span></span><br><span class="line">a = sample(c(rep(<span class="string">"L"</span>,<span class="number">100</span>),rep(<span class="string">"R"</span>,<span class="number">300</span>)))</span><br><span class="line">b = sample(c(rep(<span class="string">"L"</span>,<span class="number">300</span>),rep(<span class="string">"R"</span>,<span class="number">100</span>)))</span><br><span class="line">observation = c(a,b)</span><br><span class="line"><span class="comment"># Viterbi-training</span></span><br><span class="line">vt = viterbiTraining(hmm,observation,<span class="number">10</span>)</span><br><span class="line">print(vt$hmm)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我只是试试，自己给自己转点钱！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/统计学/" rel="tag"><i class="fa fa-tag"></i> 统计学</a>
+          
+            <a href="/tags/数理统计/" rel="tag"><i class="fa fa-tag"></i> 数理统计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/概率论杂谈篇一.html" rel="next" title="概率论（离散空间）杂谈">
+                <i class="fa fa-chevron-left"></i> 概率论（离散空间）杂谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Pic by John Lennon" />
+            
+              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.linkedin.com/in/ulson-hu-73441ab6/" target="_blank" title="Linkedin">
+                      
+                        <i class="fa fa-fw fa-linkedin-square"></i>Linkedin</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/by_nichome/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/tour_hyc/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/ulsonhu" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">马尔科夫链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">HMM 形象的例子描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">HMM模型解决的三个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">破解骰子序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">HMM 的几个要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">观测序列的生成过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">$\text{HMM}$ 的基本问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">基本算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">直接计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">前向-后向算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.</span> <span class="nav-text">监督学习方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.4.</span> <span class="nav-text">Baum-Welch 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">7.4.1.</span> <span class="nav-text">Note</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">R中的HMM</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+
+  
+</div>
+
+
+
+<div class="powered-by">
+<span id="busuanzi_container_site_uv">
+  本站访客数
+</span>
+</div>
+
+<div align="center">
+<a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3221397&c=9664504" alt="AmazingCounters.com">
+</a>
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+-->
+
+
+
+
+ <!-- <span class="post-meta-divider">|</span> -->
+
+
+
+<!-- 
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

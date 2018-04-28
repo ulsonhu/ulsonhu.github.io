@@ -90,7 +90,7 @@
 <meta property="og:description" content="准备面试数据分析岗，学习一下数据库和SQL语言知识，总结如下。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520904956/2018_03_06.png">
-<meta property="og:updated_time" content="2018-03-20T12:33:18.001Z">
+<meta property="og:updated_time" content="2018-04-28T07:54:34.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL语句学习及总结">
 <meta name="twitter:description" content="准备面试数据分析岗，学习一下数据库和SQL语言知识，总结如下。">
@@ -611,25 +611,32 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GROUP BY &lt;分组依据列&gt;[,...n]</span><br><span class="line">    [HAVING &lt;组筛选条件&gt;]</span><br></pre></td></tr></table></figure>
 <h3>1.3 多表连接查询</h3>
 <p>若一个查询同时涉及到两张或以上的表，则称为连接查询。</p>
-<ol>
-<li><strong>内连接</strong>:
-使用内连接时，如果两个表的相关字段满足条件，则从两个表中提取数据组成新的记录。</li>
-</ol>
+<p>####1. 内连接:
+使用内连接时，如果两个表的相关字段满足条件，则从两个表中提取数据组成新的记录。</p>
 <p><code>FROM &lt;table1&gt; [INNER] JOIN &lt;table2&gt; ON &lt;Join Condition&gt;</code></p>
 <p>注意：连接条件中的连接字段必须是可比的，必须是语义相同的列。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--（查询学生及选课的详细信息）</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Student <span class="keyword">INNER</span> <span class="keyword">JOIN</span> SC <span class="keyword">ON</span> Student.Sno = SC.Sno</span><br><span class="line"></span><br><span class="line"><span class="comment">--（查询计算机系学生的选课情况，列出该学生的名字、所修课程号、成绩）---行选择条件</span></span><br><span class="line"><span class="keyword">SELECT</span> Sname,Cno,Grade <span class="keyword">FROM</span> Student <span class="keyword">INNER</span> <span class="keyword">JOIN</span> SC <span class="keyword">ON</span> Student.Sno = SC.Sno <span class="keyword">WHERE</span> Dept = <span class="string">'计算机系'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--（统计每个系的平均成绩） ---分组的多表查询</span></span><br><span class="line"><span class="keyword">SELECT</span> Dept,<span class="keyword">AVG</span>(Grade) <span class="keyword">AS</span> AverageGrade <span class="keyword">FROM</span> Student S <span class="keyword">INNER</span> <span class="keyword">JOIN</span> SC <span class="keyword">ON</span> S.Sno = SC.Sno <span class="keyword">Group</span> <span class="keyword">BY</span> Dept</span><br><span class="line"></span><br><span class="line"><span class="comment">--（统计计算机系每个学生的选课门数、平均成绩、最高成绩、最低成绩）--分组和行选择条件的多表连接查询</span></span><br><span class="line"><span class="keyword">SELECT</span> Sno,<span class="keyword">COUNT</span>(*),<span class="keyword">AVG</span>(Grade),<span class="keyword">MAX</span>(Grade),<span class="keyword">MIN</span>(Grade) <span class="keyword">FROM</span> Student S <span class="keyword">JOIN</span> SC <span class="keyword">ON</span> S.Sno = SC.Sno <span class="keyword">WHERE</span> Dept = <span class="string">'计算机系'</span> <span class="keyword">Group</span> <span class="keyword">BY</span> Dept</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>自连接</strong>:
-自连接是一种特殊的内连接，相互连接的表在物理上是一张表，但在逻辑上可以看做是两张表。</li>
-</ol>
+<h4>补充：</h4>
+<p><font color="blue">INNER JOIN连接三个表、五个表以上时的SQL语句</font></p>
+<ul>
+<li>连接三个数据表，语法格式可以概括为：</li>
+</ul>
+<p>FROM (table1 INNER JOIN table2 ON table1.key = table2.key) INNER JOIN table3 ON table1.key = table3.key</p>
+<ul>
+<li>连接四个数据表，语法格式可以概括为：</li>
+</ul>
+<p>FROM ((table1 INNER JOIN table2 ON table1.key=table2.key) INNER JOIN table3 ON table1.key=table3.key) INNER JOIN table4 ON Member.key=table4.key</p>
+<blockquote>
+<p>遵循的规则就是从内而外依次执行</p>
+</blockquote>
+<h4>2. 自连接:</h4>
+<p>自连接是一种特殊的内连接，相互连接的表在物理上是一张表，但在逻辑上可以看做是两张表。</p>
 <p><code>FROM &lt;table1&gt; AS T1 JOIN &lt;table1&gt; AS T2</code></p>
 <p>通过为表取别名的方法，可以让物理上的一张表在逻辑上成为两张表。<font color="blue">（一定要为表取别名！）</font></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--（查询与刘晨在同一个系学习的学生的姓名、所在系）</span></span><br><span class="line"><span class="keyword">SELECT</span> S1.Sname,S1.Dept <span class="keyword">FROM</span> Student S1 <span class="keyword">JOIN</span> Student S2 </span><br><span class="line"><span class="keyword">ON</span> S1.Dept = S2.Dept   <span class="comment">--同一个系的学生</span></span><br><span class="line"><span class="keyword">WHERE</span> S2.Sname = <span class="string">'刘晨'</span>  <span class="comment">--S2表作为查询条件</span></span><br><span class="line"><span class="keyword">AND</span> S1.Sname != <span class="string">'刘晨'</span>  <span class="comment">--S1表作为结果表，并从中去掉‘刘晨’本人信息</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>外连接</strong>:
-在内连接操作中，只有满足条件的元祖才能出现在查询结果集中。
-外连接是只限制一张表中的数据必须满足条件，而另一张表的数据可以不满足条件。</li>
-</ol>
+<h4>3. 外连接:</h4>
+<p>在内连接操作中，只有满足条件的元祖才能出现在查询结果集中。
+外连接是只限制一张表中的数据必须满足条件，而另一张表的数据可以不满足条件。</p>
 <p><code>FROM &lt;table1&gt; LEFT|RIGHT [OUTER] JOIN &lt;table2&gt; ON &lt;Join Condition&gt;</code></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LEFT [OUTER] JOIN <span class="comment">--称为左外连接，含义是限制表2中的数据必须满足条件，但不管表1中的数据是否满足条件，均输出表1中的数据。 </span></span><br><span class="line">LEFT [OUTER] JOIN <span class="comment">--称为右外连接，含义是限制表1中的数据必须满足条件，但不管表2中的数据是否满足条件，均输出表2中的数据。</span></span><br></pre></td></tr></table></figure>
 <h2>2.数据更改功能</h2>
@@ -836,7 +843,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -858,7 +865,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -926,7 +933,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一、数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1. SQL功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">二、SQL数据操作语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据查询语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 查询语句的基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 单表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 多表连接查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据更改功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 删除数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">三、高级查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1. CASE函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 简单CASE函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 搜索CASE函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2. 子查询</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一、数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1. SQL功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">二、SQL数据操作语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据查询语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 查询语句的基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 单表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 多表连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">2. 自连接:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">3. 外连接:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据更改功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 删除数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">三、高级查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1. CASE函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 简单CASE函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 搜索CASE函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2. 子查询</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Nichome" />
+  <meta name="keywords" content="计量经济学," />
 
 
 
@@ -81,16 +81,21 @@
 
 
 
-<meta name="description" content="Lying in the gutter, but looking at the stars.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sonnet&#39;s Blog">
-<meta property="og:url" content="http://ulsonhu.cn/archives/2018/index.html">
+<meta name="description" content="向量自回归（VAR,Vector Auto regression）常用于预测相互联系的时间序列系统以及分析随机扰动对变量系统的动态影响。">
+<meta name="keywords" content="计量经济学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接触向量自回归模型">
+<meta property="og:url" content="http://ulsonhu.cn/接触向量自回归模型.html">
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
-<meta property="og:description" content="Lying in the gutter, but looking at the stars.">
+<meta property="og:description" content="向量自回归（VAR,Vector Auto regression）常用于预测相互联系的时间序列系统以及分析随机扰动对变量系统的动态影响。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1524449564/2018_04_14-01.png">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1524449564/2018_04_14-02.png">
+<meta property="og:updated_time" content="2018-04-28T08:00:06.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sonnet&#39;s Blog">
-<meta name="twitter:description" content="Lying in the gutter, but looking at the stars.">
+<meta name="twitter:title" content="接触向量自回归模型">
+<meta name="twitter:description" content="向量自回归（VAR,Vector Auto regression）常用于预测相互联系的时间序列系统以及分析随机扰动对变量系统的动态影响。">
+<meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1524449564/2018_04_14-01.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://ulsonhu.cn/archives/2018/"/>
+  <link rel="canonical" href="http://ulsonhu.cn/接触向量自回归模型.html"/>
 
 
 
 
 
-  <title>归档 | Sonnet's Blog</title>
+  <title>接触向量自回归模型 | Sonnet's Blog</title>
   
 
 
@@ -146,7 +151,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,410 +289,277 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 40 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/接触向量自回归模型.html">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sonnet's Blog">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">接触向量自回归模型</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T00:00:00+08:00">
+                2018-04-14
+              </time>
+            
+
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/接触向量自回归模型.html" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">接触向量自回归模型</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/经济学/" itemprop="url" rel="index">
+                    <span itemprop="name">经济学</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-14T00:00:00+08:00"
-              content="2018-04-14" >
-          04-14
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+
+          
+              <div class="post-description">
+                  向量自回归（VAR,Vector Auto regression）常用于预测相互联系的时间序列系统以及分析随机扰动对变量系统的动态影响。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="Note:关于概率事件的运算.html" itemprop="url">
-              
-                <span itemprop="name">Note-关于概率事件的运算</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-12T00:00:00+08:00"
-              content="2018-04-12" >
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/HMM-隐马尔可夫模型.html" itemprop="url">
-              
-                <span itemprop="name">HMM-隐马尔可夫模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-01T00:00:00+08:00"
-              content="2018-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>VAR方法通过把系统中每一个内生变量,作为系统中<strong>所有内生变量的滞后值的函数</strong>来构造模型，从而回避了结构化模型的要求。Engle, Granger（1987）指出两个或多个非平稳时间序列的线性组合可能是平稳的。假如这样一种平稳的或的线性组合存在，这些非平稳（有单位根）时间序列之间被认为是具有协整关系的。这种平稳的线性组合被称为协整方程且可被解释为变量之间的长期均衡关系。VAR模型对于相互联系的时间序列变量系统是有效的预测模型，同时，向量自回归模型也被频繁地用于分析不同类型的随机误差项对系统变量的动态影响。如果变量之间不仅存在滞后影响，而不存在同期影响关系，则适合建立VAR模型，因为VAR模型实际上是把当期关系隐含到了随机扰动项之中。</p>
+<h2>目录</h2>
+<ul>
+<li>定义</li>
+<li>概述</li>
+<li>平稳性检验</li>
+<li>向量自回归模型（VAR）</li>
+<li>E-G检验与JJ检验</li>
+<li>误差修正模型</li>
+<li>脉冲响应函数</li>
+<li>方差分解</li>
+</ul>
+<h2>定义</h2>
+<p>向量自回归模型
+（英语：Vector Autoregression model，简称VAR模型）是一种常用的计量经济模型，由C.Sims提出。它扩充了只能使用一个变量的自回归模型(AR(1))，使容纳大于1个变量，因此经常用在多变量时间序列模型的分析上。</p>
+<p>VAR模型描述在同一样本期间内的 $n$ 个变量（内生变量）可以作为它们过去值的线性函数。</p>
+<p>一个 $VAR§$ 模型可以写成为：</p>
+<p>$$y_{t}=c+A_{1}y_{t-1}+A_{2}y_{t-2}+\cdots +A_{p}y_{t-p}+e_{t},$$</p>
+<p>其中：$c$ 是 $n* 1$ 常数向量，$A_i$ 是 $n*n$ 矩阵。$e_t$ 是 $n*1$ 误差向量，满足：</p>
+<ol>
+<li>$E(e_t)=0$ ,误差项的均值为 $0$</li>
+<li>$E(e_{t}e_{t}’)=\Omega $, 误差项的协方差矩阵为 $\Omega$.（一个 $n*n$ 正定矩阵）</li>
+<li>$E(e_{t}e_{t-k}’)=0$, （对于所有不为 $0$ 的 $k$ 都满足）,误差项不存在自相关</li>
+</ol>
+<h3>结构向量自回归</h3>
+<p>一个结构向量自回归（Structural VAR）模型可以写成为：</p>
+<p>$$ B_{0}y_{t}=c_{0}+B_{1}y_{t-1}+B_{2}y_{t-2}+\cdots +B_{p}y_{t-p}+\epsilon _{t},$$</p>
+<p>其中：$c_0$ 是 $n*1$ 常数向量，$B_i$ 是 $n*n$ 矩阵，$\epsilon_t$ 是 $n*1$ 误差向量。</p>
+<h2>概述</h2>
+<p>简单说VAR模型建立</p>
+<p>第一步：不问序列如何均可建立初步的VAR模型（建立过程中数据可能前平稳序列，也可能是部分平稳，还可能是没协整关系的同阶不平稳序列，也可能是不同阶的不平稳序列，滞后阶数任意指定。所有序列一般视为内生向量)，</p>
+<p>第二步：在建立的初步VAR后进行</p>
+<ol>
+<li>滞后阶数检验，以确定最终模型的滞后阶数</li>
+<li>在滞后阶数确定后进行因果关系检验，以确定哪些序列为外生变量</li>
+</ol>
+<p>至此重新构建VAR模型（此时滞后阶数已定，内外生变量已定），再进行AR根图表分析，</p>
+<ul>
+<li>如单位根均小于1，VAR构建完成可建立误差修正模型、脉冲响应函数及方差分解。</li>
+<li>如单位根有大于1的，考虑对原始序进行降阶处理（一阶单整序列处理方法：差分或取对数，二阶单整序列：理论上可以差分与取对数同时进行，但由于序列失去了经济含义，应放弃此处理，可考虑序列的趋势分解，如分解后仍然不能满足要求，可以罢工，不建立任何模型，休息或是打砸了电脑），处理过后对新的序列（包括最初的哪些平稳序列）不断重复第一步与第二步，直至满足稳定性为止</li>
+</ul>
+<p>第三步，建立最终的VAR后，可考虑SVAR模型。如果变量不仅存在滞后影响，还存在同期影响关系，则建立VAR模型不太合适，这种情况下需要进行结构分析。</p>
+<h2>平稳性检验</h2>
+<p>平稳性检验有3个作用：</p>
+<ol>
+<li>检验平稳性，若平稳，做格兰杰检验，非平稳，作协整检验。</li>
+<li>协整检验中要用到每个序列的单整阶数。</li>
+<li>判断时间序列的数据生成过程。</li>
+</ol>
+<p>VAR建模时<code>lag intervals for endogenous</code>要填滞后期，但是此时你并不能判断哪个滞后时最优的，因此要多次尝试，选择不同的滞后期，至 $AIC$ 或 $SC$ 最小时，所对应着的滞后为最优滞后，此时做出来的VAR模型才较为可靠。</p>
+<p>协整检验前需要提前估计VAR模型，原因在于，协整检验是对滞后期和检验形式非常敏感的检验，首先需要确定最优滞后。
+由于VAR是无约束的，而协整是有约束的，因此协整检验的最优滞后一般为VAR的最优滞后减去1，确定了最优滞后后，再去诊断检验形式，最终才能做协整。</p>
+<h2>E-G检验与JJ检验</h2>
+<p>当检验的数据是非平稳（即存在单位根），并且各个序列是同阶单整（协整检验的前提），想进一步确定变量之间是否存在协整关系，可以进行协整检验，协整检验主要有EG两步法和JJ检验</p>
+<ul>
+<li>EG两步法是基于回归残差的检验，可以通过建立OLS模型检验其残差平稳性</li>
+<li>JJ检验是基于回归系数的检验，前提是建立VAR模型（即模型符合ADL模式），确定最优滞后阶数</li>
+</ul>
+<h3>Granger因果检验</h3>
+<p>协整说的是变量之间存在长期的稳定关系，这只是从数量上得到的结论，但不能确定谁是因，谁是果。而因果关系检验就是为了解决这个问题。故，如果存在协整关系，如果存在协整可进一步检测格兰杰因果检验，看看某一个变量的先前的变化对另一个变量是否有影响。</p>
+<h3>步骤</h3>
+<p>变量 $X$ 是否为变量 $Y$ 的Granger原因，是可以检验的。 检验 $X$ 是否为引起 $Y$ 变化的Granger原因的过程如下：</p>
+<p>第一步：检验原假设“$H_0$：X不是引起Y变化的Granger原因”。首先，估计下列两个回归模型：</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1524449564/2018_04_14-01.png" width="95%">
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1524449564/2018_04_14-02.png" width="95%">
+<p>第二步：将 $Y$ 与 $X$ 的位置交换，按同样的方法检验原假设“$H_0$：Y不是引起X变化的Granger原因”。</p>
+<p>第三步：要得到“ $X$ 是 $Y$ 的Granger原因”的结论，必须同时拒绝原假设“$H_0$：X不是引起Y变化的Granger原因”和接受原假设“$H_0$：Y不是引起X变化的Granger原因”。</p>
+<blockquote>
+<p>格兰杰检验<strong>只能用于平稳序列</strong> 这是格兰杰检验的前提，而其因果关系并非我们通常理解的因与果的关系，而是说 $X$ 的前期变化能有效地解释 $Y$ 的变化，所以称其为“格兰杰原因”。</p>
+</blockquote>
+<h2>误差修正模型（VEC）</h2>
+<p>VEC是有协整约束（即有长期稳定关系）的VAR模型。当变量之间存在协整关系时，可以建立ECM进一步考察短期关系</p>
+<h2>参考文献</h2>
+<ul>
+<li>《高级计量经济学与Stata应用》.陈强</li>
+<li><a href="https://wenku.baidu.com/view/e56480cb9ec3d5bbfd0a746b.html" target="_blank" rel="noopener">向量自回归模型与向量误差修正模型的理论及EVIEWS操作</a></li>
+<li>[应用VAR模型时的15个注意点]<a href="http://bbs.pinggu.org/forum.php?mod=viewthread&amp;tid=3219921&amp;ctid=2272" target="_blank" rel="noopener">http://bbs.pinggu.org/forum.php?mod=viewthread&amp;tid=3219921&amp;ctid=2272</a></li>
+<li><a href="https://blog.csdn.net/oxuzhenyi/article/details/77850516" target="_blank" rel="noopener">R语言建立VAR模型分析联合内生变量的动态关系</a></li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/概率论杂谈篇一.html" itemprop="url">
-              
-                <span itemprop="name">概率论（离散空间）杂谈</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-20T00:00:00+08:00"
-              content="2018-03-20" >
-          03-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/用python做数据分析与科学计算(篇一).html" itemprop="url">
-              
-                <span itemprop="name">用python做数据分析与科学计算(篇一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-18T00:00:00+08:00"
-              content="2018-03-18" >
-          03-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/SAS基础学习篇(一).html" itemprop="url">
-              
-                <span itemprop="name">SAS基础学习篇(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-14T00:00:00+08:00"
-              content="2018-03-14" >
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Excel知识点备忘.html" itemprop="url">
-              
-                <span itemprop="name">Excel知识点备忘</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-12T00:00:00+08:00"
-              content="2018-03-12" >
-          03-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/MySQL语句学习及总结.html" itemprop="url">
-              
-                <span itemprop="name">MySQL语句学习及总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-06T00:00:00+08:00"
-              content="2018-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/VC维理论-统计学习理论基础.html" itemprop="url">
-              
-                <span itemprop="name">VC维理论-统计学习理论基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-03T00:00:00+08:00"
-              content="2018-03-03" >
-          03-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/LASSO回归算法.html" itemprop="url">
-              
-                <span itemprop="name">Lasso回归算法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-01T00:00:00+08:00"
-              content="2018-03-01" >
-          03-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我只是试试，自己给自己转点钱！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计量经济学/" rel="tag"><i class="fa fa-tag"></i> 计量经济学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="Note:关于概率事件的运算.html" rel="next" title="Note-关于概率事件的运算">
+                <i class="fa fa-chevron-left"></i> Note-关于概率事件的运算
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -695,6 +567,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -715,8 +591,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -815,6 +700,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">结构向量自回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">平稳性检验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">E-G检验与JJ检验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Granger因果检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">误差修正模型（VEC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -970,6 +871,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

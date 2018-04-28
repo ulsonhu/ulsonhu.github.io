@@ -4,8 +4,94 @@
 
     
   <url>
+    <loc>http://ulsonhu.cn/Note:%E5%85%B3%E4%BA%8E%E6%A6%82%E7%8E%87%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%BF%90%E7%AE%97.html</loc>
+    <lastmod>2018-04-28T08:00:32.375Z</lastmod>
+    <data>
+        <display>
+        <title>Note-关于概率事件的运算</title>
+        <pubTime>2018-04-11T16:00:00.000Z</pubTime>
+        
+        <tag>概率论</tag>
+         
+         
+           
+             
+              <breadCrumb title="概率论" url="http://ulsonhu.cn/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/%E6%8E%A5%E8%A7%A6%E5%90%91%E9%87%8F%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html</loc>
+    <lastmod>2018-04-28T08:00:06.579Z</lastmod>
+    <data>
+        <display>
+        <title>接触向量自回归模型</title>
+        <pubTime>2018-04-13T16:00:00.000Z</pubTime>
+        
+        <tag>计量经济学</tag>
+         
+         
+           
+             
+              <breadCrumb title="经济学" url="http://ulsonhu.cn/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/MySQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html</loc>
+    <lastmod>2018-04-28T07:54:34.101Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL语句学习及总结</title>
+        <pubTime>2018-03-05T16:00:00.000Z</pubTime>
+        
+        <tag>数据分析</tag>
+         
+        <tag>SQL</tag>
+         
+        <tag>数据库</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据分析" url="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B(Generalized%20Linear%20Model).html</loc>
+    <lastmod>2018-04-24T07:13:26.026Z</lastmod>
+    <data>
+        <display>
+        <title>广义线性模型(Generalized Linear Model)</title>
+        <pubTime>2017-01-25T16:00:00.000Z</pubTime>
+        
+        <tag>统计学</tag>
+         
+        <tag>Mathematic</tag>
+         
+         
+           
+             
+              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://ulsonhu.cn/HMM-%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B.html</loc>
-    <lastmod>2018-04-13T02:11:45.341Z</lastmod>
+    <lastmod>2018-04-13T08:55:24.280Z</lastmod>
     <data>
         <display>
         <title>HMM-隐马尔可夫模型</title>
@@ -141,9 +227,9 @@
         <title>用python做数据分析与科学计算(篇一)</title>
         <pubTime>2018-03-17T16:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>数据分析</tag>
+         
+        <tag>Python</tag>
          
         <tag>Machine Learning</tag>
          
@@ -234,30 +320,6 @@
         <tag>数据分析</tag>
          
         <tag>SAS</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据分析" url="http://ulsonhu.cn/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://ulsonhu.cn/MySQL%E8%AF%AD%E5%8F%A5%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%80%BB%E7%BB%93.html</loc>
-    <lastmod>2018-03-20T12:33:18.001Z</lastmod>
-    <data>
-        <display>
-        <title>MySQL语句学习及总结</title>
-        <pubTime>2018-03-05T16:00:00.000Z</pubTime>
-        
-        <tag>数据分析</tag>
-         
-        <tag>SQL</tag>
-         
-        <tag>数据库</tag>
          
          
            
@@ -366,9 +428,9 @@
         <title>MacOS下使用python的多版本方案</title>
         <pubTime>2017-12-31T16:00:00.000Z</pubTime>
         
-        <tag>Python</tag>
-         
         <tag>Mac</tag>
+         
+        <tag>Python</tag>
          
          
            
@@ -416,28 +478,6 @@
            
              
               <breadCrumb title="机器学习相关" url="http://ulsonhu.cn/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B(Generalized%20Linear%20Model).html</loc>
-    <lastmod>2018-03-11T04:39:00.142Z</lastmod>
-    <data>
-        <display>
-        <title>广义线性模型(Generalized Linear Model)</title>
-        <pubTime>2017-01-25T16:00:00.000Z</pubTime>
-        
-        <tag>统计学</tag>
-         
-        <tag>Mathematic</tag>
-         
-         
-           
-             
-              <breadCrumb title="数理统计" url="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
           
         </display>
     </data>

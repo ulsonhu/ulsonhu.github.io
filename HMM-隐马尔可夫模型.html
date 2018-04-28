@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584361/2018_04_10-1.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-2.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-3.png">
-<meta property="og:updated_time" content="2018-04-13T02:11:45.341Z">
+<meta property="og:updated_time" content="2018-04-13T08:55:24.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HMM-隐马尔可夫模型">
 <meta name="twitter:description" content="隐马尔可夫模型（Hidden Markov Model，$\text{HMM}$）是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。其难点是从可观察的参数中确定该过程的隐含参数。然后利用这些参数来作进一步的分析，例如模式识别。">
@@ -430,72 +430,65 @@
 然后我们掷骰子，得到一个数字，$1，2，3，4，5，6，7，8$中的一个。
 不停的重复上述过程，我们会得到一串数字，每个数字都是$1，2，3，4，5，6，7，8$中的一个。
 例如我们可能得到这么一串数字（掷骰子10次）：$1 6 3 5 2 7 3 5 2 4$</p>
-<p>这串数字叫做可见状态链。但是在隐马尔可夫模型中，我们不仅仅有这么一串可见状态链，还有一串隐含状态链。在这个例子里，这串隐含状态链就是你用的骰子的序列。比如，隐含状态链有可能是：D6 D8 D8 D6 D4 D8 D6 D6 D4 D8</p>
-<p>一般来说，$\text{HMM}$中说到的马尔可夫链其实是指隐含状态链，因为隐含状态（骰子）之间存在转换概率（transition probability）。在我们这个例子里，D6的下一个状态是D4，D6，D8的概率都是1/3。D4，D8的下一个状态是D4，D6，D8的转换概率也都一样是1/3。这样设定是为了最开始容易说清楚，但是我们其实是可以随意设定转换概率的。比如，我们可以这样定义，D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1。这样就是一个新的$\text{HMM}$。</p>
-<p>同样的，尽管可见状态之间没有转换概率，但是隐含状态和可见状态之间有一个概率叫做输出概率（emission probability）。就我们的例子来说，六面骰（D6）产生1的输出概率是1/6。产生2，3，4，5，6的概率也都是1/6。我们同样可以对输出概率进行其他定义。比如，我有一个被赌场动过手脚的六面骰子，掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。</p>
+<p>这串数字叫做<strong>可见状态链</strong>。但是在隐马尔可夫模型中，我们不仅仅有这么一串可见状态链，还有一串<strong>隐含状态链</strong>。在这个例子里，这串隐含状态链就是你用的骰子的序列。比如，隐含状态链有可能是：D6 D8 D8 D6 D4 D8 D6 D6 D4 D8</p>
+<p>一般来说，$\text{HMM}$中说到的马尔可夫链其实是指隐含状态链，因为隐含状态（骰子）之间存在转换概率（transition probability）。<font color="blue">在我们这个例子里，D6的下一个状态是D4，D6，D8的概率都是1/3。</font>D4，D8的下一个状态是D4，D6，D8的转换概率也都一样是1/3。这样设定是为了最开始容易说清楚，但是我们其实是可以随意设定转换概率的。比如，我们可以这样定义，D6后面不能接D4，D6后面是D6的概率是0.9，是D8的概率是0.1。这样就是一个新的$\text{HMM}$。</p>
+<p>同样的，尽管可见状态之间没有转换概率，但是隐含状态和可见状态之间有一个概率叫做<strong>输出概率</strong>（emission probability）。就我们的例子来说，六面骰（D6）产生1的输出概率是1/6。产生2，3，4，5，6的概率也都是1/6。我们同样可以对输出概率进行其他定义。比如，我有一个被赌场动过手脚的六面骰子，掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。</p>
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584361/2018_04_10-1.png" width="95%" height="95%">
 隐马尔可夫示意图
-<p>其实对于 $\text{HMM}$ 来说，如果提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。</p>
+<p>其实对于 $\text{HMM}$ 来说，<font color="blue">如果</font>提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。</p>
 <p>但是应用$\text{HMM}$模型时候呢，往往是缺失了一部分信息的，有时候你知道骰子有几种，每种骰子是什么，但是不知道掷出来的骰子序列；有时候你只是看到了很多次掷骰子的结果，剩下的什么都不知道。如果应用算法去估计这些缺失的信息，就成了一个很重要的问题。</p>
 <h2>HMM模型解决的三个问题</h2>
-<ol>
-<li>知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道每次掷出来的都是哪种骰子（隐含状态链）</li>
-</ol>
+<p><font color="blue">1. 知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道每次掷出来的都是哪种骰子（隐含状态链）</font></p>
 <blockquote>
-<p>这个问题呢，在语音识别领域呢，叫做解码问题。这个问题其实有两种解法，会给出两个不同的答案。每个答案都对，只不过这些答案的意义不一样。</p>
+<p>这个问题呢，在语音识别领域呢，叫做 <strong>解码问题</strong>。这个问题其实有两种解法，会给出两个不同的答案。每个答案都对，只不过这些答案的意义不一样。</p>
 <ul>
 <li>第一种解法求最大似然状态路径，说通俗点呢，就是我求一串骰子序列，这串骰子序列产生观测结果的概率最大。</li>
 <li>第二种解法呢，就不是求一组骰子序列了，而是求每次掷出的骰子分别是某种骰子的概率。比如说我看到结果后，我可以求得第一次掷骰子是D4的概率是0.5，D6的概率是0.3，D8的概率是0.2</li>
 </ul>
 </blockquote>
-<ol start="2">
-<li>还是知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道掷出这个结果的概率</li>
-</ol>
+<p><font color="blue">2. 还是知道骰子有几种（隐含状态数量），每种骰子是什么（转换概率），根据掷骰子掷出的结果（可见状态链），我想知道掷出这个结果的概率</font></p>
 <p>看似这个问题意义不大，因为你掷出来的结果很多时候都对应了一个比较大的概率。
 问这个问题的目的呢，其实是检测观察到的结果和已知的模型是否吻合。
 如果很多次结果都对应了比较小的概率，那么就说明我们已知的模型很有可能是错的，有人偷偷把我们的骰子給换了</p>
-<ol start="3">
-<li>知道骰子有几种（隐含状态数量），不知道每种骰子是什么（转换概率），观测到很多次掷骰子的结果（可见状态链），我想反推出每种骰子是什么（转换概率）</li>
-</ol>
+<p><font color="blue">3. <strong>知道骰子有几种（隐含状态数量），不知道每种骰子是什么（转换概率），观测到很多次掷骰子的结果（可见状态链），我想反推出每种骰子是什么(转换概率)</strong></font></p>
 <blockquote>
 <p>这个问题很重要，因为这是最常见的情况。很多时候我们只有可见结果，不知道$\text{HMM}$模型里的参数，我们需要从可见结果估计出这些参数，这是建模的一个必要步骤</p>
 </blockquote>
-<p>在实际应用中，比如中文分词，我们更多的是利用第三个问题去建模( 当然，如果利用工具的话，你拿到手的时候这部分的参数都是已经训练好了的 )，然后用第一个问题的解码去求隐含状态序列（这也是我们的目标，比如分词、词性标注等）.</p>
+<p>在实际应用中，比如中文分词，我们更多的是利用<strong>第三个问题</strong>去建模( 当然，如果利用工具的话，你拿到手的时候这部分的参数都是已经训练好了的 )，然后用<strong>第一个问题</strong>的解码去求隐含状态序列（这也是我们的目标，比如分词、词性标注等）.</p>
 <h3>破解骰子序列</h3>
-<p>在这个形象的掷骰子的例子中，我们重点讲一下Viterbi algorithm解码过程.</p>
-<p>举例来说，我知道我有三个骰子，六面骰，四面骰，八面骰。我也知道我掷了十次的结果<code>（1 6 3 5 2 7 3 5 2 4）</code>，我不知道每次用了那种骰子，我想知道最有可能的骰子序列</p>
+<p>举例来说，我知道我有三个骰子，六面骰，四面骰，八面骰。我也知道我掷了十次的结果<code>1 6 3 5 2 7 3 5 2 4</code>，我不知道每次用了那种骰子，我想知道最有可能的骰子序列</p>
 <p>其实最简单而暴力的方法就是穷举所有可能的骰子序列，然后依照第零个问题的解法把每个序列对应的概率算出来。然后我们从里面把对应最大概率的序列挑出来就行了。如果马尔可夫链不长，当然可行。如果长的话，穷举的数量太大，就很难完成了。</p>
 <p>另外一种很有名的算法叫做 Viterbi algorithm.</p>
 <h2>HMM 的几个要素</h2>
 <p>经过上面形象化的例子描述，读者应该对隐马尔科夫模型有了大致的了解，下面通过引入数学化描述，来正式介绍 $\text{HMM}$.读者在阅读 $\text{HMM}$ 数学化描述时，可以对照前面掷骰子的问题来理解.</p>
 <ul>
-<li>StatusSet :
+<li><font color="blue">StatusSet : </font>
 状态值集合，常用 $S=\{S_1,S_2,\cdots ,S_Q\}$ 来表示系统的隐状态集合，其中 $Q$ 为隐状态数。用 $q_t=S_i$ 表示系统在时刻 $t$ 处于隐状态 $S_i$，隐状态序列为$Q=\{q_1,q_2,\cdots ,q_t\}$</li>
 </ul>
 <p>例如上面的三个不同的骰子，这些状态之间满足马尔科夫性质，是马尔科夫模型中实际所隐含的状态，这些状态通常无法直接观察得到.</p>
 <ul>
-<li>ObservedSet :
+<li><font color="blue">ObservedSet :</font>
 观察值集合，观测序列记为 $O = (o_1,o_2,\cdots,o_T)$，其中 $T$ 为观测序列的长度； $O_t$为时刻$t$  的观测随机变量，可以是一个数值或向量.</li>
 </ul>
 <blockquote>
 <p>例如上面的 $1,2,3,4,5,\cdots $ 等值，在模型中与隐含状态相关联，可通过直接观测得到.</p>
 </blockquote>
 <ul>
-<li>TransProbMatrix :
+<li><font color="blue">TransProbMatrix :</font>
 转移概率矩阵，状态转移的概率分布可表示为 $A=\{a_{ij}\}$，其中 $a_{ij} = P(q_{t+1} = S_j | q_t = S_i), 1 \leq i,j \leq Q$，且满足$a_{ij} \geq 0,\sum_{j=1}^Q a_{ij} = 1$ ，表示时刻 $t$ 从状态 $a_i$ 状态转移到时刻 $t+1$ 状态 $a_j$ 的概率.</li>
 </ul>
 <blockquote>
 <p>例如上面的取不同骰子的概率，描述了 $\text{HMM}$ 模型中各个状态之间的转移概率，</p>
 </blockquote>
 <ul>
-<li>EmitProbMatrix :
-发射概率矩阵，假设观测变量的样本空间为$V$ ，在状态 $S_i$ 时输出观测变量的概率分布可表示为:$B = \{ b_i(v),1 \leq i \leq Q,v \in V \}$ ，其中$b_i(v) = f\{ O_t = v | q_t = S_i \}$ 。</li>
+<li><font color="blue">EmitProbMatrix :
+发射概率矩阵，假设观测变量的样本空间为$V$ ，在状态 $S_i$ 时输出观测变量的概率分布可表示为:$B = \{ b_i(v),1 \leq i \leq Q,v \in V \}$ ，其中$b_i(v) = f\{ O_t = v | q_t = S_i \}$ 。</font></li>
 </ul>
 <blockquote>
 <p>例如上面的每个骰子取不同值的概率，令 $N$代表隐含状态数目， $M$代表可观测状态数目，则 $B_{ij} = P(O_i | S_j),1 \leq i \leq M,1 \leq j \leq N$ 表示在 $t$ 时刻、隐含状态是$S_j$  条件下，观察状态为$O_i$  的概率.</p>
 </blockquote>
 <ul>
-<li>InitStatus :
+<li><font color="blue">InitStatus :</font>
 初始状态分布，一般用 $\pi $ 来表示，即 $\pi = \{ \pi_i,1 \leq i \leq Q \}$，其中 $\pi_i = P\{ q_1 = S_i \}$
 例如上面我们假设投掷的是第一枚骰子，表示隐含状态在初始时刻 $t=1$ 的概率矩阵.</li>
 </ul>
@@ -546,9 +539,9 @@ $$P(O,Q|\lambda) = P(O|Q,\lambda) P(Q|\lambda) \\ = \pi_{q_1} b_{q_1}(o_1) a_{q_
 <p>该算法定义<strong>前向概率变量</strong>
 $$\alpha_t(i) : \alpha_t(i) = P(o_1,o_2,\cdots,o_t,q_t = S_i | \lambda)$$
 $\alpha(t_i)$ 可由下面递推公式计算得到 :</p>
-<p>初始化: $\alpha_1(i) = \pi_i b_i(o_1), 1 \leq i \leq Q$</p>
-<p>递推:$\alpha_{t+1}(j) =  \sum_{i=1}^Q \alpha_t(i) a_{ij} ] b_j(o_{t+1}) , 1 \leq j \leq Q,1 \leq t \leq T-1$</p>
-<p>结束: $P(O | \lambda) = \sum_{i=1}^Q \alpha_T(i)$</p>
+<p>初始化:$\alpha_1(i) = \pi_i b_i(o_1), 1 \leq i \leq Q$</p>
+<p>递推:$$\alpha_{t+1}(j) = [ \sum_{i=1}^Q \alpha_t(i) a_{ij} ] b_j(o_{t+1}) , 1 \leq j \leq Q,1 \leq t \leq T-1$$</p>
+<p>结束:$P(O | \lambda) = \sum_{i=1}^Q \alpha_T(i)$</p>
 <p>其中$\sum_{i=1}^Q \alpha_T(i)$  是把最后 $T$ 时刻的所有可能的状态下观察到 $O$ 的概率求和；因为到最后 $T$ 时刻时，每一条状态路径都能观察到观测序列 $O$，且有一个生成概率，即$\alpha_T(i)$，于是将  $T$时刻所有可能的状态对应的前向概率变量累加，就是将所有可能观察到观测序列的状态序列的概率相加，即 $P(O|\lambda)$
 上述前向算法的递推关系如图所示:</p>
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-2.png" width="95%" height="95%">
@@ -556,8 +549,7 @@ $\alpha(t_i)$ 可由下面递推公式计算得到 :</p>
 $$\beta_t(i) : \beta_t(i) = P(o_{t+1},o_t,\cdots,o_T | q_t = S_i,\lambda)$$</p>
 <p>则 $\beta_t(i)$ 可由下面递推公式计算，后向算法的递推关系图如下所示:</p>
 <p>初始化 : $\beta_T(i) = 1, 1 \leq i \leq Q$</p>
-<p>递推公式 :
-$$\beta_t(i) = \sum_{j=1}^Q a_{ij} b_j(o_{t+1}) \beta_{t+1}(j), 1 \leq i \leq Q,t = T-1,\cdots,1$$</p>
+<p>递推公式:$$\beta_t(i) = \sum_{j=1}^Q a_{ij} b_j(o_{t+1}) \beta_{t+1}(j), 1 \leq i \leq Q,t = T-1,\cdots,1$$</p>
 <p>结束 : $P(O | \lambda) = \sum_{i=1}^Q \beta_1(i) \pi_i = \beta_0(1)$</p>
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1523584358/2018_04_10-3.png" width="95%" height="95%">
 <p>根据前向变量和后向变量的定义，显然下式成立 ：</p>
@@ -727,6 +719,10 @@ $$a_{ij}^{(n+1)} = \frac{\sum_{t=1}^{T-1} \xi_t(i,j)}{\sum_{t=1}^{T-1} \gamma_t(
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="Note:关于概率事件的运算.html" rel="prev" title="Note-关于概率事件的运算">
+                Note-关于概率事件的运算 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -806,7 +802,7 @@ $$a_{ij}^{(n+1)} = \frac{\sum_{t=1}^{T-1} \xi_t(i,j)}{\sum_{t=1}^{T-1} \gamma_t(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -828,7 +824,7 @@ $$a_{ij}^{(n+1)} = \frac{\sum_{t=1}^{T-1} \xi_t(i,j)}{\sum_{t=1}^{T-1} \gamma_t(
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

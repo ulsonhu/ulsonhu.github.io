@@ -4,19 +4,21 @@
 
     
   <url>
-    <loc>http://ulsonhu.cn/Note:%E5%85%B3%E4%BA%8E%E6%A6%82%E7%8E%87%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%BF%90%E7%AE%97.html</loc>
-    <lastmod>2018-04-28T08:00:32.375Z</lastmod>
+    <loc>http://ulsonhu.cn/Note-%E5%85%B3%E4%BA%8E%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%BF%90%E7%AE%97.html</loc>
+    <lastmod>2018-05-04T14:59:25.393Z</lastmod>
     <data>
         <display>
-        <title>Note-关于概率事件的运算</title>
-        <pubTime>2018-04-11T16:00:00.000Z</pubTime>
+        <title>Note-关于事件的运算</title>
+        <pubTime>2018-04-19T16:00:00.000Z</pubTime>
         
-        <tag>概率论</tag>
+        <tag>数理统计</tag>
+         
+        <tag>Mathematic</tag>
          
          
            
              
-              <breadCrumb title="概率论" url="http://ulsonhu.cn/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+              <breadCrumb title="Note" url="http://ulsonhu.cn/categories/Note/"/>
           
         </display>
     </data>
@@ -25,7 +27,7 @@
     
   <url>
     <loc>http://ulsonhu.cn/%E6%8E%A5%E8%A7%A6%E5%90%91%E9%87%8F%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html</loc>
-    <lastmod>2018-04-28T08:00:06.579Z</lastmod>
+    <lastmod>2018-05-04T14:58:37.115Z</lastmod>
     <data>
         <display>
         <title>接触向量自回归模型</title>
@@ -37,6 +39,26 @@
            
              
               <breadCrumb title="经济学" url="http://ulsonhu.cn/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://ulsonhu.cn/%E7%90%86%E8%A7%A3%E6%8B%93%E6%89%91%E7%A9%BA%E9%97%B4%E7%9A%84%E7%B4%A7%E6%80%A7.html</loc>
+    <lastmod>2018-05-04T14:54:39.593Z</lastmod>
+    <data>
+        <display>
+        <title>理解拓扑空间的紧性</title>
+        <pubTime>2018-04-27T16:00:00.000Z</pubTime>
+        
+        <tag>Mathematic</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学" url="http://ulsonhu.cn/categories/%E6%95%B0%E5%AD%A6/"/>
           
         </display>
     </data>
@@ -183,9 +205,9 @@
         <title>概率论（离散空间）杂谈</title>
         <pubTime>2018-03-19T16:00:00.000Z</pubTime>
         
-        <tag>Mathematic</tag>
-         
         <tag>概率论</tag>
+         
+        <tag>Mathematic</tag>
          
          
            

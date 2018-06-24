@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ulsonhu.cn/"/>
-  <updated>2018-05-04T14:54:39.593Z</updated>
+  <updated>2018-06-24T16:27:53.139Z</updated>
   <id>http://ulsonhu.cn/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Schwarz不等式知识归纳</title>
+    <link href="http://ulsonhu.cn/Schwarz%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%9F%A5%E8%AF%86%E5%BD%92%E7%BA%B3.html"/>
+    <id>http://ulsonhu.cn/Schwarz不等式知识归纳.html</id>
+    <published>2018-06-09T16:00:00.000Z</published>
+    <updated>2018-06-24T16:27:53.139Z</updated>
+    
+    <content type="html"><![CDATA[<p>Schwarz 不等式是个应用广泛的不等式，常见于线性代数的内积空间，数学分析的无穷级数，连续函数的积分以及概率论中的方差、协方差。</p><p>一般表述为</p><p>$\vert \langle x,y\rangle \vert ^2 \leq \langle x,x\rangle \dot \langle y,y \rangle$</p><p>在欧几里得空间$\mathcal{R^n}$中，$$(\sum_{i=1}^{n}x_i y_i)^2 \leq (\sum_{i=1}^{n}x_i^2)(\sum_{i=1}^{n}y_i^2)$$</p><p>$$\vert \int f^*(x)g(x)dx \vert ^2 \leq \int \vert f(x) \vert ^2dx \dot \int \vert g(x) \vert ^2dx$$</p><p>复向量空间 $\mathbb{C}^n$ 中，考虑两个向量 $x=(x_1,\ldots,x_n),y=(y_1,\ldots,y_n)$将 Schwarz 不等式两边平方并使用标准向量内积，可得$$\vert \sum_{i=1}^{n}\overline{x_i}{y_i}\vert ^2\leq \sum_{i=1}^{n}\vert x_i\vert ^2\cdot\sum_{j=1}^n\vert y_i\vert^2$$上面的式子描述了数列乘积之和与数列平方和乘积的 Cauchy 不等式。由于上式与 Schwarz 不等式本质上相同，故我们经常将上式称作 <strong>Cauchy-Schwarz</strong> 不等式。现在考虑我们熟悉的区间 $[0,1]$上的连续函数空间，Schwarz 不等式形式可以表达成,</p><p>$$\vert \int_0^1 \bar{f(t)}g(t) dt \vert^2 \leq \int_0^1 \vert f(t) \vert ^2dt \dot \int_0^1 g(t) \vert ^2dt$$</p><p>在一般的广义向量空间，我们定义二向量 $x$ 和 $y$ 的距离为</p><p>$$d(\mathbf{x},\mathbf{y})=\vert \mathbf{x}-\mathbf{y} \Vert = \sqrt{\langle\mathbf{x}-\mathbf{y},\mathbf{x}-\mathbf{y} \rangle}$$</p><p>注意，$d$ 称作向量范数，需要满足以下三个性质：</p><ol><li>$d(\mathbf{x},\mathbf{y})=d(\mathbf{y},\mathbf{x})$</li><li>$d(\mathbf{x},\mathbf{y})\geq 0$ ，当且仅当 $\mathbf{x}=\mathbf{y} $时，$d(\mathbf{x},\mathbf{y})=0$。</li><li>$d(\mathbf{x},\mathbf{y})\leq d(\mathbf{x},\mathbf{z})+d(\mathbf{z},\mathbf{y})$</li></ol><p>显然，向量范数 满足(1) 和 (2)，性质 (3) 即为三角不等式，此式可由 Schwarz 不等式导出，如下：</p><h3>关于证明</h3><p>可参考：<a href="https://ccjou.wordpress.com/2010/03/10/schwarz-%E4%B8%8D%E7%AD%89%E5%BC%8F/" target="_blank" rel="noopener">以 Bessel 不等式证明 Schwarz 不等式</a></p><h3>延伸点</h3><p>从数学分析到泛函分析里最重要的一些不等式:</p><ul><li>Schwarz不等式</li><li>Jesen不等式（凸分析与随机数学中出现得比较多）</li><li>赫尔德（Holder）不等式</li><li>闵可夫斯基（Minkowski）不等式</li><li>Hilbert空间的贝塞尔不等式</li><li>Poincare不等式（变分学中非常重要的不等式）</li><li>Soblev空间嵌入定理（在变分学和偏微分方程中非常重要的不等式）</li></ul><p>以上这些不等式，是必须记住、经常用到（不仅仅在数学自身学科中用到）的最基本的不等式。</p><p>结合运筹学与控制论方向，顺便说一说必须牢牢记住的、最常用的<strong>分析学</strong>定理:</p><ul><li>Banach不动点定理</li><li>Hilbert空间的投影定理</li><li>Hahn-Banach定理（核心中的核心）与分离超平面定理</li><li>反函数定理和隐函数定理（赋范线性空间的微分学）</li><li>阿尔采拉-阿斯科利定理</li><li>Sobolev嵌入定理</li><li>Rellich Kontracheev紧嵌入定理</li><li>Eblerlin Schulyman定理</li><li>Lagrange乘子定理</li><li>Kuhn-Tucker定理（无限维空间的版本，基于Hahn-Banach定理）</li><li>Pontryagin最大值原理（利用Frechet微分理论和前面的乘子定理去理解即可）</li><li>Brouwer（布劳威尔）不动点定理</li><li>Schaulder（绍德）不动点定理</li></ul><h3>复变函数中的柯西不等式</h3><p>设 $ f(z)$ 在区域 $D$ 及其边界上解析，$a$ 为 $D$ 内一点，以 $a$ 为圆心做圆周 $C_R: |z-a|=R$，只 $C_R$ 及其内部 $G$ 均被 $D$ 包含，则有：</p><p>$$\vert f^{(n)}(z_0) \vert \leq \frac{n!M}{R^n}$$</p><p>其中，$M$ 是 $\vert f(z) \vert$ 的最大值，$M= \max \vert f(x) \vert$</p><h3>其它推广</h3><p>$$\sqrt {\sum _{i=1}^{n} (\sum _{j=1}^{m} a_{ij})^2} \leq \sum _{j=1}^{m} \sqrt {\sum _{i=1}^{n}a_{ij}^2} \\ m \req \alpha &gt; 0,(\sum _{i=1}^{n} \prod _{j=1}^{m} a_{ij})^{\alpha }\leq \prod _{j=1}^{m}\sum _{i=1}^{n} a_{ij}^\alpha$$</p>]]></content>
+    
+    <summary type="html">
+    
+      Schwarz 不等式是个应用广泛的不等式，常见于线性代数的内积空间，数学分析的无穷级数，连续函数的积分以及概率论中的方差、协方差。
+    
+    </summary>
+    
+      <category term="数学" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="Mathematic" scheme="http://ulsonhu.cn/tags/Mathematic/"/>
+    
+  </entry>
   
   <entry>
     <title>理解拓扑空间的紧性</title>
@@ -126,9 +148,9 @@
       <category term="概率论" scheme="http://ulsonhu.cn/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
     
     
-      <category term="概率论" scheme="http://ulsonhu.cn/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
-    
       <category term="Mathematic" scheme="http://ulsonhu.cn/tags/Mathematic/"/>
+    
+      <category term="概率论" scheme="http://ulsonhu.cn/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
     
   </entry>
   
@@ -305,30 +327,6 @@
   </entry>
   
   <entry>
-    <title>广义矩估计(GMM)方法</title>
-    <link href="http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html"/>
-    <id>http://ulsonhu.cn/广义矩估计(GMM)方法.html</id>
-    <published>2018-02-23T16:00:00.000Z</published>
-    <updated>2018-03-31T15:59:43.886Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先广义矩估计($GMM$)很容易使我们联想到统计学中参数估计方法之一的矩估计。</p><h2>矩估计</h2><p>矩估计是什么呢？简单的说，就是用样本矩代替总体矩进行统计推断的方法。</p><p>一个最基础的例子是正态总体的参数估计问题。如果$x_i \sim N(\mu,{\sigma}^2)$，如何估计$\mu$和$\sigma$呢？本科的统计学一般会介绍两种方法：极大似然估计和矩估计。其中矩估计是我们今天的主角。观察到：</p><p>$$E(x_i)=\mu,\quad E(x_{i}^2)={\mu}^2+{\sigma}^2$$而根据大数定理，在一定的条件下，我们有：$$\bar{x_i}-\mu=O_p(1),\quad \bar{x_{i}^2}={\mu}^2+{\sigma}^2+O_p(1)$$</p><p>也就是说，当样本量足够大的时候，样本矩与总体矩只差了一个无穷小量，那么我们是不是可以<font color="blue">用样本矩代替总体矩得到参数的估计呢？</font></p><p>按照上面的思路，我们把$O_p(1)$去掉，同时把未知的总体参数写成其估计值，也就是$\hat{x}$的形式，我们得到了：$$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p><p>如此，我们得到了两个总体矩的点估计。<font color="blue">在这个简单的例子里面，你只要把上面的大数定理的结论带到上面两个式子里面，很容易的就可以证明出两个点估计是一致的估计量。当然，值得注意的是，即便我使用的是矩条件，$\sigma$的估计也不是无偏的。一般而言，除了特殊情况，不管是$MLE$还是$MM$还是$GMM$，都不一定可以得到无偏的估计量。特别是在比较复杂的应用里面，一致就很不错了，无偏性的讨论真的繁琐。</font></p><h2>广义矩估计</h2><p>在上面的例子中，我们只使用了<strong>两个矩条件</strong>。然而我们知道，正态分布的矩是有无穷多个可以用的，那么我们是不是可以使用更多的矩条件呢？</p><p>但是有个问题不好解决。在这个例子里面，我们有两个未知参数，如果只使用一阶矩，那么只有一个方程解两个未知数，显然是不可能的。像上面一样，我们用两个矩条件解两个未知数，就解出来了。然而，当我们用一到三阶矩，总共三个方程求解的时候，三个方程求解两个未知数，可能无解。</p><p>方程数多了，反而没有解了，为什么呢？其实很简单，用三个方程中的任意两个方程，都可以求出一组解，那么三个方程我们就可以求出三组解。所以应该如何把这些矩条件都用上呢？到这里我们不妨引入一些记号。还是使用上面的例子，我们把上面的三个矩条件写到一个向量里面去，记：</p><p>$$g(x_i,\theta)=[x_i-\mu,{x_i}^2-\mu^2-\sigma^2,{x_i}^3-\mu^3-3\cdot \mu \sigma^2],\theta={\mu,\sigma^2}$$我们可以得到一个$3*1$的列向量，并且：</p><p>$$Eg(x_i,\theta)=0$$</p><p>上面就是我们要用的矩条件。而根据上面的思路，用其样本矩代替总体矩：</p><p>$$\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})=0$$解这个方程应该就可以得到参数$\theta$的估计。但是正如上面所说的，三个方程两个未知数，并不能确保这个方程有解，所以必须想一些其他办法。一个比较自然的想法是，上面的矩条件等于0，虽然我不太可能保证三个方程同时等于0，但是仿照$OLS$，我们可以让他们的平方和最小，也就是：</p><p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}’[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$这样我们就能保证三个矩条件的样本矩都足够贴近于0，当然不可能同时为0。这样不就综合使用了三个矩条件的信息么？</p><p>更一般的，由于上面的$g$函数是一个$3*1$的列向量，我们可以使用一个权重矩阵$W$来赋予每个矩条件以不同的权重：</p><p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}'W[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$</p><p>只要这个$W$是一个正定矩阵，那么仍然可以保证每个样本矩都足够贴近于0。那么问题来了，既然对$W$的要求只要求正定矩阵，那么使用不同的权重矩阵就有可能得到不同的结果。</p><p>问题是，有没有一个最优的权重矩阵呢？当然是有的。可以证明，最优的权重矩阵应该是：使用这个权重矩阵，就得到了最有效的估计。</p><blockquote><p>$GMM$估计相当于给不同的矩条件赋予了不同的权重，然后才能这个权重得到最小化条件，不同的权重阵其实就对不同的估计量，“OLS, IV, 2SLS, GLS, RE, FE, SUR, 3SLS, Pooled OLS…全是它的特殊情况”</p></blockquote><h2>GMM延伸</h2><p>计量经济学的很多问题基本都可以归结为$GMM$的问题。从最简单的$OLS、2SLS$到稍微复杂一点的面板数据、动态面板等等，本质上都是在找矩条件。比如工具变量的$2SLS$，可以发现矩条件不过就是：</p><p>$$E[(y_i-{x_i}’\beta)*z_i]=0$$</p><p>套一下上面的公式，最优权重矩阵(的逆)为：</p><p>$$E[(y_i-{x_i}’\beta_0)*z_i*{z_i}’*(y_i-{x_i}’\beta_0)’]=E[e_i^2z_i{z_i}’]=\sigma^2Ez_i{z_i}’$$</p><p>带入到目标函数中，就得到了$2SLS$。甚至，一些其他的估计量，比如$MLE、M-estimator$等，在一定的条件下也可以转化为$GMM$，因为这些估计量的一阶条件可以看成是矩条件。所以$GMM$也就变成了一个统一的框架。为什么$GMM$这么受欢迎呢？因为$GMM$把复杂的统计过程抽象化成为一个（看似）简单的过程：找矩条件。只要你能找到矩条件，你就能估计。$GMM$把估计的繁琐细节全都抽象了，面对一个模型，你所需要做的所有事情就是找到矩条件，证明这个模型是可以识别的，然后什么也不用管，一股脑儿塞进去，结果就出来了。</p><p>所以呢如果你去看一些稍微复杂的模型，基本都可以归结为矩条件。</p><h2>参考</h2><ol><li><a href="https://www.zhihu.com/question/41312883/answer/91484566" target="_blank" rel="noopener">如何用简单的例子解释什么是 Generalized Method of Moments (GMM)?</a></li><li><a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1" target="_blank" rel="noopener">广义矩估计</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。
-    
-    </summary>
-    
-      <category term="数理统计" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
-    
-    
-      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
-    
-      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JUMP少年周刊-最全漫画排行榜</title>
     <link href="http://ulsonhu.cn/JUMP%E5%B0%91%E5%B9%B4%E5%91%A8%E5%88%8A-%E6%9C%80%E5%85%A8%E6%BC%AB%E7%94%BB%E6%8E%92%E8%A1%8C%E6%A6%9C.html"/>
     <id>http://ulsonhu.cn/JUMP少年周刊-最全漫画排行榜.html</id>
@@ -349,6 +347,30 @@
       <category term="JUMP周刊" scheme="http://ulsonhu.cn/tags/JUMP%E5%91%A8%E5%88%8A/"/>
     
       <category term="漫画" scheme="http://ulsonhu.cn/tags/%E6%BC%AB%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>广义矩估计(GMM)方法</title>
+    <link href="http://ulsonhu.cn/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1(GMM)%E6%96%B9%E6%B3%95.html"/>
+    <id>http://ulsonhu.cn/广义矩估计(GMM)方法.html</id>
+    <published>2018-02-23T16:00:00.000Z</published>
+    <updated>2018-03-31T15:59:43.886Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先广义矩估计($GMM$)很容易使我们联想到统计学中参数估计方法之一的矩估计。</p><h2>矩估计</h2><p>矩估计是什么呢？简单的说，就是用样本矩代替总体矩进行统计推断的方法。</p><p>一个最基础的例子是正态总体的参数估计问题。如果$x_i \sim N(\mu,{\sigma}^2)$，如何估计$\mu$和$\sigma$呢？本科的统计学一般会介绍两种方法：极大似然估计和矩估计。其中矩估计是我们今天的主角。观察到：</p><p>$$E(x_i)=\mu,\quad E(x_{i}^2)={\mu}^2+{\sigma}^2$$而根据大数定理，在一定的条件下，我们有：$$\bar{x_i}-\mu=O_p(1),\quad \bar{x_{i}^2}={\mu}^2+{\sigma}^2+O_p(1)$$</p><p>也就是说，当样本量足够大的时候，样本矩与总体矩只差了一个无穷小量，那么我们是不是可以<font color="blue">用样本矩代替总体矩得到参数的估计呢？</font></p><p>按照上面的思路，我们把$O_p(1)$去掉，同时把未知的总体参数写成其估计值，也就是$\hat{x}$的形式，我们得到了：$$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p><p>如此，我们得到了两个总体矩的点估计。<font color="blue">在这个简单的例子里面，你只要把上面的大数定理的结论带到上面两个式子里面，很容易的就可以证明出两个点估计是一致的估计量。当然，值得注意的是，即便我使用的是矩条件，$\sigma$的估计也不是无偏的。一般而言，除了特殊情况，不管是$MLE$还是$MM$还是$GMM$，都不一定可以得到无偏的估计量。特别是在比较复杂的应用里面，一致就很不错了，无偏性的讨论真的繁琐。</font></p><h2>广义矩估计</h2><p>在上面的例子中，我们只使用了<strong>两个矩条件</strong>。然而我们知道，正态分布的矩是有无穷多个可以用的，那么我们是不是可以使用更多的矩条件呢？</p><p>但是有个问题不好解决。在这个例子里面，我们有两个未知参数，如果只使用一阶矩，那么只有一个方程解两个未知数，显然是不可能的。像上面一样，我们用两个矩条件解两个未知数，就解出来了。然而，当我们用一到三阶矩，总共三个方程求解的时候，三个方程求解两个未知数，可能无解。</p><p>方程数多了，反而没有解了，为什么呢？其实很简单，用三个方程中的任意两个方程，都可以求出一组解，那么三个方程我们就可以求出三组解。所以应该如何把这些矩条件都用上呢？到这里我们不妨引入一些记号。还是使用上面的例子，我们把上面的三个矩条件写到一个向量里面去，记：</p><p>$$g(x_i,\theta)=[x_i-\mu,{x_i}^2-\mu^2-\sigma^2,{x_i}^3-\mu^3-3\cdot \mu \sigma^2],\theta={\mu,\sigma^2}$$我们可以得到一个$3*1$的列向量，并且：</p><p>$$Eg(x_i,\theta)=0$$</p><p>上面就是我们要用的矩条件。而根据上面的思路，用其样本矩代替总体矩：</p><p>$$\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})=0$$解这个方程应该就可以得到参数$\theta$的估计。但是正如上面所说的，三个方程两个未知数，并不能确保这个方程有解，所以必须想一些其他办法。一个比较自然的想法是，上面的矩条件等于0，虽然我不太可能保证三个方程同时等于0，但是仿照$OLS$，我们可以让他们的平方和最小，也就是：</p><p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}’[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$这样我们就能保证三个矩条件的样本矩都足够贴近于0，当然不可能同时为0。这样不就综合使用了三个矩条件的信息么？</p><p>更一般的，由于上面的$g$函数是一个$3*1$的列向量，我们可以使用一个权重矩阵$W$来赋予每个矩条件以不同的权重：</p><p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}'W[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$</p><p>只要这个$W$是一个正定矩阵，那么仍然可以保证每个样本矩都足够贴近于0。那么问题来了，既然对$W$的要求只要求正定矩阵，那么使用不同的权重矩阵就有可能得到不同的结果。</p><p>问题是，有没有一个最优的权重矩阵呢？当然是有的。可以证明，最优的权重矩阵应该是：使用这个权重矩阵，就得到了最有效的估计。</p><blockquote><p>$GMM$估计相当于给不同的矩条件赋予了不同的权重，然后才能这个权重得到最小化条件，不同的权重阵其实就对不同的估计量，“OLS, IV, 2SLS, GLS, RE, FE, SUR, 3SLS, Pooled OLS…全是它的特殊情况”</p></blockquote><h2>GMM延伸</h2><p>计量经济学的很多问题基本都可以归结为$GMM$的问题。从最简单的$OLS、2SLS$到稍微复杂一点的面板数据、动态面板等等，本质上都是在找矩条件。比如工具变量的$2SLS$，可以发现矩条件不过就是：</p><p>$$E[(y_i-{x_i}’\beta)*z_i]=0$$</p><p>套一下上面的公式，最优权重矩阵(的逆)为：</p><p>$$E[(y_i-{x_i}’\beta_0)*z_i*{z_i}’*(y_i-{x_i}’\beta_0)’]=E[e_i^2z_i{z_i}’]=\sigma^2Ez_i{z_i}’$$</p><p>带入到目标函数中，就得到了$2SLS$。甚至，一些其他的估计量，比如$MLE、M-estimator$等，在一定的条件下也可以转化为$GMM$，因为这些估计量的一阶条件可以看成是矩条件。所以$GMM$也就变成了一个统一的框架。为什么$GMM$这么受欢迎呢？因为$GMM$把复杂的统计过程抽象化成为一个（看似）简单的过程：找矩条件。只要你能找到矩条件，你就能估计。$GMM$把估计的繁琐细节全都抽象了，面对一个模型，你所需要做的所有事情就是找到矩条件，证明这个模型是可以识别的，然后什么也不用管，一股脑儿塞进去，结果就出来了。</p><p>所以呢如果你去看一些稍微复杂的模型，基本都可以归结为矩条件。</p><h2>参考</h2><ol><li><a href="https://www.zhihu.com/question/41312883/answer/91484566" target="_blank" rel="noopener">如何用简单的例子解释什么是 Generalized Method of Moments (GMM)?</a></li><li><a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1" target="_blank" rel="noopener">广义矩估计</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。
+    
+    </summary>
+    
+      <category term="数理统计" scheme="http://ulsonhu.cn/categories/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+      <category term="统计学" scheme="http://ulsonhu.cn/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/"/>
+    
+      <category term="数量经济学" scheme="http://ulsonhu.cn/tags/%E6%95%B0%E9%87%8F%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
   </entry>
   
@@ -468,28 +490,6 @@
     
     
       <category term="Python" scheme="http://ulsonhu.cn/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写在大三下学期</title>
-    <link href="http://ulsonhu.cn/%E5%86%99%E5%9C%A8%E5%A4%A7%E4%B8%89%E4%B8%8B%E5%AD%A6%E6%9C%9F.html"/>
-    <id>http://ulsonhu.cn/写在大三下学期.html</id>
-    <published>2017-03-22T05:20:09.000Z</published>
-    <updated>2018-03-11T04:38:52.339Z</updated>
-    
-    <content type="html"><![CDATA[<p>  大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:</p><a id="more"></a><h2>时代的浪潮已经拍到了我们这代人的脚下</h2><p>  每每看到知乎上“大三了，考研还来得及吗？”，“大三了，学计算机还来得及吗？”诸如此类的问题，总也庆幸自己两年多的时间做了一些事读了一些书，但我知道自己做的还远远远远不够看。大三的生活，伴着毕业的步伐，来的匆匆。自己的学年论文加上向老师申请的论文，学的懵懂的专业课，还得挤出时间来为考研蓄力，冷不丁还夹带点感情的纠结。Flag ～</p><p>时光总是匆匆的催人老，情爱总是让人烦恼。</p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=394467&auto=0&height=66"></iframe><h2>写博客的初衷</h2><p>  大脑的存储空间是有限的，为了让新知识进来，你就得把暂时用不上旧知识遗忘掉。但是，自己当时花了那么多宝贵时间，一步一步摸索着过来所接触到的总结过的知识点，就这样被遗忘，或者被藏在某本笔记本的角落是在太可惜。当你怀着一颗热忱的心去进入一个领域，你只有从宏观上清楚了行业整体，从微观上把握住各个知识点原理，才算得上入门选手。</p><p>  为此，记录下来并且可查可复习非常重要，这也就是Blog能为我提供的。</p><p><em>性格决定你做怎样的选择，你的选择决定你怎样的人生。生命只有一次，而且它正在以不可逆转的姿态向前推进。你可以去旅行，可以朝九晚五地上班，还可以不顾一切地去创业。只是，千万不要选择平庸的人生。</em></p><blockquote><p>黄色的树林里分出两条路，可惜我不能同时去涉足，我在那路口久久伫立，我向着一条路极目望去，直到它消失在丛林深处。</p></blockquote><blockquote><p>但我选了另外一条路，它荒草萋萋，十分幽寂，显得更诱人，更美丽；虽然在这条小路上，很少留下旅人的足迹。</p></blockquote><blockquote><p>那天清晨落叶满地，两条路都未经脚印污染。啊，留下一条路等改日再见！但我知道路径延绵无尽头，恐怕我难以再回返。</p></blockquote><blockquote><p>也许多少年后在某个地方，我将轻声叹息将往事回顾：一片树林里分出两条路——而我选择了人迹更少的一条，从此决定了我一生的道路。——罗伯特·弗罗斯特《未选择的路》</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  大学时光经不起回味，一眨眼的时间，大学生生活已经步入尾声，随之而来的就该是毕业季的伤感了。步入大三的同学们，都在为步入”社会“摩拳擦掌，该考研的考研，该工作的工作。即使是平时班上最不爱学习的，也时不时开始向人打听起公务员考试的相关事宜了 :blush: :blush:&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书思考" scheme="http://ulsonhu.cn/categories/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83/"/>
-    
-    
-      <category term="文字" scheme="http://ulsonhu.cn/tags/%E6%96%87%E5%AD%97/"/>
     
   </entry>
   

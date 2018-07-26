@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Sonnet&#39;s Blog">
 <meta property="og:description" content="定义：如果先验分布和似然函数可以使得先验分布和后验分布有相同的形式，那么就称先验分布与似然函数是共轭的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-11T04:38:53.030Z">
+<meta property="og:updated_time" content="2018-07-22T07:48:52.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="共轭先验">
 <meta name="twitter:description" content="定义：如果先验分布和似然函数可以使得先验分布和后验分布有相同的形式，那么就称先验分布与似然函数是共轭的。">
@@ -414,11 +414,15 @@ $$p(q)={q^{\alpha -1}(1-q)^{\beta -1} \over \mathrm {B} (\alpha ,\beta )}$$</p>
 <p>  与共轭先验对应的概念是共轭分布族(Conjugate family of distribution),所谓共轭分布族是指参数$\theta$的后验pdf与作为先验的分布族是相同的，则称此类先验pdf关于具有pdf$f(x|\theta),\theta \in \Omega$
 的分布族为共轭分布。</p>
 <p>  例如，给定$\theta$时随机变量X的pmf是均值为$\theta$的泊松分布。若我们选取伽马先验，由贝叶斯定理计算出后验也是伽马分布族。则称，伽马分布族构成这种泊松模型的共轭先验类。</p>
+<blockquote>
+<p>一般而言，有了先验和似然，计算后验能够方便我们实现变分推断和Gibbs采样等</p>
+</blockquote>
 <p>参考资料：</p>
 <ol>
 <li>Pattern Recognition and Machine Learning ,  M. Bishop</li>
 <li>数理统计学导论 ,Robert V.Hogg</li>
 <li>Conjugate prior - Wikipedia</li>
+<li><a href="https://link.zhihu.com/?target=https%3A//alexanderetz." target="_blank" rel="noopener">以贝塔分布为例，解释了共轭分布，并给出了R语言的code.</a>com/2015/07/25/understanding-bayes-updating-priors-via-the-likelihood/</li>
 </ol>
 
       
@@ -569,7 +573,7 @@ $$p(q)={q^{\alpha -1}(1-q)^{\beta -1} \over \mathrm {B} (\alpha ,\beta )}$$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

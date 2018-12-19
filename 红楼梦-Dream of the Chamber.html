@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="统计学,数量经济学," />
+  <meta name="keywords" content="文字," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。">
-<meta name="keywords" content="统计学,数量经济学">
+<meta name="description" content="红楼梦 Dream of the Red Chamber 摘述">
+<meta name="keywords" content="文字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="广义矩估计(GMM)方法">
-<meta property="og:url" content="http://ulsonhu.cn/广义矩估计(GMM)方法.html">
+<meta property="og:title" content="《红楼梦》Dream of the Red Chamber">
+<meta property="og:url" content="http://ulsonhu.cn/红楼梦-Dream of the Chamber.html">
 <meta property="og:site_name" content="Watson&#39;s Blog">
-<meta property="og:description" content="简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。">
+<meta property="og:description" content="红楼梦 Dream of the Red Chamber 摘述">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-31T15:59:43.886Z">
+<meta property="og:updated_time" content="2018-12-19T14:19:17.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="广义矩估计(GMM)方法">
-<meta name="twitter:description" content="简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。">
+<meta name="twitter:title" content="《红楼梦》Dream of the Red Chamber">
+<meta name="twitter:description" content="红楼梦 Dream of the Red Chamber 摘述">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://ulsonhu.cn/广义矩估计(GMM)方法.html"/>
+  <link rel="canonical" href="http://ulsonhu.cn/红楼梦-Dream of the Chamber.html"/>
 
 
 
 
 
-  <title>广义矩估计(GMM)方法 | Watson's Blog</title>
+  <title>《红楼梦》Dream of the Red Chamber | Watson's Blog</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/广义矩估计(GMM)方法.html">
+    <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/红楼梦-Dream of the Chamber.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Pic by W.H">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">广义矩估计(GMM)方法</h1>
+          <h1 class="post-title" itemprop="name headline">《红楼梦》Dream of the Red Chamber</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-24T00:00:00+08:00">
-                2018-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T00:00:00+08:00">
+                2018-06-24
               </time>
             
 
@@ -354,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数理统计/" itemprop="url" rel="index">
-                    <span itemprop="name">数理统计</span>
+                  <a href="/categories/读书思考/" itemprop="url" rel="index">
+                    <span itemprop="name">读书思考</span>
                   </a>
                 </span>
 
@@ -378,7 +378,7 @@
 
           
               <div class="post-description">
-                  简单的$GMM$快速入门介绍虽然听起来高大上，但背后统计学思想并不复杂。如果你有本科的统计知识，看懂下文是不成问题的。$GMM$的全名是$\text{Generalized Method of Moments}$，也就是广义矩估计。
+                  红楼梦 Dream of the Red Chamber 摘述
               </div>
           
 
@@ -395,51 +395,101 @@
       
 
       
-        <p>首先广义矩估计($GMM$)很容易使我们联想到统计学中参数估计方法之一的矩估计。</p>
-<h2>矩估计</h2>
-<p>矩估计是什么呢？简单的说，就是用样本矩代替总体矩进行统计推断的方法。</p>
-<p>一个最基础的例子是正态总体的参数估计问题。如果$x_i \sim N(\mu,{\sigma}^2)$，如何估计$\mu$和$\sigma$呢？
-本科的统计学一般会介绍两种方法：极大似然估计和矩估计。其中矩估计是我们今天的主角。观察到：</p>
-<p>$$E(x_i)=\mu,\quad E(x_{i}^2)={\mu}^2+{\sigma}^2$$
-而根据大数定理，在一定的条件下，我们有：
-$$\bar{x_i}-\mu=O_p(1),\quad \bar{x_{i}^2}={\mu}^2+{\sigma}^2+O_p(1)$$</p>
-<p>也就是说，当样本量足够大的时候，样本矩与总体矩只差了一个无穷小量，那么我们是不是可以<font color="blue">用样本矩代替总体矩得到参数的估计呢？</font></p>
-<p>按照上面的思路，我们把$O_p(1)$去掉，同时把未知的总体参数写成其估计值，也就是$\hat{x}$的形式，我们得到了：
-$$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
-<p>如此，我们得到了两个总体矩的点估计。<font color="blue">在这个简单的例子里面，你只要把上面的大数定理的结论带到上面两个式子里面，很容易的就可以证明出两个点估计是一致的估计量。当然，值得注意的是，即便我使用的是矩条件，$\sigma$的估计也不是无偏的。一般而言，除了特殊情况，不管是$MLE$还是$MM$还是$GMM$，都不一定可以得到无偏的估计量。特别是在比较复杂的应用里面，一致就很不错了，无偏性的讨论真的繁琐。</font></p>
-<h2>广义矩估计</h2>
-<p>在上面的例子中，我们只使用了<strong>两个矩条件</strong>。然而我们知道，正态分布的矩是有无穷多个可以用的，那么我们是不是可以使用更多的矩条件呢？</p>
-<p>但是有个问题不好解决。在这个例子里面，我们有两个未知参数，如果只使用一阶矩，那么只有一个方程解两个未知数，显然是不可能的。像上面一样，我们用两个矩条件解两个未知数，就解出来了。然而，当我们用一到三阶矩，总共三个方程求解的时候，三个方程求解两个未知数，可能无解。</p>
-<p>方程数多了，反而没有解了，为什么呢？其实很简单，用三个方程中的任意两个方程，都可以求出一组解，那么三个方程我们就可以求出三组解。所以应该如何把这些矩条件都用上呢？
-到这里我们不妨引入一些记号。还是使用上面的例子，我们把上面的三个矩条件写到一个向量里面去，记：</p>
-<p>$$g(x_i,\theta)=[x_i-\mu,{x_i}^2-\mu^2-\sigma^2,{x_i}^3-\mu^3-3\cdot \mu \sigma^2],\theta={\mu,\sigma^2}$$
-我们可以得到一个$3*1$的列向量，并且：</p>
-<p>$$Eg(x_i,\theta)=0$$</p>
-<p>上面就是我们要用的矩条件。而根据上面的思路，用其样本矩代替总体矩：</p>
-<p>$$\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})=0$$
-解这个方程应该就可以得到参数$\theta$的估计。但是正如上面所说的，三个方程两个未知数，并不能确保这个方程有解，所以必须想一些其他办法。一个比较自然的想法是，上面的矩条件等于0，虽然我不太可能保证三个方程同时等于0，但是仿照$OLS$，我们可以让他们的平方和最小，也就是：</p>
-<p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}’[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$
-这样我们就能保证三个矩条件的样本矩都足够贴近于0，当然不可能同时为0。这样不就综合使用了三个矩条件的信息么？</p>
-<p>更一般的，由于上面的$g$函数是一个$3*1$的列向量，我们可以使用一个权重矩阵$W$来赋予每个矩条件以不同的权重：</p>
-<p>$$\underset{\hat{\theta} }{min}{ [ \frac{1}{N}\sum_{i}g(x_i,\hat{\theta}) ]}'W[\frac{1}{N}\sum_{i}g(x_i,\hat{\theta})]$$</p>
-<p>只要这个$W$是一个正定矩阵，那么仍然可以保证每个样本矩都足够贴近于0。
-那么问题来了，既然对$W$的要求只要求正定矩阵，那么使用不同的权重矩阵就有可能得到不同的结果。</p>
-<p>问题是，有没有一个最优的权重矩阵呢？当然是有的。可以证明，最优的权重矩阵应该是：使用这个权重矩阵，就得到了最有效的估计。</p>
+        <p>曹雪芹在红楼梦第五回，借宝玉神游太虚幻境，道出书中女子各自的命运结局，虽已告知告知宝玉众人命运结局，当局者亦浑然不觉，只能看着剧中人一步一步走向那个已经注定的宿命。想罢，人生亦如是，命运总是在可解与不可解之间徘徊。</p>
 <blockquote>
-<p>$GMM$估计相当于给不同的矩条件赋予了不同的权重，然后才能这个权重得到最小化条件，不同的权重阵其实就对不同的估计量，“OLS, IV, 2SLS, GLS, RE, FE, SUR, 3SLS, Pooled OLS…全是它的特殊情况”</p>
+<p>仙姑笑道：“吾居离恨天之上，灌愁海之中，乃放春山遣香洞太虚幻境警幻仙姑是也：司人间之风情月债，掌尘世之女怨男痴。因近来风流冤孽，缠绵于此处，是以前来访察机会，布散相思。今忽与尔相逢，亦非偶然。此离吾境不远，别无他物，仅有自采仙茗一盏。亲酿美酒一瓮，素练魔舞歌姬数人，新填《红楼梦》仙曲十二支，试随吾一游否？</p>
 </blockquote>
-<h2>GMM延伸</h2>
-<p>计量经济学的很多问题基本都可以归结为$GMM$的问题。从最简单的$OLS、2SLS$到稍微复杂一点的面板数据、动态面板等等，本质上都是在找矩条件。比如工具变量的$2SLS$，可以发现矩条件不过就是：</p>
-<p>$$E[(y_i-{x_i}’\beta)*z_i]=0$$</p>
-<p>套一下上面的公式，最优权重矩阵(的逆)为：</p>
-<p>$$E[(y_i-{x_i}’\beta_0)*z_i*{z_i}’*(y_i-{x_i}’\beta_0)’]=E[e_i^2z_i{z_i}’]=\sigma^2Ez_i{z_i}’$$</p>
-<p>带入到目标函数中，就得到了$2SLS$。甚至，一些其他的估计量，比如$MLE、M-estimator$等，在一定的条件下也可以转化为$GMM$，因为这些估计量的一阶条件可以看成是矩条件。所以$GMM$也就变成了一个统一的框架。为什么$GMM$这么受欢迎呢？因为$GMM$把复杂的统计过程抽象化成为一个（看似）简单的过程：找矩条件。只要你能找到矩条件，你就能估计。$GMM$把估计的繁琐细节全都抽象了，面对一个模型，你所需要做的所有事情就是找到矩条件，证明这个模型是可以识别的，然后什么也不用管，一股脑儿塞进去，结果就出来了。</p>
-<p>所以呢如果你去看一些稍微复杂的模型，基本都可以归结为矩条件。</p>
-<h2>参考</h2>
-<ol>
-<li><a href="https://www.zhihu.com/question/41312883/answer/91484566" target="_blank" rel="noopener">如何用简单的例子解释什么是 Generalized Method of Moments (GMM)?</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E7%9F%A9%E4%BC%B0%E8%AE%A1" target="_blank" rel="noopener">广义矩估计</a></li>
-</ol>
+<ul>
+<li>晴雯<br>
+霁月难逢，彩云易散。<br>
+心比天高，身为下贱。<br>
+风流灵巧招人怨。寿夭多因毁谤生，多情公子空牵念。<br>
+宝玉看了，又见后面画着一簇鲜花，一床破席，也有几句言词，写道是：</li>
+<li>袭人<br>
+枉自温柔和顺，空云似桂如兰；<br>
+堪羡优伶有福，谁知公子无缘。<br>
+宝玉看了不解。遂掷下这个，又去开了副册厨门，拿起一本册来，揭开看时，只见画着一株桂花，下面有一池沼，其中水涸泥干，莲枯藕败，后面书云：</li>
+<li>香菱<br>
+根并荷花一茎香，平生遭际实堪伤。<br>
+自从两地生孤木，致使香魂返故乡。</li>
+<li>林黛玉、薛宝钗<br>
+可叹停机德，堪怜咏絮才。<br>
+玉带林中挂，金钗雪里埋。<br>
+宝玉看了仍不解。待要问时，情知他必不肯泄漏；待要丢下，又不舍。遂又往后看时，只见画着一张弓，弓上挂着香橼。也有一首歌词云：</li>
+<li>元春<br>
+二十年来辨是非，榴花开处照宫闱。<br>
+三春争及初春景，虎兕相逢大梦归。<br>
+后面又画着两人放风筝，一片大海，一只大船，船中有一女子掩面泣涕之状。也有四句写云：</li>
+<li>探春<br>
+才自精明志自高，生于末世运偏消。<br>
+清明涕送江边望，千里东风一梦遥。<br>
+后面又画几缕飞云，一湾逝水。其词曰：</li>
+<li>史湘云<br>
+富贵又何为，襁褓之间父母违。<br>
+展眼吊斜晖，湘江水逝楚云飞。<br>
+后面又画着一块美玉，落在泥垢之中。其断语云：</li>
+<li>妙玉<br>
+欲洁何曾洁，云空未必空。
+可怜金玉质，终陷淖泥中。
+后面忽见画着个恶狼，追扑一美女，欲啖之意，其书云：</li>
+<li>迎春<br>
+子系中山狼，得志便猖狂。<br>
+金闺花柳质，一载赴黄粱。<br>
+后面便是一所古庙，里面有一美人在内看经独坐。其判云：</li>
+<li>惜春<br>
+勘破三春景不长，缁衣顿改昔年妆。<br>
+可怜绣户侯门女，独卧青灯古佛旁。<br>
+后面便是一片冰山，上面有一只雌凤。其判曰：</li>
+<li>王熙凤<br>
+凡鸟偏从末世来，都知爱慕此生才。<br>
+一从二令三人木，哭向金陵事更哀。<br>
+后面又是一座荒村野店，有一美人在那里纺绩。其判云：</li>
+<li>巧姐<br>
+势败休云贵，家亡莫论亲。<br>
+偶因济刘氏，巧得遇恩人。<br>
+后面又画着一盆茂兰，旁有一位凤冠霞帔的美人。也有判云：</li>
+<li>李纨<br>
+桃李春风结子完，到头谁似一盆兰。<br>
+如冰水好空相妒，枉与他人作笑谈。<br>
+后面又画着高楼大厦，有一美人悬梁自缢。其判云：</li>
+<li>秦可卿<br>
+情天情海幻情身，情既相逢必主淫。<br>
+漫言不肖皆荣出，造衅开端实在宁。</li>
+</ul>
+<blockquote>
+<p>好了歌<br>
+陋室空堂，当年笏满床；衰草枯杨，曾为歌舞场。<br>
+蛛丝儿结满雕梁，绿纱今又糊在蓬窗上。<br>
+说什么脂正浓、粉正香，如何两鬓又成霜？<br>
+昨日黄土陇头送白骨，今宵红灯帐底卧鸳鸯。<br>
+金满箱，银满箱，展眼乞丐人皆谤。<br>
+正叹他人命不长，那知自己归来丧！<br>
+训有方，保不定日后作强梁。<br>
+择膏粱，谁承望流落在烟花巷！<br>
+因嫌纱帽小，致使锁枷扛；昨怜破袄寒，今嫌紫蟒长。<br>
+乱烘烘你方唱罢我登场，反认他乡是故乡。<br>
+甚荒唐，到头来都是为他人作嫁衣裳！</p>
+</blockquote>
+<blockquote>
+<p>女儿是水作的骨肉，男人是泥作的骨肉。</p>
+</blockquote>
+<p>宝玉会秦钟</p>
+<blockquote>
+<p>故其气亦必赋人，发泄一尽始散。使男女偶秉此气而生者，在上则不能成仁人君子，下亦不能为大凶大恶。<br>
+置之于万万人中，其聪俊灵秀之气，则在万万人之上；
+其乖僻邪谬不近人情之态，又在万万人之下。<br>
+若生于公侯富贵之家，则为情痴情种；<br>
+若生于诗书清贫之族，则为逸士高人；<br>
+纵再偶生于薄祚寒门，断不能为走卒健仆，甘遭庸人驱制驾驭，必为奇优名娼。<br>
+如前代之许由、陶潜、阮籍、嵇康、刘伶、王谢二族、顾虎头、陈后主、唐明皇、宋徽宗、刘庭芝、温飞卿、米南宫、石曼卿、柳耆卿、秦少游，近日之倪云林、唐伯虎、祝枝山，再如李龟年、黄幡绰、敬新磨、卓文君、红拂、薛涛、崔莺、朝云之流，此皆易地则同之人也。</p>
+</blockquote>
+<p>上述，曹雪芹罗列出的一系列古人。细想一下，皆为当时代最具个性之人，独领风骚，活出一个真自我。</p>
+<blockquote>
+<p>不一时，只见三个奶嬷嬷并五六个丫鬟，簇拥着三个姐妹来了。<br>
+第一个肌肤微丰，合中身材，腮凝新荔，鼻腻鹅脂，温柔沉默，观之可亲。<br>
+第二个削肩细腰，长挑身材，鸭蛋脸面，俊眼修眉，顾盼神飞，文彩精华，见之忘俗。<br>
+第三个身量未足，形容尚小。其钗环裙袄，三人皆是一样的妆饰。</p>
+</blockquote>
 
       
     </div>
@@ -481,9 +531,7 @@ $$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
       
         <div class="post-tags">
           
-            <a href="/tags/统计学/" rel="tag"><i class="fa fa-tag"></i> 统计学</a>
-          
-            <a href="/tags/数量经济学/" rel="tag"><i class="fa fa-tag"></i> 数量经济学</a>
+            <a href="/tags/文字/" rel="tag"><i class="fa fa-tag"></i> 文字</a>
           
         </div>
       
@@ -496,8 +544,8 @@ $$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/JUMP少年周刊-最全漫画排行榜.html" rel="next" title="JUMP少年周刊-最全漫画排行榜">
-                <i class="fa fa-chevron-left"></i> JUMP少年周刊-最全漫画排行榜
+              <a href="/概率论的两个问题-球盒模型、匹配问题.html" rel="next" title="概率论的两个问题-球盒模型、匹配问题">
+                <i class="fa fa-chevron-left"></i> 概率论的两个问题-球盒模型、匹配问题
               </a>
             
           </div>
@@ -506,8 +554,8 @@ $$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/因果推断：工具变量（Instrumental Variable）.html" rel="prev" title="因果推断：工具变量（Instrumental Variable）">
-                因果推断：工具变量（Instrumental Variable） <i class="fa fa-chevron-right"></i>
+              <a href="/new_year_2018.html" rel="prev" title="Books & Moive in 2018">
+                Books & Moive in 2018 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -560,17 +608,8 @@ $$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -669,22 +708,6 @@ $$\hat{\mu}=\bar{x_i},\quad \hat{\sigma^2}=\bar{x_{i}^2}+\bar{x_i}^2$$</p>
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">矩估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">广义矩估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">GMM延伸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

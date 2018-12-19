@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Watson's Blog" type="application/atom+xml" />
 
 
 
@@ -84,15 +84,16 @@
 <meta name="description" content="准备面试数据分析岗，学习一下数据库和SQL语言知识，总结如下。">
 <meta name="keywords" content="数据分析,SQL,数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL语句学习及总结">
+<meta property="og:title" content="Oracle SQL语句学习及总结">
 <meta property="og:url" content="http://ulsonhu.cn/MySQL语句学习及总结.html">
-<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:site_name" content="Watson&#39;s Blog">
 <meta property="og:description" content="准备面试数据分析岗，学习一下数据库和SQL语言知识，总结如下。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520904956/2018_03_06.png">
-<meta property="og:updated_time" content="2018-04-28T07:54:34.101Z">
+<meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1537061180/sqlload.jpg">
+<meta property="og:updated_time" content="2018-09-24T23:32:38.105Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL语句学习及总结">
+<meta name="twitter:title" content="Oracle SQL语句学习及总结">
 <meta name="twitter:description" content="准备面试数据分析岗，学习一下数据库和SQL语言知识，总结如下。">
 <meta name="twitter:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520904956/2018_03_06.png">
 
@@ -130,7 +131,7 @@
 
 
 
-  <title>MySQL语句学习及总结 | Sonnet's Blog</title>
+  <title>Oracle SQL语句学习及总结 | Watson's Blog</title>
   
 
 
@@ -161,7 +162,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sonnet's Blog</span>
+        <span class="site-title">Watson's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -305,13 +306,13 @@
     <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/MySQL语句学习及总结.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="name" content="Pic by W.H">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sonnet's Blog">
+      <meta itemprop="name" content="Watson's Blog">
     </span>
 
     
@@ -319,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MySQL语句学习及总结</h1>
+          <h1 class="post-title" itemprop="name headline">Oracle SQL语句学习及总结</h1>
         
 
         <div class="post-meta">
@@ -423,8 +424,14 @@
 <ol start="5">
 <li>数据表操作:</li>
 </ol>
-<p>创建数据表</p>
+<ul>
+<li>创建数据表</li>
+</ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">   column_1 column_1_type,</span><br><span class="line">   column_2 column_2_type,</span><br><span class="line">   column_3 column_3_type,</span><br><span class="line">   column_4 column_4_type</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>技巧：复制表结构</li>
+</ul>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> New_table <span class="keyword">as</span> </span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> Old_table </span><br><span class="line"><span class="keyword">where</span> <span class="number">1</span> = <span class="number">2</span></span><br></pre></td></tr></table></figure>
 <h2>1. SQL功能概述</h2>
 <p>SQL（Structured Query Language，结构化查询语言）是用户操作关系数据库的通用语言。
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520904956/2018_03_06.png" width="80%" height="80%"></p>
@@ -537,7 +544,7 @@
 </tr>
 <tr>
 <td>确定范围</td>
-<td>BETWEEN…AND、 NOT BETWEEN…AND</td>
+<td>BETWEy …AND、 NOT BETWEy …AND</td>
 </tr>
 <tr>
 <td>确定集合</td>
@@ -559,10 +566,11 @@
 </table>
 <ol start="3">
 <li>对查询结果进行排序:
-将查询结果按照指定的顺序显示。<code>ASC</code>表示按列值升序排列（从上往下，值从大到小）。<code>DESC</code>表示按列值降序排列（从上往下，值从小到大）。默认为<code>ASC</code>。</li>
+将查询结果按照指定的顺序显示。<code>ASC</code>表示按列值升序排列（从上往下，值从大到小）。<code>DESC</code>表示按列值降序排列（从上往下，值从小到大）, 默认为<code>ASC</code>。</li>
 </ol>
 <p><code>ORDER BY &lt;column_name&gt; [ASC|DESC]</code></p>
 <p>例子 ：<code>SELECT Sno,Grade FROM SC ORDER BY Grade DESC</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 用 row_number 排序</span></span><br><span class="line">row_number() over(partition by [分组字段] order by [排序字段] desc) as row_number</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>使用聚合函数统计数据:
 聚合函数也称为统计函数或集合函数，作用是对一组值进行计算并返回一个统计结果。</li>
@@ -602,7 +610,7 @@
 </tbody>
 </table>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--（统计学生总人数）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> Student</span><br><span class="line"></span><br><span class="line"><span class="comment">--（统计“001”学号学生的考试平均成绩）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(Grade) <span class="keyword">FROM</span> SC <span class="keyword">WHERE</span> Sno = <span class="string">'001'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--（查询“C001”号课程考试成绩的最高分和最低分）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(Grade) 最高分,<span class="keyword">MIN</span>(Grade) 最低分 <span class="keyword">FROM</span> SC <span class="keyword">WHERE</span> Cno = <span class="string">'C001'</span></span><br></pre></td></tr></table></figure>
-<p>注意：聚合函数不能出现在WHERE子句中！</p>
+<p>注意：聚合函数不能出现在 <code>WHERE</code> 子句中！</p>
 <ol start="5">
 <li>对数据进行分组统计:
 需要先对数据进行分组，然后再对每个组进行统计。分组子句<code>GROUP BY</code>。在一个查询语句中，可以用多个列进行分组。
@@ -692,6 +700,22 @@
 <li><code>WHERE 列名 比较运算符 (子查询)</code></li>
 <li><code>WHERE EXISTS(子查询)</code></li>
 </ul>
+<h1>四、其他</h1>
+<h3>1. 年月日相关</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> </span><br><span class="line"><span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+<h2>2. Decode语句</h2>
+<p><code>decode(condition,val_1,return_1,val_2,return_2,...,val_n,return_n,default)</code></p>
+<p>可以类比语句理解：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">IF condition = val_1 THEN</span><br><span class="line">　　　　RETURN(gval_1)</span><br><span class="line">ELSIF condition = val_2 THEN</span><br><span class="line">　　　　RETURN(gval_2)</span><br><span class="line">ELSIF condition = val_n THEN</span><br><span class="line">　　　　RETURN(gval_n)</span><br><span class="line">ELSE</span><br><span class="line">　　　　RETURN(default)</span><br><span class="line"><span class="keyword">END</span> <span class="keyword">IF</span></span><br></pre></td></tr></table></figure>
+<h2>3. Use_hash</h2>
+<h2>4. Over() function</h2>
+<p>常见的分析函数如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">row_number() over(partition by ... order by ...)</span><br><span class="line">rank() over(partition by ... order by ...)</span><br><span class="line">dense_rank() over(partition by ... order by ...)</span><br><span class="line">count() over(partition by ... order by ...)</span><br><span class="line">max() over(partition by ... order by ...) </span><br><span class="line">min() over(partition by ... order by ...)</span><br><span class="line">sum() over(partition by ... order by ...)</span><br><span class="line">avg() over(partition by ... order by ...)</span><br><span class="line">first_value() over(partition by ... order by ...)</span><br><span class="line">last_value() over(partition by ... order by ...)</span><br><span class="line">lag() over(partition by ... order by ...)</span><br><span class="line">lead() over(partition by ... order by ...)</span><br></pre></td></tr></table></figure>
+<h2>4. sql * load</h2>
+<p>SQL*Loader是Oracle提供的用于数据加载的一种工具，它比较适合业务分析类型数据库（数据仓库），能处理多种格式的平面文件，批量数据装载比传统的数据插入效率更高。以<code>sqlldr</code>命令参数执行。</p>
+<img src="https://res.cloudinary.com/ulsonhu/image/upload/v1537061180/sqlload.jpg" width="80%" height="80%">
+<p>使用sql*loader上传数据，必须指定 控制文件(Control File) (.ctl),</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">load data</span><br><span class="line">infile &apos;example.dat&apos;  &quot;var 3&quot;</span><br><span class="line">into table example</span><br><span class="line">fields terminated by &apos;,&apos; optionally enclosed by &apos;&quot;&apos;</span><br><span class="line">(col1 char(5),</span><br><span class="line"> col2 char(7))</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -712,7 +736,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by W.H 微信支付"/>
         <p>微信支付</p>
       </div>
     
@@ -830,9 +854,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="Pic by John Lennon" />
+                alt="Pic by W.H" />
             
-              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-author-name" itemprop="name">Pic by W.H</p>
               <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
           </div>
 
@@ -843,7 +867,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -865,7 +889,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -892,9 +916,9 @@
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.instagram.com/by_nichome/" target="_blank" title="Instagram">
+                    <a href="https://space.bilibili.com/26177442/#/" target="_blank" title="Bilibili">
                       
-                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                        <i class="fa fa-fw fa-globe"></i>Bilibili</a>
                   </span>
                 
                   <span class="links-of-author-item">
@@ -933,7 +957,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一、数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1. SQL功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">二、SQL数据操作语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据查询语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 查询语句的基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 单表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 多表连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">2. 自连接:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">3. 外连接:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据更改功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 删除数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">三、高级查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1. CASE函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 简单CASE函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 搜索CASE函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2. 子查询</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一、数据库基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1. SQL功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">二、SQL数据操作语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据查询语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 查询语句的基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 单表查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 多表连接查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">2. 自连接:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">3. 外连接:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据更改功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 更新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 删除数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">三、高级查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">1. CASE函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 简单CASE函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2 搜索CASE函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">2. 子查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">四、其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.0.1.</span> <span class="nav-text">1. 年月日相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">2. Decode语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">3. Use_hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">4. Over() function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">4. sql * load</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -957,7 +981,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+  <span class="author" itemprop="copyrightHolder">Pic by W.H</span>
 
   
 </div>

@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Watson's Blog" type="application/atom+xml" />
 
 
 
@@ -86,7 +86,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解回调函数">
 <meta property="og:url" content="http://ulsonhu.cn/理解回调函数.html">
-<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:site_name" content="Watson&#39;s Blog">
 <meta property="og:description" content="主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-03-11T04:38:50.535Z">
@@ -128,7 +128,7 @@
 
 
 
-  <title>理解回调函数 | Sonnet's Blog</title>
+  <title>理解回调函数 | Watson's Blog</title>
   
 
 
@@ -159,7 +159,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sonnet's Blog</span>
+        <span class="site-title">Watson's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -303,13 +303,13 @@
     <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/理解回调函数.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="name" content="Pic by W.H">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sonnet's Blog">
+      <meta itemprop="name" content="Watson's Blog">
     </span>
 
     
@@ -560,7 +560,7 @@
 <p>1：如何取到上一个参数</p>
 <p>2：add后如何执行</p>
 <p>看看我们实现的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Callbacks</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> list = [];</span><br><span class="line">  <span class="keyword">var</span> self;</span><br><span class="line">  <span class="keyword">var</span> firingStart;</span><br><span class="line">  <span class="keyword">var</span> memory;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">_fire</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    memory = options === <span class="string">'memory'</span> &amp;&amp; data;</span><br><span class="line">    firingIndex = firingStart || <span class="number">0</span>;</span><br><span class="line">    firingStart = <span class="number">0</span>;</span><br><span class="line">    firingLength = list.length;</span><br><span class="line">    <span class="keyword">for</span> (; list &amp;&amp; firingIndex &lt; firingLength; firingIndex++) &#123;</span><br><span class="line">      list[firingIndex](data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  self = &#123;</span><br><span class="line">    add: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> start = list.length;</span><br><span class="line">      list.push(fn)</span><br><span class="line">      <span class="keyword">if</span> (memory) &#123;</span><br><span class="line">        firingStart = start; <span class="comment">//获取最后一值</span></span><br><span class="line">        _fire(memory);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">   	fire: <span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (list) &#123;</span><br><span class="line">        _fire(args)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Callbacks</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> list = [];</span><br><span class="line">  <span class="keyword">var</span> self;</span><br><span class="line">  <span class="keyword">var</span> firingStart;</span><br><span class="line">  <span class="keyword">var</span> memory;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> _fire(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    memory = options === <span class="string">'memory'</span> &amp;&amp; data;</span><br><span class="line">    firingIndex = firingStart || <span class="number">0</span>;</span><br><span class="line">    firingStart = <span class="number">0</span>;</span><br><span class="line">    firingLength = list.length;</span><br><span class="line">    <span class="keyword">for</span> (; list &amp;&amp; firingIndex &lt; firingLength; firingIndex++) &#123;</span><br><span class="line">      list[firingIndex](data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  self = &#123;</span><br><span class="line">    add: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> start = list.length;</span><br><span class="line">      list.push(fn)</span><br><span class="line">      <span class="keyword">if</span> (memory) &#123;</span><br><span class="line">        firingStart = start; <span class="comment">//获取最后一值</span></span><br><span class="line">        _fire(memory);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">   	fire: <span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (list) &#123;</span><br><span class="line">        _fire(args)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>首先add之后要能触发fire的动作，所以我们把fire作为内部的一个私有方法实现_fire，比较合逻辑，这样外部的fire只是一个门面方法的调用。</p>
 <p>私有变量memory缓存这上一个参数的属性，我们靠firingStart用来定位最后通过add增加的回调数据的索引。在遍历的时候直接通过firingStart的起始索引定位，然后传递memory的参数，而且实现这种“保持以前的值”的设计。</p>
 <h2>unique的设计</h2>
@@ -602,7 +602,7 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by W.H 微信支付"/>
         <p>微信支付</p>
       </div>
     
@@ -716,9 +716,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="Pic by John Lennon" />
+                alt="Pic by W.H" />
             
-              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-author-name" itemprop="name">Pic by W.H</p>
               <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
           </div>
 
@@ -729,7 +729,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -751,7 +751,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -778,9 +778,9 @@
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.instagram.com/by_nichome/" target="_blank" title="Instagram">
+                    <a href="https://space.bilibili.com/26177442/#/" target="_blank" title="Bilibili">
                       
-                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                        <i class="fa fa-fw fa-globe"></i>Bilibili</a>
                   </span>
                 
                   <span class="links-of-author-item">
@@ -843,7 +843,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+  <span class="author" itemprop="copyrightHolder">Pic by W.H</span>
 
   
 </div>

@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Sonnet's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="Watson's Blog" type="application/atom+xml" />
 
 
 
@@ -86,14 +86,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lasso回归算法">
 <meta property="og:url" content="http://ulsonhu.cn/LASSO回归算法.html">
-<meta property="og:site_name" content="Sonnet&#39;s Blog">
+<meta property="og:site_name" content="Watson&#39;s Blog">
 <meta property="og:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764085/2018_03_04p1.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018.03_04lasso01.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04lasso02.png">
 <meta property="og:image" content="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018_03_04_lasso03.png">
-<meta property="og:updated_time" content="2018-03-24T14:49:32.426Z">
+<meta property="og:updated_time" content="2018-12-19T14:14:34.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lasso回归算法">
 <meta name="twitter:description" content="很多人在做变量选择时，眼光依然局限于$R^2$或者$Adjusted-R^2$,以及$P-Value$之中。计量经济学中，对于模型选择，学术界其实更倾向于采用$AIC$和$BIC$等标准来做判断。而对于$P-Value$的滥用与批判，其实已经到了水深火热的地步。抛开背景知识不谈，在变量选择，可以倚靠哪些神奇的准则和方法？">
@@ -133,7 +133,7 @@
 
 
 
-  <title>Lasso回归算法 | Sonnet's Blog</title>
+  <title>Lasso回归算法 | Watson's Blog</title>
   
 
 
@@ -164,7 +164,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sonnet's Blog</span>
+        <span class="site-title">Watson's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -308,13 +308,13 @@
     <link itemprop="mainEntityOfPage" href="http://ulsonhu.cn/LASSO回归算法.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Pic by John Lennon">
+      <meta itemprop="name" content="Pic by W.H">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sonnet's Blog">
+      <meta itemprop="name" content="Watson's Blog">
     </span>
 
     
@@ -403,7 +403,7 @@
         <p><a href="http://rokia.org/?tag=p_value" target="_blank" rel="noopener">关于P值滥用的简要介绍</a></p>
 <p>计量模型中关于变量选择，很多同学可能第一个想到的是：前进法，后退法，向前向后逐步回归。但是，这些方法存在一些固有的缺陷,它们会导致某些可能为最优的变量组合无法共同进入模型。</p>
 <p>我们抛开传统的统计学教材，把眼光瞄向统计学习理论，就会发现，其实有大量的模型可供我们选择。
-今天，先介绍最基础的方法：lasso。</p>
+今天，先介绍最基础的方法：Lasso。</p>
 <h2>一、The lasso的提出</h2>
 <p>Lasso,即Lesat absolute shrinkage and seletion operator.改方法由统计学习领域的执牛耳者<a href="http://statweb.stanford.edu/~tibs/lasso/lasso.pdf" target="_blank" rel="noopener">Robert Tibshirani于1996年开创</a>。至今为止，这篇文章被引用次数已达14000多次。据说，在学术领域，被引用次数能达到几十次已经可以引以为傲。经过将近20年的发展，这个方法养活了一大群人，同时也发展出了很多更为成熟的理论，如Adaptive lasso，The Grouped lasso,SCAD。</p>
 <h2>二、The lasso的原理</h2>
@@ -414,7 +414,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
 <p>$$\widehat{\beta}^{lasso} = argmin_{\beta}{\sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2 + \lambda\sum_{j = 1}^{p}|\beta_j|}$$</p>
 <p>看到这个表达式，有没有一种熟悉的感觉？看！</p>
 <p>$$\widehat{\beta}^{ridge} = argmin_{\beta} {\sum_{i = 1}^{N}(y_i - \beta_0 - \sum_{j = 1}^{p}x_{ij}\beta_j)^2 + \lambda\sum_{j = 1}^{p}\beta_{j}^2}$$</p>
-<p>没错！它其实跟我们在回归分析教材中介绍的岭回归(ridge regression)非常相似，只是将$L_2$惩罚换成了$L_1$惩罚。Zou and Hastie在2005年，提出了一种在ridge regression和the lasso之间折衷的方法：the <strong>elastic net</strong> penalty,思想也非常简单，但是却很有影响力。</p>
+<p>没错！它其实跟我们在回归分析教材中常见的岭回归(ridge regression)非常相似，只是将$L_2$惩罚换成了$L_1$惩罚。Zou and Hastie在2005年，提出了一种在ridge regression和the lasso之间折衷的方法：the <strong>elastic net</strong> penalty,思想也非常简单，但是却很有影响力。</p>
 <p>回头看下，lasso为何如此流行。
 这么做的好处是一举多得的：</p>
 <ul>
@@ -434,7 +434,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
 这个包采用的算法是循环坐标下降法（cyclical coordinate descent），能够处理的模型包括 linear regression,logistic and multinomial regression models, poisson regression 和 the Cox model，用到的正则化方法就是$l1$范数（lasso）、$l2$范数（岭回归）和它们的混合 （elastic net）。</p>
 <p>这里，给出一个实现lasso的示例。</p>
 <p>数据来源于ISLR包中的Hitters数据集，该数据集描述了美国1986年和1987年的棒球运动员相关数据。我们来探究一下对运动员薪水起主要作用的因素有哪些。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ISLR)</span><br><span class="line">str(Hitters)&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ISLR)</span><br><span class="line">str(Hitters)</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 'data.frame':    322 obs. of  20 variables:</span></span><br><span class="line"><span class="comment">##  $ AtBat    : int  293 315 479 496 321 594 185 298 323 401 ...</span></span><br><span class="line"><span class="comment">##  $ Hits     : int  66 81 130 141 87 169 37 73 81 92 ...</span></span><br><span class="line"><span class="comment">##  $ HmRun    : int  1 7 18 20 10 4 1 0 6 17 ...</span></span><br><span class="line"><span class="comment">##  $ Runs     : int  30 24 66 65 39 74 23 24 26 49 ...</span></span><br><span class="line"><span class="comment">##  $ RBI      : int  29 38 72 78 42 51 8 24 32 66 ...</span></span><br><span class="line"><span class="comment">##  $ Walks    : int  14 39 76 37 30 35 21 7 8 65 ...</span></span><br><span class="line"><span class="comment">##  $ Years    : int  1 14 3 11 2 11 2 3 2 13 ...</span></span><br><span class="line"><span class="comment">##  $ CAtBat   : int  293 3449 1624 5628 396 4408 214 509 341 5206 ...</span></span><br><span class="line"><span class="comment">##  $ CHits    : int  66 835 457 1575 101 1133 42 108 86 1332 ...</span></span><br><span class="line"><span class="comment">##  $ CHmRun   : int  1 69 63 225 12 19 1 0 6 253 ...</span></span><br><span class="line"><span class="comment">##  $ CRuns    : int  30 321 224 828 48 501 30 41 32 784 ...</span></span><br><span class="line"><span class="comment">##  $ CRBI     : int  29 414 266 838 46 336 9 37 34 890 ...</span></span><br><span class="line"><span class="comment">##  $ CWalks   : int  14 375 263 354 33 194 24 12 8 866 ...</span></span><br><span class="line"><span class="comment">##  $ League   : Factor w/ 2 levels &amp;quot;A&amp;quot;,&amp;quot;N&amp;quot;: 1 2 1 2 2 1 2 1 2 1 ...</span></span><br><span class="line"><span class="comment">##  $ Division : Factor w/ 2 levels &amp;quot;E&amp;quot;,&amp;quot;W&amp;quot;: 1 2 2 1 1 2 1 2 2 1 ...</span></span><br><span class="line"><span class="comment">##  $ PutOuts  : int  446 632 880 200 805 282 76 121 143 0 ...</span></span><br><span class="line"><span class="comment">##  $ Assists  : int  33 43 82 11 40 421 127 283 290 0 ...</span></span><br><span class="line"><span class="comment">##  $ Errors   : int  20 10 14 3 4 25 7 9 19 0 ...</span></span><br><span class="line"><span class="comment">##  $ Salary   : num  NA 475 480 500 91.5 750 70 100 75 1100 ...</span></span><br><span class="line"><span class="comment">##  $ NewLeague: Factor w/ 2 levels &amp;quot;A&amp;quot;,&amp;quot;N&amp;quot;: 1 2 1 2 2 1 1 1 2 1 ...&lt;/code&gt;&lt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hitters&lt;-na.omit(Hitters)</span><br><span class="line"><span class="comment">## sampling</span></span><br><span class="line">x&amp;lt;-model.matrix(Salary~.,Hitters)[,-<span class="number">1</span>]</span><br><span class="line">y&amp;lt;-Hitters$Salary</span><br><span class="line"></span><br><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">train&amp;lt;-sample(<span class="number">1</span>:nrow(x),nrow(x)/<span class="number">2</span>)</span><br><span class="line">test&amp;lt;-(-train)</span><br><span class="line">y.test&amp;lt;-y[test]</span><br><span class="line"></span><br><span class="line"><span class="comment">## ridge regression</span></span><br><span class="line"><span class="keyword">library</span>(glmnet)</span><br><span class="line">grid&amp;lt;-<span class="number">10</span>^seq(<span class="number">10</span>,-<span class="number">2</span>,length = <span class="number">100</span>)</span><br><span class="line">ridge.mod&amp;lt;-glmnet(x,y,alpha = <span class="number">0</span>,lambda = grid)</span><br><span class="line">plot(ridge.mod, main = &amp;quot;The ridge&amp;quot;)</span><br></pre></td></tr></table></figure>
 <img src="https://res.cloudinary.com/ulsonhu/image/upload/v1520764084/2018.03_04lasso01.png" width="70%" height="70%">
@@ -481,7 +481,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by John Lennon 微信支付"/>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Pic by W.H 微信支付"/>
         <p>微信支付</p>
       </div>
     
@@ -597,9 +597,9 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="Pic by John Lennon" />
+                alt="Pic by W.H" />
             
-              <p class="site-author-name" itemprop="name">Pic by John Lennon</p>
+              <p class="site-author-name" itemprop="name">Pic by W.H</p>
               <p class="site-description motion-element" itemprop="description">Lying in the gutter, but looking at the stars.</p>
           </div>
 
@@ -610,7 +610,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -632,7 +632,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -659,9 +659,9 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.instagram.com/by_nichome/" target="_blank" title="Instagram">
+                    <a href="https://space.bilibili.com/26177442/#/" target="_blank" title="Bilibili">
                       
-                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                        <i class="fa fa-fw fa-globe"></i>Bilibili</a>
                   </span>
                 
                   <span class="links-of-author-item">
@@ -724,7 +724,7 @@ $$\widehat{\beta}^{lasso} =\quad  argmin_{\beta}\sum_{i = 1}^{N}(y_i - \beta_0 -
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Pic by John Lennon</span>
+  <span class="author" itemprop="copyrightHolder">Pic by W.H</span>
 
   
 </div>

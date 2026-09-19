@@ -1,0 +1,634 @@
+<!doctype html><html lang=zh dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>理解回调函数 | Nichome</title><meta name=keywords content="前端"><meta name=description content="主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。
+函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：
+**☑ **  能“存储”在变量中
+** ☑**   能作为函数的实参被传递
+**☑ **  能在函数中被创建
+** ☑**   能从函数中返回
+百科里面是这么解释的：
+回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
+因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。
+在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就是输入和输出之间实现过程的映射。
+但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。
+jQuery中遍地都是回调的设计：
+异步回调：
+事件句柄回调
+$(document).ready(callback);
+$(document).on(‘click’,callback)
+Ajax异步请求成功失败回调
+$.ajax({
+  url: &#34;aaron.html&#34;,
+  context: document
+}).done(function() { 
+        //成功执行
+}).fail(function() {
+        //失败执行
+);
+动画执行完毕回调
+$('#clickme').click(function() {
+    $('#book').animate({
+        opacity: 0.25,
+        left: '+=50',
+        height: 'toggle'
+    }, 5000, function() {
+        // Animation complete.
+    });
+});
+以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。
+同步回调：
+当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。"><meta name=author content="Watson Hu"><link rel=canonical href=https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html><link crossorigin=anonymous href=/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as=style><link rel=icon href=https://ulsonhu.cn/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://ulsonhu.cn/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://ulsonhu.cn/favicon-32x32.png><link rel=apple-touch-icon href=https://ulsonhu.cn/apple-touch-icon.png><link rel=mask-icon href=https://ulsonhu.cn/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><meta property="og:url" content="https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html"><meta property="og:site_name" content="Nichome"><meta property="og:title" content="理解回调函数"><meta property="og:description" content="主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。
+函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：
+**☑ ** 能“存储”在变量中
+** ☑** 能作为函数的实参被传递
+**☑ ** 能在函数中被创建
+** ☑** 能从函数中返回
+百科里面是这么解释的：
+回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
+因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。
+在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就是输入和输出之间实现过程的映射。
+但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。
+jQuery中遍地都是回调的设计：
+异步回调：
+事件句柄回调
+$(document).ready(callback); $(document).on(‘click’,callback) Ajax异步请求成功失败回调
+$.ajax({ url: &#34;aaron.html&#34;, context: document }).done(function() { //成功执行 }).fail(function() { //失败执行 ); 动画执行完毕回调
+$('#clickme').click(function() { $('#book').animate({ opacity: 0.25, left: '+=50', height: 'toggle' }, 5000, function() { // Animation complete. }); }); 以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。
+同步回调：
+当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2016-12-10T00:00:00+00:00"><meta property="article:modified_time" content="2016-12-10T00:00:00+00:00"><meta property="article:tag" content="前端"><meta name=twitter:card content="summary"><meta name=twitter:title content="理解回调函数"><meta name=twitter:description content="主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。
+函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：
+**☑ ** 能“存储”在变量中
+** ☑** 能作为函数的实参被传递
+**☑ ** 能在函数中被创建
+** ☑** 能从函数中返回
+百科里面是这么解释的：
+回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
+因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。
+在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就是输入和输出之间实现过程的映射。
+但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。
+jQuery中遍地都是回调的设计：
+异步回调：
+事件句柄回调
+$(document).ready(callback); $(document).on(‘click’,callback) Ajax异步请求成功失败回调
+$.ajax({ url: &#34;aaron.html&#34;, context: document }).done(function() { //成功执行 }).fail(function() { //失败执行 ); 动画执行完毕回调
+$('#clickme').click(function() { $('#book').animate({ opacity: 0.25, left: '+=50', height: 'toggle' }, 5000, function() { // Animation complete. }); }); 以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。
+同步回调：
+当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://ulsonhu.cn/posts/"},{"@type":"ListItem","position":2,"name":"理解回调函数","item":"https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"理解回调函数","name":"理解回调函数","description":"主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。\n函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：\n**☑ ** 能“存储”在变量中\n** ☑** 能作为函数的实参被传递\n**☑ ** 能在函数中被创建\n** ☑** 能从函数中返回\n百科里面是这么解释的：\n回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。\n因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。\n在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就是输入和输出之间实现过程的映射。\n但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。\njQuery中遍地都是回调的设计：\n异步回调：\n事件句柄回调\n$(document).ready(callback); $(document).on(‘click’,callback) Ajax异步请求成功失败回调\n$.ajax({ url: \u0026#34;aaron.html\u0026#34;, context: document }).done(function() { //成功执行 }).fail(function() { //失败执行 ); 动画执行完毕回调\n$(\u0026#39;#clickme\u0026#39;).click(function() { $(\u0026#39;#book\u0026#39;).animate({ opacity: 0.25, left: \u0026#39;+=50\u0026#39;, height: \u0026#39;toggle\u0026#39; }, 5000, function() { // Animation complete. }); }); 以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。\n同步回调：\n当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。\n","keywords":["前端"],"articleBody":"主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。\n函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：\n**☑ ** 能“存储”在变量中\n** ☑** 能作为函数的实参被传递\n**☑ ** 能在函数中被创建\n** ☑** 能从函数中返回\n百科里面是这么解释的：\n回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。\n因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。\n在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就是输入和输出之间实现过程的映射。\n但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。\njQuery中遍地都是回调的设计：\n异步回调：\n事件句柄回调\n$(document).ready(callback); $(document).on(‘click’,callback) Ajax异步请求成功失败回调\n$.ajax({ url: \"aaron.html\", context: document }).done(function() { //成功执行 }).fail(function() { //失败执行 ); 动画执行完毕回调\n$('#clickme').click(function() { $('#book').animate({ opacity: 0.25, left: '+=50', height: 'toggle' }, 5000, function() { // Animation complete. }); }); 以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。\n同步回调：\n当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。\n一个同步(阻塞)中使用回调的例子，目的是在test1代码执行完成后执行回调callback\nvar test1 = function(callback) { //执行长时间操作 callback(); } test1(function() { //执行回调中的方法 }); 所以理解回调函数最重要的2点：\n1、一个回调函数作为参数传递给另一个函数是，我们仅仅传递了函数定义。我们并没有在参数中执行函数。我们并不传递像我们平时执行函数一样带有一对执行小括号()的函数\n2、回调函数并不会马上被执行，它会在包含它的函数内的某个特定时间点被“回调”。\n回调的灵活运用 我们经常会这样使用函数回调：\n☑ 事件触发通知\n☑ 资源加载通知\n☑ 定时器延时\n☑ ajax、动画通知等等。\n以上都是很单一的事件监听回调的处理方式，但是jQuery把回调函数的用法设计成一个更高的抽像，用于解耦与分离变化。\n如何理解这个设计？我们看下面的例子。\n例子一：\njQuery针对Dom的处理提供了append、prepend、before、after等方法的处理，这几个方法的特征：\n1、参数的传递可以是HTML字符串、DOM元素、元素数组或者jQuery对象\n2、为了优化性能针对节点的处理需要生成文档碎片\n可见几个方法都是需要实现这2个特性的，那么我们应该如何处理？\n高层接口：\nbefore: function() { return this.domManip(arguments, function(elem) { if (this.parentNode) { this.parentNode.insertBefore(elem, this); } }); }, after: function() { return this.domManip(arguments, function(elem) { if (this.parentNode) { this.parentNode.insertBefore(elem, this.nextSibling); } }); }, 底层实现：\ndomManip: function(args, callback) { // Flatten any nested arrays args = concat.apply([], args); // We can't cloneNode fragments that contain checked, in WebKit if (isFunction || //多参数处理 self.domManip(args, callback); } if (l) { //生成文档碎片 fragment = jQuery.buildFragment(args, this[0].ownerDocument, false, this); callback.call(this[i], node, i); } return this; } 我们观察下jQuery的实现，通过抽象出一个domManip方法，然后在这个方法中处理共性，合并多个参数的处理与生成文档碎片的处理，然后最终把结果通过回调函数返回给每一个调用者。\n例子二：\n在很多时候需要控制一系列的函数顺序执行。那么一般就需要一个队列函数来处理这个问题。\n我们看一段代码：\nfunction Ulson(List, callback) { setTimeout(function() { var task; if (task = List.shift()) { task(); //执行函数 } if (List.length \u003e 0) { //递归分解 arguments.callee(List) } else { callback() } }, 25) } //调用 Ulson([ function() { alert('a') }, function() { alert('b') }, function() { alert('c') } ], function() { alert('callback') }) // 分别弹出 ‘a’ , ‘b’ ,'c',’callback 传入一组函数参数，靠递归解析，分个执行，其实就是靠setTimeout可以把函数加入到队列末尾才执行的原理，这样的写法就有点就事论事了，聚合对象完全是一个整体，无法再次细分出来，所以我们需要一种方案，用来管理分离每一个独立的对象。\n我们换成jQuery提供的方式:\nvar callbacks = $.Callbacks(); callbacks.add(function() { alert('a'); }) callbacks.add(function() { alert('b'); }) callbacks.fire(); //输出结果: 'a' 'b' 是不是便捷很多了，代码又很清晰，所以Callbacks它是一个多用途的回调函数列表对象，提供了一种强大的方法来管理回调函数队列。\n那么我们使用回调函数，总的来说弱化耦合，让调用者与被调用者分开，调用者不关心谁是被调用者，所有它需知道的，只是存在一个具有某种特定原型、某些限制条件的被调用函数。\n理解观察者模式 讲解jQuery回调对象之前，我们有必要先理解其背后的设计思想 - “观察者模式”。\n观察者模式 (pub/sub) 的背后，总的想法是在应用程序中增强松耦合性。并非是在其它对象的方法上的单个对象调用。一个对象作为特定任务或是另一对象的活动的观察者，并且在这个任务或活动发生时，通知观察者。观察者也被叫作订阅者（Subscriber），它指向被观察的对象，既被观察者（Publisher 或 subject)。当事件发生时，被观察者（Publisher）就会通知观察者（subscriber）。\n观察者的使用场合\n观察者的使用场合就是：当一个对象的改变需要同时改变其它对象，并且它不知道具体有多少对象需要改变的时候，就应该考虑使用观察者模式。先看官网的demo这个例子，涉及到了 add 与 fire方法，熟悉设计模式的童鞋呢，一眼就能看出，其实又是基于发布订阅（Publish/Subscribe）的观察者模式的设计。\n作为 $.Callbacks() 的创建组件的一个演示，只使用回调函数列表，就可以实现 Pub/Sub 系统，将 $.Callbacks 作为一个队列。\n我们来模拟常规下最简单的实现：\nJS里对观察者模式的实现是通过回调来实现的，我们来先定义一个Observable对象，其内部包含了2个方法：订阅add方法与发布fire方法，如下代码：\nvar Observable = { callbacks: [], add: function(fn) { this.callbacks.push(fn); }, fire: function() { this.callbacks.forEach(function(fn) { fn(); }) } } 使用add开始订阅：\nObservable.add(function() { alert(1) }) Observable.add(function() { alert(2) }) 使用fire开始发布：\nObservable.fire(); // 1, 2 设计的原理：\n开始构建一个存放回调的数组，如this.callbacks= []添加回调时，将回调push进this.callbacks，执行则遍历this.callbacks执行回调，也弹出1跟2了。当然这只是简洁的设计，便于理解，整体来说设计的思路代码都是挺简单的，那么我们从简单的设计深度挖掘下这种模式的优势。\n注意：如果没有做过复杂交互设计，或者大型应用的开发者，可能一开始无法理解这模式的好处，就简单的设计而言用模式来处理问题，有点把简单的问题复杂化。我们不是为了使用模式而使用的。\n组件开发为了保证组件可以在不同的项目中都适用，其必须是对其常用功能抽象出来加以实现，绝不会包含具体的业务逻辑而某一特定的项目使用者在其业务场景中使用组件时不可避免的要加入不同场景的业务逻辑。\n模式的实际运用 在进行组件开发中，为了保证组件可以在不同的类似项目场景中都能适用，那么就必须是对其常用功能抽象出来加以实现。\n我们来看看具体的实际用处：\n假设一段ajax的请求，成功后通过done返回结果数据：\n$.ajax({ url: \"test.html\", context: document.body }).done(function(data) { //data数据的处理 $('aaron1').html(data.a) $('aaron2').html(data.b) $('aaron3').html(data.c) //其余处理 }); 咋一看好像都挺好，没什么问题，但是仔细观察我们会发现所有的逻辑是不是都写在done方法里面，这样确实是无可厚非的，但是问题就是逻辑太复杂了。Done里面有数据处理、html渲染、还可能有其它不同场景的业务逻辑。这样如果是换做不同的人去维护代码，增加功能就会显得很混乱而且没有扩展性。那么观察者模式能很好的解决了这个的问题。\n我们优化下代码:\n$.ajax({ url: \"test.html\", context: document.body }).done(function(data) { pocessData() pocessHtml() pocessOther() } function pocessData() { //处理数据 } function pocessHtml() { $('aaron1').html(data.a) $('aaron2').html(data.b) $('aaron3').html(data.c) } function pocessOther() { //处理其他逻辑 } 这种方式的好处是，分离出各种的业务函数，从而降低了代码之间的耦合度，但是这样代码写法几乎就是“就事论事”的处理，达不到抽象复用。\n那么我们用之前的观察者模式加工一下上面的代码：（这只是伪代码，用于理解）\nObservable.add(function() { //pocessData }) Observable.add(function() { $('aaron1').html(data.a) $('aaron2').html(data.b) $('aaron3').html(data.c) }) Observable.add(function() { //pocessOther }) $.ajax({ url: \"test.html\", context: document.body }).done(function(data) { Observable.fire(data) }) 设计该模式背后的主要动力是促进形成松散耦合。在这种模式中，并不是一个对象调用另一个对象的方法，而是一个对象订阅另一个对象的特定活动并在状态改变后获得通知。订阅者也称为观察者，而被观察的对象称为发布者或主题。当发生了一个重要的事件时，发布者将会通知（调用）所有订阅者并且可能经常以事件对象的形式传递消息。\n总的来说，观察者模式所做的工作就是在解耦，让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响到另一边的变化。\nvar Observable = { callbacks: [], add: function(fn) { this.callbacks.push(fn); }, fire: function(data) { this.callbacks.forEach( function(fn) {fn(data);}) } } function ajax(arg){ setTimeout(function(){ arg.successful(arg.data+ ',返回获取到后台的数据') },1000) } //使用add开始订阅： Observable.add(function(data) { show('Action_one: ' + data) }) Observable.add(function(data) { show('Action_two: ') }) //一段ajax请求，成功后处理 ajax({ data:'Hello', successful:function(data){ Observable.fire(data); //触发动作 } }) jQuery回调对象 jQuery.Callbacks一般开发者接触的很少，虽然jQuery向开发者提供了外部接口调用，但是$.Callbacks()模块的开发目的是为了给内部$.ajax() 和 $.Deferred()模块提供统一的基本功能组件。它可以用来作为类似基础定义的新组件的功能。\njQuery.Callbacks是jquery在1.7版本之后加入的，是从1.6版中的_Deferred对象中抽离的，主要用来进行函数队列的add、remove、fire、lock等操作，并提供once、memory、unique、stopOnFalse四个option进行一些特殊的控制。\n这个函数常见的应用场景是事件触发机制，也就是设计模式中的观察者模式的发布、订阅机制，目前Callbacks对象用于queue、ajax、Deferred对象中，本小节主要是一些简单的例子去理解的使用。\n我们看官网提供的demo：\nfunction fn1(value) { console.log(value); } function fn2(value) { fn1(\"fn2 says: \" + value); return false; } 可以将上述两个方法作为回调函数，并添加到 $.Callbacks 列表中，并按下面的顺序调用它们:\nvar callbacks = $.Callbacks(); callbacks.add(fn1); // outputs: foo! callbacks.fire(\"foo!\"); callbacks.add(fn2); // outputs: bar!, fn2 says: bar! callbacks.fire(\"bar!\") 这样做的结果是，当构造复杂的回调函数列表时，将会变更很简单。可以根据需要，很方面的就可以向这些回调函数中传入所需的参数。\n上面的例子中，我们使用了 $.Callbacks() 的两个方法: .add() 和 .fire()。 .add() 和 .fire() .add() 支持添加新的回调列表, 而.fire() 提供了一种用于处理在同一列表中的回调方法的途径。\n另一种方法是$.Callbacks 的.remove()方法，用于从回调列表中删除一个特定的回调。下面是.remove()使用的一个例子:\nvar callbacks = $.Callbacks(); callbacks.add( fn1 ); // outputs: foo! callbacks.fire( \"foo!\" ); callbacks.add( fn2 ); // outputs: bar!, fn2 says: bar! callbacks.fire( \"bar!\" ); callbacks.remove( fn2 ); // only outputs foobar, as fn2 has been removed. callbacks.fire( \"foobar\" ); 这个运用内部就是观察者模式的一种设计实现，只是相对比较复杂。我们看看jQuery的回调函数到底为哪些模块服务？\n异步队列模块：\nDeferred: function(func) { var tuples = [ // action, add listener, listener list, final state [\"resolve\", \"done\", jQuery.Callbacks(\"once memory\"), \"resolved\"], [\"reject\", \"fail\", jQuery.Callbacks(\"once memory\"), \"rejected\"], [\"notify\", \"progress\", jQuery.Callbacks(\"memory\")] ]，…………. 队列模块\n_queueHooks: function(elem, type) { var key = type + \"queueHooks\"; return data_priv.get(elem, key) || data_priv.access(elem, key, { empty: jQuery.Callbacks(\"once memory\").add(function() { data_priv.remove(elem, [type + \"queue\", key]); }) }); } Ajax模块\najax: function(url, options) { //省略代码 deferred = jQuery.Deferred(), completeDeferred = jQuery.Callbacks(\"once memory\") .............. } 不难发现jQuery.Callbacks还提供“once memory”等参数用来处理：\n☑ once: 确保这个回调列表只执行（ .fire() ）一次(像一个递延 Deferred)。\n☑ memory: 保持以前的值，将添加到这个列表的后面的最新的值立即执行调用任何回调 (像一个递延 Deferred)。\n☑ unique: 确保一次只能添加一个回调(所以在列表中没有重复的回调)。\n☑ stopOnFalse: 当一个回调返回false 时中断调用。\nvar callbacks = $.Callbacks('once'); callbacks.add(function() { alert('a'); }) callbacks.add(function() { alert('b'); }) callbacks.fire(); //输出结果: 'a' 'b' callbacks.fire(); //未执行 once的作用是使callback队列只执行一次。\n最后，我们大概知道这个是干嘛用的了，可以开始上正菜了。\njQuery回调模块结构 整个$.Callbacks的源码很少，它是一个工厂函数，使用函数调用（非new，它不是一个类）创建对象，它有一个可选参数flags用来设置回调函数的行为，对外的接口也就是self的返回。\njQuery.Callbacks()的API列表如下：\ncallbacks.add() ：回调列表中添加一个回调或回调的集合。 callbacks.disable() ：禁用回调列表中的回调。 callbacks.disabled() ：确定回调列表是否已被禁用。 callbacks.empty() ：从列表中删除所有的回调。 callbacks.fire() ：用给定的参数调用所有的回调。 callbacks.fired() ：访问给定的上下文和参数列表中的所有回调。 callbacks.fireWith() ：访问给定的上下文和参数列表中的所有回调。 callbacks.has() ：确定列表中是否提供一个回调。 callbacks.lock() ：锁定当前状态的回调列表。 callbacks.locked() ：确定回调列表是否已被锁定。 callbacks.remove() ：从回调列表中的删除一个回调或回调集合。 源码结构：\njQuery.Callbacks = function(options) { options = typeof options === \"string\" ? (optionsCache[options] || createOptions(options)) : jQuery.extend({}, options); //实现代码 fire = function() {} self = { add: function() {}, remove: function() {}, has: function(fn) {}, empty: function() {}, disable: function() {}, disabled: function() {}, lock: function() {}, locked: function() {}, fireWith: function(context, args) {}, fire: function() {}, fired: function() {} }; return self; }; 整个结构要分三部分：\n☑ Options参数缓存\n☑ 内部fire触发器的设计\n☑ 外部\n参数的缓存设计\nCallbacks是可以是接受的字符串的组合传参数，可以使用空格分割，代码如下：\nvar opts = 'unique memory'; var object = {} jQuery.each(opts.match(/\\S+/g) || [], function(_, flag) { object[flag] = true; }); 这样的操作其实是不需要重复的，所以我们可以设计一个缓存池，用来储存重复的操作：\nvar optionsCache = {}; function createOptions(options) { var object = optionsCache[options] = {}; jQuery.each(options.match(rnotwhite) || [], function(_, flag) { object[flag] = true; }); return object; } 所以我们传递参数的时候，如果参数是字符串，我们可以直接从optionsCache缓存中去查找：\noptions = typeof options === \"string\" ? ( optionsCache[ options ] || createOptions( options ) ) : jQuery.extend( {}, options ); 接口的设计：\n通过学习了观察者模式的思路，我们知道callback需要在内部维护着一个list的队列数组，用于保存订阅的对象数据。同时也需要提供了add、remove、fire等订阅、发布、删除类似的接口。\n那么我们代码是不是很简单是就是把订阅对象给push给内部list列表？\n实现思路就是: 构建一个存放回调的数组，如var list = []，通过闭包使这条回调数组保持存在。添加回调时，将回调push进list，执行则遍历list执行回调。\n后面几节我们会通过简单的模拟实现去剖析设计的思路。\n默认回调对象设计 不传入任何参数，调用add的时候将函数add到内部的list中，调用fire的时候顺序触发list中的回调函数：\nfunction fn1(val) { console.log('fn1 says:' + val); } function fn2(val) { console.log('fn2 says ' + val); } var cbs = $.Callbacks(); cbs.add(fn1); cbs.fire('foo'); console.log('........') cbs.add(fn2); cbs.fire('bar') 结果就是按照顺序叠加触发，如下列表：\nfn1 says:foo ……………………… fn1 says:bar fn2 says bar 这种就是最简单的处理了，可以直接模拟，代码如下：\nfunction Callbacks() { var list = []; var self; self = { add: function(fn) { list.push(fn) }, fire: function(args) { list.forEach(function(fn) { fn(args); }) } } return self; } once的设计 这一小节我们来讲一下once。\nonce的作用确保回调列表只执行（.fire()）一次(像一个递延 Deferred)，如下代码：\nfunction fn1(val){ console.log('fn1 says ' + val); } var cbs = $.Callbacks('once'); cbs.add(fn1); cbs.fire('foo'); cbs.fire('foo'); 结果你会发现cbs.fire(‘foo’)只执行了一次。\nfn1 says foo //只显示一次 once定义是很明确的，确保这个回调列表只执行（ .fire() ）一次(像一个递延 Deferred)，所以针对这种once的处理可以有多种不同的途径实现。\n1、add的时候抛弃\n2、在fire的时候抛弃多个。\n但是jQuery是在执行第一个fire的时候直接给清空list列表了，然后在add的地方给判断下list是否存在，从而达到这样的处理。\nfunction Callbacks(options) { var list = []; var self; self = { add: function(fn) { list.push(fn) }, fire: function(args) { if (list) { list.forEach(function(fn) { fn(args); }) if (options === 'once') { list = undefined; } } } } return self; } 在fire之后，判断参数是否为once，直接把list给清理掉，所以之后的所有fire都被抛弃掉了，而从达到了once的效果。\njQuery.Callbacks的处理\n在fire中调用了 self.disable(); 方法\n// 禁用回调列表中的回调。 disable: function() { list = stack = memory = undefined; return this; }, memory的设计 memory：保持以前的值，将添加到这个列表的后面的最新的值立即执行调用任何回调 (像一个递延 Deferred)。\n回调函数是从异步队列Deferred分离出来的，所以很多的接口设计都是为了契合Deferred接口，memory用的很多，这个缓存的设计这里提及一下\n主要是用来实现deferred的异步收集与pipe管道风格的数据传递的，具体在Deferred有详解，这里大概了解下作用范围。\nmemory这个有点不好理解，我们还是通过列子说明下，看下面的代码：\nvar cbs = Callbacks('once'); cbs.add(fn1); cbs.fire('foo'); cbs.fire('foo'); function fn1(val) { console.log('fn1 says ' + val); } function fn2(val) { console.log('fn2 says ' + val); } function fn3(val) { console.log('fn3 says ' + val); } var cbs = $.Callbacks('memory'); cbs.add(fn1); cbs.fire('foo'); console.log('..........') cbs.add(fn2); cbs.fire('bar'); console.log('..........') cbs.add(fn3); cbs.fire('aaron'); 结果可以看出，我们在执行cbs.add(fn2);的时候，此时除了把fn2添加到了回调队列之外而且还立刻执行了这个方法，唯一的区别就是，参数是用的之前的。所以解释就叫“保持以前的值”。\nfn1 says foo .......... fn2 says foo fn1 says bar fn2 says bar .......... fn3 says bar fn1 says aaron fn2 says aaron fn3 says aaron 所以这个memory设计需要解决的问题就是：\n1：如何取到上一个参数\n2：add后如何执行\n看看我们实现的代码：\nfunction Callbacks(options) { var list = []; var self; var firingStart; var memory; function _fire(data) { memory = options === 'memory' \u0026\u0026 data; firingIndex = firingStart || 0; firingStart = 0; firingLength = list.length; for (; list \u0026\u0026 firingIndex \u003c firingLength; firingIndex++) { list[firingIndex](data) } } self = { add: function(fn) { var start = list.length; list.push(fn) if (memory) { firingStart = start; //获取最后一值 _fire(memory); } }, fire: function(args) { if (list) { _fire(args) } } } return self; } 首先add之后要能触发fire的动作，所以我们把fire作为内部的一个私有方法实现_fire，比较合逻辑，这样外部的fire只是一个门面方法的调用。\n私有变量memory缓存这上一个参数的属性，我们靠firingStart用来定位最后通过add增加的回调数据的索引。在遍历的时候直接通过firingStart的起始索引定位，然后传递memory的参数，而且实现这种“保持以前的值”的设计。\nunique的设计 Unique：确保一次只能添加一个回调(所以在列表中没有重复的回调)\nfunction fn1(val) { console.log('fn1 says ' + val); } var callbacks = $.Callbacks( \"unique\" ); callbacks.add( fn1 ); callbacks.add( fn1 ); // repeat addition callbacks.add( fn1 ); callbacks.fire( \"foo\" ); 结果：过滤了相同的add操作\nfn1 says foo 过滤重复的比较简单，因为是数组的保存方式，我们可以在入口处通过indexOf判断即可\nfunction Callbacks(options) { var list = []; var self; var firingStart; var memory; function _fire(data) { memory = options === 'memory' \u0026\u0026 data; firingIndex = firingStart || 0; firingStart = 0; firingLength = list.length; for (; list \u0026\u0026 firingIndex \u003c firingLength; firingIndex++) { list[firingIndex](data) } } self = { add: function(fn) { var start = list.length; if (options == 'unique') { if (-1 === list.indexOf(fn)) { list.push(fn) } } else { list.push(fn) } if (memory) { firingStart = start; //获取最后一值 _fire(memory); } }, fire: function(args) { if (list) { _fire(args) } } } return self; } stopOnFalse stopOnFalse: 当一个回调返回false 时中断调用\nfunction fn1(value) { console.log(value); return false; } function fn2(value) { fn1(\"fn2 says: \" + value); return false; } var callbacks = $.Callbacks(\"stopOnFalse\"); callbacks.add(fn1); callbacks.fire(\"foo\"); callbacks.add(fn2); callbacks.fire(\"bar\"); 结果虽然fn1被添加到了回调列表，但是因为fn1返回了false，那么意思之后的回调都不会被调用了。如果还有fn3，在f2上返回false，fn3也将不会被调用。\nfoo bar 这个设计我们只要控制好函数返回的处理的布尔值，通过这个值用来判断是否需要下一个遍历\nif (list[firingIndex](data) === false \u0026\u0026 options === 'stopOnFalse') { break; } 源码可以如下：\nfunction Callbacks(options) { var list = []; var self; var firingStart; var memory; function _fire(data) { memory = options === 'memory' \u0026\u0026 data; firingIndex = firingStart || 0; firingStart = 0; firingLength = list.length; for (; list \u0026\u0026 firingIndex \u003c firingLength; firingIndex++) { if (list[firingIndex](data) === false \u0026\u0026 options === 'stopOnFalse') { break; } } } self = { add: function(fn) { var start = list.length; if (options == 'unique') { if (-1 === list.indexOf(fn)) { list.push(fn) } } else { list.push(fn) } if (memory) { firingStart = start; //获取最后一值 _fire(memory); } }, fire: function(args) { if (list) { _fire(args) } } } return self; } 以上是几种单独的处理情况的用法，我们可以看到jQuery都是组合使用的，最常见的就是\njQuery.Callbacks(“once memory”)的组合了，其实以上的思路都讲解过了，无非就是组合起来的时候要考虑一些判断了。\n","wordCount":"1438","inLanguage":"zh","datePublished":"2016-12-10T00:00:00Z","dateModified":"2016-12-10T00:00:00Z","author":{"@type":"Person","name":"Watson Hu"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html"},"publisher":{"@type":"Organization","name":"Nichome","logo":{"@type":"ImageObject","url":"https://ulsonhu.cn/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://ulsonhu.cn/ accesskey=h title="Nichome (Alt + H)">Nichome</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://ulsonhu.cn/archives/ title=归档><span>归档</span></a></li><li><a href=https://ulsonhu.cn/categories/ title=分类><span>分类</span></a></li><li><a href=https://ulsonhu.cn/tags/ title=标签><span>标签</span></a></li><li><a href=https://ulsonhu.cn/search/ title=搜索><span>搜索</span></a></li><li><a href=https://ulsonhu.cn/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=/posts/>Posts</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">理解回调函数</h1><div class=post-meta><span title='2016-12-10 00:00:00 +0000 UTC'>2016年12月10日</span>&nbsp;·&nbsp;<span>7 分钟</span>&nbsp;·&nbsp;<span>1438 字</span>&nbsp;·&nbsp;<span>Watson Hu</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><nav id=TableOfContents><ul><li><a href=#回调的灵活运用>回调的灵活运用</a></li><li><a href=#理解观察者模式>理解观察者模式</a></li><li><a href=#模式的实际运用>模式的实际运用</a></li><li><a href=#jquery回调对象>jQuery回调对象</a></li><li><a href=#jquery回调模块结构>jQuery回调模块结构</a></li><li><a href=#默认回调对象设计>默认回调对象设计</a></li><li><a href=#once的设计>once的设计</a></li><li><a href=#memory的设计>memory的设计</a></li><li><a href=#unique的设计>unique的设计</a></li><li><a href=#stoponfalse>stopOnFalse</a></li></ul></nav></div></details><div class="post-content md-content"><p>主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。</p><p>函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：</p><p>**☑ **  能“存储”在变量中</p><p>** ☑**   能作为函数的实参被传递</p><p>**☑ **  能在函数中被创建</p><p>** ☑**   能从函数中返回</p><p><strong>百科里面是这么解释的：</strong></p><p>回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该<strong>事件</strong>或<strong>条件</strong>进行响应。</p><p>因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。</p><p>在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就<strong>是输入和输出之间实现过程的映射</strong>。</p><p>但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。</p><p><strong>jQuery中遍地都是回调的设计：</strong></p><p><strong>异步回调：</strong></p><p>事件句柄回调</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>$(document).ready(callback);
+</span></span><span style=display:flex><span>$(document).on(‘click’,callback)
+</span></span></code></pre></div><p>Ajax异步请求成功失败回调</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>$.ajax({
+</span></span><span style=display:flex><span>  url: &#34;aaron.html&#34;,
+</span></span><span style=display:flex><span>  context: document
+</span></span><span style=display:flex><span>}).done(function() { 
+</span></span><span style=display:flex><span>        //成功执行
+</span></span><span style=display:flex><span>}).fail(function() {
+</span></span><span style=display:flex><span>        //失败执行
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><p>动画执行完毕回调</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>$(&#39;#clickme&#39;).click(function() {
+</span></span><span style=display:flex><span>    $(&#39;#book&#39;).animate({
+</span></span><span style=display:flex><span>        opacity: 0.25,
+</span></span><span style=display:flex><span>        left: &#39;+=50&#39;,
+</span></span><span style=display:flex><span>        height: &#39;toggle&#39;
+</span></span><span style=display:flex><span>    }, 5000, function() {
+</span></span><span style=display:flex><span>        // Animation complete.
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。</p><p><strong>同步回调：</strong></p><p>当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。</p><p>一个同步(阻塞)中使用回调的例子，目的是在test1代码执行完成后执行回调callback</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var test1 = function(callback) {
+</span></span><span style=display:flex><span>    //执行长时间操作
+</span></span><span style=display:flex><span>    callback();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>test1(function() {
+</span></span><span style=display:flex><span>    //执行回调中的方法
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p><strong>所以理解回调函数最重要的2点：</strong></p><p>1、一个回调函数作为参数传递给另一个函数是，我们仅仅传递了函数定义。我们并没有在参数中执行函数。我们并不传递像我们平时执行函数一样带有一对执行小括号()的函数</p><p>2、回调函数并不会马上被执行，它会在包含它的函数内的某个特定时间点被“回调”。</p><h2 id=回调的灵活运用>回调的灵活运用<a hidden class=anchor aria-hidden=true href=#回调的灵活运用>#</a></h2><p>我们经常会这样使用函数回调：</p><p><strong>☑</strong>  事件触发通知</p><p><strong>☑</strong>  资源加载通知</p><p><strong>☑</strong>  定时器延时</p><p><strong>☑</strong>  ajax、动画通知等等。</p><p>以上都是很单一的事件监听回调的处理方式，但是jQuery把回调函数的用法设计成一个更高的抽像，用于解耦与分离变化。</p><p>如何理解这个设计？我们看下面的例子。</p><p><strong>例子一：</strong></p><p>jQuery针对Dom的处理提供了append、prepend、before、after等方法的处理，这几个方法的特征：</p><p>1、参数的传递可以是HTML字符串、DOM元素、元素数组或者jQuery对象</p><p>2、为了优化性能针对节点的处理需要生成文档碎片</p><p>可见几个方法都是需要实现这2个特性的，那么我们应该如何处理？</p><p><strong>高层接口：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>before</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>domManip</span>(<span style=color:#a6e22e>arguments</span>, <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>elem</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>parentNode</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>parentNode</span>.<span style=color:#a6e22e>insertBefore</span>(<span style=color:#a6e22e>elem</span>, <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>},
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>after</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>domManip</span>(<span style=color:#a6e22e>arguments</span>, <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>elem</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>parentNode</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>parentNode</span>.<span style=color:#a6e22e>insertBefore</span>(<span style=color:#a6e22e>elem</span>, <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>nextSibling</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>},
+</span></span></code></pre></div><p><strong>底层实现：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>domManip</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>args</span>, <span style=color:#a6e22e>callback</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Flatten any nested arrays
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>args</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>concat</span>.<span style=color:#a6e22e>apply</span>([], <span style=color:#a6e22e>args</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// We can&#39;t cloneNode fragments that contain checked, in WebKit
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>isFunction</span> <span style=color:#f92672>||</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//多参数处理
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>self</span>.<span style=color:#a6e22e>domManip</span>(<span style=color:#a6e22e>args</span>, <span style=color:#a6e22e>callback</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>l</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//生成文档碎片
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>fragment</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>jQuery</span>.<span style=color:#a6e22e>buildFragment</span>(<span style=color:#a6e22e>args</span>, <span style=color:#66d9ef>this</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>ownerDocument</span>, <span style=color:#66d9ef>false</span>, <span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>callback</span>.<span style=color:#a6e22e>call</span>(<span style=color:#66d9ef>this</span>[<span style=color:#a6e22e>i</span>], <span style=color:#a6e22e>node</span>, <span style=color:#a6e22e>i</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>我们观察下jQuery的实现，通过抽象出一个domManip方法，然后在这个方法中处理共性，合并多个参数的处理与生成文档碎片的处理，然后最终把结果通过回调函数返回给每一个调用者。</p><p><strong>例子二：</strong></p><p>在很多时候需要控制一系列的函数顺序执行。那么一般就需要一个队列函数来处理这个问题。</p><p>我们看一段代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function Ulson(List, callback) {
+</span></span><span style=display:flex><span>    setTimeout(function() {
+</span></span><span style=display:flex><span>        var task;
+</span></span><span style=display:flex><span>        if (task = List.shift()) {
+</span></span><span style=display:flex><span>            task(); //执行函数
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        if (List.length &gt; 0) { //递归分解
+</span></span><span style=display:flex><span>            arguments.callee(List)
+</span></span><span style=display:flex><span>        } else {
+</span></span><span style=display:flex><span>            callback()
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }, 25)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>//调用
+</span></span><span style=display:flex><span>Ulson([
+</span></span><span style=display:flex><span>    function() {
+</span></span><span style=display:flex><span>        alert(&#39;a&#39;)
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    function() {
+</span></span><span style=display:flex><span>        alert(&#39;b&#39;)
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    function() {
+</span></span><span style=display:flex><span>        alert(&#39;c&#39;)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>], function() {
+</span></span><span style=display:flex><span>    alert(&#39;callback&#39;)
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// 分别弹出 ‘a’ , ‘b’ ,&#39;c&#39;,’callback
+</span></span></code></pre></div><p>传入一组函数参数，靠递归解析，分个执行，其实就是靠setTimeout可以把函数加入到队列末尾才执行的原理，这样的写法就有点就事论事了，聚合对象完全是一个整体，无法再次细分出来，所以我们需要一种方案，用来管理分离每一个独立的对象。</p><p><strong>我们换成jQuery提供的方式:</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var callbacks = $.Callbacks();
+</span></span><span style=display:flex><span>callbacks.add(function() {
+</span></span><span style=display:flex><span>    alert(&#39;a&#39;);
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>callbacks.add(function() {
+</span></span><span style=display:flex><span>    alert(&#39;b&#39;);
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>callbacks.fire(); //输出结果: &#39;a&#39; &#39;b&#39;
+</span></span></code></pre></div><p>是不是便捷很多了，代码又很清晰，所以Callbacks它是一个多用途的回调函数列表对象，提供了一种强大的方法来管理回调函数队列。</p><p>那么我们使用回调函数，总的来说<strong>弱化耦合</strong>，让调用者与被调用者分开，调用者不关心谁是被调用者，所有它需知道的，只是存在一个具有某种特定原型、某些限制条件的被调用函数。</p><h2 id=理解观察者模式>理解观察者模式<a hidden class=anchor aria-hidden=true href=#理解观察者模式>#</a></h2><p>讲解jQuery回调对象之前，我们有必要先理解其背后的设计思想 - “观察者模式”。</p><p>观察者模式 (pub/sub) 的背后，总的想法是在应用程序中增强松耦合性。并非是在其它对象的方法上的单个对象调用。一个对象作为特定任务或是另一对象的活动的观察者，并且在这个任务或活动发生时，通知观察者。观察者也被叫作订阅者（Subscriber），它指向被观察的对象，既被观察者（Publisher 或 subject)。当事件发生时，被观察者（Publisher）就会通知观察者（subscriber）。</p><p><strong>观察者的使用场合</strong></p><p>观察者的使用场合就是：<strong>当一个对象的改变需要同时改变其它对象，并且它不知道具体有多少对象需要改变的时候，就应该考虑使用观察者模式</strong>。先看官网的demo这个例子，涉及到了 add 与 fire方法，熟悉设计模式的童鞋呢，一眼就能看出，其实又是基于发布订阅（Publish/Subscribe）的观察者模式的设计。</p><p>作为 $.Callbacks() 的创建组件的一个演示，只使用回调函数列表，就可以实现 Pub/Sub 系统，将 $.Callbacks 作为一个队列。</p><p><strong>我们来模拟常规下最简单的实现：</strong></p><p>JS里对观察者模式的实现是通过回调来实现的，我们来先定义一个Observable对象，其内部包含了2个方法：订阅add方法与发布fire方法，如下代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Observable</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>callbacks</span><span style=color:#f92672>:</span> [],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>add</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>push</span>(<span style=color:#a6e22e>fn</span>);
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fire</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>forEach</span>(<span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fn</span>();
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>使用add开始订阅：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Observable.add(function() {
+</span></span><span style=display:flex><span>  alert(1)
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>Observable.add(function() {
+</span></span><span style=display:flex><span>  alert(2)
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>使用fire开始发布：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Observable.fire(); // 1, 2
+</span></span></code></pre></div><p><strong>设计的原理：</strong></p><p>开始构建一个存放回调的数组，如<code>this.callbacks= []</code>添加回调时，将回调push进this.callbacks，执行则遍历this.callbacks执行回调，也弹出1跟2了。当然这只是简洁的设计，便于理解，整体来说设计的思路代码都是挺简单的，那么我们从简单的设计深度挖掘下这种模式的优势。</p><p>注意：如果没有做过复杂交互设计，或者大型应用的开发者，可能一开始无法理解这模式的好处，就简单的设计而言用模式来处理问题，有点把简单的问题复杂化。我们不是为了使用模式而使用的。</p><p><strong>组件开发为了保证组件可以在不同的项目中都适用，其必须是对其常用功能抽象出来加以实现，绝不会包含具体的业务逻辑而某一特定的项目使用者在其业务场景中使用组件时不可避免的要加入不同场景的业务逻辑。</strong></p><h2 id=模式的实际运用>模式的实际运用<a hidden class=anchor aria-hidden=true href=#模式的实际运用>#</a></h2><p>在进行组件开发中，为了保证组件可以在不同的类似项目场景中都能适用，那么就必须是对其常用功能抽象出来加以实现。</p><p>我们来看看具体的实际用处：</p><p>假设一段ajax的请求，成功后通过done返回结果数据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>$</span>.<span style=color:#a6e22e>ajax</span>({
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>url</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;test.html&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>context</span><span style=color:#f92672>:</span> document.<span style=color:#a6e22e>body</span>
+</span></span><span style=display:flex><span>}).<span style=color:#a6e22e>done</span>(<span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>data</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//data数据的处理
+</span></span></span><span style=display:flex><span>  <span style=color:#a6e22e>$</span>(<span style=color:#e6db74>&#39;aaron1&#39;</span>).<span style=color:#a6e22e>html</span>(<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>a</span>)
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>$</span>(<span style=color:#e6db74>&#39;aaron2&#39;</span>).<span style=color:#a6e22e>html</span>(<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>b</span>)
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>$</span>(<span style=color:#e6db74>&#39;aaron3&#39;</span>).<span style=color:#a6e22e>html</span>(<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>c</span>)
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//其余处理
+</span></span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>咋一看好像都挺好，没什么问题，但是仔细观察我们会发现所有的逻辑是不是都写在done方法里面，这样确实是无可厚非的，但是问题就是逻辑太复杂了。Done里面有数据处理、html渲染、还可能有其它不同场景的业务逻辑。这样如果是换做不同的人去维护代码，增加功能就会显得很混乱而且没有扩展性。那么观察者模式能很好的解决了这个的问题。</p><p>我们优化下代码:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>$.ajax({
+</span></span><span style=display:flex><span>  url: &#34;test.html&#34;,
+</span></span><span style=display:flex><span>  context: document.body
+</span></span><span style=display:flex><span>}).done(function(data) {
+</span></span><span style=display:flex><span>    pocessData()
+</span></span><span style=display:flex><span>    pocessHtml()
+</span></span><span style=display:flex><span>    pocessOther()
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  function pocessData() {
+</span></span><span style=display:flex><span>    //处理数据
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  function pocessHtml() {
+</span></span><span style=display:flex><span>    $(&#39;aaron1&#39;).html(data.a)
+</span></span><span style=display:flex><span>    $(&#39;aaron2&#39;).html(data.b)
+</span></span><span style=display:flex><span>    $(&#39;aaron3&#39;).html(data.c)
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  function pocessOther() {
+</span></span><span style=display:flex><span>    //处理其他逻辑
+</span></span><span style=display:flex><span>  }
+</span></span></code></pre></div><p>这种方式的好处是，分离出各种的业务函数，从而降低了代码之间的耦合度，但是这样代码写法几乎就是“就事论事”的处理，达不到<strong>抽象复用</strong>。</p><p>那么我们用之前的观察者模式加工一下上面的代码：（这只是伪代码，用于理解）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Observable.add(function() {
+</span></span><span style=display:flex><span>  //pocessData
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Observable.add(function() {
+</span></span><span style=display:flex><span>  $(&#39;aaron1&#39;).html(data.a)
+</span></span><span style=display:flex><span>  $(&#39;aaron2&#39;).html(data.b)
+</span></span><span style=display:flex><span>  $(&#39;aaron3&#39;).html(data.c)
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Observable.add(function() {
+</span></span><span style=display:flex><span>  //pocessOther
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>$.ajax({
+</span></span><span style=display:flex><span>  url: &#34;test.html&#34;,
+</span></span><span style=display:flex><span>  context: document.body
+</span></span><span style=display:flex><span>}).done(function(data) {
+</span></span><span style=display:flex><span>  Observable.fire(data)
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>设计该模式背后的主要动力是促进形成松散耦合。在这种模式中，并不是一个对象调用另一个对象的方法，而是一个对象订阅另一个对象的特定活动并在状态改变后获得通知。订阅者也称为观察者，而被观察的对象称为发布者或主题。当发生了一个重要的事件时，发布者将会通知（调用）所有订阅者并且可能经常以事件对象的形式传递消息。</p><p>总的来说，观察者模式所做的工作就是在解耦，让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响到另一边的变化。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Observable</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>callbacks</span><span style=color:#f92672>:</span> [],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>add</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>push</span>(<span style=color:#a6e22e>fn</span>);
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fire</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>data</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>forEach</span>(
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {<span style=color:#a6e22e>fn</span>(<span style=color:#a6e22e>data</span>);})
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>ajax</span>(<span style=color:#a6e22e>arg</span>){
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>setTimeout</span>(<span style=color:#66d9ef>function</span>(){
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>arg</span>.<span style=color:#a6e22e>successful</span>(<span style=color:#a6e22e>arg</span>.<span style=color:#a6e22e>data</span><span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;,返回获取到后台的数据&#39;</span>)
+</span></span><span style=display:flex><span>  },<span style=color:#ae81ff>1000</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//使用add开始订阅：
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>Observable</span>.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>data</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>show</span>(<span style=color:#e6db74>&#39;Action_one: &#39;</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>data</span>)
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Observable</span>.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>data</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>show</span>(<span style=color:#e6db74>&#39;Action_two: &#39;</span>)
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//一段ajax请求，成功后处理
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>ajax</span>({
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>data</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;Hello&#39;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>successful</span><span style=color:#f92672>:</span><span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>data</span>){
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Observable</span>.<span style=color:#a6e22e>fire</span>(<span style=color:#a6e22e>data</span>); <span style=color:#75715e>//触发动作
+</span></span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><h2 id=jquery回调对象>jQuery回调对象<a hidden class=anchor aria-hidden=true href=#jquery回调对象>#</a></h2><p>jQuery.Callbacks一般开发者接触的很少，虽然jQuery向开发者提供了外部接口调用，但是$.Callbacks()模块的开发目的是为了给内部$.ajax() 和 $.Deferred()模块提供统一的基本功能组件。它可以用来作为类似基础定义的新组件的功能。</p><p>jQuery.Callbacks是jquery在1.7版本之后加入的，是从1.6版中的_Deferred对象中抽离的，主要用来进行函数队列的add、remove、fire、lock等操作，并提供once、memory、unique、stopOnFalse四个option进行一些特殊的控制。</p><p>这个函数常见的应用场景是事件触发机制，也就是设计模式中的观察者模式的发布、订阅机制，目前Callbacks对象用于queue、ajax、Deferred对象中，本小节主要是一些简单的例子去理解的使用。</p><p>我们看官网提供的demo：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function fn1(value) {
+</span></span><span style=display:flex><span>  console.log(value);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function fn2(value) {
+</span></span><span style=display:flex><span>  fn1(&#34;fn2 says: &#34; + value);
+</span></span><span style=display:flex><span>  return false;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>可以将上述两个方法作为回调函数，并添加到 $.Callbacks 列表中，并按下面的顺序调用它们:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>callbacks</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>$</span>.<span style=color:#a6e22e>Callbacks</span>();
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>add</span>(<span style=color:#a6e22e>fn1</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>// outputs: foo!
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fire</span>(<span style=color:#e6db74>&#34;foo!&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>add</span>(<span style=color:#a6e22e>fn2</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>// outputs: bar!, fn2 says: bar!
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fire</span>(<span style=color:#e6db74>&#34;bar!&#34;</span>)
+</span></span></code></pre></div><p>这样做的结果是，当构造复杂的回调函数列表时，将会变更很简单。可以根据需要，很方面的就可以向这些回调函数中传入所需的参数。</p><p>上面的例子中，我们使用了 $.Callbacks() 的两个方法: .add() 和 .fire()。 .add() 和 .fire() .add() 支持添加新的回调列表, 而.fire() 提供了一种用于处理在同一列表中的回调方法的途径。</p><p>另一种方法是$.Callbacks 的.remove()方法，用于从回调列表中删除一个特定的回调。下面是.remove()使用的一个例子:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var callbacks = $.Callbacks();
+</span></span><span style=display:flex><span>callbacks.add( fn1 );
+</span></span><span style=display:flex><span>// outputs: foo!
+</span></span><span style=display:flex><span>callbacks.fire( &#34;foo!&#34; );
+</span></span><span style=display:flex><span>callbacks.add( fn2 );
+</span></span><span style=display:flex><span>// outputs: bar!, fn2 says: bar!
+</span></span><span style=display:flex><span>callbacks.fire( &#34;bar!&#34; );
+</span></span><span style=display:flex><span>callbacks.remove( fn2 );
+</span></span><span style=display:flex><span>// only outputs foobar, as fn2 has been removed.
+</span></span><span style=display:flex><span>callbacks.fire( &#34;foobar&#34; );
+</span></span></code></pre></div><p>这个运用内部就是观察者模式的一种设计实现，只是相对比较复杂。我们看看jQuery的回调函数到底为哪些模块服务？</p><p>异步队列模块：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Deferred: function(func) {
+</span></span><span style=display:flex><span>  var tuples = [
+</span></span><span style=display:flex><span>    // action, add listener, listener list, final state
+</span></span><span style=display:flex><span>    [&#34;resolve&#34;, &#34;done&#34;, jQuery.Callbacks(&#34;once memory&#34;), &#34;resolved&#34;],
+</span></span><span style=display:flex><span>    [&#34;reject&#34;, &#34;fail&#34;, jQuery.Callbacks(&#34;once memory&#34;), &#34;rejected&#34;],
+</span></span><span style=display:flex><span>    [&#34;notify&#34;, &#34;progress&#34;, jQuery.Callbacks(&#34;memory&#34;)]
+</span></span><span style=display:flex><span>  ]，………….
+</span></span></code></pre></div><p>队列模块</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>_queueHooks: function(elem, type) {
+</span></span><span style=display:flex><span>  var key = type + &#34;queueHooks&#34;;
+</span></span><span style=display:flex><span>  return data_priv.get(elem, key) || data_priv.access(elem, key, {
+</span></span><span style=display:flex><span>    empty: jQuery.Callbacks(&#34;once memory&#34;).add(function() {
+</span></span><span style=display:flex><span>      data_priv.remove(elem, [type + &#34;queue&#34;, key]);
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Ajax模块</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>ajax: function(url, options) {
+</span></span><span style=display:flex><span>  //省略代码
+</span></span><span style=display:flex><span>  deferred = jQuery.Deferred(),
+</span></span><span style=display:flex><span>  completeDeferred = jQuery.Callbacks(&#34;once memory&#34;)
+</span></span><span style=display:flex><span>    ..............
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>不难发现jQuery.Callbacks还提供“once memory”等参数用来处理：</p><p>☑  once: 确保这个回调列表只执行（ .fire() ）一次(像一个递延 Deferred)。</p><p>☑  memory: 保持以前的值，将添加到这个列表的后面的最新的值立即执行调用任何回调 (像一个递延 Deferred)。</p><p>☑  unique: 确保一次只能添加一个回调(所以在列表中没有重复的回调)。</p><p>☑  stopOnFalse: 当一个回调返回false 时中断调用。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>callbacks</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>$</span>.<span style=color:#a6e22e>Callbacks</span>(<span style=color:#e6db74>&#39;once&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>function</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#39;a&#39;</span>);
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>function</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>alert</span>(<span style=color:#e6db74>&#39;b&#39;</span>);
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fire</span>(); <span style=color:#75715e>//输出结果: &#39;a&#39; &#39;b&#39;
+</span></span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fire</span>(); <span style=color:#75715e>//未执行
+</span></span></span></code></pre></div><p>once的作用是使callback队列只执行一次。</p><p>最后，我们大概知道这个是干嘛用的了，可以开始上正菜了。</p><h2 id=jquery回调模块结构>jQuery回调模块结构<a hidden class=anchor aria-hidden=true href=#jquery回调模块结构>#</a></h2><p>整个$.Callbacks的源码很少，它是一个工厂函数，使用函数调用（非new，它不是一个类）创建对象，它有一个可选参数flags用来设置回调函数的行为，对外的接口也就是self的返回。</p><p>jQuery.Callbacks()的API列表如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>add</span>()        <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>回调列表中添加一个回调或回调的集合</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>disable</span>()    <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>禁用回调列表中的回调</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>disabled</span>()   <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>确定回调列表是否已被禁用</span><span style=color:#960050;background-color:#1e0010>。</span> 
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>empty</span>()      <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>从列表中删除所有的回调</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fire</span>()       <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>用给定的参数调用所有的回调</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fired</span>()      <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>访问给定的上下文和参数列表中的所有回调</span><span style=color:#960050;background-color:#1e0010>。</span> 
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>fireWith</span>()   <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>访问给定的上下文和参数列表中的所有回调</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>has</span>()        <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>确定列表中是否提供一个回调</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>lock</span>()       <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>锁定当前状态的回调列表</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>locked</span>()     <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>确定回调列表是否已被锁定</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>callbacks</span>.<span style=color:#a6e22e>remove</span>()     <span style=color:#960050;background-color:#1e0010>：</span><span style=color:#a6e22e>从回调列表中的删除一个回调或回调集合</span><span style=color:#960050;background-color:#1e0010>。</span>
+</span></span></code></pre></div><p>源码结构：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#a6e22e>jQuery</span>.<span style=color:#a6e22e>Callbacks</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>options</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>options</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>typeof</span> <span style=color:#a6e22e>options</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#34;string&#34;</span> <span style=color:#f92672>?</span>
+</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>optionsCache</span>[<span style=color:#a6e22e>options</span>] <span style=color:#f92672>||</span> <span style=color:#a6e22e>createOptions</span>(<span style=color:#a6e22e>options</span>)) <span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>jQuery</span>.<span style=color:#a6e22e>extend</span>({}, <span style=color:#a6e22e>options</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//实现代码
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>fire</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>() {}
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>self</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>add</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>remove</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>has</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>empty</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>disable</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>disabled</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>lock</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>locked</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fireWith</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>context</span>, <span style=color:#a6e22e>args</span>) {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fire</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {},
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>fired</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>() {}
+</span></span><span style=display:flex><span>    };
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>self</span>;
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>整个结构要分三部分：</p><p>☑   Options参数缓存</p><p>☑   内部fire触发器的设计</p><p>☑   外部</p><p><strong>参数的缓存设计</strong></p><p>Callbacks是可以是接受的字符串的组合传参数，可以使用空格分割，代码如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var opts = &#39;unique memory&#39;;
+</span></span><span style=display:flex><span>var object = {}
+</span></span><span style=display:flex><span>jQuery.each(opts.match(/\S+/g) || [], function(_, flag) {
+</span></span><span style=display:flex><span>  object[flag] = true;
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><p>这样的操作其实是不需要重复的，所以我们可以设计一个缓存池，用来储存重复的操作：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var optionsCache = {};
+</span></span><span style=display:flex><span>function createOptions(options) {
+</span></span><span style=display:flex><span>  var object = optionsCache[options] = {};
+</span></span><span style=display:flex><span>  jQuery.each(options.match(rnotwhite) || [], function(_, flag) {
+</span></span><span style=display:flex><span>    object[flag] = true;
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>  return object;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>所以我们传递参数的时候，如果参数是字符串，我们可以直接从optionsCache缓存中去查找：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>options = typeof options === &#34;string&#34; ?
+</span></span><span style=display:flex><span>        ( optionsCache[ options ] || createOptions( options ) ) :
+</span></span><span style=display:flex><span>        jQuery.extend( {}, options );
+</span></span></code></pre></div><p><strong>接口的设计：</strong></p><p>通过学习了观察者模式的思路，我们知道callback需要在内部维护着一个list的队列数组，用于保存订阅的对象数据。同时也需要提供了add、remove、fire等订阅、发布、删除类似的接口。</p><p>那么我们代码是不是很简单是就是把订阅对象给push给内部list列表？</p><p>实现思路就是: 构建一个存放回调的数组，如<code>var list = []</code>，通过闭包使这条回调数组保持存在。添加回调时，将回调push进list，执行则遍历list执行回调。</p><p>后面几节我们会通过简单的模拟实现去剖析设计的思路。</p><h2 id=默认回调对象设计>默认回调对象设计<a hidden class=anchor aria-hidden=true href=#默认回调对象设计>#</a></h2><p>不传入任何参数，调用add的时候将函数add到内部的list中，调用fire的时候顺序触发list中的回调函数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function fn1(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn1 says:&#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function fn2(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn2 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>var cbs = $.Callbacks();
+</span></span><span style=display:flex><span>cbs.add(fn1);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span><span style=display:flex><span>console.log(&#39;........&#39;)
+</span></span><span style=display:flex><span>cbs.add(fn2);
+</span></span><span style=display:flex><span>cbs.fire(&#39;bar&#39;)
+</span></span></code></pre></div><p>结果就是按照顺序叠加触发，如下列表：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>fn1 says:foo 
+</span></span><span style=display:flex><span>………………………
+</span></span><span style=display:flex><span>fn1 says:bar 
+</span></span><span style=display:flex><span>fn2 says bar
+</span></span></code></pre></div><p>这种就是最简单的处理了，可以直接模拟，代码如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function Callbacks() {
+</span></span><span style=display:flex><span>  var list = [];
+</span></span><span style=display:flex><span>  var self;
+</span></span><span style=display:flex><span>  self = {
+</span></span><span style=display:flex><span>    add: function(fn) {
+</span></span><span style=display:flex><span>      list.push(fn)
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    fire: function(args) {
+</span></span><span style=display:flex><span>      list.forEach(function(fn) {
+</span></span><span style=display:flex><span>        fn(args);
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  return self;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=once的设计>once的设计<a hidden class=anchor aria-hidden=true href=#once的设计>#</a></h2><p>这一小节我们来讲一下once。</p><p>once的作用确保回调列表只执行（.fire()）一次(像一个递延 Deferred)，如下代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function fn1(val){
+</span></span><span style=display:flex><span>    console.log(&#39;fn1 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>var cbs = $.Callbacks(&#39;once&#39;);
+</span></span><span style=display:flex><span>cbs.add(fn1);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span></code></pre></div><p>结果你会发现cbs.fire(‘foo’)只执行了一次。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>fn1 says foo  //只显示一次
+</span></span></code></pre></div><p>once定义是很明确的，确保这个回调列表只执行（ .fire() ）一次(像一个递延 Deferred)，所以针对这种once的处理可以有多种不同的途径实现。</p><p>1、add的时候抛弃</p><p>2、在fire的时候抛弃多个。</p><p>但是jQuery是在执行第一个fire的时候直接给清空list列表了，然后在add的地方给判断下list是否存在，从而达到这样的处理。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function Callbacks(options) {
+</span></span><span style=display:flex><span>  var list = [];
+</span></span><span style=display:flex><span>  var self;
+</span></span><span style=display:flex><span>  self = {
+</span></span><span style=display:flex><span>    add: function(fn) {
+</span></span><span style=display:flex><span>      list.push(fn)
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    fire: function(args) {
+</span></span><span style=display:flex><span>      if (list) {
+</span></span><span style=display:flex><span>        list.forEach(function(fn) {
+</span></span><span style=display:flex><span>          fn(args);
+</span></span><span style=display:flex><span>        })
+</span></span><span style=display:flex><span>        if (options === &#39;once&#39;) {
+</span></span><span style=display:flex><span>          list = undefined;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  return self;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>在fire之后，判断参数是否为once，直接把list给清理掉，所以之后的所有fire都被抛弃掉了，而从达到了once的效果。</p><p><strong>jQuery.Callbacks的处理</strong></p><p>在fire中调用了 self.disable(); 方法</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>// 禁用回调列表中的回调。
+</span></span><span style=display:flex><span>disable: function() {
+</span></span><span style=display:flex><span>    list = stack = memory = undefined;
+</span></span><span style=display:flex><span>    return this;
+</span></span><span style=display:flex><span>},
+</span></span></code></pre></div><h2 id=memory的设计>memory的设计<a hidden class=anchor aria-hidden=true href=#memory的设计>#</a></h2><p>memory：保持以前的值，将添加到这个列表的后面的最新的值立即执行调用任何回调 (像一个递延 Deferred)。</p><p>回调函数是从异步队列Deferred分离出来的，所以很多的接口设计都是为了契合Deferred接口，memory用的很多，这个缓存的设计这里提及一下</p><p>主要是用来实现deferred的异步收集与pipe管道风格的数据传递的，具体在Deferred有详解，这里大概了解下作用范围。</p><p>memory这个有点不好理解，我们还是通过列子说明下，看下面的代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>var cbs = Callbacks(&#39;once&#39;);
+</span></span><span style=display:flex><span>cbs.add(fn1);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function fn1(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn1 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>function fn2(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn2 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>function fn3(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn3 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>var cbs = $.Callbacks(&#39;memory&#39;);
+</span></span><span style=display:flex><span>cbs.add(fn1);
+</span></span><span style=display:flex><span>cbs.fire(&#39;foo&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>console.log(&#39;..........&#39;)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>cbs.add(fn2);
+</span></span><span style=display:flex><span>cbs.fire(&#39;bar&#39;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>console.log(&#39;..........&#39;)
+</span></span><span style=display:flex><span>cbs.add(fn3);
+</span></span><span style=display:flex><span>cbs.fire(&#39;aaron&#39;);
+</span></span></code></pre></div><p>结果可以看出，我们在执行cbs.add(fn2);的时候，此时除了把fn2添加到了回调队列之外而且还立刻执行了这个方法，唯一的区别就是，参数是用的之前的。所以解释就叫“<strong>保持以前的值</strong>”。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>fn1 says foo 
+</span></span><span style=display:flex><span>.......... 
+</span></span><span style=display:flex><span>fn2 says foo 
+</span></span><span style=display:flex><span>fn1 says bar 
+</span></span><span style=display:flex><span>fn2 says bar 
+</span></span><span style=display:flex><span>.......... 
+</span></span><span style=display:flex><span>fn3 says bar 
+</span></span><span style=display:flex><span>fn1 says aaron 
+</span></span><span style=display:flex><span>fn2 says aaron 
+</span></span><span style=display:flex><span>fn3 says aaron
+</span></span></code></pre></div><p>所以这个<code>memory</code>设计需要解决的问题就是：</p><p>1：如何取到上一个参数</p><p>2：add后如何执行</p><p>看看我们实现的代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Callbacks</span>(<span style=color:#a6e22e>options</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>list</span> <span style=color:#f92672>=</span> [];
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>self</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>firingStart</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>memory</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>_fire</span>(<span style=color:#a6e22e>data</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>memory</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>options</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#39;memory&#39;</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>data</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>firingIndex</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>firingStart</span> <span style=color:#f92672>||</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>firingStart</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>firingLength</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>list</span>.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (; <span style=color:#a6e22e>list</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>firingIndex</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>firingLength</span>; <span style=color:#a6e22e>firingIndex</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>list</span>[<span style=color:#a6e22e>firingIndex</span>](<span style=color:#a6e22e>data</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>self</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>add</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>fn</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>start</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>list</span>.<span style=color:#a6e22e>length</span>;
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>list</span>.<span style=color:#a6e22e>push</span>(<span style=color:#a6e22e>fn</span>)
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>memory</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>firingStart</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>start</span>; <span style=color:#75715e>//获取最后一值
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>_fire</span>(<span style=color:#a6e22e>memory</span>);
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>   <span style=color:#a6e22e>fire</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>args</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>list</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>_fire</span>(<span style=color:#a6e22e>args</span>)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>self</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>首先add之后要能触发fire的动作，所以我们把fire作为内部的一个私有方法实现_fire，比较合逻辑，这样外部的fire只是一个门面方法的调用。</p><p>私有变量memory缓存这上一个参数的属性，我们靠firingStart用来定位最后通过add增加的回调数据的索引。在遍历的时候直接通过firingStart的起始索引定位，然后传递memory的参数，而且实现这种“保持以前的值”的设计。</p><h2 id=unique的设计>unique的设计<a hidden class=anchor aria-hidden=true href=#unique的设计>#</a></h2><p>Unique：确保一次只能添加一个回调(所以在列表中没有重复的回调)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function fn1(val) {
+</span></span><span style=display:flex><span>  console.log(&#39;fn1 says &#39; + val);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>var callbacks = $.Callbacks( &#34;unique&#34; );
+</span></span><span style=display:flex><span>callbacks.add( fn1 );
+</span></span><span style=display:flex><span>callbacks.add( fn1 ); // repeat addition
+</span></span><span style=display:flex><span>callbacks.add( fn1 );
+</span></span><span style=display:flex><span>callbacks.fire( &#34;foo&#34; );
+</span></span></code></pre></div><p>结果：过滤了相同的add操作</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>fn1 says foo
+</span></span></code></pre></div><p>过滤重复的比较简单，因为是数组的保存方式，我们可以在入口处通过indexOf判断即可</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function Callbacks(options) {
+</span></span><span style=display:flex><span>  var list = [];
+</span></span><span style=display:flex><span>  var self;
+</span></span><span style=display:flex><span>  var firingStart;
+</span></span><span style=display:flex><span>  var memory;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  function _fire(data) {
+</span></span><span style=display:flex><span>    memory = options === &#39;memory&#39; &amp;&amp; data;
+</span></span><span style=display:flex><span>    firingIndex = firingStart || 0;
+</span></span><span style=display:flex><span>    firingStart = 0;
+</span></span><span style=display:flex><span>    firingLength = list.length;
+</span></span><span style=display:flex><span>    for (; list &amp;&amp; firingIndex &lt; firingLength; firingIndex++) {
+</span></span><span style=display:flex><span>      list[firingIndex](data)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  self = {
+</span></span><span style=display:flex><span>    add: function(fn) {
+</span></span><span style=display:flex><span>      var start = list.length;
+</span></span><span style=display:flex><span>      if (options == &#39;unique&#39;) {
+</span></span><span style=display:flex><span>        if (-1 === list.indexOf(fn)) {
+</span></span><span style=display:flex><span>          list.push(fn)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      } else {
+</span></span><span style=display:flex><span>        list.push(fn)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      if (memory) {
+</span></span><span style=display:flex><span>        firingStart = start; //获取最后一值
+</span></span><span style=display:flex><span>        _fire(memory);
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    fire: function(args) {
+</span></span><span style=display:flex><span>      if (list) {
+</span></span><span style=display:flex><span>        _fire(args)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  return self;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=stoponfalse>stopOnFalse<a hidden class=anchor aria-hidden=true href=#stoponfalse>#</a></h2><p>stopOnFalse: 当一个回调返回false 时中断调用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function fn1(value) {
+</span></span><span style=display:flex><span>  console.log(value);
+</span></span><span style=display:flex><span>  return false;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function fn2(value) {
+</span></span><span style=display:flex><span>  fn1(&#34;fn2 says: &#34; + value);
+</span></span><span style=display:flex><span>  return false;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>var callbacks = $.Callbacks(&#34;stopOnFalse&#34;);
+</span></span><span style=display:flex><span>callbacks.add(fn1);
+</span></span><span style=display:flex><span>callbacks.fire(&#34;foo&#34;);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>callbacks.add(fn2);
+</span></span><span style=display:flex><span>callbacks.fire(&#34;bar&#34;);
+</span></span></code></pre></div><p>结果虽然fn1被添加到了回调列表，但是因为fn1返回了false，那么意思之后的回调都不会被调用了。如果还有fn3，在f2上返回false，fn3也将不会被调用。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>foo
+</span></span><span style=display:flex><span>bar
+</span></span></code></pre></div><p>这个设计我们只要控制好函数返回的处理的布尔值，通过这个值用来判断是否需要下一个遍历</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>if (list[firingIndex](data) === false &amp;&amp; options === &#39;stopOnFalse&#39;) {
+</span></span><span style=display:flex><span>  break;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>源码可以如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>function Callbacks(options) {
+</span></span><span style=display:flex><span>  var list = [];
+</span></span><span style=display:flex><span>  var self;
+</span></span><span style=display:flex><span>  var firingStart;
+</span></span><span style=display:flex><span>  var memory;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  function _fire(data) {
+</span></span><span style=display:flex><span>    memory = options === &#39;memory&#39; &amp;&amp; data;
+</span></span><span style=display:flex><span>    firingIndex =
+</span></span><span style=display:flex><span>      firingStart || 0;
+</span></span><span style=display:flex><span>    firingStart = 0;
+</span></span><span style=display:flex><span>    firingLength = list.length;
+</span></span><span style=display:flex><span>    for (; list &amp;&amp; firingIndex &lt; firingLength; firingIndex++) {
+</span></span><span style=display:flex><span>      if (list[firingIndex](data) === false &amp;&amp; options === &#39;stopOnFalse&#39;) {
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  self = {
+</span></span><span style=display:flex><span>    add: function(fn) {
+</span></span><span style=display:flex><span>      var start = list.length;
+</span></span><span style=display:flex><span>      if (options == &#39;unique&#39;) {
+</span></span><span style=display:flex><span>        if (-1 === list.indexOf(fn)) {
+</span></span><span style=display:flex><span>          list.push(fn)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      } else {
+</span></span><span style=display:flex><span>        list.push(fn)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      if (memory) {
+</span></span><span style=display:flex><span>        firingStart = start; //获取最后一值
+</span></span><span style=display:flex><span>        _fire(memory);
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    fire: function(args) {
+</span></span><span style=display:flex><span>      if (list) {
+</span></span><span style=display:flex><span>        _fire(args)
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  return self;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>以上是几种单独的处理情况的用法，我们可以看到jQuery都是组合使用的，最常见的就是</p><p>jQuery.Callbacks(“once memory”)的组合了，其实以上的思路都讲解过了，无非就是组合起来的时候要考虑一些判断了。</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://ulsonhu.cn/tags/%E5%89%8D%E7%AB%AF/>前端</a></li></ul><nav class=paginav><a class=prev href=https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%BC%82%E6%AD%A5.html><span class=title>« 上一页</span>
+<span>理解异步</span>
+</a><a class=next href=https://ulsonhu.cn/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%2002-%E5%AF%B9%E8%B1%A1%E6%9E%84%E5%BB%BA.html><span class=title>下一页 »</span>
+<span>JQuery源码解读 02-对象构建</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://ulsonhu.cn/>Nichome</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

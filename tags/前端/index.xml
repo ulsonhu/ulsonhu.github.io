@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>前端 on Nichome</title><link>https://ulsonhu.cn/tags/%E5%89%8D%E7%AB%AF/</link><description>Recent content in 前端 on Nichome</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Wed, 28 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://ulsonhu.cn/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>用AngularJS写框架</title><link>https://ulsonhu.cn/%E7%94%A8AngularJS%E5%86%99%E6%A1%86%E6%9E%B6.html</link><pubDate>Wed, 28 Dec 2016 00:00:00 +0000</pubDate><guid>https://ulsonhu.cn/%E7%94%A8AngularJS%E5%86%99%E6%A1%86%E6%9E%B6.html</guid><description>一个框架想要能支撑较大的应用，首先要考虑怎么做模块化。有了内核和模块加载系统，外围的模块就可以一个一个增加。不同的JavaScript框架，实现模块化方式各有不同，我们来选择一种比较优雅的方式作个讲解。</description></item><item><title>理解异步</title><link>https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%BC%82%E6%AD%A5.html</link><pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate><guid>https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%BC%82%E6%AD%A5.html</guid><description>&lt;p&gt;JavaScript编程几乎总是伴随着异步操作，传统的异步操作会在操作完成之后，使用回调函数传回结果，而回调函数中则包含了后续的工作。这也是造成异步编程困难的主要原因：&lt;/p&gt;
+&lt;h2 id="前述"&gt;前述&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;我们一直习惯于“线性”地编写代码逻辑，但是大量异步操作所带来的回调函数，会把我们的算法分解地支离破碎。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;此时我们不能用if来实现逻辑分支，也不能用while/for/do来实现循环，更不用说异步操作之间的组合、错误处理以及取消操作了。因此也就诞生了如jQuery Deferred这样的辅助类库。&lt;/p&gt;
+&lt;p&gt;我们常见的异步操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定时器setTimeout&lt;/li&gt;
+&lt;li&gt;postmessage&lt;/li&gt;
+&lt;li&gt;WebWorkor&lt;/li&gt;
+&lt;li&gt;CSS3 动画&lt;/li&gt;
+&lt;li&gt;XMLHttpRequest&lt;/li&gt;
+&lt;li&gt;HTML5的本地数据&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;JavaScript要求在与服务器进行交互时要用异步通信，如同AJAX一样。因为是异步模型，所以在调用Transaction游览器提供的本地数据接口时候类似AJAX（这里我是假设），浏览器自己有内部的XHR方法异步处理，但是此时的JS代码还是会同步往下执行，其实就是无阻塞的代码。&lt;/p&gt;
+&lt;p&gt;**问题：**因为无阻塞，代码在发送AJAX这个请求后会继续执行，那么后续的操作如果依赖这个数据的就会出错了，所以这里就需要等待AJAX返回，才能执行后续操作。&lt;/p&gt;
+&lt;p&gt;因为异步而导致流程不正确，或者说我们的应用在某个程度上依赖第三方API的数据，那么就会面临一个共同的问题：&lt;/p&gt;
+&lt;p&gt;我们无法获悉一个API响应的延迟时间，应用程序的其他部分可能会被阻塞，直到它返回结果。Deferreds 的引入对这个问题提供了一个更好的解决方案，它是非阻塞的，并且与代码完全解耦。&lt;/p&gt;
+&lt;p&gt;当然异步操作也可以提供一个类似于成功回调，失败回调的通知接口。&lt;/p&gt;
+&lt;p&gt;JS是单线程语言，就简单性而言，把每一件事情（包括GUI事件和渲染）都放在一个线程里来处理是一个很好的程序模型，因为这样就无需再考虑线程同步这些复杂问题。&lt;/p&gt;
+&lt;p&gt;另一方面，他也暴露了应用开发中的一个严重问题，单线程环境看起来对用户请求响应迅速，但是当线程忙于处理其它事情时，就不能对用户的鼠标点击和键盘操作做出响应。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;//定时器改变流程
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;setTimeout&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;)}, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;//执行异步动画
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;//因为代码的执行是按照从上至下
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;//但是由于加入了动画，动画形成了异步，所以实际的改变值必须等动画完成才能得到
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;//但是同步逻辑3其实已经运行，所以3要等待2结束才可以
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;#go&amp;#34;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;click&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;block&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;#block&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;1.动画流程代码开始,对象长度&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;block&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;css&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;width&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;block&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;animate&lt;/span&gt;({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;width&lt;/span&gt; &lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;70%&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;opacity&lt;/span&gt; &lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0.4&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;marginLeft&lt;/span&gt; &lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;0.6in&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;fontSize&lt;/span&gt; &lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;3em&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;borderWidth&lt;/span&gt; &lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;10px&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}, &lt;span style="color:#ae81ff"&gt;1000&lt;/span&gt;, &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;2.动画执行结束束,对象长度&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;block&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;css&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;width&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;3.动画流程代码结束,对象长度&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;block&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;css&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;width&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;show&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;data&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;body&amp;#34;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;append&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;lt;li&amp;gt;&amp;#39;&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;data&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#39;&amp;lt;/li&amp;gt;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="deferred"&gt;Deferred&lt;/h2&gt;
+&lt;h3 id="deferred是什么"&gt;Deferred是什么&lt;/h3&gt;
+&lt;p&gt;前端项目的开发，不仅仅涉及到同步的概念，而且还会经常穿插各种异步的处理。一些大的操作，比如远程获取数据，操作一个大数据处理，这时候是不能马上获取到数据的。假设我们发送一个AJAX请求到接受到数据需要10秒钟，那么从发送到接受数据这个时间段中，前端的处理时间其实是空闲，但是对于开发者来说这种时间是不能浪费了，所以我们可以在10秒钟做很多同步的处理，同时等待异步的数据返回。所以我们需要监听这个回调的数据在成功的时候能够获取到，或者设计一个返回后触发处理的机制，当然原生的JavaScript对这个机制几乎是没有的。为了优化这个形成统一的异步处理方案，jQuery就开始设计了一个Deferred异步模型。&lt;/p&gt;
+&lt;p&gt;Deferred 提供了一个抽象的非阻塞的解决方案（如异步请求的响应），它创建一个promise对象，其目的是在未来某个时间点返回一个响应。简单来说就是一个异步/同步回调函数的处理方案。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$.Deferred&lt;/code&gt;在jQuery代码内部有四个模块被使用，分别是“&lt;strong&gt;promise方法”、“DOM ready”、“Ajax模块”及“动画模块&lt;/strong&gt;”。&lt;/p&gt;
+&lt;p&gt;看看jQuery中的最常用的AJAX处理：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一：Ajax的改造&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;传统的jQuery的AJAX操作的传统写法(1.5版之前)：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;ajax&lt;/span&gt;({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;url&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;aaron.html&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;success&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;(){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;成功！&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; },
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;error&lt;/span&gt;&lt;span style="color:#f92672"&gt;:&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;(){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;失败！&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;$.ajax()接受一个对象参数，这个对象包含两个方法：success方法指定操作成功后的回调函数，error方法指定操作失败后的回调函数。&lt;/p&gt;</description></item><item><title>理解回调函数</title><link>https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html</link><pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate><guid>https://ulsonhu.cn/%E7%90%86%E8%A7%A3%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html</guid><description>&lt;p&gt;主要讲解回调函数在jQuery中的使用技巧与实现原理，概念上的东西看似简单，但是在实际运用中要做到灵活自如却也不是那么容易的事，而且对于部分开发者来说它仍然是一个谜。在阅读本文之后你能深入理解这个“回调函数”。&lt;/p&gt;
+&lt;p&gt;函数是第一类对象，这是javascript中的一个重要的概念。意味着函数可以像对象一样按照第一类管理被使用，所以在javaScript中的函数：&lt;/p&gt;
+&lt;p&gt;**☑ **  能“存储”在变量中&lt;/p&gt;
+&lt;p&gt;** ☑**   能作为函数的实参被传递&lt;/p&gt;
+&lt;p&gt;**☑ **  能在函数中被创建&lt;/p&gt;
+&lt;p&gt;** ☑**   能从函数中返回&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;百科里面是这么解释的：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该&lt;strong&gt;事件&lt;/strong&gt;或&lt;strong&gt;条件&lt;/strong&gt;进行响应。&lt;/p&gt;
+&lt;p&gt;因此从上面可以看出来，回调本质上是一种设计原则，并且jQuery的设计原则遵循了这个模式。&lt;/p&gt;
+&lt;p&gt;在后端的编程语言中，传统函数以参数形式输入数据，并且使用返回语句返回值。理论上，在函数结尾处有一个return返回语句，结构上就是：一个输入和一个输出。简单的理解函数本质上就&lt;strong&gt;是输入和输出之间实现过程的映射&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;但是，当函数的实现过程非常漫长，你是选择等待函数完成处理，还是使用回调函数进行异步处理呢？这种情况下，使用回调函数变得至关重要，例如：AJAX请求。若是使用回调函数进行处理，代码就可以继续进行其他任务，而无需空等。实际开发中，经常在javascript中使用异步调用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;jQuery中遍地都是回调的设计：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;异步回调：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;事件句柄回调&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$(document).ready(callback);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$(document).on(‘click’,callback)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ajax异步请求成功失败回调&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$.ajax({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;  url: &amp;#34;aaron.html&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;  context: document
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}).done(function() { 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        //成功执行
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}).fail(function() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        //失败执行
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;动画执行完毕回调&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$(&amp;#39;#clickme&amp;#39;).click(function() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;    $(&amp;#39;#book&amp;#39;).animate({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        opacity: 0.25,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        left: &amp;#39;+=50&amp;#39;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        height: &amp;#39;toggle&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;    }, 5000, function() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;        // Animation complete.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;    });
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上都是jQuery的回调直接运用，运用基本都是将匿名函数作为参数传递给了另一个函数或方法。而且以上都有一个特点，执行的代码都是异步的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;同步回调：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当然回调不仅仅只是处理异步，一般同步(很耗时的任务)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数。&lt;/p&gt;</description></item><item><title>JQuery源码解读 02-对象构建</title><link>https://ulsonhu.cn/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%2002-%E5%AF%B9%E8%B1%A1%E6%9E%84%E5%BB%BA.html</link><pubDate>Fri, 28 Oct 2016 00:00:00 +0000</pubDate><guid>https://ulsonhu.cn/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%2002-%E5%AF%B9%E8%B1%A1%E6%9E%84%E5%BB%BA.html</guid><description>&lt;h2 id="对象简介"&gt;对象简介&lt;/h2&gt;
+&lt;p&gt;面向对象(OOP)的语言都有一个特点，它们都会有类的这一概念，通过类可以抽象出创建具体相同方法与属性的对象。但是ECMAScript中是没有类的概念的，因此它的对象与基于类的语言如java的定义是有所不同的。&lt;/p&gt;
+&lt;p&gt;在JavaScript世界中函数作为“一等公民”，它不仅拥有一切传统函数的使用方式（声明和调用），而且可以做到像简单值一样赋值、传参、返回，这样的函数也称之为第一级函数。不仅如此，而且还可以通过操作符new来充当类的构造器。&lt;/p&gt;
+&lt;p&gt;函数在充当类的构造器时，原型prototype是一个重要的概念。prototype是构造函数的一个属性, 该属性指向一个对象。而这个对象将作为该构造函数所创建的所有实例的基引用(base reference), 可以把对象的基引用想像成一个自动创建的隐藏属性。 当访问对象的一个属性时, 首先查找对象本身, 找到则返回；若不, 则查找基引用指向的对象的属性(如果还找不到实际上还会沿着原型链向上查找,  直至到根)。 只要没有被覆盖的话, 对象原型的属性就能在所有的实例中找到。&lt;/p&gt;
+&lt;p&gt;类一：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;function ajQuery() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; this.name = &amp;#39;jQuery&amp;#39;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; this.sayName = function(){
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; return this.name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var a = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var b = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var c = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;类二:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-plain" data-lang="plain"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;function ajQuery() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; this.name = &amp;#39;jQuery&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ajQuery.prototype = {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sayName: function() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; return this.name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var a = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var b = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;var c = new ajQuery()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;类一与类二产生的结构几乎是一样的，而本质区别就是：类二new产生的a、b、c三个实例对象共享了原型的sayName方法，这样的好处节省了内存空间，类一则是要为每一个实例复制sayName方法，每个方法属性都占用一定的内存的空间，所以如果把所有属性方法都声明在构造函数中，就会无形的增大很多开销，这些实例化的对象的属性一模一样，都是对this的引用来处理。除此之外类一的所有方法都是拷贝到当前实例对象上。类二则是要通过scope连接到原型链上查找，这样就无形之中要多一层作用域链的查找了。&lt;/p&gt;</description></item><item><title>JQuery源码解读 01</title><link>https://ulsonhu.cn/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%2001.html</link><pubDate>Sun, 23 Oct 2016 00:00:00 +0000</pubDate><guid>https://ulsonhu.cn/JQuery%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%2001.html</guid><description>&lt;h2 id="简介"&gt;简介&lt;/h2&gt;
+&lt;p&gt;从整体入手理解架构，再深入攻破每个依赖模块，包括回调函数、异步加载、数据缓存、动画队列最后整体分析：选择器、DOM处理、AJAX、动画模块、事件&lt;/p&gt;
+&lt;h2 id="jquery设计理念"&gt;jQuery设计理念&lt;/h2&gt;
+&lt;p&gt;引用百科的介绍：&lt;/p&gt;
+&lt;p&gt;jQuery是继prototype之后又一个优秀的Javascript框架。它是轻量级的js库 ，它兼容CSS3，还兼容各种浏览器（IE 6.0+, FF 1.5+, Safari 2.0+, Opera 9.0+），jQuery2.0及后续版本将不再支持IE6/7/8浏览器。jQuery使用户能更方便地处理&lt;strong&gt;HTML（标准通用标记语言下的一个应用）、events、实现动画效果&lt;/strong&gt;，并且方便地为网站提供&lt;strong&gt;AJAX交互&lt;/strong&gt;。jQuery还有一个比较大的优势是，它的文档说明很全，而且各种应用也说得很详细，同时还有许多成熟的插件可供选择。jQuery能够使用户的html页面保持代码和html内容分离，也就是说，不用再在html里面插入一堆js来调用命令了，只需定义id即可。&lt;/p&gt;
+&lt;p&gt;The Write Less,Do More（写更少，做更多），无疑就是jQuery的核心理念，简洁的API、优雅的链式、强大的查询与便捷的操作。从而把jQuery打造成前端世界的一把利剑，所向披靡！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;简洁的API:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;on&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;css&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;ajax&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;…&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;优雅的链式:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;var&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;jqxhr&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;ajax&lt;/span&gt;( &lt;span style="color:#e6db74"&gt;&amp;#34;example.php&amp;#34;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; .&lt;span style="color:#a6e22e"&gt;done&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() { &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;success&amp;#34;&lt;/span&gt;); })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; .&lt;span style="color:#a6e22e"&gt;fail&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() { &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;error&amp;#34;&lt;/span&gt;); })
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; .&lt;span style="color:#a6e22e"&gt;always&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;() { &lt;span style="color:#a6e22e"&gt;alert&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;complete&amp;#34;&lt;/span&gt;); });
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;强大的选择器：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;div, span, p.myClass&amp;#34;&lt;/span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;div span:first-child&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;tr:visible&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;…&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;便捷的操作：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-javascript" data-lang="javascript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;p&amp;#34;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;removeClass&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;myClass noClass&amp;#34;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;addClass&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;yourClass&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#34;ul li:last&amp;#34;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;addClass&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;function&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;item-&amp;#34;&lt;/span&gt; &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;index&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;.container&amp;#39;&lt;/span&gt;).&lt;span style="color:#a6e22e"&gt;append&lt;/span&gt;(&lt;span style="color:#a6e22e"&gt;$&lt;/span&gt;(&lt;span style="color:#e6db74"&gt;&amp;#39;h2&amp;#39;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;…&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;为什么要做jQuery源码解析？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;虽然jQuery的文档很完善，潜意识降低了前端开发的入门的门槛，要实现一个动画随手拈来，只要简单的调用一个animate方法传递几个执行的参数即可，但如果要我们自己实现一个定制的动画呢？我们要考虑的问题太多太多了，浏览器兼容、各种属性的获取、逻辑流程、性能等等，这些才是前端开发的基础核心。&lt;/p&gt;
+&lt;p&gt;如果我们只知道使用jQuery，而不知道其原理，那就是“知其然,而不知其所以然”，说了这么多，那就赶快跟着慕课网进入“高大上”之旅吧，深入来探究jQuery的内部架构！&lt;/p&gt;
+&lt;h2 id="jquery整体架构"&gt;jQuery整体架构&lt;/h2&gt;
+&lt;p&gt;任何程序代码不是一开始就复杂的，成功也不是一躇而蹴的，早期jQuery的作者John Resig在2005年提议改进Prototype的“Behaviour”库时，只是想让其使用更简单才发布新的jQuery框架。起初John Resig估计也没料想jQuery会如此的火热。我们可以看到从发布的第一个1.0开始到目前最新的2.1.1其代码膨胀到了9000多行，它兼容CSS3，还兼容各种浏览器，jQuery使用户能更方便地处理DOM、事件、实现动画效果，并且方便地为网站提供AJAX交互。&lt;/p&gt;
+&lt;p&gt;1、最新jQuery2.1.1版本的结构：&lt;/p&gt;
+&lt;p&gt;1、最新jQuery2.1.1版本的结构：代码请查看右侧代码编辑器（1-24行）&lt;/p&gt;
+&lt;p&gt;2、jQuery的模块依赖网：&lt;/p&gt;
+&lt;p&gt;2、jQuery的模块依赖网： &lt;a href="http://img.mukewang.com/53fa8fec0001754806930473.jpg"&gt;&lt;img alt="img" loading="lazy" src="http://img.mukewang.com/53fa8fec0001754806930473.jpg"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;jQuery一共13个模块，从2.1版开始jQuery支持通过AMD模块划分，jQuery在最开始发布的1.0版本是很简单的，只有CSS选择符、事件处理和AJAX交互3大块。其发展过程中，有几次重要的变革：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1.2.3 版发布，引入数据缓存，解决循环引用与大数据保存的问题&lt;/li&gt;
+&lt;li&gt;1.3 版发布，它使用了全新的选择符引擎Sizzle，在各个浏览器下全面超越其他同类型JavaScript框架的查询速度，程序库的性能也因此有了极大提升&lt;/li&gt;
+&lt;li&gt;1.5 版发布，新增延缓对像(Deferred Objects)，并用deferred重写了Ajax模块&lt;/li&gt;
+&lt;li&gt;1.7 版发布，抽象出回调对象，提供了强大的的方式来管理回调函数列表。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每一次大的改进都引入了一些新的机制、新的特性，通过这些新的机制就造就了如今jQuery库，一共13个模块，模块不是单一的，比如jQuery动画，都会依赖异步队列、动画队列、回调队列与数据缓存模块等。&lt;/p&gt;</description></item></channel></rss>

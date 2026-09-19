@@ -1,1 +1,3 @@
 User-agent: *
+Allow: /
+Sitemap: https://ulsonhu.cn/sitemap.xml

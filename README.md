@@ -1,4 +1,4 @@
-# Nichome - Watson's Blog
+# Julio - Watson's Blog
 
 个人博客，2026 年起由 Hexo 迁移至 [Hugo](https://gohugo.io/)。页面风格参考 [Free Mind](https://freemind.pluskid.org/)，布局与样式为自写（无第三方主题）。
 

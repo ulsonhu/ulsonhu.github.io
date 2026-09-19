@@ -3,14 +3,17 @@
   <div class="post-header">
     <h2 class="title">Welcome</h2>
   </div>
-  <p>欢迎来到 Nichome，这是由 Watson Hu 维护的个人 blog，主要记录数理统计、机器学习、程序设计以及各种技术和非技术的内容。更多文章索引请浏览 <a href="/archives/">归档</a>、<a href="/categories/">分类</a> 和 <a href="/tags/">标签</a>。博客内容仅代表个人观点，与雇主无关。</p>
+  <p>欢迎来到 Julio 个人blog，主要记录数理统计、机器学习、程序设计以及各种技术和日常思考。更多文章索引请浏览 <a href="/archives/">归档</a>、<a href="/categories/">分类</a> 和 <a href="/tags/">标签</a>。</p>
 </div>
 
 {{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
 {{ range $pag.Pages }}
 <article class="post-container">
   {{ partial "post-header.html" . }}
-  <div class="post-content">{{ .Content }}</div>
+  <div class="post-content">{{ .Summary }}</div>
+  {{ if .Truncated }}
+  <div class="read-more"><a href="{{ .Permalink }}">Read More &raquo;</a></div>
+  {{ end }}
 </article>
 {{ end }}
 

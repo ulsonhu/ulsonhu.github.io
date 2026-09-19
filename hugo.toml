@@ -1,8 +1,13 @@
 baseURL = "https://ulsonhu.cn/"
 locale = "zh-cn"
 defaultContentLanguage = "zh"
-title = "Nichome"
+title = "Julio"
 paginate = 5
+hasCJKLanguage = true
+summaryLength = 120
+
+[pagination]
+  pagerSize = 5
 enableRobotsTXT = true
 enableGitInfo = false
 disablePathToLower = true

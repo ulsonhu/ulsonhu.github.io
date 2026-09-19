@@ -1,284 +1,274 @@
-<!doctype html><html lang=zh dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>SAS基础学习篇(一) | Nichome</title><meta name=keywords content="数据分析,SAS"><meta name=description content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下"><meta name=author content="Watson Hu"><link rel=canonical href=https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html><link crossorigin=anonymous href=/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as=style><link rel=icon href=https://ulsonhu.cn/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://ulsonhu.cn/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://ulsonhu.cn/favicon-32x32.png><link rel=apple-touch-icon href=https://ulsonhu.cn/apple-touch-icon.png><link rel=mask-icon href=https://ulsonhu.cn/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><meta property="og:url" content="https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html"><meta property="og:site_name" content="Nichome"><meta property="og:title" content="SAS基础学习篇(一)"><meta property="og:description" content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-03-14T00:00:00+00:00"><meta property="article:modified_time" content="2018-03-14T00:00:00+00:00"><meta property="article:tag" content="数据分析"><meta property="article:tag" content="SAS"><meta name=twitter:card content="summary"><meta name=twitter:title content="SAS基础学习篇(一)"><meta name=twitter:description content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://ulsonhu.cn/posts/"},{"@type":"ListItem","position":2,"name":"SAS基础学习篇(一)","item":"https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"SAS基础学习篇(一)","name":"SAS基础学习篇(一)","description":"由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下","keywords":["数据分析","SAS"],"articleBody":"参考书籍\n《SAS编程与数据挖掘商业案例》（预热） 「the Little SAS Book」(推荐) 「Applied Econometrics Using The SAS System」 SAS编程主要包括DATA和PROC两部分\n* create sas data set named toads; * read the data file ToadJump.dta using list input; DATA toads; INFILE '~/desktop/ToadJump.dta'; INPUT ToadJump $ Weight Jump1 Jump2 Jump3; RUN; * print the data to make sure the file was read correctly; * PROC PRINT DATA = toads; TITLE 'SAS Data Set Toads'; RUN; 这样就建立了一个名为toads的临时数据集，然后读入外部文件ToadJump.dat，然后告诉SAS有四个变量，其中第一个是文本型,缺失值用一个点.标记\n* Create a SAS data set named sales; * Read the data file OnionRing.dat using column input; DATA sales; INFILE ’~/desktop/OnionRing.dat’; INPUT VisitingTeam $ 1-20 ConcessionSales 21-24 BleacherSales 25-28 OurHits 29-31 TheirHits 32-34 OurRuns 35-37 TheirRuns 38-40; RUN; * Print the data to make sure the file was read correctly; PROC PRINT DATA = sales; TITLE ’SAS Data Set Sales’; RUN; 基本函数 SAS文本类函数 ANYALNUM(arg,start) 返回第一次出现任意数字或字母的位置，可选开始位置start ANYALPHA(arg,start) 返回第一次出现任意字母的位置，可选开始位置start ANYDIGIT(arg,start) 返回第一次出现任意数字的位置，可选开始位置start ANYSPACE(arg,start) 返回第一次出现任意空白的位置，可选开始位置start CAT(arg1,arg2,…argn) 连接字符串，留下头尾空白 CATS(arg1,arg2,…argn) 连接字符串，删除头尾空白 CATX(‘separator-string’, arg-1,…,arg-n) 连接字符串，删除头尾空白并用指定标点连接 COMPRESS(arg, ‘char’) 移除字符串中的空格和可选字符 INDEX(arg, ‘string’) 返回指定字符在变量中的位置 LEFT(arg) 字符串左对齐 LENGTH(arg) 返回字符串长度，不考虑尾部空格 PROPCASE(arg) 首字母大写 SUBSTR(arg,position,n) 从字符串中提取指定开始位置指定长度字符 TRANSLATE(source,to1,from1,…ton,fromn) 替换字符 TRANWRD(source,from,to) 替换字符串 TRIM(arg) 删除尾部空白 UPCASE(arg) 替换成大写 SAS数值函数 INT(arg) 返回整数 LOG(arg) 自然对数 LOG10(arg) $10$为底对数 MAX(arg1,arg2,…argn) 最大值 MEAN(arg1,arg2,…argn) 均值 MIN(arg1,arg2,…argn) 最小值 N(arg1,arg2,…argn) 非缺失值个数 NMISS(arg1,arg2,…argn) 缺失值个数 ROUND(arg, roundoffunit) 保留几位小数 SUM(arg1,arg2,…argn) 求和 SAS日期函数 DATEJUL(julian-date) 标准julian日期到SAS日期 DAY(date) 返回「日」 MDY(month,day,year) 年月日到SAS日期 MONTH(date) 返回「月」 QTR(date) 返回季度 TODAY() 今日 WEEKDAY(date) 返回周几（周日为1） YEAR(date) 返回「年」 YRDIF(start-date,end- date,’ACTUAL’) 返回相差年份 判断结构 * if then structure if model = 'Pink' then make = 'Floyd'; * 执行多项命令，需要嵌套do；可以用and和or if Year then Model = 'Mac' or Model = 'pro' then Make = 'Jobs'; if Model = 'iphone5' then do; Make = 'Tim'; Seats = 2; end; * if else if Cost = . then CostGroup = 'Missing'; else if Cost else if Cost else CostGroup = high; * use if to select sub-set if sex = 'm';if sex = 'm' then detele; 数组操作 * Change all 9 to missing values; DATA songs; INFILE '~/desktop/WBRK.dat'; INPUT City $ 1-15 Age domk wj hwow simbh kt aomm libm tr filp ttr; ARRAY song (10) domk wj hwow simbh kt aomm libm tr filp ttr; DO i = 1 TO 10; IF song(i) = 9 THEN song(i) = .; END; RUN; PROC PRINT DATA = songs; TITLE 'WBRK Song Survey'; RUN; 基本模块调用 搞定基本的函数之后，开始鼓捣$SAS$里面的模型。也就是说，要开始写PROC了。其实，$SAS$比较像$Stata$（计量经济学主流软件），无论是从输出的样式，还是语法。不习惯没有()的模型调用呀。若是说$SAS$和$Stata$的区别，怕只是$Stata$更侧重于计量模型而$SAS$则是服务于大多数统计模型吧。\nPROC的基本内容：CONTENT PROC:content，可以显示数据集的主要特性。比如，\nLIBNAME tropical '~/MySASLib'; PROC CONTENTS DATA = tropical.banana; 这里主要是两个声明:TITLE和FOOTNOTE。前者输出时候会产生一个标题，后者会产生尾注。用法也是比较直接的：\nTITLE ”Here’s another title”; TITLE ’Here’’s another title’; FOOTNOTE3 ’This is the third footnote’; SAS PROC求子集:WHERE 如果要在PROC里面先求子集的话，可以直接调用WHERE。感觉这里和$SQL$的思路比较像。\nPROC PRINT DATA = '～/desktop/MySASLib/style'; WHERE Genre = 'Impressionism'; TITLE 'Major Impressionist Painters'; FOOTNOTE 'F = France N = Netherlands U = US'; RUN; SAS PROC 数据进行排序:SORT DATA marine; INFILE '~/desktop/Lengths.dat'; INPUT Name $ Family $ Length @@; RUN; * Sort the data; PROC SORT DATA = marine OUT = seasort NODUPKEY; BY Family DESCENDING Length; PROC PRINT DATA = seasort; TITLE 'Whales and Sharks'; RUN; 这样数据就按照Family、Length（递减）排序了。\nSAS PROC 输出数据:PRINT DATA sales; INFILE '~/desktop/Candy.dat'; INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $ Quantity; Profit = Quantity * 1.25; PROC SORT DATA = sales; BY Class; PROC PRINT DATA = sales; BY Class; SUM Profit; VAR Name DateReturned CandyType Profit; TITLE 'Candy Sales for Field Trip by Class'; RUN; SAS PROC里面改变输出格式：FORMAT 基本就是FORMAT一下就可以了，再就是PUT的时候也可以调整。\nDATA sales; INFILE '~/desktop/Candy.dat'; INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $ Quantity; Profit = Quantity * 1.25; PROC PRINT DATA = sales; VAR Name DateReturned CandyType Profit; FORMAT DateReturned DATE9. Profit DOLLAR6.2; TITLE 'Candy Sale Data Using Formats'; RUN; 常用的格式有：\n文本型：$HEXw.和$w. 日期型：DATEw.（输出为ddmmyy或者ddmmyyyy）、DATETIMEw.d（输出为ddmmyy:hh:mm:ss）、DAYw.（输出为dd）、EURDFDDw. 、JULIANw.、MMDDYYw.（输出为mmddyy或mmddyyyy）、TIMEw.d（输出为hh:mm:ss）、WEEKDATEw.（输出为工作日）、WORDDATEw.(输出为单词)。 数字型：BESTw.（自动选择）、COMMAw.d（逗号分隔）、DOLLARw.d（货币）、Ew.（科学计数法）、PDw.d、w.d（标准小数） 输出的样本见下：\n当然FORMAT还可以自定义factor型变量的输出格式，比如：\nDATA carsurvey; INFILE '~/deskktop/Cars.dat'; INPUT Age Sex Income Color $; PROC FORMAT; VALUE gender 1 = 'Male' 2 = 'Female'; VALUE agegroup 13 -\u003c 20 = 'Teen' 20 -\u003c 65 = 'Adult' 65 - HIGH = 'Senior'; VALUE $col 'W' = 'Moon White' 'B' = 'Sky Blue' 'Y' = 'Sunburst Yellow' 'G' = 'Rain Cloud Gray'; * Print data using user-defined and standard (DOLLAR8.) formats; PROC PRINT DATA = carsurvey; FORMAT Sex gender. Age agegroup. Color $col. Income DOLLAR8.; TITLE 'Survey Results Printed with User-Defined Formats'; RUN; 就可以把数字型的1，2转换为对应的文本male和female等，还可以把变量离散化。\nSAS总结数据:MEANS $SAS$当然还有类似于$Excel$的数据透视表和$R$的data.table的模块，就是MEANS。可以输出的描述性统计值，包括最大值、最小值、平均值、中位数、余非缺失值个数、缺失值个数、范围、标准差、和等等。此外，还可以使用BY或者CLASS进行分组统计，VAR选择变量等。\nDATA sales; INFILE '~/desktop/Flowers.dat'; INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon Marigold; Month = MONTH(SaleDate); PROC SORT DATA = sales; BY Month; * Calculate means by Month for flower sales; PROC MEANS DATA = sales; BY Month; VAR Petunia SnapDragon Marigold; TITLE 'Summary of Flower Sales by Month'; RUN; 可以实现\nSummary of Flower Sales by Month 1 ---------------- Month=5 -------------- The MEANS Procedure Variable N Mean Std Dev Minimum Maximum ---------------------------------------- Petunia 3 86.6666667 35.1188458 50.0000000 120.0000000 SnapDragon 3 113.3333333 41.6333200 80.0000000 160.0000000 Marigold 3 81.6666667 25.6580072 60.0000000 110.0000000 ---------------- Month=6 --------------- Variable N Mean Std Dev Minimum Maximum ----------------------------------------- Petunia 4 81.2500000 16.5201897 60.0000000 100.0000000 SnapDragon 4 97.5000000 47.8713554 60.0000000 160.0000000 Marigold 4 83.7500000 19.7378655 60.0000000 100.0000000 ------------------------------------------- 当然这些统计量也可以直接的写入一个SAS数据表，只需要加上一个OUTPUT就可以了。原数据：\n756-01 05/04/2008 120 80 110 834-01 05/12/2008 90 160 60 901-02 05/18/2008 50 100 75 834-01 06/01/2008 80 60 100 756-01 06/11/2008 100 160 75 901-02 06/19/2008 60 60 60 756-01 06/25/2008 85 110 100 SAS代码：\nDATA sales; INFILE '~/desktop/Flowers.dat'; INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon Marigold; PROC SORT DATA = sales; BY CustomerID; * Calculate means by CustomerID, output sum and mean to new data set; PROC MEANS NOPRINT DATA = sales; BY CustomerID; VAR Petunia SnapDragon Marigold; OUTPUT OUT = totals MEAN(Petunia SnapDragon Marigold) = MeanPetunia MeanSnapDragon MeanMarigold SUM(Petunia SnapDragon Marigold) = Petunia SnapDragon Marigold; PROC PRINT DATA = totals; TITLE 'Sum of Flower Data over Customer ID'; FORMAT MeanPetunia MeanSnapDragon MeanMarigold 3.; RUN; 最终结果为：\nSAS PROC统计频率：FREQ 计数的话，就要靠SAS里面的FREQ模块了。比如我们有一个数据集：\nesp w cap d cap w kon w ice w kon d esp d kon w ice d esp d cap w esp d cap d Kon d . d kon w esp d cap w ice w kon w kon w kon w ice d esp d kon w esp d esp w kon w cap w kon w 然后可以用FREQ来统计一些基本量：\nDATA orders; INFILE '~/desktop/Coffee.dat'; INPUT Coffee $ Window $ @@; * Print tables for Window and Window by Coffee; PROC FREQ DATA = orders; TABLES Window Window * Coffee; RUN; 最终会得到一个$2*5$的表格：\nSAS PROC汇报表格：TABULATE 基本看到TABULATE就可以想到那个著名的软件Tabular了…不过貌似SAS也自带了一个类似的表格模块。这个东西可以变得非常复杂，不过鉴于一时半会儿还用不到，没有细细看。抄个例子吧。\n原数据：\nSilent Lady Maalea sail sch 75.00 America II Maalea sail yac 32.95 Aloha Anai Lahaina sail cat 62.00 Ocean Spirit Maalea power cat 22.00 Anuenue Maalea sail sch 47.50 Hana Lei Maalea power cat 28.99 Leilani Maalea power yac 19.99 Kalakaua Maalea power cat 29.50 Reef Runner Lahaina power yac 29.95 Blue Dolphin Maalea sail cat 42.95 SAS代码：\nDATA boats; INFILE '~/desktop/Boats.dat'; INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30 Price 32-36; RUN; * Tabulations with three dimensions; PROC TABULATE DATA = boats; CLASS Port Locomotion Type; TABLE Port, Locomotion, Type; TITLE 'Number of Boats by Port, Locomotion, and Type'; RUN; 最终结果：\n类似的，还可以增加统计量（类似于MEANS那里）：\nDATA boats; INFILE '~/desktop/Boats.dat'; INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30 Price 32-36; RUN; * PROC TABULATE report with options; PROC TABULATE DATA = boats FORMAT=DOLLAR9.2; CLASS Locomotion Type; VAR Price; TABLE Locomotion ALL, MEAN*Price*(Type ALL) /BOX='Full Day Excursions' MISSTEXT='none'; TITLE; RUN; 可以得到：\n最后还可以混合FORMAT等等，可以变得相当的复杂。貌似这东西是美国劳工部鼓捣出来的格式…\nDATA boats; INFILE '~/desktop/Boats.dat'; INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30 Price 32-36 Length 38-40; RUN; * Using the FORMAT= option in the TABLE statement; PROC TABULATE DATA = boats; CLASS Locomotion Type; VAR Price Length; TABLE Locomotion ALL, MEAN * (Price*FORMAT=DOLLAR6.2 Length*FORMAT=6.0) * (Type ALL); TITLE 'Price and Length by Type of Boat'; RUN; BOSS级汇报表格呈现了…\n我只能感慨，不愧是商业软件啊，用户需求考虑的真的是特别的周到…这种费时费力做汇报表格的事情也被搞定了，强悍。\nSAS里面的报告：REPORT还有一个REPORT，看到有TABULATE的时候我已经不奇怪并略略的有些期待一个做报告的模块出现了。这东西基本就是前面几个的超级混合体，反正你想搞到的汇报模式总是能够搞出来的。\n又是一堆数据：\n17 sci 9 bio 28 fic 50 mys 13 fic 32 fic 67 fic 81 non 38 non 53 non 16 sci 15 bio 61 fic 52 ref 22 mys 76 bio 37 fic 86 fic 49 mys 78 non 45 sci 64 bio 8 fic 11 non 41 fic 46 ref 69 fic 34 fic 26 mys 23 sci 74 ref 15 sci 27 fic 23 mys 63 fic 78 non 40 bio 12 fic 29 fic 54 mys 67 fic 60 fic 38 sci 42 fic 80 fic 然后一堆SAS代码：\nDATA books; INFILE 'c:\\MyRawData\\LibraryBooks.dat'; INPUT Age BookType $ @@; RUN; * Define formats to group the data; PROC FORMAT; VALUE agegpa 0-18 = '0 to 18' 19-25 = '19 to 25' 26-49 = '26 to 49' 50-HIGH = ' 50+ '; VALUE agegpb 0-25 = '0 to 25' 26-HIGH = ' 26+ '; VALUE $typ 'bio','non','ref' = 'Non-Fiction' 'fic','mys','sci' = 'Fiction'; RUN; *Create two way table with Age grouped into four categories; PROC FREQ DATA = books; TITLE 'Patron Age by Book Type: Four Age Groups'; TABLES BookType * Age / NOPERCENT NOROW NOCOL; FORMAT Age agegpa. BookType $typ.; RUN; * Create two way table with Age grouped into two categories; PROC FREQ DATA = books; TITLE 'Patron Age by Book Type: Two Age Groups'; TABLES BookType * Age / NOPERCENT NOROW NOCOL; FORMAT Age agegpb. BookType $typ.; RUN; 然后一堆交叉计数的结果就出来了：\n当然，简单的计算和分类统计也不在话下：\nDATA natparks; INFILE 'c:\\MyRawData\\Parks.dat'; INPUT Name $ 1-21 Type $ Region $ Museums Camping; RUN; *Statistics in COLUMN statement with two group variables; PROC REPORT DATA = natparks NOWINDOWS HEADLINE; COLUMN Region Type N (Museums Camping),MEAN; DEFINE Region / GROUP; DEFINE Type / GROUP; TITLE 'Statistics with Two Group Variables'; RUN; *Statistics in COLUMN statement with group and across variables; PROC REPORT DATA = natparks NOWINDOWS HEADLINE; COLUMN Region N Type,(Museums Camping),MEAN; DEFINE Region / GROUP; DEFINE Type / ACROSS; TITLE 'Statistics with a Group and Across Variable'; RUN; 可以得到一个看起来很fancy的表格：\nSAS数据总结综述 我的感觉是，MEANS, TABULATE和REPORT这三个模块各有千秋，基本就是可以替代EXCEL的数据透视表，虽然效率上说不好谁比谁高。\n","wordCount":"1531","inLanguage":"zh","datePublished":"2018-03-14T00:00:00Z","dateModified":"2018-03-14T00:00:00Z","author":{"@type":"Person","name":"Watson Hu"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html"},"publisher":{"@type":"Organization","name":"Nichome","logo":{"@type":"ImageObject","url":"https://ulsonhu.cn/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://ulsonhu.cn/ accesskey=h title="Nichome (Alt + H)">Nichome</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://ulsonhu.cn/archives/ title=归档><span>归档</span></a></li><li><a href=https://ulsonhu.cn/categories/ title=分类><span>分类</span></a></li><li><a href=https://ulsonhu.cn/tags/ title=标签><span>标签</span></a></li><li><a href=https://ulsonhu.cn/search/ title=搜索><span>搜索</span></a></li><li><a href=https://ulsonhu.cn/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/>主页</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/posts/>Posts</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1 class="post-title entry-hint-parent">SAS基础学习篇(一)</h1><div class=post-description>由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下</div><div class=post-meta><span title='2018-03-14 00:00:00 +0000 UTC'>2018年3月14日</span>&nbsp;·&nbsp;<span>8 分钟</span>&nbsp;·&nbsp;<span>1531 字</span>&nbsp;·&nbsp;<span>Watson Hu</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>目录</span></summary><div class=inner><nav id=TableOfContents><ul><li><a href=#基本函数>基本函数</a></li><li><a href=#判断结构>判断结构</a></li><li><a href=#数组操作>数组操作</a></li><li><a href=#基本模块调用>基本模块调用</a><ul><li><a href=#proc的基本内容content>PROC的基本内容：CONTENT</a></li><li><a href=#sas-proc求子集where>SAS PROC求子集:WHERE</a></li><li><a href=#sas-proc-数据进行排序sort>SAS PROC 数据进行排序:SORT</a></li><li><a href=#sas-proc-输出数据print>SAS PROC 输出数据:PRINT</a></li><li><a href=#sas-proc里面改变输出格式format>SAS PROC里面改变输出格式：FORMAT</a></li><li><a href=#sas总结数据means>SAS总结数据:MEANS</a></li><li><a href=#sas-proc统计频率freq>SAS PROC统计频率：FREQ</a></li><li><a href=#sas-proc汇报表格tabulate>SAS PROC汇报表格：TABULATE</a></li><li><a href=#sas数据总结综述>SAS数据总结综述</a></li></ul></li></ul></nav></div></details><div class="post-content md-content"><p>参考书籍</p><ol><li>《SAS编程与数据挖掘商业案例》（预热）</li><li>「the Little SAS Book」(推荐)</li><li>「Applied Econometrics Using The SAS System」</li></ol><p>SAS编程主要包括<code>DATA</code>和<code>PROC</code>两部分</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>* create sas data set named toads;
-</span></span><span style=display:flex><span>* read the data file ToadJump.dta using list input;
-</span></span><span style=display:flex><span>DATA toads;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/ToadJump.dta&#39;;
-</span></span><span style=display:flex><span>INPUT ToadJump $ Weight Jump1 Jump2 Jump3;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* print the data to make sure the file was read correctly;
-</span></span><span style=display:flex><span>* PROC PRINT DATA = toads;
-</span></span><span style=display:flex><span>TITLE &#39;SAS Data Set Toads&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>这样就建立了一个名为<code>toads</code>的临时数据集，然后读入外部文件<code>ToadJump.dat</code>，然后告诉SAS有四个变量，其中第一个是文本型,缺失值用一个点<code>.</code>标记</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>* Create a SAS data set named sales;
-</span></span><span style=display:flex><span>* Read the data file OnionRing.dat using column input;
-</span></span><span style=display:flex><span>DATA sales;
-</span></span><span style=display:flex><span>INFILE ’~/desktop/OnionRing.dat’;
-</span></span><span style=display:flex><span>INPUT VisitingTeam $ 1-20 ConcessionSales 21-24 BleacherSales 25-28
-</span></span><span style=display:flex><span>OurHits 29-31 TheirHits 32-34 OurRuns 35-37 TheirRuns 38-40;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Print the data to make sure the file was read correctly;
-</span></span><span style=display:flex><span>PROC PRINT DATA = sales;
-</span></span><span style=display:flex><span>TITLE ’SAS Data Set Sales’;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><h2 id=基本函数>基本函数<a hidden class=anchor aria-hidden=true href=#基本函数>#</a></h2><table><thead><tr><th>SAS文本类函数</th><th></th></tr></thead><tbody><tr><td>ANYALNUM(arg,start)</td><td>返回第一次出现任意数字或字母的位置，可选开始位置start</td></tr><tr><td>ANYALPHA(arg,start)</td><td>返回第一次出现任意字母的位置，可选开始位置start</td></tr><tr><td>ANYDIGIT(arg,start)</td><td>返回第一次出现任意数字的位置，可选开始位置start</td></tr><tr><td>ANYSPACE(arg,start)</td><td>返回第一次出现任意空白的位置，可选开始位置start</td></tr><tr><td>CAT(arg1,arg2,…argn)</td><td>连接字符串，留下头尾空白</td></tr><tr><td>CATS(arg1,arg2,…argn)</td><td>连接字符串，删除头尾空白</td></tr><tr><td>CATX(‘separator-string’, arg-1,…,arg-n)</td><td>连接字符串，删除头尾空白并用指定标点连接</td></tr><tr><td>COMPRESS(arg, ‘char’)</td><td>移除字符串中的空格和可选字符</td></tr><tr><td>INDEX(arg, ‘string’)</td><td>返回指定字符在变量中的位置</td></tr><tr><td>LEFT(arg)</td><td>字符串左对齐</td></tr><tr><td>LENGTH(arg)</td><td>返回字符串长度，不考虑尾部空格</td></tr><tr><td>PROPCASE(arg)</td><td>首字母大写</td></tr><tr><td>SUBSTR(arg,position,n)</td><td>从字符串中提取指定开始位置指定长度字符</td></tr><tr><td>TRANSLATE(source,to1,from1,…ton,fromn)</td><td>替换字符</td></tr><tr><td>TRANWRD(source,from,to)</td><td>替换字符串</td></tr><tr><td>TRIM(arg)</td><td>删除尾部空白</td></tr><tr><td>UPCASE(arg)</td><td>替换成大写</td></tr></tbody></table><table><thead><tr><th>SAS数值函数</th><th></th></tr></thead><tbody><tr><td>INT(arg)</td><td>返回整数</td></tr><tr><td>LOG(arg)</td><td>自然对数</td></tr><tr><td>LOG10(arg)</td><td>$10$为底对数</td></tr><tr><td>MAX(arg1,arg2,…argn)</td><td>最大值</td></tr><tr><td>MEAN(arg1,arg2,…argn)</td><td>均值</td></tr><tr><td>MIN(arg1,arg2,…argn)</td><td>最小值</td></tr><tr><td>N(arg1,arg2,…argn)</td><td>非缺失值个数</td></tr><tr><td>NMISS(arg1,arg2,…argn)</td><td>缺失值个数</td></tr><tr><td>ROUND(arg, roundoffunit)</td><td>保留几位小数</td></tr><tr><td>SUM(arg1,arg2,…argn)</td><td>求和</td></tr></tbody></table><table><thead><tr><th>SAS日期函数</th><th></th></tr></thead><tbody><tr><td>DATEJUL(julian-date)</td><td>标准julian日期到SAS日期</td></tr><tr><td>DAY(date)</td><td>返回「日」</td></tr><tr><td>MDY(month,day,year)</td><td>年月日到SAS日期</td></tr><tr><td>MONTH(date)</td><td>返回「月」</td></tr><tr><td>QTR(date)</td><td>返回季度</td></tr><tr><td>TODAY()</td><td>今日</td></tr><tr><td>WEEKDAY(date)</td><td>返回周几（周日为1）</td></tr><tr><td>YEAR(date)</td><td>返回「年」</td></tr><tr><td>YRDIF(start-date,end- date,’ACTUAL’)</td><td>返回相差年份</td></tr></tbody></table><h2 id=判断结构>判断结构<a hidden class=anchor aria-hidden=true href=#判断结构>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>* if then structure
-</span></span><span style=display:flex><span>if model = &#39;Pink&#39; then make = &#39;Floyd&#39;;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>* 执行多项命令，需要嵌套do；可以用and和or
-</span></span><span style=display:flex><span>if Year then Model = &#39;Mac&#39; or Model = &#39;pro&#39; then Make = &#39;Jobs&#39;;
-</span></span><span style=display:flex><span>if Model = &#39;iphone5&#39; then do;
-</span></span><span style=display:flex><span>Make = &#39;Tim&#39;;
-</span></span><span style=display:flex><span>Seats = 2;
-</span></span><span style=display:flex><span>end;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>* if else
-</span></span><span style=display:flex><span>if Cost = . then CostGroup = &#39;Missing&#39;;
-</span></span><span style=display:flex><span>else if Cost else if Cost else CostGroup = high;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>* use if to select sub-set
-</span></span><span style=display:flex><span>if sex = &#39;m&#39;;if sex = &#39;m&#39; then detele;
-</span></span></code></pre></div><h2 id=数组操作>数组操作<a hidden class=anchor aria-hidden=true href=#数组操作>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>* Change all 9 to missing values;
-</span></span><span style=display:flex><span>DATA songs;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/WBRK.dat&#39;;
-</span></span><span style=display:flex><span>INPUT City $ 1-15 Age domk wj hwow simbh kt aomm libm tr filp ttr;
-</span></span><span style=display:flex><span>ARRAY song (10) domk wj hwow simbh kt aomm libm tr filp ttr;
-</span></span><span style=display:flex><span>DO i = 1 TO 10;
-</span></span><span style=display:flex><span>IF song(i) = 9 THEN song(i) = .;
-</span></span><span style=display:flex><span>END;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>PROC PRINT DATA = songs;
-</span></span><span style=display:flex><span>TITLE &#39;WBRK Song Survey&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><h2 id=基本模块调用>基本模块调用<a hidden class=anchor aria-hidden=true href=#基本模块调用>#</a></h2><p>搞定基本的函数之后，开始鼓捣$SAS$里面的模型。也就是说，要开始写<code>PROC</code>了。其实，$SAS$比较像$Stata$（计量经济学主流软件），无论是从输出的样式，还是语法。不习惯没有()的模型调用呀。若是说$SAS$和$Stata$的区别，怕只是$Stata$更侧重于<strong>计量模型</strong>而$SAS$则是服务于大多数<strong>统计模型</strong>吧。</p><h3 id=proc的基本内容content>PROC的基本内容：CONTENT<a hidden class=anchor aria-hidden=true href=#proc的基本内容content>#</a></h3><p><code>PROC:content</code>，可以显示数据集的主要特性。比如，</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>LIBNAME tropical &#39;~/MySASLib&#39;;
-</span></span><span style=display:flex><span>PROC CONTENTS DATA = tropical.banana;
-</span></span></code></pre></div><p>这里主要是两个声明:<code>TITLE</code>和<code>FOOTNOTE</code>。前者输出时候会产生一个标题，后者会产生尾注。用法也是比较直接的：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>TITLE ”Here’s another title”;
-</span></span><span style=display:flex><span>TITLE ’Here’’s another title’;
-</span></span><span style=display:flex><span>FOOTNOTE3 ’This is the third footnote’;
-</span></span></code></pre></div><h3 id=sas-proc求子集where>SAS PROC求子集:WHERE<a hidden class=anchor aria-hidden=true href=#sas-proc求子集where>#</a></h3><p>如果要在<code>PROC</code>里面先求子集的话，可以直接调用<code>WHERE</code>。感觉这里和$SQL$的思路比较像。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>PROC PRINT DATA = &#39;～/desktop/MySASLib/style&#39;;
-</span></span><span style=display:flex><span>WHERE Genre = &#39;Impressionism&#39;;
-</span></span><span style=display:flex><span>TITLE &#39;Major Impressionist Painters&#39;;
-</span></span><span style=display:flex><span>FOOTNOTE &#39;F = France N = Netherlands U = US&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><h3 id=sas-proc-数据进行排序sort>SAS PROC 数据进行排序:SORT<a hidden class=anchor aria-hidden=true href=#sas-proc-数据进行排序sort>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA marine;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Lengths.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ Family $ Length @@;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Sort the data;
-</span></span><span style=display:flex><span>PROC SORT DATA = marine OUT = seasort NODUPKEY;
-</span></span><span style=display:flex><span>BY Family DESCENDING Length;
-</span></span><span style=display:flex><span>PROC PRINT DATA = seasort;
-</span></span><span style=display:flex><span>TITLE &#39;Whales and Sharks&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>这样数据就按照<code>Family</code>、<code>Length</code>（递减）排序了。</p><h3 id=sas-proc-输出数据print>SAS PROC 输出数据:PRINT<a hidden class=anchor aria-hidden=true href=#sas-proc-输出数据print>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA sales;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Candy.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $
-</span></span><span style=display:flex><span>Quantity;
-</span></span><span style=display:flex><span>Profit = Quantity * 1.25;
-</span></span><span style=display:flex><span>PROC SORT DATA = sales;
-</span></span><span style=display:flex><span>BY Class;
-</span></span><span style=display:flex><span>PROC PRINT DATA = sales;
-</span></span><span style=display:flex><span>BY Class;
-</span></span><span style=display:flex><span>SUM Profit;
-</span></span><span style=display:flex><span>VAR Name DateReturned CandyType Profit;
-</span></span><span style=display:flex><span>TITLE &#39;Candy Sales for Field Trip by Class&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><h3 id=sas-proc里面改变输出格式format>SAS PROC里面改变输出格式：FORMAT<a hidden class=anchor aria-hidden=true href=#sas-proc里面改变输出格式format>#</a></h3><p>基本就是<code>FORMAT</code>一下就可以了，再就是<code>PUT</code>的时候也可以调整。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA sales;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Candy.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $
-</span></span><span style=display:flex><span>Quantity;
-</span></span><span style=display:flex><span>Profit = Quantity * 1.25;
-</span></span><span style=display:flex><span>PROC PRINT DATA = sales;
-</span></span><span style=display:flex><span>VAR Name DateReturned CandyType Profit;
-</span></span><span style=display:flex><span>FORMAT DateReturned DATE9. Profit DOLLAR6.2;
-</span></span><span style=display:flex><span>TITLE &#39;Candy Sale Data Using Formats&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>常用的格式有：</p><ul><li>文本型：<code>$HEXw.</code>和<code>$w.</code></li><li>日期型：<code>DATEw.</code>（输出为ddmmyy或者ddmmyyyy）、<code>DATETIMEw.d</code>（输出为ddmmyy:hh:mm:ss）、<code>DAYw.</code>（输出为dd）、<code>EURDFDDw.</code> 、<code>JULIANw.</code>、<code>MMDDYYw.</code>（输出为mmddyy或mmddyyyy）、<code>TIMEw.d</code>（输出为hh:mm:ss）、<code>WEEKDATEw.</code>（输出为工作日）、<code>WORDDATEw.</code>(输出为单词)。</li><li>数字型：<code>BESTw.</code>（自动选择）、<code>COMMAw.d</code>（逗号分隔）、<code>DOLLARw.d</code>（货币）、<code>Ew.</code>（科学计数法）、<code>PDw.d</code>、<code>w.d</code>（标准小数）</li></ul><p>输出的样本见下：</p><p>当然<code>FORMAT</code>还可以自定义<code>factor</code>型变量的输出格式，比如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA carsurvey;
-</span></span><span style=display:flex><span>INFILE &#39;~/deskktop/Cars.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Age Sex Income Color $;
-</span></span><span style=display:flex><span>PROC FORMAT;
-</span></span><span style=display:flex><span>VALUE gender 1 = &#39;Male&#39; 
-</span></span><span style=display:flex><span>2 = &#39;Female&#39;;
-</span></span><span style=display:flex><span>VALUE agegroup 13 -&lt; 20 = &#39;Teen&#39;
-</span></span><span style=display:flex><span>20 -&lt; 65 = &#39;Adult&#39;
-</span></span><span style=display:flex><span>65 - HIGH = &#39;Senior&#39;;
-</span></span><span style=display:flex><span>VALUE $col &#39;W&#39; = &#39;Moon White&#39;
-</span></span><span style=display:flex><span>&#39;B&#39; = &#39;Sky Blue&#39;
-</span></span><span style=display:flex><span>&#39;Y&#39; = &#39;Sunburst Yellow&#39;
-</span></span><span style=display:flex><span>&#39;G&#39; = &#39;Rain Cloud Gray&#39;;
-</span></span><span style=display:flex><span>* Print data using user-defined and standard (DOLLAR8.) formats;
-</span></span><span style=display:flex><span>PROC PRINT DATA = carsurvey;
-</span></span><span style=display:flex><span>FORMAT Sex gender. Age agegroup. Color $col. Income DOLLAR8.;
-</span></span><span style=display:flex><span>TITLE &#39;Survey Results Printed with User-Defined Formats&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>就可以把数字型的1，2转换为对应的文本<code>male</code>和<code>female</code>等，还可以把变量离散化。</p><h3 id=sas总结数据means>SAS总结数据:MEANS<a hidden class=anchor aria-hidden=true href=#sas总结数据means>#</a></h3><p>$SAS$当然还有类似于$Excel$的数据透视表和$R$的<code>data.table</code>的模块，就是<code>MEANS</code>。可以输出的描述性统计值，包括最大值、最小值、平均值、中位数、余非缺失值个数、缺失值个数、范围、标准差、和等等。此外，还可以使用<code>BY</code>或者<code>CLASS</code>进行分组统计，<code>VAR</code>选择变量等。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA sales;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Flowers.dat&#39;;
-</span></span><span style=display:flex><span>INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon
-</span></span><span style=display:flex><span>Marigold;
-</span></span><span style=display:flex><span>Month = MONTH(SaleDate);
-</span></span><span style=display:flex><span>PROC SORT DATA = sales;
-</span></span><span style=display:flex><span>BY Month;
-</span></span><span style=display:flex><span>* Calculate means by Month for flower sales;
-</span></span><span style=display:flex><span>PROC MEANS DATA = sales;
-</span></span><span style=display:flex><span>BY Month;
-</span></span><span style=display:flex><span>VAR Petunia SnapDragon Marigold;
-</span></span><span style=display:flex><span>TITLE &#39;Summary of Flower Sales by Month&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>可以实现</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span> Summary of  Flower Sales by Month 1
-</span></span><span style=display:flex><span>---------------- Month=5 --------------
-</span></span><span style=display:flex><span>The MEANS Procedure
-</span></span><span style=display:flex><span>Variable N Mean Std Dev Minimum Maximum
-</span></span><span style=display:flex><span>----------------------------------------
-</span></span><span style=display:flex><span>Petunia 3 86.6666667 35.1188458 50.0000000 120.0000000
-</span></span><span style=display:flex><span>SnapDragon 3 113.3333333 41.6333200 80.0000000 160.0000000
-</span></span><span style=display:flex><span>Marigold 3 81.6666667 25.6580072 60.0000000 110.0000000
-</span></span><span style=display:flex><span>---------------- Month=6 ---------------
-</span></span><span style=display:flex><span>Variable N Mean Std Dev Minimum Maximum
-</span></span><span style=display:flex><span>-----------------------------------------
-</span></span><span style=display:flex><span>Petunia 4 81.2500000 16.5201897 60.0000000 100.0000000
-</span></span><span style=display:flex><span>SnapDragon 4 97.5000000 47.8713554 60.0000000 160.0000000
-</span></span><span style=display:flex><span>Marigold 4 83.7500000 19.7378655 60.0000000 100.0000000
-</span></span><span style=display:flex><span>-------------------------------------------
-</span></span></code></pre></div><p>当然这些统计量也可以直接的写入一个SAS数据表，只需要加上一个<code>OUTPUT</code>就可以了。原数据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>756-01 05/04/2008 120 80 110
-</span></span><span style=display:flex><span>834-01 05/12/2008 90 160 60
-</span></span><span style=display:flex><span>901-02 05/18/2008 50 100 75
-</span></span><span style=display:flex><span>834-01 06/01/2008 80 60 100
-</span></span><span style=display:flex><span>756-01 06/11/2008 100 160 75
-</span></span><span style=display:flex><span>901-02 06/19/2008 60 60 60
-</span></span><span style=display:flex><span>756-01 06/25/2008 85 110 100
-</span></span></code></pre></div><p>SAS代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA sales;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Flowers.dat&#39;;
-</span></span><span style=display:flex><span>INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon Marigold;
-</span></span><span style=display:flex><span>PROC SORT DATA = sales;
-</span></span><span style=display:flex><span>BY CustomerID;
-</span></span><span style=display:flex><span>* Calculate means by CustomerID, output sum and mean to new data set;
-</span></span><span style=display:flex><span>PROC MEANS NOPRINT DATA = sales;
-</span></span><span style=display:flex><span>BY CustomerID;
-</span></span><span style=display:flex><span>VAR Petunia SnapDragon Marigold;
-</span></span><span style=display:flex><span>OUTPUT OUT = totals MEAN(Petunia SnapDragon Marigold) =
-</span></span><span style=display:flex><span>MeanPetunia MeanSnapDragon MeanMarigold
-</span></span><span style=display:flex><span>SUM(Petunia SnapDragon Marigold) = Petunia SnapDragon Marigold;
-</span></span><span style=display:flex><span>PROC PRINT DATA = totals;
-</span></span><span style=display:flex><span>TITLE &#39;Sum of Flower Data over Customer ID&#39;;
-</span></span><span style=display:flex><span>FORMAT MeanPetunia MeanSnapDragon MeanMarigold 3.;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>最终结果为：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_01.png></p><h3 id=sas-proc统计频率freq>SAS PROC统计频率：FREQ<a hidden class=anchor aria-hidden=true href=#sas-proc统计频率freq>#</a></h3><p>计数的话，就要靠SAS里面的<code>FREQ</code>模块了。比如我们有一个数据集：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>esp w cap d cap w kon w ice w kon d esp d kon w ice d esp d
-</span></span><span style=display:flex><span>cap w esp d cap d Kon d . d kon w esp d cap w ice w kon w
-</span></span><span style=display:flex><span>kon w kon w ice d esp d kon w esp d esp w kon w cap w kon w
-</span></span></code></pre></div><p>然后可以用<code>FREQ</code>来统计一些基本量：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA orders;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Coffee.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Coffee $ Window $ @@;
-</span></span><span style=display:flex><span>* Print tables for Window and Window by Coffee;
-</span></span><span style=display:flex><span>PROC FREQ DATA = orders;
-</span></span><span style=display:flex><span>TABLES Window Window * Coffee;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>最终会得到一个$2*5$的表格：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_02.png></p><h3 id=sas-proc汇报表格tabulate>SAS PROC汇报表格：TABULATE<a hidden class=anchor aria-hidden=true href=#sas-proc汇报表格tabulate>#</a></h3><p>基本看到TABULATE就可以想到那个著名的软件Tabular了…不过貌似SAS也自带了一个类似的表格模块。这个东西可以变得非常复杂，不过鉴于一时半会儿还用不到，没有细细看。抄个例子吧。</p><p>原数据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>Silent Lady Maalea sail sch 75.00
-</span></span><span style=display:flex><span>America II Maalea sail yac 32.95
-</span></span><span style=display:flex><span>Aloha Anai Lahaina sail cat 62.00
-</span></span><span style=display:flex><span>Ocean Spirit Maalea power cat 22.00
-</span></span><span style=display:flex><span>Anuenue Maalea sail sch 47.50
-</span></span><span style=display:flex><span>Hana Lei Maalea power cat 28.99
-</span></span><span style=display:flex><span>Leilani Maalea power yac 19.99
-</span></span><span style=display:flex><span>Kalakaua Maalea power cat 29.50
-</span></span><span style=display:flex><span>Reef Runner Lahaina power yac 29.95
-</span></span><span style=display:flex><span>Blue Dolphin Maalea sail cat 42.95
-</span></span></code></pre></div><p>SAS代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA boats;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Boats.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
-</span></span><span style=display:flex><span>Price 32-36;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Tabulations with three dimensions;
-</span></span><span style=display:flex><span>PROC TABULATE DATA = boats;
-</span></span><span style=display:flex><span>CLASS Port Locomotion Type;
-</span></span><span style=display:flex><span>TABLE Port, Locomotion, Type;
-</span></span><span style=display:flex><span>TITLE &#39;Number of Boats by Port, Locomotion, and Type&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>最终结果：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_03.png></p><p>类似的，还可以增加统计量（类似于<code>MEANS</code>那里）：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA boats;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Boats.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
-</span></span><span style=display:flex><span>Price 32-36;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* PROC TABULATE report with options;
-</span></span><span style=display:flex><span>PROC TABULATE DATA = boats FORMAT=DOLLAR9.2;
-</span></span><span style=display:flex><span>CLASS Locomotion Type;
-</span></span><span style=display:flex><span>VAR Price;
-</span></span><span style=display:flex><span>TABLE Locomotion ALL, MEAN*Price*(Type ALL)
-</span></span><span style=display:flex><span>/BOX=&#39;Full Day Excursions&#39; MISSTEXT=&#39;none&#39;;
-</span></span><span style=display:flex><span>TITLE;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>可以得到：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_04.png></p><p>最后还可以混合<code>FORMAT</code>等等，可以变得相当的复杂。貌似这东西是美国劳工部鼓捣出来的格式…</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA boats;
-</span></span><span style=display:flex><span>INFILE &#39;~/desktop/Boats.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
-</span></span><span style=display:flex><span>Price 32-36 Length 38-40;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Using the FORMAT= option in the TABLE statement;
-</span></span><span style=display:flex><span>PROC TABULATE DATA = boats;
-</span></span><span style=display:flex><span>CLASS Locomotion Type;
-</span></span><span style=display:flex><span>VAR Price Length;
-</span></span><span style=display:flex><span>TABLE Locomotion ALL,
-</span></span><span style=display:flex><span>MEAN * (Price*FORMAT=DOLLAR6.2 Length*FORMAT=6.0) * (Type ALL);
-</span></span><span style=display:flex><span>TITLE &#39;Price and Length by Type of Boat&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>BOSS级汇报表格呈现了…</p><p><img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_05.png></p><p>我只能感慨，不愧是商业软件啊，用户需求考虑的真的是特别的周到…这种费时费力做汇报表格的事情也被搞定了，强悍。</p><p>SAS里面的报告：REPORT还有一个REPORT，看到有TABULATE的时候我已经不奇怪并略略的有些期待一个做报告的模块出现了。这东西基本就是前面几个的超级混合体，反正你想搞到的汇报模式总是能够搞出来的。</p><p>又是一堆数据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>17 sci 9 bio 28 fic 50 mys 13 fic 32 fic 67 fic 81 non 38 non
-</span></span><span style=display:flex><span>53 non 16 sci 15 bio 61 fic 52 ref 22 mys 76 bio 37 fic 86 fic
-</span></span><span style=display:flex><span>49 mys 78 non 45 sci 64 bio 8 fic 11 non 41 fic 46 ref 69 fic
-</span></span><span style=display:flex><span>34 fic 26 mys 23 sci 74 ref 15 sci 27 fic 23 mys 63 fic 78 non
-</span></span><span style=display:flex><span>40 bio 12 fic 29 fic 54 mys 67 fic 60 fic 38 sci 42 fic 80 fic
-</span></span></code></pre></div><p>然后一堆SAS代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA books;
-</span></span><span style=display:flex><span>INFILE &#39;c:\MyRawData\LibraryBooks.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Age BookType $ @@;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Define formats to group the data;
-</span></span><span style=display:flex><span>PROC FORMAT;
-</span></span><span style=display:flex><span>VALUE agegpa
-</span></span><span style=display:flex><span>0-18 = &#39;0 to 18&#39;
-</span></span><span style=display:flex><span>19-25 = &#39;19 to 25&#39;
-</span></span><span style=display:flex><span>26-49 = &#39;26 to 49&#39;
-</span></span><span style=display:flex><span>50-HIGH = &#39; 50+ &#39;;
-</span></span><span style=display:flex><span>VALUE agegpb
-</span></span><span style=display:flex><span>0-25 = &#39;0 to 25&#39;
-</span></span><span style=display:flex><span>26-HIGH = &#39; 26+ &#39;;
-</span></span><span style=display:flex><span>VALUE $typ
-</span></span><span style=display:flex><span>&#39;bio&#39;,&#39;non&#39;,&#39;ref&#39; = &#39;Non-Fiction&#39;
-</span></span><span style=display:flex><span>&#39;fic&#39;,&#39;mys&#39;,&#39;sci&#39; = &#39;Fiction&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>*Create two way table with Age grouped into four categories;
-</span></span><span style=display:flex><span>PROC FREQ DATA = books;
-</span></span><span style=display:flex><span>TITLE &#39;Patron Age by Book Type: Four Age Groups&#39;;
-</span></span><span style=display:flex><span>TABLES BookType * Age / NOPERCENT NOROW NOCOL;
-</span></span><span style=display:flex><span>FORMAT Age agegpa. BookType $typ.;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>* Create two way table with Age grouped into two categories;
-</span></span><span style=display:flex><span>PROC FREQ DATA = books;
-</span></span><span style=display:flex><span>TITLE &#39;Patron Age by Book Type: Two Age Groups&#39;;
-</span></span><span style=display:flex><span>TABLES BookType * Age / NOPERCENT NOROW NOCOL;
-</span></span><span style=display:flex><span>FORMAT Age agegpb. BookType $typ.;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>然后一堆交叉计数的结果就出来了：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_06.png></p><p>当然，简单的计算和分类统计也不在话下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-plain data-lang=plain><span style=display:flex><span>DATA natparks;
-</span></span><span style=display:flex><span>INFILE &#39;c:\MyRawData\Parks.dat&#39;;
-</span></span><span style=display:flex><span>INPUT Name $ 1-21 Type $ Region $ Museums Camping;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>*Statistics in COLUMN statement with two group variables;
-</span></span><span style=display:flex><span>PROC REPORT DATA = natparks NOWINDOWS HEADLINE;
-</span></span><span style=display:flex><span>COLUMN Region Type N (Museums Camping),MEAN;
-</span></span><span style=display:flex><span>DEFINE Region / GROUP;
-</span></span><span style=display:flex><span>DEFINE Type / GROUP;
-</span></span><span style=display:flex><span>TITLE &#39;Statistics with Two Group Variables&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span><span style=display:flex><span>*Statistics in COLUMN statement with group and across variables;
-</span></span><span style=display:flex><span>PROC REPORT DATA = natparks NOWINDOWS HEADLINE;
-</span></span><span style=display:flex><span>COLUMN Region N Type,(Museums Camping),MEAN;
-</span></span><span style=display:flex><span>DEFINE Region / GROUP;
-</span></span><span style=display:flex><span>DEFINE Type / ACROSS;
-</span></span><span style=display:flex><span>TITLE &#39;Statistics with a Group and Across Variable&#39;;
-</span></span><span style=display:flex><span>RUN;
-</span></span></code></pre></div><p>可以得到一个看起来很fancy的表格：<img loading=lazy src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_07.png></p><h3 id=sas数据总结综述>SAS数据总结综述<a hidden class=anchor aria-hidden=true href=#sas数据总结综述>#</a></h3><p>我的感觉是，<code>MEANS</code>, <code>TABULATE</code>和<code>REPORT</code>这三个模块各有千秋，基本就是可以替代EXCEL的数据透视表，虽然效率上说不好谁比谁高。</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://ulsonhu.cn/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a></li><li><a href=https://ulsonhu.cn/tags/SAS/>SAS</a></li></ul><nav class=paginav><a class=prev href=https://ulsonhu.cn/%E7%94%A8python%E5%81%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%28%E7%AF%87%E4%B8%80%29.html><span class=title>« 上一页</span>
-<span>用python做数据分析与科学计算(篇一)</span>
-</a><a class=next href=https://ulsonhu.cn/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html><span class=title>下一页 »</span>
-<span>Excel知识点备忘</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://ulsonhu.cn/>Nichome</a></span> ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>SAS基础学习篇(一) | Nichome</title><meta name=description content="由于接触到SAS，本人电脑为Macbook，暂时无法安装SAS，所以通过网上收集相关知识，Mark下"><meta name=author content="Watson Hu"><link rel=icon href=/favicon.ico><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fontsource/fira-sans@5/index.css><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/syntax.css><link rel=alternate type=application/rss+xml title=Nichome href=/index.xml><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></head><body><header class=page-header><div class=site-title><a href=/>Nichome</a></div><nav class=site-nav><ul><li><a href=/archives/>归档</a></li><li><a href=/categories/>分类</a></li><li><a href=/tags/>标签</a></li><li><a href=/about/>关于</a></li><li><a href=/index.xml>RSS</a></li></ul></nav><div class=site-tagline>Lying in the gutter, but looking at the stars.</div></header><main><article class=post-container><div class=post-header><h2 class=title><a href=https://ulsonhu.cn/SAS%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AF%87%28%E4%B8%80%29.html>SAS基础学习篇(一)</a></h2><div class=post-meta><span>2018-03-14</span>
+<span>数据分析</span></div></div><div class=post-content><p>参考书籍</p><ol><li>《SAS编程与数据挖掘商业案例》（预热）</li><li>「the Little SAS Book」(推荐)</li><li>「Applied Econometrics Using The SAS System」</li></ol><p>SAS编程主要包括<code>DATA</code>和<code>PROC</code>两部分</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>* create sas data set named toads;
+</span></span><span class=line><span class=cl>* read the data file ToadJump.dta using list input;
+</span></span><span class=line><span class=cl>DATA toads;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/ToadJump.dta&#39;;
+</span></span><span class=line><span class=cl>INPUT ToadJump $ Weight Jump1 Jump2 Jump3;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* print the data to make sure the file was read correctly;
+</span></span><span class=line><span class=cl>* PROC PRINT DATA = toads;
+</span></span><span class=line><span class=cl>TITLE &#39;SAS Data Set Toads&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>这样就建立了一个名为<code>toads</code>的临时数据集，然后读入外部文件<code>ToadJump.dat</code>，然后告诉SAS有四个变量，其中第一个是文本型,缺失值用一个点<code>.</code>标记</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>* Create a SAS data set named sales;
+</span></span><span class=line><span class=cl>* Read the data file OnionRing.dat using column input;
+</span></span><span class=line><span class=cl>DATA sales;
+</span></span><span class=line><span class=cl>INFILE ’~/desktop/OnionRing.dat’;
+</span></span><span class=line><span class=cl>INPUT VisitingTeam $ 1-20 ConcessionSales 21-24 BleacherSales 25-28
+</span></span><span class=line><span class=cl>OurHits 29-31 TheirHits 32-34 OurRuns 35-37 TheirRuns 38-40;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Print the data to make sure the file was read correctly;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = sales;
+</span></span><span class=line><span class=cl>TITLE ’SAS Data Set Sales’;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><h2 id=基本函数>基本函数</h2><table><thead><tr><th>SAS文本类函数</th><th></th></tr></thead><tbody><tr><td>ANYALNUM(arg,start)</td><td>返回第一次出现任意数字或字母的位置，可选开始位置start</td></tr><tr><td>ANYALPHA(arg,start)</td><td>返回第一次出现任意字母的位置，可选开始位置start</td></tr><tr><td>ANYDIGIT(arg,start)</td><td>返回第一次出现任意数字的位置，可选开始位置start</td></tr><tr><td>ANYSPACE(arg,start)</td><td>返回第一次出现任意空白的位置，可选开始位置start</td></tr><tr><td>CAT(arg1,arg2,…argn)</td><td>连接字符串，留下头尾空白</td></tr><tr><td>CATS(arg1,arg2,…argn)</td><td>连接字符串，删除头尾空白</td></tr><tr><td>CATX(‘separator-string’, arg-1,…,arg-n)</td><td>连接字符串，删除头尾空白并用指定标点连接</td></tr><tr><td>COMPRESS(arg, ‘char’)</td><td>移除字符串中的空格和可选字符</td></tr><tr><td>INDEX(arg, ‘string’)</td><td>返回指定字符在变量中的位置</td></tr><tr><td>LEFT(arg)</td><td>字符串左对齐</td></tr><tr><td>LENGTH(arg)</td><td>返回字符串长度，不考虑尾部空格</td></tr><tr><td>PROPCASE(arg)</td><td>首字母大写</td></tr><tr><td>SUBSTR(arg,position,n)</td><td>从字符串中提取指定开始位置指定长度字符</td></tr><tr><td>TRANSLATE(source,to1,from1,…ton,fromn)</td><td>替换字符</td></tr><tr><td>TRANWRD(source,from,to)</td><td>替换字符串</td></tr><tr><td>TRIM(arg)</td><td>删除尾部空白</td></tr><tr><td>UPCASE(arg)</td><td>替换成大写</td></tr></tbody></table><table><thead><tr><th>SAS数值函数</th><th></th></tr></thead><tbody><tr><td>INT(arg)</td><td>返回整数</td></tr><tr><td>LOG(arg)</td><td>自然对数</td></tr><tr><td>LOG10(arg)</td><td>$10$为底对数</td></tr><tr><td>MAX(arg1,arg2,…argn)</td><td>最大值</td></tr><tr><td>MEAN(arg1,arg2,…argn)</td><td>均值</td></tr><tr><td>MIN(arg1,arg2,…argn)</td><td>最小值</td></tr><tr><td>N(arg1,arg2,…argn)</td><td>非缺失值个数</td></tr><tr><td>NMISS(arg1,arg2,…argn)</td><td>缺失值个数</td></tr><tr><td>ROUND(arg, roundoffunit)</td><td>保留几位小数</td></tr><tr><td>SUM(arg1,arg2,…argn)</td><td>求和</td></tr></tbody></table><table><thead><tr><th>SAS日期函数</th><th></th></tr></thead><tbody><tr><td>DATEJUL(julian-date)</td><td>标准julian日期到SAS日期</td></tr><tr><td>DAY(date)</td><td>返回「日」</td></tr><tr><td>MDY(month,day,year)</td><td>年月日到SAS日期</td></tr><tr><td>MONTH(date)</td><td>返回「月」</td></tr><tr><td>QTR(date)</td><td>返回季度</td></tr><tr><td>TODAY()</td><td>今日</td></tr><tr><td>WEEKDAY(date)</td><td>返回周几（周日为1）</td></tr><tr><td>YEAR(date)</td><td>返回「年」</td></tr><tr><td>YRDIF(start-date,end- date,’ACTUAL’)</td><td>返回相差年份</td></tr></tbody></table><h2 id=判断结构>判断结构</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>* if then structure
+</span></span><span class=line><span class=cl>if model = &#39;Pink&#39; then make = &#39;Floyd&#39;;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>* 执行多项命令，需要嵌套do；可以用and和or
+</span></span><span class=line><span class=cl>if Year then Model = &#39;Mac&#39; or Model = &#39;pro&#39; then Make = &#39;Jobs&#39;;
+</span></span><span class=line><span class=cl>if Model = &#39;iphone5&#39; then do;
+</span></span><span class=line><span class=cl>Make = &#39;Tim&#39;;
+</span></span><span class=line><span class=cl>Seats = 2;
+</span></span><span class=line><span class=cl>end;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>* if else
+</span></span><span class=line><span class=cl>if Cost = . then CostGroup = &#39;Missing&#39;;
+</span></span><span class=line><span class=cl>else if Cost else if Cost else CostGroup = high;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>* use if to select sub-set
+</span></span><span class=line><span class=cl>if sex = &#39;m&#39;;if sex = &#39;m&#39; then detele;
+</span></span></code></pre></div><h2 id=数组操作>数组操作</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>* Change all 9 to missing values;
+</span></span><span class=line><span class=cl>DATA songs;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/WBRK.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT City $ 1-15 Age domk wj hwow simbh kt aomm libm tr filp ttr;
+</span></span><span class=line><span class=cl>ARRAY song (10) domk wj hwow simbh kt aomm libm tr filp ttr;
+</span></span><span class=line><span class=cl>DO i = 1 TO 10;
+</span></span><span class=line><span class=cl>IF song(i) = 9 THEN song(i) = .;
+</span></span><span class=line><span class=cl>END;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = songs;
+</span></span><span class=line><span class=cl>TITLE &#39;WBRK Song Survey&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><h2 id=基本模块调用>基本模块调用</h2><p>搞定基本的函数之后，开始鼓捣$SAS$里面的模型。也就是说，要开始写<code>PROC</code>了。其实，$SAS$比较像$Stata$（计量经济学主流软件），无论是从输出的样式，还是语法。不习惯没有()的模型调用呀。若是说$SAS$和$Stata$的区别，怕只是$Stata$更侧重于<strong>计量模型</strong>而$SAS$则是服务于大多数<strong>统计模型</strong>吧。</p><h3 id=proc的基本内容content>PROC的基本内容：CONTENT</h3><p><code>PROC:content</code>，可以显示数据集的主要特性。比如，</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>LIBNAME tropical &#39;~/MySASLib&#39;;
+</span></span><span class=line><span class=cl>PROC CONTENTS DATA = tropical.banana;
+</span></span></code></pre></div><p>这里主要是两个声明:<code>TITLE</code>和<code>FOOTNOTE</code>。前者输出时候会产生一个标题，后者会产生尾注。用法也是比较直接的：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>TITLE ”Here’s another title”;
+</span></span><span class=line><span class=cl>TITLE ’Here’’s another title’;
+</span></span><span class=line><span class=cl>FOOTNOTE3 ’This is the third footnote’;
+</span></span></code></pre></div><h3 id=sas-proc求子集where>SAS PROC求子集:WHERE</h3><p>如果要在<code>PROC</code>里面先求子集的话，可以直接调用<code>WHERE</code>。感觉这里和$SQL$的思路比较像。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>PROC PRINT DATA = &#39;～/desktop/MySASLib/style&#39;;
+</span></span><span class=line><span class=cl>WHERE Genre = &#39;Impressionism&#39;;
+</span></span><span class=line><span class=cl>TITLE &#39;Major Impressionist Painters&#39;;
+</span></span><span class=line><span class=cl>FOOTNOTE &#39;F = France N = Netherlands U = US&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><h3 id=sas-proc-数据进行排序sort>SAS PROC 数据进行排序:SORT</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA marine;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Lengths.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ Family $ Length @@;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Sort the data;
+</span></span><span class=line><span class=cl>PROC SORT DATA = marine OUT = seasort NODUPKEY;
+</span></span><span class=line><span class=cl>BY Family DESCENDING Length;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = seasort;
+</span></span><span class=line><span class=cl>TITLE &#39;Whales and Sharks&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>这样数据就按照<code>Family</code>、<code>Length</code>（递减）排序了。</p><h3 id=sas-proc-输出数据print>SAS PROC 输出数据:PRINT</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA sales;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Candy.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $
+</span></span><span class=line><span class=cl>Quantity;
+</span></span><span class=line><span class=cl>Profit = Quantity * 1.25;
+</span></span><span class=line><span class=cl>PROC SORT DATA = sales;
+</span></span><span class=line><span class=cl>BY Class;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = sales;
+</span></span><span class=line><span class=cl>BY Class;
+</span></span><span class=line><span class=cl>SUM Profit;
+</span></span><span class=line><span class=cl>VAR Name DateReturned CandyType Profit;
+</span></span><span class=line><span class=cl>TITLE &#39;Candy Sales for Field Trip by Class&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><h3 id=sas-proc里面改变输出格式format>SAS PROC里面改变输出格式：FORMAT</h3><p>基本就是<code>FORMAT</code>一下就可以了，再就是<code>PUT</code>的时候也可以调整。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA sales;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Candy.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-11 Class @15 DateReturned MMDDYY10. CandyType $
+</span></span><span class=line><span class=cl>Quantity;
+</span></span><span class=line><span class=cl>Profit = Quantity * 1.25;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = sales;
+</span></span><span class=line><span class=cl>VAR Name DateReturned CandyType Profit;
+</span></span><span class=line><span class=cl>FORMAT DateReturned DATE9. Profit DOLLAR6.2;
+</span></span><span class=line><span class=cl>TITLE &#39;Candy Sale Data Using Formats&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>常用的格式有：</p><ul><li>文本型：<code>$HEXw.</code>和<code>$w.</code></li><li>日期型：<code>DATEw.</code>（输出为ddmmyy或者ddmmyyyy）、<code>DATETIMEw.d</code>（输出为ddmmyy:hh:mm:ss）、<code>DAYw.</code>（输出为dd）、<code>EURDFDDw.</code> 、<code>JULIANw.</code>、<code>MMDDYYw.</code>（输出为mmddyy或mmddyyyy）、<code>TIMEw.d</code>（输出为hh:mm:ss）、<code>WEEKDATEw.</code>（输出为工作日）、<code>WORDDATEw.</code>(输出为单词)。</li><li>数字型：<code>BESTw.</code>（自动选择）、<code>COMMAw.d</code>（逗号分隔）、<code>DOLLARw.d</code>（货币）、<code>Ew.</code>（科学计数法）、<code>PDw.d</code>、<code>w.d</code>（标准小数）</li></ul><p>输出的样本见下：</p><p>当然<code>FORMAT</code>还可以自定义<code>factor</code>型变量的输出格式，比如：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA carsurvey;
+</span></span><span class=line><span class=cl>INFILE &#39;~/deskktop/Cars.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Age Sex Income Color $;
+</span></span><span class=line><span class=cl>PROC FORMAT;
+</span></span><span class=line><span class=cl>VALUE gender 1 = &#39;Male&#39; 
+</span></span><span class=line><span class=cl>2 = &#39;Female&#39;;
+</span></span><span class=line><span class=cl>VALUE agegroup 13 -&lt; 20 = &#39;Teen&#39;
+</span></span><span class=line><span class=cl>20 -&lt; 65 = &#39;Adult&#39;
+</span></span><span class=line><span class=cl>65 - HIGH = &#39;Senior&#39;;
+</span></span><span class=line><span class=cl>VALUE $col &#39;W&#39; = &#39;Moon White&#39;
+</span></span><span class=line><span class=cl>&#39;B&#39; = &#39;Sky Blue&#39;
+</span></span><span class=line><span class=cl>&#39;Y&#39; = &#39;Sunburst Yellow&#39;
+</span></span><span class=line><span class=cl>&#39;G&#39; = &#39;Rain Cloud Gray&#39;;
+</span></span><span class=line><span class=cl>* Print data using user-defined and standard (DOLLAR8.) formats;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = carsurvey;
+</span></span><span class=line><span class=cl>FORMAT Sex gender. Age agegroup. Color $col. Income DOLLAR8.;
+</span></span><span class=line><span class=cl>TITLE &#39;Survey Results Printed with User-Defined Formats&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>就可以把数字型的1，2转换为对应的文本<code>male</code>和<code>female</code>等，还可以把变量离散化。</p><h3 id=sas总结数据means>SAS总结数据:MEANS</h3><p>$SAS$当然还有类似于$Excel$的数据透视表和$R$的<code>data.table</code>的模块，就是<code>MEANS</code>。可以输出的描述性统计值，包括最大值、最小值、平均值、中位数、余非缺失值个数、缺失值个数、范围、标准差、和等等。此外，还可以使用<code>BY</code>或者<code>CLASS</code>进行分组统计，<code>VAR</code>选择变量等。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA sales;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Flowers.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon
+</span></span><span class=line><span class=cl>Marigold;
+</span></span><span class=line><span class=cl>Month = MONTH(SaleDate);
+</span></span><span class=line><span class=cl>PROC SORT DATA = sales;
+</span></span><span class=line><span class=cl>BY Month;
+</span></span><span class=line><span class=cl>* Calculate means by Month for flower sales;
+</span></span><span class=line><span class=cl>PROC MEANS DATA = sales;
+</span></span><span class=line><span class=cl>BY Month;
+</span></span><span class=line><span class=cl>VAR Petunia SnapDragon Marigold;
+</span></span><span class=line><span class=cl>TITLE &#39;Summary of Flower Sales by Month&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>可以实现</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl> Summary of  Flower Sales by Month 1
+</span></span><span class=line><span class=cl>---------------- Month=5 --------------
+</span></span><span class=line><span class=cl>The MEANS Procedure
+</span></span><span class=line><span class=cl>Variable N Mean Std Dev Minimum Maximum
+</span></span><span class=line><span class=cl>----------------------------------------
+</span></span><span class=line><span class=cl>Petunia 3 86.6666667 35.1188458 50.0000000 120.0000000
+</span></span><span class=line><span class=cl>SnapDragon 3 113.3333333 41.6333200 80.0000000 160.0000000
+</span></span><span class=line><span class=cl>Marigold 3 81.6666667 25.6580072 60.0000000 110.0000000
+</span></span><span class=line><span class=cl>---------------- Month=6 ---------------
+</span></span><span class=line><span class=cl>Variable N Mean Std Dev Minimum Maximum
+</span></span><span class=line><span class=cl>-----------------------------------------
+</span></span><span class=line><span class=cl>Petunia 4 81.2500000 16.5201897 60.0000000 100.0000000
+</span></span><span class=line><span class=cl>SnapDragon 4 97.5000000 47.8713554 60.0000000 160.0000000
+</span></span><span class=line><span class=cl>Marigold 4 83.7500000 19.7378655 60.0000000 100.0000000
+</span></span><span class=line><span class=cl>-------------------------------------------
+</span></span></code></pre></div><p>当然这些统计量也可以直接的写入一个SAS数据表，只需要加上一个<code>OUTPUT</code>就可以了。原数据：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>756-01 05/04/2008 120 80 110
+</span></span><span class=line><span class=cl>834-01 05/12/2008 90 160 60
+</span></span><span class=line><span class=cl>901-02 05/18/2008 50 100 75
+</span></span><span class=line><span class=cl>834-01 06/01/2008 80 60 100
+</span></span><span class=line><span class=cl>756-01 06/11/2008 100 160 75
+</span></span><span class=line><span class=cl>901-02 06/19/2008 60 60 60
+</span></span><span class=line><span class=cl>756-01 06/25/2008 85 110 100
+</span></span></code></pre></div><p>SAS代码：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA sales;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Flowers.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT CustomerID $ @9 SaleDate MMDDYY10. Petunia SnapDragon Marigold;
+</span></span><span class=line><span class=cl>PROC SORT DATA = sales;
+</span></span><span class=line><span class=cl>BY CustomerID;
+</span></span><span class=line><span class=cl>* Calculate means by CustomerID, output sum and mean to new data set;
+</span></span><span class=line><span class=cl>PROC MEANS NOPRINT DATA = sales;
+</span></span><span class=line><span class=cl>BY CustomerID;
+</span></span><span class=line><span class=cl>VAR Petunia SnapDragon Marigold;
+</span></span><span class=line><span class=cl>OUTPUT OUT = totals MEAN(Petunia SnapDragon Marigold) =
+</span></span><span class=line><span class=cl>MeanPetunia MeanSnapDragon MeanMarigold
+</span></span><span class=line><span class=cl>SUM(Petunia SnapDragon Marigold) = Petunia SnapDragon Marigold;
+</span></span><span class=line><span class=cl>PROC PRINT DATA = totals;
+</span></span><span class=line><span class=cl>TITLE &#39;Sum of Flower Data over Customer ID&#39;;
+</span></span><span class=line><span class=cl>FORMAT MeanPetunia MeanSnapDragon MeanMarigold 3.;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>最终结果为：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_01.png alt></p><h3 id=sas-proc统计频率freq>SAS PROC统计频率：FREQ</h3><p>计数的话，就要靠SAS里面的<code>FREQ</code>模块了。比如我们有一个数据集：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>esp w cap d cap w kon w ice w kon d esp d kon w ice d esp d
+</span></span><span class=line><span class=cl>cap w esp d cap d Kon d . d kon w esp d cap w ice w kon w
+</span></span><span class=line><span class=cl>kon w kon w ice d esp d kon w esp d esp w kon w cap w kon w
+</span></span></code></pre></div><p>然后可以用<code>FREQ</code>来统计一些基本量：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA orders;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Coffee.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Coffee $ Window $ @@;
+</span></span><span class=line><span class=cl>* Print tables for Window and Window by Coffee;
+</span></span><span class=line><span class=cl>PROC FREQ DATA = orders;
+</span></span><span class=line><span class=cl>TABLES Window Window * Coffee;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>最终会得到一个$2*5$的表格：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_02.png alt></p><h3 id=sas-proc汇报表格tabulate>SAS PROC汇报表格：TABULATE</h3><p>基本看到TABULATE就可以想到那个著名的软件Tabular了…不过貌似SAS也自带了一个类似的表格模块。这个东西可以变得非常复杂，不过鉴于一时半会儿还用不到，没有细细看。抄个例子吧。</p><p>原数据：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>Silent Lady Maalea sail sch 75.00
+</span></span><span class=line><span class=cl>America II Maalea sail yac 32.95
+</span></span><span class=line><span class=cl>Aloha Anai Lahaina sail cat 62.00
+</span></span><span class=line><span class=cl>Ocean Spirit Maalea power cat 22.00
+</span></span><span class=line><span class=cl>Anuenue Maalea sail sch 47.50
+</span></span><span class=line><span class=cl>Hana Lei Maalea power cat 28.99
+</span></span><span class=line><span class=cl>Leilani Maalea power yac 19.99
+</span></span><span class=line><span class=cl>Kalakaua Maalea power cat 29.50
+</span></span><span class=line><span class=cl>Reef Runner Lahaina power yac 29.95
+</span></span><span class=line><span class=cl>Blue Dolphin Maalea sail cat 42.95
+</span></span></code></pre></div><p>SAS代码：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA boats;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Boats.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
+</span></span><span class=line><span class=cl>Price 32-36;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Tabulations with three dimensions;
+</span></span><span class=line><span class=cl>PROC TABULATE DATA = boats;
+</span></span><span class=line><span class=cl>CLASS Port Locomotion Type;
+</span></span><span class=line><span class=cl>TABLE Port, Locomotion, Type;
+</span></span><span class=line><span class=cl>TITLE &#39;Number of Boats by Port, Locomotion, and Type&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>最终结果：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_03.png alt></p><p>类似的，还可以增加统计量（类似于<code>MEANS</code>那里）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA boats;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Boats.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
+</span></span><span class=line><span class=cl>Price 32-36;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* PROC TABULATE report with options;
+</span></span><span class=line><span class=cl>PROC TABULATE DATA = boats FORMAT=DOLLAR9.2;
+</span></span><span class=line><span class=cl>CLASS Locomotion Type;
+</span></span><span class=line><span class=cl>VAR Price;
+</span></span><span class=line><span class=cl>TABLE Locomotion ALL, MEAN*Price*(Type ALL)
+</span></span><span class=line><span class=cl>/BOX=&#39;Full Day Excursions&#39; MISSTEXT=&#39;none&#39;;
+</span></span><span class=line><span class=cl>TITLE;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>可以得到：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_04.png alt></p><p>最后还可以混合<code>FORMAT</code>等等，可以变得相当的复杂。貌似这东西是美国劳工部鼓捣出来的格式…</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA boats;
+</span></span><span class=line><span class=cl>INFILE &#39;~/desktop/Boats.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-12 Port $ 14-20 Locomotion $ 22-26 Type $ 28-30
+</span></span><span class=line><span class=cl>Price 32-36 Length 38-40;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Using the FORMAT= option in the TABLE statement;
+</span></span><span class=line><span class=cl>PROC TABULATE DATA = boats;
+</span></span><span class=line><span class=cl>CLASS Locomotion Type;
+</span></span><span class=line><span class=cl>VAR Price Length;
+</span></span><span class=line><span class=cl>TABLE Locomotion ALL,
+</span></span><span class=line><span class=cl>MEAN * (Price*FORMAT=DOLLAR6.2 Length*FORMAT=6.0) * (Type ALL);
+</span></span><span class=line><span class=cl>TITLE &#39;Price and Length by Type of Boat&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>BOSS级汇报表格呈现了…</p><p><img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_05.png alt></p><p>我只能感慨，不愧是商业软件啊，用户需求考虑的真的是特别的周到…这种费时费力做汇报表格的事情也被搞定了，强悍。</p><p>SAS里面的报告：REPORT还有一个REPORT，看到有TABULATE的时候我已经不奇怪并略略的有些期待一个做报告的模块出现了。这东西基本就是前面几个的超级混合体，反正你想搞到的汇报模式总是能够搞出来的。</p><p>又是一堆数据：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>17 sci 9 bio 28 fic 50 mys 13 fic 32 fic 67 fic 81 non 38 non
+</span></span><span class=line><span class=cl>53 non 16 sci 15 bio 61 fic 52 ref 22 mys 76 bio 37 fic 86 fic
+</span></span><span class=line><span class=cl>49 mys 78 non 45 sci 64 bio 8 fic 11 non 41 fic 46 ref 69 fic
+</span></span><span class=line><span class=cl>34 fic 26 mys 23 sci 74 ref 15 sci 27 fic 23 mys 63 fic 78 non
+</span></span><span class=line><span class=cl>40 bio 12 fic 29 fic 54 mys 67 fic 60 fic 38 sci 42 fic 80 fic
+</span></span></code></pre></div><p>然后一堆SAS代码：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA books;
+</span></span><span class=line><span class=cl>INFILE &#39;c:\MyRawData\LibraryBooks.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Age BookType $ @@;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Define formats to group the data;
+</span></span><span class=line><span class=cl>PROC FORMAT;
+</span></span><span class=line><span class=cl>VALUE agegpa
+</span></span><span class=line><span class=cl>0-18 = &#39;0 to 18&#39;
+</span></span><span class=line><span class=cl>19-25 = &#39;19 to 25&#39;
+</span></span><span class=line><span class=cl>26-49 = &#39;26 to 49&#39;
+</span></span><span class=line><span class=cl>50-HIGH = &#39; 50+ &#39;;
+</span></span><span class=line><span class=cl>VALUE agegpb
+</span></span><span class=line><span class=cl>0-25 = &#39;0 to 25&#39;
+</span></span><span class=line><span class=cl>26-HIGH = &#39; 26+ &#39;;
+</span></span><span class=line><span class=cl>VALUE $typ
+</span></span><span class=line><span class=cl>&#39;bio&#39;,&#39;non&#39;,&#39;ref&#39; = &#39;Non-Fiction&#39;
+</span></span><span class=line><span class=cl>&#39;fic&#39;,&#39;mys&#39;,&#39;sci&#39; = &#39;Fiction&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>*Create two way table with Age grouped into four categories;
+</span></span><span class=line><span class=cl>PROC FREQ DATA = books;
+</span></span><span class=line><span class=cl>TITLE &#39;Patron Age by Book Type: Four Age Groups&#39;;
+</span></span><span class=line><span class=cl>TABLES BookType * Age / NOPERCENT NOROW NOCOL;
+</span></span><span class=line><span class=cl>FORMAT Age agegpa. BookType $typ.;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>* Create two way table with Age grouped into two categories;
+</span></span><span class=line><span class=cl>PROC FREQ DATA = books;
+</span></span><span class=line><span class=cl>TITLE &#39;Patron Age by Book Type: Two Age Groups&#39;;
+</span></span><span class=line><span class=cl>TABLES BookType * Age / NOPERCENT NOROW NOCOL;
+</span></span><span class=line><span class=cl>FORMAT Age agegpb. BookType $typ.;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>然后一堆交叉计数的结果就出来了：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_06.png alt></p><p>当然，简单的计算和分类统计也不在话下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-plain data-lang=plain><span class=line><span class=cl>DATA natparks;
+</span></span><span class=line><span class=cl>INFILE &#39;c:\MyRawData\Parks.dat&#39;;
+</span></span><span class=line><span class=cl>INPUT Name $ 1-21 Type $ Region $ Museums Camping;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>*Statistics in COLUMN statement with two group variables;
+</span></span><span class=line><span class=cl>PROC REPORT DATA = natparks NOWINDOWS HEADLINE;
+</span></span><span class=line><span class=cl>COLUMN Region Type N (Museums Camping),MEAN;
+</span></span><span class=line><span class=cl>DEFINE Region / GROUP;
+</span></span><span class=line><span class=cl>DEFINE Type / GROUP;
+</span></span><span class=line><span class=cl>TITLE &#39;Statistics with Two Group Variables&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span><span class=line><span class=cl>*Statistics in COLUMN statement with group and across variables;
+</span></span><span class=line><span class=cl>PROC REPORT DATA = natparks NOWINDOWS HEADLINE;
+</span></span><span class=line><span class=cl>COLUMN Region N Type,(Museums Camping),MEAN;
+</span></span><span class=line><span class=cl>DEFINE Region / GROUP;
+</span></span><span class=line><span class=cl>DEFINE Type / ACROSS;
+</span></span><span class=line><span class=cl>TITLE &#39;Statistics with a Group and Across Variable&#39;;
+</span></span><span class=line><span class=cl>RUN;
+</span></span></code></pre></div><p>可以得到一个看起来很fancy的表格：<img src=https://res.cloudinary.com/ulsonhu/image/upload/v1521555460/2018_03_07_07.png alt></p><h3 id=sas数据总结综述>SAS数据总结综述</h3><p>我的感觉是，<code>MEANS</code>, <code>TABULATE</code>和<code>REPORT</code>这三个模块各有千秋，基本就是可以替代EXCEL的数据透视表，虽然效率上说不好谁比谁高。</p></div><footer class=post-footer><div class="post-tags tag-list"><a href=/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a><a href=/tags/SAS/>SAS</a></div><nav class=post-nav><span><a href=https://ulsonhu.cn/Excel%E7%9F%A5%E8%AF%86%E7%82%B9%E5%A4%87%E5%BF%98.html>&larr; Excel知识点备忘</a></span>
+<span><a href=https://ulsonhu.cn/%E7%94%A8python%E5%81%9A%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%28%E7%AF%87%E4%B8%80%29.html>用python做数据分析与科学计算(篇一) &rarr;</a></span></nav></footer></article></main><footer class=page-footer><p>&copy; 2026 Watson Hu · Powered by <a href=https://gohugo.io/>Hugo</a> · <a href=/index.xml>RSS</a></p></footer></body></html>

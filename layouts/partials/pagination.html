@@ -1,0 +1,11 @@
+{{ with .paginator }}
+{{ if gt .TotalPages 1 }}
+<nav class="pagination">
+  {{ if .HasPrev }}<a href="{{ .Prev.URL }}">&larr; 上一页</a>{{ end }}
+  {{ range .Pagers }}
+    {{ if eq . $.paginator }}<span class="active">{{ .PageNumber }}</span>{{ else }}<a href="{{ .URL }}">{{ .PageNumber }}</a>{{ end }}
+  {{ end }}
+  {{ if .HasNext }}<a href="{{ .Next.URL }}">下一页 &rarr;</a>{{ end }}
+</nav>
+{{ end }}
+{{ end }}

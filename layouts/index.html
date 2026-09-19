@@ -8,9 +8,13 @@
 
 {{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
 {{ range $pag.Pages }}
+{{ $summary := .Summary -}}
+{{ $summary = replaceRE `(?s)\$\$.+?\$\$` " [公式] " $summary -}}
+{{ $summary = replaceRE `\$.+?\$` " [公式] " $summary -}}
+{{ $summary = replaceRE `\$` "" $summary -}}
 <article class="post-container">
   {{ partial "post-header.html" . }}
-  <div class="post-content">{{ .Summary }}</div>
+  <div class="post-content">{{ $summary | safeHTML }}</div>
   {{ if .Truncated }}
   <div class="read-more"><a href="{{ .Permalink }}">Read More &raquo;</a></div>
   {{ end }}

@@ -1,4 +1,4 @@
-{{ if .Params.math -}}
+{{ if or .Params.math (eq .Kind "home") -}}
 <script>
   MathJax = {
     tex: {

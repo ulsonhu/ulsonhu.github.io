@@ -8,10 +8,15 @@
 
 {{ $pag := .Paginate (where .Site.RegularPages "Section" "posts") }}
 {{ range $pag.Pages }}
+{{/* 摘要截断可能切断公式：去掉末尾未闭合的 $$...$$ 或 $... 片段，完整的公式保留给 MathJax 渲染 */}}
 {{ $summary := .Summary -}}
-{{ $summary = replaceRE `(?s)\$\$.+?\$\$` " [公式] " $summary -}}
-{{ $summary = replaceRE `\$.+?\$` " [公式] " $summary -}}
-{{ $summary = replaceRE `\$` "" $summary -}}
+{{ if eq (mod (len (findRE `\$\$` $summary)) 2) 1 -}}
+  {{ $summary = replaceRE `(?s)^(.*)\$\$.*$` `${1}` $summary -}}
+{{ end -}}
+{{ $noDD := replaceRE `(?s)\$\$.+?\$\$` "" $summary -}}
+{{ if eq (mod (len (findRE `\$` $noDD)) 2) 1 -}}
+  {{ $summary = replaceRE `^(.*)\$[^$]*$` `${1}` $summary -}}
+{{ end -}}
 <article class="post-container">
   {{ partial "post-header.html" . }}
   <div class="post-content">{{ $summary | safeHTML }}</div>

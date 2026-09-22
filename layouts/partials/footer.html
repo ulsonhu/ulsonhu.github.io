@@ -1,3 +1,9 @@
 <footer class="page-footer">
   <p>&copy; {{ now.Format "2006" }} {{ .Site.Params.author }} · Powered by <a href="https://gohugo.io/">Hugo</a> · <a href="/index.xml">RSS</a></p>
+  <p class="site-stats">
+    <span>总访问量 <span id="vercount_value_site_pv">-</span></span>
+    <span class="stats-sep">·</span>
+    <span>访客数 <span id="vercount_value_site_uv">-</span></span>
+  </p>
+  <script defer src="https://events.vercount.one/js"></script>
 </footer>

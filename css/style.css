@@ -274,6 +274,15 @@ a:hover { color: var(--color-link-hover); }
   color: var(--color-meta);
   font-size: 1.3rem;
 }
+.site-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
 
 /* ---------- responsive margins ---------- */
 @media (min-width: 550px) {
